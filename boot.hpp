@@ -15,9 +15,15 @@ You should have received a copy of the GNU General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>
 */
 
-#include "boot.hpp"
+/// @file
+/// The boot function.
+/// @author Jonan
 
-int main(int argc, char *argv[]) {
-  boot();
-  return 0;
-}
+#ifndef BOOT_HPP
+#define BOOT_HPP
+
+/// Loads Ogre and it's plugins.
+/// It has to be called first thing in the program.
+void boot(void);
+
+#endif // BOOT_HPP
