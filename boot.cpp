@@ -19,6 +19,8 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 
 #include <Ogre.h>
 
+#include "input.hpp"
+
 // Loads the Ogre plugins that will be used.
 void loadPlugins(Ogre::Root *ogre_root) {
   ogre_root->loadPlugin("RenderSystem_GL"); // OpenGL
@@ -77,4 +79,6 @@ void boot(void) {
   defineResources();
   setupRenderSystem(ogre_root);
   initializeAllResources();
+  // Start capturing all input
+  input::Input::getInstance();
 }

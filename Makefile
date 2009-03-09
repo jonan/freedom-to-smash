@@ -14,21 +14,27 @@
 # along with this program. If not, see <http://www.gnu.org/licenses/>
 
 # Global variables
-OBJECTS = boot.o main.o
-LIBRARIES = OGRE
+OBJECTS = boot.o input.o main.o
+LIBRARIES = OGRE OIS
 CC = g++ -Wall -Wno-deprecated -g -c
 CFLAGS = $(shell pkg-config --cflags $(LIBRARIES))
 LIBS = $(shell pkg-config --libs $(LIBRARIES))
 
 # Headers dependencies
 BOOT = boot.hpp
+INPUT = input.hpp $(MACROS)
+INPUT_SYSTEMS = input_systems.hpp
+MACROS = macros.hpp
 
 # Build dependencies
 freedom-to-smash: $(OBJECTS)
 	g++ -Wall -Wno-deprecated -g $(OBJECTS) $(CFLAGS) $(LIBS) -o freedom-to-smash
 
-boot.o: boot.cpp $(BOOT)
+boot.o: boot.cpp $(BOOT) $(INPUT)
 	$(CC) $(CFLAGS) boot.cpp
+
+input.o: input.cpp $(INPUT) $(INPUT_SYSTEMS)
+	$(CC) $(CFLAGS) input.cpp
 
 main.o: main.cpp $(BOOT)
 	$(CC) $(CFLAGS) main.cpp
