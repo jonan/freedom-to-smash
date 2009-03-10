@@ -15,44 +15,14 @@ You should have received a copy of the GNU General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>
 */
 
-/// @file
-/// 
-/// @author Jonan
-
-#ifndef BATTLE_GROUND_HPP
-#define BATTLE_GROUND_HPP
+#include "character.hpp"
 
 #include <Ogre.h>
 
-#include <deque>
-
-#include "macros.hpp"
-
-class Character;
-
-/// 
-class BattleGround : public Ogre::FrameListener {
-  public:
-    BattleGround(void); // Constructor
-    ~BattleGround(void); // Destructor
-
-    /// 
-    void addPlayer(Character &player);
-
-    /// 
-    void start(void);
-
-  private:
-    // 
-    virtual bool frameStarted(const Ogre::FrameEvent& event);
-
-    Ogre::SceneManager *scene_manager;
-    Ogre::Viewport *viewport;
-    Ogre::Camera *camera;
-
-    std::deque<Character*> players;
-
-    DISALLOW_COPY_AND_ASSIGN(BattleGround);
-};
-
-#endif // BATTLE_GROUND_HPP
+// Constructor
+Character::Character(Ogre::SceneManager &scene_manager) {
+  entity = scene_manager.createEntity("Kid", "kid.mesh");
+  entity->setCastShadows(true);
+  node = scene_manager.getRootSceneNode()->createChildSceneNode(Ogre::Vector3(0,1,0));
+  node->attachObject(entity);
+}

@@ -17,6 +17,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 
 #include "battle_ground.hpp"
 
+#include "character.hpp"
 #include "input_systems.hpp"
 
 // Constructor
@@ -25,7 +26,7 @@ BattleGround::BattleGround(void) {
   scene_manager = Ogre::Root::getSingleton().createSceneManager(Ogre::ST_GENERIC);
   viewport = Ogre::Root::getSingleton().getAutoCreatedWindow()->addViewport(NULL);
   camera = scene_manager->createCamera("BattleGround Camera");
-  camera->setPosition(Ogre::Vector3(0,5,-20));
+  camera->setPosition(Ogre::Vector3(0,5,-50));
   camera->lookAt(Ogre::Vector3(0,0,0));
   camera->setNearClipDistance(5);
   camera->setFarClipDistance(1000);
@@ -33,6 +34,16 @@ BattleGround::BattleGround(void) {
   viewport->setCamera(camera);
   // Default settings
   scene_manager->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
+  scene_manager->setAmbientLight(Ogre::ColourValue(1.0,1.0,1.0));
+  // Temporal addition of a player
+  Character *player = new Character(*scene_manager);
+  players.push_back(player);
+}
+
+// Destructor
+BattleGround::~BattleGround(void) {
+  for(unsigned int i=0; i<players.size(); i++)
+    delete players[i];
 }
 
 // 

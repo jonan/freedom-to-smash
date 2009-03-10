@@ -19,40 +19,27 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 /// 
 /// @author Jonan
 
-#ifndef BATTLE_GROUND_HPP
-#define BATTLE_GROUND_HPP
-
-#include <Ogre.h>
-
-#include <deque>
+#ifndef CHARACTER_HPP
+#define CHARACTER_HPP
 
 #include "macros.hpp"
 
-class Character;
+namespace Ogre {
+class Entity;
+class SceneNode;
+class SceneManager;
+}
 
 /// 
-class BattleGround : public Ogre::FrameListener {
+class Character {
   public:
-    BattleGround(void); // Constructor
-    ~BattleGround(void); // Destructor
-
-    /// 
-    void addPlayer(Character &player);
-
-    /// 
-    void start(void);
+    Character(Ogre::SceneManager &scene_manager); // Constructor
 
   private:
-    // 
-    virtual bool frameStarted(const Ogre::FrameEvent& event);
+    Ogre::SceneNode *node;
+    Ogre::Entity *entity;
 
-    Ogre::SceneManager *scene_manager;
-    Ogre::Viewport *viewport;
-    Ogre::Camera *camera;
-
-    std::deque<Character*> players;
-
-    DISALLOW_COPY_AND_ASSIGN(BattleGround);
+    DISALLOW_COPY_AND_ASSIGN(Character);
 };
 
-#endif // BATTLE_GROUND_HPP
+#endif // CHARACTER_HPP
