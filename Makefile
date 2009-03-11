@@ -38,7 +38,7 @@ battle_ground.o: battle_ground.cpp $(BATTLE_GROUND) $(CHARACTER) $(INPUT_SYSTEMS
 boot.o: boot.cpp $(BOOT) $(INPUT)
 	$(CC) $(CFLAGS) boot.cpp
 
-character.o: character.cpp $(CHARACTER)
+character.o: character.cpp $(CHARACTER) $(INPUT_SYSTEMS)
 	$(CC) $(CFLAGS) character.cpp
 
 input.o: input.cpp $(INPUT) $(INPUT_SYSTEMS)

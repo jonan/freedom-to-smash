@@ -25,19 +25,46 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #include "macros.hpp"
 
 namespace Ogre {
+class AnimationState;
 class Entity;
+class FrameEvent;
 class SceneNode;
 class SceneManager;
 }
+
+enum action_types {ATTACK,
+                   JUMP,
+                   MOVE_LEFT,
+                   MOVE_RIGHT,
+                   NUM_ACTIONS};
 
 /// 
 class Character {
   public:
     Character(Ogre::SceneManager &scene_manager); // Constructor
 
+    /// 
+    void update(const Ogre::FrameEvent& event);
+
   private:
+    // Types of animations
+    enum {ATTACK, IDLE, JUMP, RUN, NUM_ANIMATIONS};
+
+    // 
+    void setAnimations(void);
+
+    // 
+    void checkInput(void);
+    // 
+    void animate(const Ogre::FrameEvent& event);
+
+    bool action[NUM_ACTIONS]; // active actions
+    bool key[NUM_ACTIONS];    // last frame input
+
     Ogre::SceneNode *node;
     Ogre::Entity *entity;
+
+    Ogre::AnimationState *animations[NUM_ANIMATIONS];
 
     DISALLOW_COPY_AND_ASSIGN(Character);
 };
