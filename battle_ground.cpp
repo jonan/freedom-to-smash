@@ -26,8 +26,8 @@ BattleGround::BattleGround(void) {
   scene_manager = Ogre::Root::getSingleton().createSceneManager(Ogre::ST_GENERIC);
   viewport = Ogre::Root::getSingleton().getAutoCreatedWindow()->addViewport(NULL);
   camera = scene_manager->createCamera("BattleGround Camera");
-  camera->setPosition(Ogre::Vector3(0,5,-50));
-  camera->lookAt(Ogre::Vector3(0,0,0));
+  camera->setPosition(Ogre::Vector3(0,5,-30));
+  camera->lookAt(Ogre::Vector3(0,4,0));
   camera->setNearClipDistance(5);
   camera->setFarClipDistance(1000);
   camera->setAspectRatio(Ogre::Real(viewport->getActualWidth()) / Ogre::Real(viewport->getActualHeight()));
@@ -42,7 +42,7 @@ BattleGround::BattleGround(void) {
 
 // Destructor
 BattleGround::~BattleGround(void) {
-  for(unsigned int i=0; i<players.size(); i++)
+  for (unsigned int i=0; i<players.size(); i++)
     delete players[i];
 }
 
@@ -59,5 +59,6 @@ void BattleGround::start(void) {
 
 // 
 bool BattleGround::frameStarted(const Ogre::FrameEvent& event) {
+  players[0]->update(event);
   return !input::keyboard[OIS::KC_ESCAPE];
 }
