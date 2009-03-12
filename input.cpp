@@ -24,7 +24,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 namespace input {
 
 // Declare the input systems
-bool keyboard[238];
+std::vector<bool> keyboard(238, false); // OIS defines 238 different keyboard keys
 OIS::MouseState mouse;
 OIS::JoyStickState joystick;
 

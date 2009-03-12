@@ -22,11 +22,13 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #ifndef INPUT_SYSTEMS_HPP
 #define INPUT_SYSTEMS_HPP
 
+#include <vector>
+
 #include <OIS/OIS.h>
 
 namespace input {
 
-extern bool keyboard[238]; // OIS defines 238 different keyboard keys
+extern std::vector<bool> keyboard;
 extern OIS::MouseState mouse;
 extern OIS::JoyStickState joystick;
 
