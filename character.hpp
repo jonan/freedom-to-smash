@@ -32,12 +32,6 @@ class SceneNode;
 class SceneManager;
 }
 
-enum action_types {ATTACK,
-                   JUMP,
-                   MOVE_LEFT,
-                   MOVE_RIGHT,
-                   NUM_ACTIONS};
-
 /// 
 class Character {
   public:
@@ -48,7 +42,11 @@ class Character {
 
   private:
     // Types of animations
-    enum {ATTACK, IDLE, JUMP, RUN, NUM_ANIMATIONS};
+    enum {ATTACK_ANIMATION, IDLE_ANIMATION, JUMP_ANIMATION, RUN_ANIMATION, NUM_ANIMATIONS};
+    // Current action(s)
+    enum {ATTACKING, JUMPING, MOVING_LEFT, MOVING_RIGHT, NUM_ACTIONS};
+    // Control keys
+    enum {ATTACK_KEY, JUMP_KEY, MOVE_LEFT_KEY, MOVE_RIGHT_KEY, NUM_KEYS};
 
     // 
     void setAnimations(void);
@@ -57,6 +55,9 @@ class Character {
     void checkInput(void);
     // 
     void animate(const Ogre::FrameEvent& event);
+
+    // Controls
+    int attack_key, jump_key, move_left_key, move_right_key;
 
     bool action[NUM_ACTIONS]; // active actions
     bool key[NUM_ACTIONS];    // last frame input

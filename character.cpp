@@ -30,6 +30,11 @@ Character::Character(Ogre::SceneManager &scene_manager) {
   setAnimations();
   // Start with no action active
   for (int i=0; i < NUM_ACTIONS; i++) action[i] = false;
+  // Define controls
+  attack_key     = OIS::KC_A;
+  jump_key       = OIS::KC_S;
+  move_left_key  = OIS::KC_LEFT;
+  move_right_key = OIS::KC_RIGHT;
 }
 
 // 
@@ -40,68 +45,65 @@ void Character::update(const Ogre::FrameEvent& event) {
 
 // 
 void Character::setAnimations(void) {
-  animations[ATTACK] = entity->getAnimationState("attackforward1");
-  animations[ATTACK]->setLoop(false);
-  animations[ATTACK]->setEnabled(false);
-  animations[IDLE] = entity->getAnimationState("idle1");
-  animations[IDLE]->setLoop(true);
-  animations[IDLE]->setEnabled(false);
-  animations[JUMP] = entity->getAnimationState("jump1");
-  animations[JUMP]->setLoop(false);
-  animations[JUMP]->setEnabled(false);
-  animations[RUN] = entity->getAnimationState("run1");
-  animations[RUN]->setLoop(true);
-  animations[RUN]->setEnabled(false);
+  animations[ATTACK_ANIMATION] = entity->getAnimationState("attackforward1");
+  animations[ATTACK_ANIMATION]->setLoop(false);
+  animations[ATTACK_ANIMATION]->setEnabled(false);
+  animations[IDLE_ANIMATION] = entity->getAnimationState("idle1");
+  animations[IDLE_ANIMATION]->setLoop(true);
+  animations[IDLE_ANIMATION]->setEnabled(false);
+  animations[JUMP_ANIMATION] = entity->getAnimationState("jump1");
+  animations[JUMP_ANIMATION]->setLoop(false);
+  animations[JUMP_ANIMATION]->setEnabled(false);
+  animations[RUN_ANIMATION] = entity->getAnimationState("run1");
+  animations[RUN_ANIMATION]->setLoop(true);
+  animations[RUN_ANIMATION]->setEnabled(false);
 }
 
 // 
 void Character::checkInput(void) {
   using input::keyboard;
 
-  if (!key[::ATTACK] && !action[::ATTACK]) action[::ATTACK] = keyboard[OIS::KC_A];
-  if (!key[::JUMP  ] && !action[::JUMP  ]) action[::JUMP  ] = keyboard[OIS::KC_S];
+  if (!key[ATTACK_KEY] && !action[ATTACKING] && !action[JUMPING])
+    action[ATTACKING] = keyboard[attack_key];
+  if (!action[ATTACKING]) {
+    if (!key[JUMP_KEY] && !action[JUMPING]) action[JUMPING] = keyboard[jump_key];
+    action[MOVING_LEFT ] = keyboard[move_left_key ];
+    if (!keyboard[move_left_key]) action[MOVING_RIGHT] = keyboard[move_right_key];
+  } else {
+    action[MOVING_LEFT] = action[MOVING_RIGHT] = false;
+  }
 
-  action[::MOVE_LEFT ] = keyboard[OIS::KC_LEFT ];
-  action[::MOVE_RIGHT] = keyboard[OIS::KC_RIGHT];
-
-  key[::ATTACK    ] = keyboard[OIS::KC_A    ];
-  key[::JUMP      ] = keyboard[OIS::KC_S    ];
-  key[::MOVE_LEFT ] = keyboard[OIS::KC_LEFT ];
-  key[::MOVE_RIGHT] = keyboard[OIS::KC_RIGHT];
+  // Store keyboard state
+  key[ATTACK_KEY    ] = keyboard[attack_key    ];
+  key[JUMP_KEY      ] = keyboard[jump_key      ];
+  key[MOVE_LEFT_KEY ] = keyboard[move_left_key ];
+  key[MOVE_RIGHT_KEY] = keyboard[move_right_key];
 }
 
 // 
 void Character::animate(const Ogre::FrameEvent& event) {
-  if (action[::MOVE_LEFT] || action[::MOVE_RIGHT]) {
-    animations[IDLE]->setEnabled(false);
-    animations[RUN]->setEnabled(true);
-    animations[RUN]->addTime(event.timeSinceLastFrame);
+  // Disable all animations
+  for (int i=0; i<NUM_ANIMATIONS; i++) animations[i]->setEnabled(false);
+  // Check what animations need to be enabled
+  if (action[ATTACKING]) {
+    animations[ATTACK_ANIMATION]->setEnabled(true);
+    animations[ATTACK_ANIMATION]->addTime(event.timeSinceLastFrame);
+    if (animations[ATTACK_ANIMATION]->hasEnded()) {
+      animations[ATTACK_ANIMATION]->setTimePosition(0);
+      action[ATTACKING] = false;
+    }
+  } else if (action[JUMPING]) {
+    animations[JUMP_ANIMATION]->setEnabled(true);
+    animations[JUMP_ANIMATION]->addTime(event.timeSinceLastFrame);
+    if (animations[JUMP_ANIMATION]->hasEnded()) {
+      animations[JUMP_ANIMATION]->setTimePosition(0);
+      action[JUMPING] = false;
+    }
+  } else if (action[MOVING_LEFT] || action[MOVING_RIGHT]) {
+    animations[RUN_ANIMATION]->setEnabled(true);
+    animations[RUN_ANIMATION]->addTime(event.timeSinceLastFrame);
   } else {
-    animations[RUN]->setEnabled(false);
-    animations[IDLE]->setEnabled(true);
-    animations[IDLE]->addTime(event.timeSinceLastFrame);
-  }
-
-  if (action[::ATTACK]) {
-    animations[IDLE]->setEnabled(false);
-    animations[RUN]->setEnabled(false);
-    animations[ATTACK]->setEnabled(true);
-    animations[ATTACK]->addTime(event.timeSinceLastFrame);
-    if (animations[ATTACK]->hasEnded()) {
-      animations[ATTACK]->setEnabled(false);
-      animations[ATTACK]->setTimePosition(0);
-      action[::ATTACK] = false;
-    }
-  }
-  if (action[::JUMP]) {
-    animations[IDLE]->setEnabled(false);
-    animations[RUN]->setEnabled(false);
-    animations[JUMP]->setEnabled(true);
-    animations[JUMP]->addTime(event.timeSinceLastFrame);
-    if (animations[JUMP]->hasEnded()) {
-      animations[JUMP]->setEnabled(false);
-      animations[JUMP]->setTimePosition(0);
-      action[::JUMP] = false;
-    }
+    animations[IDLE_ANIMATION]->setEnabled(true);
+    animations[IDLE_ANIMATION]->addTime(event.timeSinceLastFrame);
   }
 }
