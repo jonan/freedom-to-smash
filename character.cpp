@@ -41,6 +41,7 @@ Character::Character(Ogre::SceneManager &scene_manager) {
 void Character::update(const Ogre::FrameEvent& event) {
   checkInput();
   animate(event);
+  move(event);
 }
 
 // 
@@ -81,7 +82,7 @@ void Character::checkInput(void) {
 }
 
 // 
-void Character::animate(const Ogre::FrameEvent& event) {
+void Character::animate(const Ogre::FrameEvent &event) {
   // Disable all animations
   for (int i=0; i<NUM_ANIMATIONS; i++) animations[i]->setEnabled(false);
   // Check what animations need to be enabled
@@ -105,5 +106,17 @@ void Character::animate(const Ogre::FrameEvent& event) {
   } else {
     animations[IDLE_ANIMATION]->setEnabled(true);
     animations[IDLE_ANIMATION]->addTime(event.timeSinceLastFrame);
+  }
+}
+
+// 
+void Character::move(const Ogre::FrameEvent &event) {
+  using Ogre::Vector3;
+  if (action[MOVING_LEFT]) {
+    node->translate(Vector3(5*event.timeSinceLastFrame,0,0));
+    node->setDirection(0,0,-1,Ogre::Node::TS_PARENT);
+  } else if (action[MOVING_RIGHT]) {
+    node->translate(Vector3(-5*event.timeSinceLastFrame,0,0));
+    node->setDirection(0,0,1,Ogre::Node::TS_PARENT);
   }
 }

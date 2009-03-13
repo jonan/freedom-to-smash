@@ -54,7 +54,9 @@ class Character {
     // 
     void checkInput(void);
     // 
-    void animate(const Ogre::FrameEvent& event);
+    void animate(const Ogre::FrameEvent &event);
+    // 
+    void move(const Ogre::FrameEvent &event);
 
     // Controls
     int attack_key, jump_key, move_left_key, move_right_key;
