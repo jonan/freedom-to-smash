@@ -15,13 +15,11 @@ You should have received a copy of the GNU General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>
 */
 
-#include "battle_ground.hpp"
 #include "boot.hpp"
+#include "server.hpp"
 
 int main(int argc, char *argv[]) {
   boot();
-  BattleGround *battle = new BattleGround;
-  battle->start();
-  delete battle;
+  Server::getInstance()->start();
   return 0;
 }
