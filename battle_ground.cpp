@@ -36,8 +36,7 @@ BattleGround::BattleGround(void) {
   scene_manager->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
   scene_manager->setAmbientLight(Ogre::ColourValue(1.0,1.0,1.0));
   // Temporal addition of a player
-  Character *player = new Character(*scene_manager);
-  players.push_back(player);
+  addPlayer();
 }
 
 // Destructor
@@ -47,8 +46,9 @@ BattleGround::~BattleGround(void) {
 }
 
 // 
-void BattleGround::addPlayer(Character &player) {
-  players.push_back(&player);
+void BattleGround::addPlayer(void) {
+  Character *player = new Character(KID, *scene_manager);
+  players.push_back(player);
 }
 
 // 
@@ -59,6 +59,7 @@ void BattleGround::start(void) {
 
 // 
 bool BattleGround::frameStarted(const Ogre::FrameEvent& event) {
-  players[0]->update(event);
+  for (unsigned int i=0; i<players.size(); i++)
+    players[i]->update(event);
   return !input::keyboard[OIS::KC_ESCAPE];
 }

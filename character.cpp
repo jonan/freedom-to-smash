@@ -17,15 +17,28 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 
 #include "character.hpp"
 
+#include <string>
+
 #include <Ogre.h>
 
 #include "input_systems.hpp"
 
 // Constructor
-Character::Character(Ogre::SceneManager &scene_manager) {
-  entity = scene_manager.createEntity("Kid", "kid.mesh");
+Character::Character(CharacterType type, Ogre::SceneManager &scene_manager) {
+  bool done = false;
+  std::string name = "kid";
+  std::string manager_name = name;
+  while (!done) {
+    try {
+      done = true;
+      manager_name += ".";
+      entity = scene_manager.createEntity(manager_name, name + ".mesh");
+    } catch (...) {
+      done = false;
+    }
+  }
   entity->setCastShadows(true);
-  node = scene_manager.getRootSceneNode()->createChildSceneNode(Ogre::Vector3(0,1,0));
+  node = scene_manager.getRootSceneNode()->createChildSceneNode(Ogre::Vector3(0,0,0));
   node->attachObject(entity);
   setAnimations();
   // Start with no action active

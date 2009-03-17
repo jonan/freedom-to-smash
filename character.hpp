@@ -32,10 +32,12 @@ class SceneNode;
 class SceneManager;
 }
 
+enum CharacterType {KID};
+
 /// 
 class Character {
   public:
-    Character(Ogre::SceneManager &scene_manager); // Constructor
+    Character(CharacterType type, Ogre::SceneManager &scene_manager); // Constructor
 
     /// 
     void update(const Ogre::FrameEvent& event);

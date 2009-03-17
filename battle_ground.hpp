@@ -37,7 +37,9 @@ class BattleGround : public Ogre::FrameListener {
     ~BattleGround(void); // Destructor
 
     /// 
-    void addPlayer(Character &player);
+    void addPlayer(void);
+    /// 
+    std::deque<Character*>& getPlayers(void) {return players;}
 
     /// 
     void start(void);
