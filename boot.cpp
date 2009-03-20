@@ -70,10 +70,10 @@ void initializeAllResources(void) {
   Ogre::ResourceGroupManager::getSingleton().initialiseAllResourceGroups();
 }
 
-// Loads Ogre and it's plugins.
+// Loads all the necessary things for the game to run.
 void boot(void) {
+  // Start Ogre
   Ogre::Root *ogre_root = new Ogre::Root;
-
   // For the moment plugins are loaded according to plugins.cfg
   //loadPlugins(ogre_root);
   defineResources();
