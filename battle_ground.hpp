@@ -24,7 +24,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 
 #include <Ogre.h>
 
-#include <deque>
+#include <vector>
 
 #include "macros.hpp"
 
@@ -39,7 +39,7 @@ class BattleGround : public Ogre::FrameListener {
     /// 
     void addPlayer(void);
     /// 
-    std::deque<Character*>& getPlayers(void) {return players;}
+    std::vector<Character*>& getPlayers(void) {return players;}
 
     /// 
     void start(void);
@@ -52,7 +52,7 @@ class BattleGround : public Ogre::FrameListener {
     Ogre::Viewport *viewport;
     Ogre::Camera *camera;
 
-    std::deque<Character*> players;
+    std::vector<Character*> players;
 
     DISALLOW_COPY_AND_ASSIGN(BattleGround);
 };
