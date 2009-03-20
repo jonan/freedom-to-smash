@@ -22,6 +22,8 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #ifndef SERVER_HPP
 #define SERVER_HPP
 
+#include <vector>
+
 #include <Ogre.h>
 
 #include "battle_ground.hpp"
@@ -31,6 +33,7 @@ class BattleGround;
 
 struct _ENetAddress;
 struct _ENetHost;
+struct _ENetPeer;
 
 /// 
 class Server : public Ogre::FrameListener {
@@ -48,6 +51,8 @@ class Server : public Ogre::FrameListener {
     virtual bool frameStarted(const Ogre::FrameEvent& /*event*/);
 
     BattleGround *ground;
+
+    std::vector<_ENetPeer*> peers;
 
     _ENetAddress *address;
     _ENetHost *host_server;

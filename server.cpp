@@ -54,10 +54,15 @@ bool Server::frameStarted(const Ogre::FrameEvent& /*event*/) {
   while ( enet_host_service(host_server, &event, 0) > 0 ) {
     switch (event.type) {
       case ENET_EVENT_TYPE_CONNECT:
+        peers.push_back(event.peer);
         break;
       case ENET_EVENT_TYPE_RECEIVE:
+        enet_packet_destroy(event.packet);
         break;
       case ENET_EVENT_TYPE_DISCONNECT:
+        break;
+      case ENET_EVENT_TYPE_NONE:
+        // Impossible case, just to avoid compiler warnings
         break;
     }
   }
