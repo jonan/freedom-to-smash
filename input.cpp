@@ -56,7 +56,6 @@ void Input::setListeners(OIS::KeyListener *keyboard,
 
 // Constructor
 Input::Input(void) {
-  for (int i=0; i<238; i++) input::keyboard[i] = false;
   setupOIS();
   setListeners(this);
   Ogre::Root::getSingleton().addFrameListener(this);
