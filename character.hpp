@@ -22,7 +22,6 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #ifndef CHARACTER_HPP
 #define CHARACTER_HPP
 
-#include "macros.hpp"
 #include "object.hpp"
 
 namespace Ogre {

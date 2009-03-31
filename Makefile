@@ -23,7 +23,7 @@ LIBS = $(shell pkg-config --libs $(LIBRARIES)) -lenet
 # Headers dependencies
 BATTLE_GROUND = battle_ground.hpp $(MACROS)
 BOOT = boot.hpp
-CHARACTER = character.hpp $(MACROS) $(OBJECT)
+CHARACTER = character.hpp $(OBJECT)
 INPUT = input.hpp $(MACROS)
 INPUT_SYSTEMS = input_systems.hpp
 MACROS = macros.hpp
