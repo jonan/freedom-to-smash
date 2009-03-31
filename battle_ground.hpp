@@ -38,8 +38,6 @@ class BattleGround : public Ogre::FrameListener {
 
     /// 
     void addPlayer(void);
-    /// 
-    std::vector<Character*>& getPlayers(void) {return players;}
 
     /// 
     void start(void);
