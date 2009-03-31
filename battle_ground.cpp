@@ -35,12 +35,11 @@ BattleGround::BattleGround(void) {
   // Default settings
   scene_manager->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
   scene_manager->setAmbientLight(Ogre::ColourValue(2.0,2.0,2.0));
-  // Plane
-  Ogre::Plane plane(Ogre::Vector3::UNIT_Y, 0);
-  Ogre::MeshManager::getSingleton().createPlane("ground", Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
-                                                plane, 1500, 1500, 1, 1, true, 1, 1, 1, Ogre::Vector3::UNIT_Z);
-  Ogre::Entity *plane_entity = scene_manager->createEntity("plane", "ground");
-  scene_manager->getRootSceneNode()->createChildSceneNode()->attachObject(plane_entity);
+  // Ground
+  Ogre::Entity *ground_entity = scene_manager->createEntity("cube", "Cube.mesh");
+  Ogre::SceneNode *ground_node = scene_manager->getRootSceneNode()->createChildSceneNode(Ogre::Vector3(0,-5,0));
+  ground_node->attachObject(ground_entity);
+  ground_node->setScale(20,1,1);
   // Temporal addition of a player
   addPlayer();
 }
