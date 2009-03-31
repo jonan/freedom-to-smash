@@ -52,7 +52,7 @@ BattleGround::~BattleGround(void) {
 
 // 
 void BattleGround::addPlayer(void) {
-  Character *player = new Character(KID, *scene_manager);
+  Character *player = new Character(*scene_manager, KID);
   players.push_back(player);
 }
 

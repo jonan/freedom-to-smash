@@ -23,6 +23,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #define CHARACTER_HPP
 
 #include "macros.hpp"
+#include "object.hpp"
 
 namespace Ogre {
 class AnimationState;
@@ -35,9 +36,9 @@ class SceneManager;
 enum CharacterType {KID};
 
 /// 
-class Character {
+class Character : public Object {
   public:
-    Character(CharacterType type, Ogre::SceneManager &scene_manager); // Constructor
+    Character(Ogre::SceneManager &scene_manager, CharacterType type); // Constructor
 
     /// 
     void update(const Ogre::FrameEvent& event);
@@ -65,9 +66,6 @@ class Character {
 
     bool action[NUM_ACTIONS]; // active actions
     bool key[NUM_ACTIONS];    // last frame input
-
-    Ogre::SceneNode *node;
-    Ogre::Entity *entity;
 
     Ogre::AnimationState *animations[NUM_ANIMATIONS];
 

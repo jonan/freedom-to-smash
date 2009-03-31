@@ -14,7 +14,7 @@
 # along with this program. If not, see <http://www.gnu.org/licenses/>
 
 # Global variables
-OBJECTS = battle_ground.o boot.o character.o input.o main.o server.o
+OBJECTS = battle_ground.o boot.o character.o input.o main.o object.o server.o
 LIBRARIES = OGRE OIS
 CC = g++ -Wall -Wno-deprecated -g -c
 CFLAGS = $(shell pkg-config --cflags $(LIBRARIES))
@@ -23,10 +23,11 @@ LIBS = $(shell pkg-config --libs $(LIBRARIES)) -lenet
 # Headers dependencies
 BATTLE_GROUND = battle_ground.hpp $(MACROS)
 BOOT = boot.hpp
-CHARACTER = character.hpp $(MACROS)
+CHARACTER = character.hpp $(MACROS) $(OBJECT)
 INPUT = input.hpp $(MACROS)
 INPUT_SYSTEMS = input_systems.hpp
 MACROS = macros.hpp
+OBJECT = object.hpp $(MACROS)
 SERVER = server.hpp $(BATTLEGROUND) $(MACROS)
 
 # Build dependencies
@@ -47,6 +48,9 @@ input.o: input.cpp $(INPUT) $(INPUT_SYSTEMS)
 
 main.o: main.cpp $(BOOT) $(SERVER)
 	$(CC) $(CFLAGS) main.cpp
+
+object.o: object.cpp $(OBJECT)
+	$(CC) $(CFLAGS) object.cpp
 
 server.o: server.cpp $(SERVER)
 	$(CC) $(CFLAGS) server.cpp
