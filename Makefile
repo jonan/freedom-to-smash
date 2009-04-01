@@ -46,7 +46,7 @@ character.o: character.cpp $(CHARACTER) $(INPUT_SYSTEMS)
 input.o: input.cpp $(INPUT) $(INPUT_SYSTEMS)
 	$(CC) $(CFLAGS) input.cpp
 
-main.o: main.cpp $(BOOT) $(SERVER)
+main.o: main.cpp $(BATTLE_GROUND) $(BOOT)
 	$(CC) $(CFLAGS) main.cpp
 
 object.o: object.cpp $(OBJECT)
