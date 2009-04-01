@@ -36,16 +36,19 @@ BattleGround::BattleGround(void) {
   scene_manager->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
   scene_manager->setAmbientLight(Ogre::ColourValue(2.0,2.0,2.0));
   // Ground
-  Ogre::Entity *ground_entity = scene_manager->createEntity("cube", "Cube.mesh");
-  Ogre::SceneNode *ground_node = scene_manager->getRootSceneNode()->createChildSceneNode(Ogre::Vector3(0,-5,0));
-  ground_node->attachObject(ground_entity);
-  ground_node->setScale(20,1,1);
+  Object *ground = new Object(*scene_manager);
+  ground->setEntity("cube");
+  ground->setPosition(Ogre::Vector3(0,-5,0));
+  ground->setScale(Ogre::Vector3(20,1,1));
+  objects.push_back(ground);
   // Temporal addition of a player
   addPlayer();
 }
 
 // Destructor
 BattleGround::~BattleGround(void) {
+  for (unsigned int i=0; i<objects.size(); i++)
+    delete objects[i];
   for (unsigned int i=0; i<players.size(); i++)
     delete players[i];
 }

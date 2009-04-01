@@ -42,3 +42,8 @@ void Object::setPosition(const Ogre::Vector3 &pos) {
   node = scene_manager->getRootSceneNode()->createChildSceneNode(pos);
   node->attachObject(entity);
 }
+
+// 
+void Object::setScale(const Ogre::Vector3 &scale) {
+  node->setScale(scale);
+}

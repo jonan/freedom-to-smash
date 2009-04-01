@@ -29,6 +29,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #include "macros.hpp"
 
 class Character;
+class Object;
 
 /// 
 class BattleGround : public Ogre::FrameListener {
@@ -50,6 +51,7 @@ class BattleGround : public Ogre::FrameListener {
     Ogre::Viewport *viewport;
     Ogre::Camera *camera;
 
+    std::vector<Object*> objects;
     std::vector<Character*> players;
 
     DISALLOW_COPY_AND_ASSIGN(BattleGround);

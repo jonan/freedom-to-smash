@@ -40,6 +40,7 @@ class Object {
     /// 
     void setEntity   (const char *name);
     void setPosition (const Ogre::Vector3 &pos);
+    void setScale    (const Ogre::Vector3 &scale);
     // @}
 
     /// 
