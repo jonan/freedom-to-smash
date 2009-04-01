@@ -17,7 +17,8 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 
 #include "object.hpp"
 
-#include <Ogre.h>
+#include <OgreEntity.h>
+#include <OgreSceneManager.h>
 
 // 
 void Object::setEntity(const char *name) {

@@ -19,6 +19,8 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 
 #include <enet/enet.h>
 
+#include <OgreRoot.h>
+
 // Singleton pattern constructor
 Server* Server::getInstance(void) {
   static Server instance;

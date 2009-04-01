@@ -19,7 +19,10 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 
 #include <string>
 
-#include <Ogre.h>
+#include <OgreAnimationState.h>
+#include <OgreEntity.h>
+#include <OgreFrameListener.h>
+#include <OgreSceneNode.h>
 
 #include "input_systems.hpp"
 

@@ -17,7 +17,9 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 
 #include "boot.hpp"
 
-#include <Ogre.h>
+#include <OgreConfigFile.h>
+#include <OgreRenderSystem.h>
+#include <OgreRoot.h>
 
 #include "input.hpp"
 

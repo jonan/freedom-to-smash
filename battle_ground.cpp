@@ -17,6 +17,9 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 
 #include "battle_ground.hpp"
 
+#include <OgreRenderWindow.h>
+#include <OgreRoot.h>
+
 #include "character.hpp"
 #include "input_systems.hpp"
 
