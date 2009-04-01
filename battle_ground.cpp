@@ -44,8 +44,6 @@ BattleGround::BattleGround(void) {
   ground->setPosition(Ogre::Vector3(0,-5,0));
   ground->setScale(Ogre::Vector3(20,1,1));
   objects.push_back(ground);
-  // Temporal addition of a player
-  addPlayer();
 }
 
 // Destructor
