@@ -30,8 +30,11 @@ void Object::setEntity(const char *name) {
       done = true;
       manager_name += ".";
       entity = scene_manager->createEntity(manager_name, mesh_name);
-    } catch (...) {
-      done = false;
+    } catch (Ogre::Exception exception) {
+      if (exception.getNumber() == Ogre::Exception::ERR_DUPLICATE_ITEM)
+        done = false;
+      else
+        throw exception;
     }
   }
   entity->setCastShadows(true);
