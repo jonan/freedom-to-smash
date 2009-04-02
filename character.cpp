@@ -53,6 +53,8 @@ void Character::update(const Ogre::FrameEvent& event) {
 void Character::recoverFromPenetration(Object &obj) {
   if (getBoundingBox()->intersects(*obj.getBoundingBox()))
     on_floor = true;
+  else
+    on_floor = false;
 }
 
 // 
