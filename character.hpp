@@ -42,6 +42,9 @@ class Character : public Object {
     /// 
     void update(const Ogre::FrameEvent& event);
 
+    /// 
+    void recoverFromPenetration(Object &obj);
+
   private:
     // Types of animations
     enum {ATTACK_ANIMATION, IDLE_ANIMATION, JUMP_ANIMATION, RUN_ANIMATION, NUM_ANIMATIONS};
@@ -65,6 +68,8 @@ class Character : public Object {
 
     bool action[NUM_ACTIONS]; // active actions
     bool key[NUM_ACTIONS];    // last frame input
+
+    bool on_floor;
 
     Ogre::AnimationState *animations[NUM_ANIMATIONS];
 

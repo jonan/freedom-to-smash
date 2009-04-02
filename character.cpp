@@ -38,6 +38,8 @@ Character::Character(Ogre::SceneManager &scene_manager, CharacterType type) : Ob
   jump_key       = OIS::KC_S;
   move_left_key  = OIS::KC_LEFT;
   move_right_key = OIS::KC_RIGHT;
+  // Initialize variables
+  on_floor = false;
 }
 
 // 
@@ -45,6 +47,12 @@ void Character::update(const Ogre::FrameEvent& event) {
   checkInput();
   animate(event);
   move(event);
+}
+
+// 
+void Character::recoverFromPenetration(Object &obj) {
+  if (getBoundingBox()->intersects(*obj.getBoundingBox()))
+    on_floor = true;
 }
 
 // 
@@ -122,4 +130,5 @@ void Character::move(const Ogre::FrameEvent &event) {
     node->translate(Vector3(-5*event.timeSinceLastFrame,0,0));
     node->setDirection(0,0,1,Ogre::Node::TS_PARENT);
   }
+  if (!on_floor) node->translate(Vector3(0,-5*event.timeSinceLastFrame,0));
 }

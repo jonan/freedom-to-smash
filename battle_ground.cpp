@@ -68,7 +68,10 @@ void BattleGround::start(void) {
 
 // 
 bool BattleGround::frameStarted(const Ogre::FrameEvent& event) {
-  for (unsigned int i=0; i<players.size(); i++)
+  for (unsigned int i=0; i<players.size(); i++) {
+    for (unsigned int j=0; j<objects.size(); j++)
+      players[i]->recoverFromPenetration(*objects[j]);
     players[i]->update(event);
+  }
   return !input::keyboard[OIS::KC_ESCAPE];
 }

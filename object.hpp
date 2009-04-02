@@ -25,6 +25,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #include "macros.hpp"
 
 namespace Ogre {
+class AxisAlignedBox;
 class Entity;
 class SceneNode;
 class SceneManager;
@@ -44,7 +45,7 @@ class Object {
     // @}
 
     /// 
-    void recoverFromPenetration(Object &obj);
+    const Ogre::AxisAlignedBox* getBoundingBox(void);
 
   protected:
     Ogre::Entity *entity;

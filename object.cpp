@@ -51,3 +51,8 @@ void Object::setPosition(const Ogre::Vector3 &pos) {
 void Object::setScale(const Ogre::Vector3 &scale) {
   node->setScale(scale);
 }
+
+// 
+const Ogre::AxisAlignedBox* Object::getBoundingBox(void) {
+  return &entity->getWorldBoundingBox();
+}
