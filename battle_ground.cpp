@@ -29,7 +29,7 @@ BattleGround::BattleGround(void) {
   scene_manager = Ogre::Root::getSingleton().createSceneManager(Ogre::ST_GENERIC);
   viewport = Ogre::Root::getSingleton().getAutoCreatedWindow()->addViewport(NULL);
   camera = scene_manager->createCamera("BattleGround Camera");
-  camera->setPosition(Ogre::Vector3(0,5,-30));
+  camera->setPosition(Ogre::Vector3(0,5,-50));
   camera->lookAt(Ogre::Vector3(0,4,0));
   camera->setNearClipDistance(5);
   camera->setFarClipDistance(1000);
@@ -42,7 +42,7 @@ BattleGround::BattleGround(void) {
   Object *ground = new Object(*scene_manager);
   ground->setEntity("cube");
   ground->setPosition(Ogre::Vector3(0,-5,0));
-  ground->setScale(Ogre::Vector3(20,1,1));
+  ground->setScale(Ogre::Vector3(10,1,1));
   objects.push_back(ground);
 }
 
