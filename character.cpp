@@ -29,7 +29,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 // Constructor
 Character::Character(Ogre::SceneManager &scene_manager, CharacterType type) : Object(scene_manager) {
   setEntity("kid");
-  setPosition(Ogre::Vector3(0,0,0));
+  setPosition(Ogre::Vector3(0,5,0));
   setAnimations();
   // Start with no action active
   for (int i=0; i < NUM_ACTIONS; i++) action[i] = false;
@@ -51,10 +51,15 @@ void Character::update(const Ogre::FrameEvent& event) {
 
 // 
 void Character::recoverFromPenetration(Object &obj) {
-  if (getBoundingBox()->intersects(*obj.getBoundingBox()))
-    on_floor = true;
-  else
+  if (getBoundingBox()->intersects(*obj.getBoundingBox())) {
+    if (!on_floor) {
+      on_floor = true;
+      double offset_y = node->getPosition().y-getBoundingBox()->getMinimum().y;
+      node->setPosition(node->getPosition().x,obj.getBoundingBox()->getMaximum().y+offset_y,node->getPosition().z);
+    }
+  } else {
     on_floor = false;
+  }
 }
 
 // 
