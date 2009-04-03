@@ -45,6 +45,7 @@ void Object::setEntity(const char *name) {
 void Object::setPosition(const Ogre::Vector3 &pos) {
   node = scene_manager->getRootSceneNode()->createChildSceneNode(pos);
   node->attachObject(entity);
+  node->showBoundingBox(true);
 }
 
 // 
