@@ -55,8 +55,8 @@ BattleGround::~BattleGround(void) {
 }
 
 // 
-void BattleGround::addPlayer(void) {
-  Character *player = new Character(*scene_manager, KID);
+void BattleGround::addPlayer(const int num_player) {
+  Character *player = new Character(*scene_manager, KID, num_player);
   players.push_back(player);
 }
 

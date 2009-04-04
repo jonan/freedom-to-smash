@@ -21,7 +21,8 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 int main(int argc, char *argv[]) {
   boot();
   BattleGround *battle = new BattleGround;
-  battle->addPlayer();
+  battle->addPlayer(1);
+  battle->addPlayer(2);
   battle->start();
   delete battle;
   return 0;

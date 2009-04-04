@@ -27,17 +27,33 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #include "input_systems.hpp"
 
 // Constructor
-Character::Character(Ogre::SceneManager &scene_manager, CharacterType type) : Object(scene_manager) {
+Character::Character(Ogre::SceneManager &scene_manager, CharacterType type, const int num_player) : Object(scene_manager) {
   setEntity("kid");
   setPosition(Ogre::Vector3(0,5,0));
   setAnimations();
   // Start with no action active
   for (int i=0; i < NUM_ACTIONS; i++) action[i] = false;
   // Define controls
-  attack_key     = OIS::KC_A;
-  jump_key       = OIS::KC_S;
-  move_left_key  = OIS::KC_LEFT;
-  move_right_key = OIS::KC_RIGHT;
+  switch (num_player) {
+    case 1:
+      attack_key     = OIS::KC_N;
+      jump_key       = OIS::KC_M;
+      move_left_key  = OIS::KC_LEFT;
+      move_right_key = OIS::KC_RIGHT;
+      break;
+    case 2:
+      attack_key     = OIS::KC_F;
+      jump_key       = OIS::KC_G;
+      move_left_key  = OIS::KC_A;
+      move_right_key = OIS::KC_S;
+      break;
+    default:
+      attack_key     = OIS::KC_A;
+      jump_key       = OIS::KC_S;
+      move_left_key  = OIS::KC_LEFT;
+      move_right_key = OIS::KC_RIGHT;
+      break;
+  }
   // Initialize variables
   on_floor = false;
 }

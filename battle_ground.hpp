@@ -38,7 +38,7 @@ class BattleGround : public Ogre::FrameListener {
     ~BattleGround(void); // Destructor
 
     /// 
-    void addPlayer(void);
+    void addPlayer(const int num_player);
 
     /// 
     void start(void);

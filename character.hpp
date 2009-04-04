@@ -37,7 +37,7 @@ enum CharacterType {KID};
 /// 
 class Character : public Object {
   public:
-    Character(Ogre::SceneManager &scene_manager, CharacterType type); // Constructor
+    Character(Ogre::SceneManager &scene_manager, CharacterType type, const int num_player); // Constructor
 
     /// 
     void update(const Ogre::FrameEvent& event);
