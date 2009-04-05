@@ -70,6 +70,8 @@ void Character::recoverFromPenetration(Object &obj) {
   if (getBoundingBox()->intersects(*obj.getBoundingBox())) {
     if (!on_floor) {
       on_floor = true;
+      action[FALLING] = false;
+      animations[FALL_ANIMATION]->setTimePosition(0);
       double offset_y = node->getPosition().y-getBoundingBox()->getMinimum().y;
       node->setPosition(node->getPosition().x,obj.getBoundingBox()->getMaximum().y+offset_y,node->getPosition().z);
     }
@@ -83,6 +85,9 @@ void Character::setAnimations(void) {
   animations[ATTACK_ANIMATION] = entity->getAnimationState("attackforward1");
   animations[ATTACK_ANIMATION]->setLoop(false);
   animations[ATTACK_ANIMATION]->setEnabled(false);
+  animations[FALL_ANIMATION] = entity->getAnimationState("fall1");
+  animations[FALL_ANIMATION]->setLoop(false);
+  animations[FALL_ANIMATION]->setEnabled(false);
   animations[IDLE_ANIMATION] = entity->getAnimationState("idle1");
   animations[IDLE_ANIMATION]->setLoop(true);
   animations[IDLE_ANIMATION]->setEnabled(false);
@@ -127,6 +132,9 @@ void Character::animate(const Ogre::FrameEvent &event) {
       animations[ATTACK_ANIMATION]->setTimePosition(0);
       action[ATTACKING] = false;
     }
+  } else if (action[FALLING]) {
+    animations[FALL_ANIMATION]->setEnabled(true);
+    animations[FALL_ANIMATION]->addTime(event.timeSinceLastFrame);
   } else if (action[JUMPING]) {
     animations[JUMP_ANIMATION]->setEnabled(true);
     animations[JUMP_ANIMATION]->addTime(event.timeSinceLastFrame);
@@ -153,5 +161,10 @@ void Character::move(const Ogre::FrameEvent &event) {
     node->translate(Vector3(-5*event.timeSinceLastFrame,0,0));
     node->setDirection(0,0,1,Ogre::Node::TS_PARENT);
   }
-  if (!on_floor) node->translate(Vector3(0,-5*event.timeSinceLastFrame,0));
+  if (action[JUMPING]) {
+    node->translate(Vector3(0,5*event.timeSinceLastFrame,0));
+  } else if (!on_floor) {
+    action[FALLING] = true;
+    node->translate(Vector3(0,-5*event.timeSinceLastFrame,0));
+  }
 }
