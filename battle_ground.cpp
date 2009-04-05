@@ -44,6 +44,16 @@ BattleGround::BattleGround(void) {
   ground->setPosition(Ogre::Vector3(0,-5,0));
   ground->setScale(Ogre::Vector3(10,1,1));
   objects.push_back(ground);
+  ground = new Object(*scene_manager);
+  ground->setEntity("cube");
+  ground->setPosition(Ogre::Vector3(-23,7,0));
+  ground->setScale(Ogre::Vector3(3,0.5,1));
+  objects.push_back(ground);
+  ground = new Object(*scene_manager);
+  ground->setEntity("cube");
+  ground->setPosition(Ogre::Vector3(23,7,0));
+  ground->setScale(Ogre::Vector3(3,0.5,1));
+  objects.push_back(ground);
 }
 
 // Destructor
