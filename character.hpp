@@ -67,7 +67,7 @@ class Character : public Object {
     int attack_key, jump_key, move_left_key, move_right_key;
 
     bool action[NUM_ACTIONS]; // active actions
-    bool key[NUM_ACTIONS];    // last frame input
+    bool key[NUM_KEYS];       // last frame input
 
     bool on_floor;
 
