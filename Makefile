@@ -25,7 +25,6 @@ BATTLE_GROUND = battle_ground.hpp $(MACROS)
 BOOT = boot.hpp
 CHARACTER = character.hpp $(OBJECT)
 INPUT = input.hpp $(MACROS)
-INPUT_SYSTEMS = input_systems.hpp
 MACROS = macros.hpp
 OBJECT = object.hpp $(MACROS)
 SERVER = server.hpp $(BATTLEGROUND) $(MACROS)
@@ -34,16 +33,16 @@ SERVER = server.hpp $(BATTLEGROUND) $(MACROS)
 freedom-to-smash: $(OBJECTS)
 	g++ -Wall -Wno-deprecated -g $(OBJECTS) $(CFLAGS) $(LIBS) -o freedom-to-smash
 
-battle_ground.o: battle_ground.cpp $(BATTLE_GROUND) $(CHARACTER) $(INPUT_SYSTEMS)
+battle_ground.o: battle_ground.cpp $(BATTLE_GROUND) $(CHARACTER) $(INPUT)
 	$(CC) $(CFLAGS) battle_ground.cpp
 
 boot.o: boot.cpp $(BOOT) $(INPUT)
 	$(CC) $(CFLAGS) boot.cpp
 
-character.o: character.cpp $(CHARACTER) $(INPUT_SYSTEMS)
+character.o: character.cpp $(CHARACTER) $(INPUT)
 	$(CC) $(CFLAGS) character.cpp
 
-input.o: input.cpp $(INPUT) $(INPUT_SYSTEMS)
+input.o: input.cpp $(INPUT)
 	$(CC) $(CFLAGS) input.cpp
 
 main.o: main.cpp $(BATTLE_GROUND) $(BOOT)

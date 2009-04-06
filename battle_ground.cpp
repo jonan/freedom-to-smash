@@ -21,15 +21,16 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #include <OgreRoot.h>
 
 #include "character.hpp"
-#include "input_systems.hpp"
+#include "input.hpp"
 
 // Constructor
 BattleGround::BattleGround(void) {
+  end = false;
   // Initialize variables
   scene_manager = Ogre::Root::getSingleton().createSceneManager(Ogre::ST_GENERIC);
   viewport = Ogre::Root::getSingleton().getAutoCreatedWindow()->addViewport(NULL);
   camera = scene_manager->createCamera("BattleGround Camera");
-  camera->setPosition(Ogre::Vector3(0,5,-50));
+  camera->setPosition(Ogre::Vector3(0,0,-50));
   camera->lookAt(Ogre::Vector3(0,4,0));
   camera->setNearClipDistance(5);
   camera->setFarClipDistance(1000);
@@ -73,6 +74,7 @@ void BattleGround::addPlayer(const int num_player) {
 // 
 void BattleGround::start(void) {
   Ogre::Root::getSingleton().addFrameListener(this);
+  Input::getInstance()->setListeners(this);
   Ogre::Root::getSingleton().startRendering();
 }
 
@@ -83,5 +85,23 @@ bool BattleGround::frameStarted(const Ogre::FrameEvent& event) {
       players[i]->recoverFromPenetration(*objects[j]);
     players[i]->update(event);
   }
-  return !input::keyboard[OIS::KC_ESCAPE];
+  return !end;
+}
+
+// 
+bool BattleGround::keyPressed(const OIS::KeyEvent& key) {
+  for (unsigned int i=0; i<players.size(); i++)
+    players[i]->keyPressed(key);
+  return true;
+}
+
+// 
+bool BattleGround::keyReleased(const OIS::KeyEvent& key) {
+  if (key.key == OIS::KC_ESCAPE) {
+    end = true;
+  } else {
+    for (unsigned int i=0; i<players.size(); i++)
+      players[i]->keyReleased(key);
+  }
+  return true;
 }

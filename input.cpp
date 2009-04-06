@@ -22,15 +22,6 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #include <OgreRenderWindow.h>
 #include <OgreRoot.h>
 
-#include "input_systems.hpp"
-
-namespace input {
-
-// Declare the input systems
-std::vector<bool> keyboard(238, false); // OIS defines 238 different keyboard keys
-OIS::MouseState mouse;
-OIS::JoyStickState joystick;
-
 // Singleton pattern constructor
 Input* Input::getInstance(void) {
   static Input instance;
@@ -40,27 +31,21 @@ Input* Input::getInstance(void) {
 // Destructor
 Input::~Input(void) {
   if (keyboard) manager->destroyInputObject(keyboard);
-  if (mouse) manager->destroyInputObject(mouse);
   if (joystick) manager->destroyInputObject(joystick);
   OIS::InputManager::destroyInputSystem(manager);
-  // Delete the Ogre Root object here because it needs to me deleted after the mouse.
-  delete Ogre::Root::getSingletonPtr();
 }
 
 // Changes the listeners.
-void Input::setListeners(OIS::KeyListener *keyboard,
-                         OIS::MouseListener *mouse,
-                         OIS::JoyStickListener *joystick
+void Input::setListeners( OIS::KeyListener *keyboard,
+                          OIS::JoyStickListener *joystick
                         ) {
   if (this->keyboard) this->keyboard->setEventCallback(keyboard);
-  if (this->mouse) this->mouse->setEventCallback(mouse);
   if (this->joystick) this->joystick->setEventCallback(joystick);
 }
 
 // Constructor
 Input::Input(void) {
   setupOIS();
-  setListeners(this);
   Ogre::Root::getSingleton().addFrameListener(this);
 }
 
@@ -87,15 +72,6 @@ void Input::setupOIS(void) {
   }
   cout << endl;
   try {
-    cout << "Creating mouse... ";
-    mouse = static_cast<OIS::Mouse*>(manager->createInputObject(OIS::OISMouse, true));
-  } catch (const OIS::Exception &exception) {
-    // No mouse
-    cout << "FAILED";
-    mouse = NULL;
-  }
-  cout << endl;
-  try {
     cout << "Creating joystick... ";
     joystick = static_cast<OIS::JoyStick*>(manager->createInputObject(OIS::OISJoyStick, true));
   } catch (const OIS::Exception &exception) {
@@ -104,41 +80,11 @@ void Input::setupOIS(void) {
     joystick = NULL;
   }
   cout << endl;
-  // Tell OIS the dimensions of the window (only needed when using mouse)
-  if (mouse) {
-    unsigned int width, height, depth;
-    int left, top;
-    const OIS::MouseState& mouse_state = mouse->getMouseState();
-    window->getMetrics(width, height, depth, left, top);
-    mouse_state.width = width;
-    mouse_state.height = height;
-  }
-}
-
-// Updates variables when a key is pressed.
-bool Input::keyPressed(const OIS::KeyEvent& key) {
-  input::keyboard[key.key]=true;
-  return true;
-}
-
-// Updates variables when a key is released.
-bool Input::keyReleased(const OIS::KeyEvent& key) {
-  input::keyboard[key.key]=false;
-  return true;
 }
 
 // Checks input after every frame.
 bool Input::frameEnded(const Ogre::FrameEvent& /*event*/) {
   if (keyboard) keyboard->capture();
-  if (mouse) {
-    mouse->capture();
-    input::mouse = mouse->getMouseState();
-  }
-  if (joystick) {
-    joystick->capture();
-    input::joystick = joystick->getJoyStickState();
-  }
+  if (joystick) joystick->capture();
   return true;
 }
-
-} // namespace input

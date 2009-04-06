@@ -24,7 +24,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #include <OgreFrameListener.h>
 #include <OgreSceneNode.h>
 
-#include "input_systems.hpp"
+#include "input.hpp"
 
 // Constructor
 Character::Character(Ogre::SceneManager &scene_manager, CharacterType type, const int num_player) : Object(scene_manager) {
@@ -60,9 +60,32 @@ Character::Character(Ogre::SceneManager &scene_manager, CharacterType type, cons
 
 // 
 void Character::update(const Ogre::FrameEvent& event) {
-  checkInput();
   animate(event);
   move(event);
+}
+
+// 
+bool Character::keyPressed(const OIS::KeyEvent& key) {
+  if (key.key == attack_key && on_floor) {
+    action[ATTACKING] = true;
+  } else if (key.key == jump_key && on_floor && !action[ATTACKING]) {
+    action[JUMPING] = true;
+  } else if (key.key == move_left_key) {
+    action[MOVING_LEFT] = true;
+  } else if (key.key == move_right_key) {
+    action[MOVING_RIGHT] = true;
+  }
+  return true;
+}
+
+// 
+bool Character::keyReleased(const OIS::KeyEvent& key) {
+  if (key.key == move_left_key) {
+    action[MOVING_LEFT] = false;
+  } else if (key.key == move_right_key) {
+    action[MOVING_RIGHT] = false;
+  }
+  return true;
 }
 
 // 
@@ -97,27 +120,6 @@ void Character::setAnimations(void) {
   animations[RUN_ANIMATION] = entity->getAnimationState("run1");
   animations[RUN_ANIMATION]->setLoop(true);
   animations[RUN_ANIMATION]->setEnabled(false);
-}
-
-// 
-void Character::checkInput(void) {
-  using input::keyboard;
-
-  if (!key[ATTACK_KEY] && !action[ATTACKING] && !action[JUMPING])
-    action[ATTACKING] = keyboard[attack_key];
-  if (!action[ATTACKING]) {
-    if (!key[JUMP_KEY] && !action[JUMPING]) action[JUMPING] = keyboard[jump_key];
-    action[MOVING_LEFT ] = keyboard[move_left_key ];
-    if (!keyboard[move_left_key]) action[MOVING_RIGHT] = keyboard[move_right_key];
-  } else {
-    action[MOVING_LEFT] = action[MOVING_RIGHT] = false;
-  }
-
-  // Store keyboard state
-  key[ATTACK_KEY    ] = keyboard[attack_key    ];
-  key[JUMP_KEY      ] = keyboard[jump_key      ];
-  key[MOVE_LEFT_KEY ] = keyboard[move_left_key ];
-  key[MOVE_RIGHT_KEY] = keyboard[move_right_key];
 }
 
 // 

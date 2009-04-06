@@ -24,6 +24,8 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 
 #include <OgreFrameListener.h>
 
+#include <OIS/OIS.h>
+
 #include <vector>
 
 #include "macros.hpp"
@@ -32,7 +34,7 @@ class Character;
 class Object;
 
 /// 
-class BattleGround : public Ogre::FrameListener {
+class BattleGround : public Ogre::FrameListener, public OIS::KeyListener {
   public:
     BattleGround(void); // Constructor
     ~BattleGround(void); // Destructor
@@ -47,12 +49,20 @@ class BattleGround : public Ogre::FrameListener {
     // 
     virtual bool frameStarted(const Ogre::FrameEvent& event);
 
+    // @{
+    // 
+    virtual bool keyPressed  (const OIS::KeyEvent& key);
+    virtual bool keyReleased (const OIS::KeyEvent& key);
+    // @}
+
     Ogre::SceneManager *scene_manager;
     Ogre::Viewport *viewport;
     Ogre::Camera *camera;
 
     std::vector<Object*> objects;
     std::vector<Character*> players;
+
+    bool end;
 
     DISALLOW_COPY_AND_ASSIGN(BattleGround);
 };

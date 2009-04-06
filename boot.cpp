@@ -82,5 +82,5 @@ void boot(void) {
   setupRenderSystem(ogre_root);
   initializeAllResources();
   // Start capturing all input
-  input::Input::getInstance();
+  Input::getInstance();
 }

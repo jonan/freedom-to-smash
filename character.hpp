@@ -22,6 +22,8 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #ifndef CHARACTER_HPP
 #define CHARACTER_HPP
 
+#include <OIS/OIS.h>
+
 #include "object.hpp"
 
 namespace Ogre {
@@ -35,12 +37,18 @@ class SceneManager;
 enum CharacterType {KID};
 
 /// 
-class Character : public Object {
+class Character : public Object, public OIS::KeyListener {
   public:
     Character(Ogre::SceneManager &scene_manager, CharacterType type, const int num_player); // Constructor
 
     /// 
     void update(const Ogre::FrameEvent& event);
+
+    // @{
+    /// 
+    virtual bool keyPressed  (const OIS::KeyEvent& key);
+    virtual bool keyReleased (const OIS::KeyEvent& key);
+    // @}
 
     /// 
     void recoverFromPenetration(Object &obj);
@@ -50,28 +58,22 @@ class Character : public Object {
     enum {ATTACK_ANIMATION, FALL_ANIMATION, IDLE_ANIMATION, JUMP_ANIMATION, RUN_ANIMATION, NUM_ANIMATIONS};
     // Current action(s)
     enum {ATTACKING, FALLING, JUMPING, MOVING_LEFT, MOVING_RIGHT, NUM_ACTIONS};
-    // Control keys
-    enum {ATTACK_KEY, JUMP_KEY, MOVE_LEFT_KEY, MOVE_RIGHT_KEY, NUM_KEYS};
 
     // 
     void setAnimations(void);
 
     // 
-    void checkInput(void);
-    // 
     void animate(const Ogre::FrameEvent &event);
     // 
     void move(const Ogre::FrameEvent &event);
 
-    // Controls
-    int attack_key, jump_key, move_left_key, move_right_key;
-
     bool action[NUM_ACTIONS]; // active actions
-    bool key[NUM_KEYS];       // last frame input
-
     bool on_floor;
 
     Ogre::AnimationState *animations[NUM_ANIMATIONS];
+
+    // Controls
+    int attack_key, jump_key, move_left_key, move_right_key;
 
     DISALLOW_COPY_AND_ASSIGN(Character);
 };
