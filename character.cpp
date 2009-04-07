@@ -89,17 +89,23 @@ bool Character::keyReleased(const OIS::KeyEvent& key) {
 }
 
 // 
-void Character::recoverFromPenetration(Object &obj) {
-  if (getBoundingBox()->intersects(*obj.getBoundingBox())) {
-    if (!on_floor) {
+void Character::recoverFromPenetration(std::vector<Object*>& objects) {
+  on_floor = false;
+
+  for (unsigned int i=0; i<objects.size() && !on_floor; i++) {
+    Ogre::AxisAlignedBox intersection_box = getBoundingBox()->intersection(*objects[i]->getBoundingBox());
+    if (!intersection_box.isNull() ||  ( objects[i]->getBoundingBox()->getMaximum().y == getBoundingBox()->getMinimum().y &&
+                                         objects[i]->getBoundingBox()->getMaximum().x >  getBoundingBox()->getMinimum().x &&
+                                         objects[i]->getBoundingBox()->getMinimum().x <  getBoundingBox()->getMaximum().x    )
+                                                                                                                              ) {
       on_floor = true;
       action[FALLING] = false;
       animations[FALL_ANIMATION]->setTimePosition(0);
-      double offset_y = node->getPosition().y-getBoundingBox()->getMinimum().y;
-      node->setPosition(node->getPosition().x,obj.getBoundingBox()->getMaximum().y+offset_y,node->getPosition().z);
+      if (!intersection_box.isNull()) {
+        double offset_y = node->getPosition().y-getBoundingBox()->getMinimum().y;
+        node->setPosition(node->getPosition().x,intersection_box.getMaximum().y+offset_y,node->getPosition().z);
+      }
     }
-  } else {
-    on_floor = false;
   }
 }
 

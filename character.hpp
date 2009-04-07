@@ -22,6 +22,8 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #ifndef CHARACTER_HPP
 #define CHARACTER_HPP
 
+#include <vector>
+
 #include <OIS/OIS.h>
 
 #include "object.hpp"
@@ -51,7 +53,7 @@ class Character : public Object, public OIS::KeyListener {
     // @}
 
     /// 
-    void recoverFromPenetration(Object &obj);
+    void recoverFromPenetration(std::vector<Object*>& objects);
 
   private:
     // Types of animations
