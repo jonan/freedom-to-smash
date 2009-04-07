@@ -25,5 +25,6 @@ int main(int argc, char *argv[]) {
   battle->addPlayer(2);
   battle->start();
   delete battle;
+  quit();
   return 0;
 }

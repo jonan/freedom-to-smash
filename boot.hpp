@@ -25,5 +25,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 /// Loads all the necessary things for the game to run.
 /// It has to be called first thing in the program.
 void boot(void);
+/// 
+void quit(void);
 
 #endif // BOOT_HPP

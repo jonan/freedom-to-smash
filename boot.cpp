@@ -84,3 +84,8 @@ void boot(void) {
   // Start capturing all input
   Input::getInstance();
 }
+
+// 
+void quit(void) {
+  delete Ogre::Root::getSingletonPtr();
+}
