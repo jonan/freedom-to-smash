@@ -16,7 +16,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 */
 
 /// @file
-/// The boot function.
+/// The boot and quit functions.
 /// @author Jonan
 
 #ifndef BOOT_HPP
@@ -25,7 +25,8 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 /// Loads all the necessary things for the game to run.
 /// It has to be called first thing in the program.
 void boot(void);
-/// 
+/// Shuts down all the systems and frees memory.
+/// It has to be called last thing in the program.
 void quit(void);
 
 #endif // BOOT_HPP

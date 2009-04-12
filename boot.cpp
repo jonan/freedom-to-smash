@@ -85,7 +85,7 @@ void boot(void) {
   Input::getInstance();
 }
 
-// 
+// Shuts down all the systems and frees memory.
 void quit(void) {
   delete Ogre::Root::getSingletonPtr();
 }

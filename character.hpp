@@ -16,7 +16,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 */
 
 /// @file
-/// 
+/// The Character class.
 /// @author Jonan
 
 #ifndef CHARACTER_HPP
@@ -36,23 +36,28 @@ class SceneNode;
 class SceneManager;
 }
 
+/// Types of character.
 enum CharacterType {KID};
 
-/// 
+/// Class to control a character.
 class Character : public Object, public OIS::KeyListener {
   public:
     Character(Ogre::SceneManager &scene_manager, CharacterType type, const int num_player); // Constructor
 
-    /// 
+    /// Updates the character.
+    /// This function must be called every frame.
+    /// @param[in] event Ogre's FrameListener parameter.
     void update(const Ogre::FrameEvent& event);
 
     // @{
-    /// 
+    /// Functions to update the keyboard's state.
     virtual bool keyPressed  (const OIS::KeyEvent& key);
     virtual bool keyReleased (const OIS::KeyEvent& key);
     // @}
 
-    /// 
+    /// Detects and solves collisions of the character with the battle ground.
+    /// This function must be called every frame.
+    /// @param[in] objects All the objects in the battle ground.
     void recoverFromPenetration(std::vector<Object*>& objects);
 
   private:
@@ -61,13 +66,14 @@ class Character : public Object, public OIS::KeyListener {
     // Current action(s)
     enum {ATTACKING, FALLING, JUMPING, MOVING_LEFT, MOVING_RIGHT, NUM_ACTIONS};
 
-    // 
-    void setAnimations(void);
+    // Prepares all animations so they can be used.
+    void prepareAnimations(void);
 
-    // 
-    void animate(const Ogre::FrameEvent &event);
-    // 
-    void move(const Ogre::FrameEvent &event);
+    // @{
+    // Funtions that need to be called every frame for the character to be updated.
+    void animate (const Ogre::FrameEvent &event);
+    void move    (const Ogre::FrameEvent &event);
+    // @}
 
     bool action[NUM_ACTIONS]; // active actions
     bool on_floor;

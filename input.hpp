@@ -16,7 +16,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 */
 
 /// @file
-/// The input::Input class.
+/// The Input class.
 /// @author Jonan
 
 #ifndef INPUT_HPP
@@ -28,7 +28,9 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 
 #include "macros.hpp"
 
-/// 
+/// Class to control all input and who is listening to it.
+/// For the moment only one class can be listening at
+/// a time, but this will likely change soon.
 class Input : public Ogre::FrameListener {
   public:
     static Input* getInstance(void); // Singleton pattern constructor

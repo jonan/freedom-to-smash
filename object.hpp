@@ -16,7 +16,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 */
 
 /// @file
-/// 
+/// The Object class.
 /// @author Jonan
 
 #ifndef OBJECT_HPP
@@ -32,19 +32,20 @@ class SceneManager;
 class Vector3;
 }
 
-/// 
+/// General object class.
 class Object {
   public:
-    Object(Ogre::SceneManager &scene_manager) : scene_manager(&scene_manager) {} // Constructor
+    explicit Object(Ogre::SceneManager &scene_manager) : scene_manager(&scene_manager) {} // Constructor
 
     // @{
-    /// 
+    /// Set functions.
     void setEntity   (const char *name);
     void setPosition (const Ogre::Vector3 &pos);
     void setScale    (const Ogre::Vector3 &scale);
     // @}
 
-    /// 
+    /// Function to get the bounding box of the object's entity.
+    /// @return Bounding box of the object's entity.
     const Ogre::AxisAlignedBox* getBoundingBox(void);
 
   protected:

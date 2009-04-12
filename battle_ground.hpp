@@ -16,7 +16,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 */
 
 /// @file
-/// 
+/// The BattleGround class.
 /// @author Jonan
 
 #ifndef BATTLE_GROUND_HPP
@@ -33,24 +33,25 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 class Character;
 class Object;
 
-/// 
+/// Class to control all that happens in a battle ground.
 class BattleGround : public Ogre::FrameListener, public OIS::KeyListener {
   public:
     BattleGround(void); // Constructor
     ~BattleGround(void); // Destructor
 
-    /// 
+    /// Adds a player to the battle ground.
+    /// @param[in] num_player Number of the player.
     void addPlayer(const int num_player);
 
-    /// 
+    /// Starts the battle.
     void start(void);
 
   private:
-    // 
+    // Function that's called at the beginning of every frame.
     virtual bool frameStarted(const Ogre::FrameEvent& event);
 
     // @{
-    // 
+    // Functions to update the keyboard's state.
     virtual bool keyPressed  (const OIS::KeyEvent& key);
     virtual bool keyReleased (const OIS::KeyEvent& key);
     // @}

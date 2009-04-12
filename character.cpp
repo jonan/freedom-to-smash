@@ -30,7 +30,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 Character::Character(Ogre::SceneManager &scene_manager, CharacterType type, const int num_player) : Object(scene_manager) {
   setEntity("kid");
   setPosition(Ogre::Vector3(0,5,0));
-  setAnimations();
+  prepareAnimations();
   // Start with no action active
   for (int i=0; i < NUM_ACTIONS; i++) action[i] = false;
   // Define controls
@@ -58,13 +58,13 @@ Character::Character(Ogre::SceneManager &scene_manager, CharacterType type, cons
   on_floor = false;
 }
 
-// 
+// Updates the character.
 void Character::update(const Ogre::FrameEvent& event) {
   animate(event);
   move(event);
 }
 
-// 
+// Function to update the keyboard's state.
 bool Character::keyPressed(const OIS::KeyEvent& key) {
   if (key.key == attack_key && on_floor) {
     action[ATTACKING] = true;
@@ -78,7 +78,7 @@ bool Character::keyPressed(const OIS::KeyEvent& key) {
   return true;
 }
 
-// 
+// Function to update the keyboard's state.
 bool Character::keyReleased(const OIS::KeyEvent& key) {
   if (key.key == move_left_key) {
     action[MOVING_LEFT] = false;
@@ -88,7 +88,7 @@ bool Character::keyReleased(const OIS::KeyEvent& key) {
   return true;
 }
 
-// 
+// Detects and solves collisions of the character with the battle ground.
 void Character::recoverFromPenetration(std::vector<Object*>& objects) {
   on_floor = false;
 
@@ -109,8 +109,8 @@ void Character::recoverFromPenetration(std::vector<Object*>& objects) {
   }
 }
 
-// 
-void Character::setAnimations(void) {
+// Prepares all animations so they can be used.
+void Character::prepareAnimations(void) {
   animations[ATTACK_ANIMATION] = entity->getAnimationState("attackforward1");
   animations[ATTACK_ANIMATION]->setLoop(false);
   animations[ATTACK_ANIMATION]->setEnabled(false);
@@ -128,7 +128,7 @@ void Character::setAnimations(void) {
   animations[RUN_ANIMATION]->setEnabled(false);
 }
 
-// 
+// Funtion that needs to be called every frame for the character to be updated.
 void Character::animate(const Ogre::FrameEvent &event) {
   // Disable all animations
   for (int i=0; i<NUM_ANIMATIONS; i++) animations[i]->setEnabled(false);
@@ -159,7 +159,7 @@ void Character::animate(const Ogre::FrameEvent &event) {
   }
 }
 
-// 
+// Funtion that needs to be called every frame for the character to be updated.
 void Character::move(const Ogre::FrameEvent &event) {
   using Ogre::Vector3;
   if (action[MOVING_LEFT]) {

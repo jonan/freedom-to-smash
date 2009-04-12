@@ -20,7 +20,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #include <OgreEntity.h>
 #include <OgreSceneManager.h>
 
-// 
+// Set function.
 void Object::setEntity(const char *name) {
   bool done = false;
   std::string mesh_name = name;
@@ -41,19 +41,19 @@ void Object::setEntity(const char *name) {
   entity->setCastShadows(true);
 }
 
-// 
+// Set function.
 void Object::setPosition(const Ogre::Vector3 &pos) {
   node = scene_manager->getRootSceneNode()->createChildSceneNode(pos);
   node->attachObject(entity);
   node->showBoundingBox(true);
 }
 
-// 
+// Set function.
 void Object::setScale(const Ogre::Vector3 &scale) {
   node->setScale(scale);
 }
 
-// 
+// Function to get the bounding box of the object's entity.
 const Ogre::AxisAlignedBox* Object::getBoundingBox(void) {
   return &entity->getWorldBoundingBox();
 }

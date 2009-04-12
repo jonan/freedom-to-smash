@@ -65,20 +65,20 @@ BattleGround::~BattleGround(void) {
     delete players[i];
 }
 
-// 
+// Adds a player to the battle ground.
 void BattleGround::addPlayer(const int num_player) {
   Character *player = new Character(*scene_manager, KID, num_player);
   players.push_back(player);
 }
 
-// 
+// Starts the battle.
 void BattleGround::start(void) {
   Ogre::Root::getSingleton().addFrameListener(this);
   Input::getInstance()->setListeners(this);
   Ogre::Root::getSingleton().startRendering();
 }
 
-// 
+// Function that's called at the beginning of every frame.
 bool BattleGround::frameStarted(const Ogre::FrameEvent& event) {
   for (unsigned int i=0; i<players.size(); i++) {
     players[i]->recoverFromPenetration(objects);
@@ -87,14 +87,14 @@ bool BattleGround::frameStarted(const Ogre::FrameEvent& event) {
   return !end;
 }
 
-// 
+// Function to update the keyboard's state.
 bool BattleGround::keyPressed(const OIS::KeyEvent& key) {
   for (unsigned int i=0; i<players.size(); i++)
     players[i]->keyPressed(key);
   return true;
 }
 
-// 
+// Function to update the keyboard's state.
 bool BattleGround::keyReleased(const OIS::KeyEvent& key) {
   if (key.key == OIS::KC_ESCAPE) {
     end = true;

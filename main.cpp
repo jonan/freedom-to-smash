@@ -15,6 +15,10 @@ You should have received a copy of the GNU General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>
 */
 
+/// @file
+/// The main function.
+/// @author Jonan
+
 #include "battle_ground.hpp"
 #include "boot.hpp"
 
