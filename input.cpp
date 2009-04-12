@@ -35,17 +35,11 @@ Input::~Input(void) {
   OIS::InputManager::destroyInputSystem(manager);
 }
 
-// Changes the listeners.
-void Input::setListeners( OIS::KeyListener *keyboard,
-                          OIS::JoyStickListener *joystick
-                        ) {
-  if (this->keyboard) this->keyboard->setEventCallback(keyboard);
-  if (this->joystick) this->joystick->setEventCallback(joystick);
-}
-
 // Constructor
 Input::Input(void) {
   setupOIS();
+  if (this->keyboard) this->keyboard->setEventCallback(this);
+  if (this->joystick) this->joystick->setEventCallback(this);
   Ogre::Root::getSingleton().addFrameListener(this);
 }
 
@@ -86,5 +80,21 @@ void Input::setupOIS(void) {
 bool Input::frameEnded(const Ogre::FrameEvent& /*event*/) {
   if (keyboard) keyboard->capture();
   if (joystick) joystick->capture();
+  return true;
+}
+
+// Function to update the keyboard's state.
+bool Input::keyPressed(const OIS::KeyEvent& key) {
+  std::list<OIS::KeyListener*>::iterator it;
+  for (it = key_listeners.begin(); it != key_listeners.end(); it++)
+    (*it)->keyPressed(key);
+  return true;
+}
+
+// Function to update the keyboard's state.
+bool Input::keyReleased(const OIS::KeyEvent& key) {
+  std::list<OIS::KeyListener*>::iterator it;
+  for (it = key_listeners.begin(); it != key_listeners.end(); it++)
+    (*it)->keyReleased(key);
   return true;
 }

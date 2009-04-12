@@ -63,6 +63,7 @@ BattleGround::~BattleGround(void) {
     delete objects[i];
   for (unsigned int i=0; i<players.size(); i++)
     delete players[i];
+  Input::getInstance()->removeKeyListener(this);
 }
 
 // Adds a player to the battle ground.
@@ -74,7 +75,7 @@ void BattleGround::addPlayer(const int num_player) {
 // Starts the battle.
 void BattleGround::start(void) {
   Ogre::Root::getSingleton().addFrameListener(this);
-  Input::getInstance()->setListeners(this);
+  Input::getInstance()->addKeyListener(this);
   Ogre::Root::getSingleton().startRendering();
 }
 
