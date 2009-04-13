@@ -56,36 +56,18 @@ Character::Character(Ogre::SceneManager &scene_manager, CharacterType type, cons
   }
   // Initialize variables
   on_floor = false;
+  Input::getInstance()->addKeyListener(this);
+}
+
+// Destructor
+Character::~Character(void) {
+  Input::getInstance()->removeKeyListener(this);
 }
 
 // Updates the character.
 void Character::update(const Ogre::FrameEvent& event) {
   animate(event);
   move(event);
-}
-
-// Function to update the keyboard's state.
-bool Character::keyPressed(const OIS::KeyEvent& key) {
-  if (key.key == attack_key && on_floor) {
-    action[ATTACKING] = true;
-  } else if (key.key == jump_key && on_floor && !action[ATTACKING]) {
-    action[JUMPING] = true;
-  } else if (key.key == move_left_key) {
-    action[MOVING_LEFT] = true;
-  } else if (key.key == move_right_key) {
-    action[MOVING_RIGHT] = true;
-  }
-  return true;
-}
-
-// Function to update the keyboard's state.
-bool Character::keyReleased(const OIS::KeyEvent& key) {
-  if (key.key == move_left_key) {
-    action[MOVING_LEFT] = false;
-  } else if (key.key == move_right_key) {
-    action[MOVING_RIGHT] = false;
-  }
-  return true;
 }
 
 // Detects and solves collisions of the character with the battle ground.
@@ -175,4 +157,28 @@ void Character::move(const Ogre::FrameEvent &event) {
     action[FALLING] = true;
     node->translate(Vector3(0,-5*event.timeSinceLastFrame,0));
   }
+}
+
+// Function to update the keyboard's state.
+bool Character::keyPressed(const OIS::KeyEvent& key) {
+  if (key.key == attack_key && on_floor) {
+    action[ATTACKING] = true;
+  } else if (key.key == jump_key && on_floor && !action[ATTACKING]) {
+    action[JUMPING] = true;
+  } else if (key.key == move_left_key) {
+    action[MOVING_LEFT] = true;
+  } else if (key.key == move_right_key) {
+    action[MOVING_RIGHT] = true;
+  }
+  return true;
+}
+
+// Function to update the keyboard's state.
+bool Character::keyReleased(const OIS::KeyEvent& key) {
+  if (key.key == move_left_key) {
+    action[MOVING_LEFT] = false;
+  } else if (key.key == move_right_key) {
+    action[MOVING_RIGHT] = false;
+  }
+  return true;
 }

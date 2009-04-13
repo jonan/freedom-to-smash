@@ -89,19 +89,9 @@ bool BattleGround::frameStarted(const Ogre::FrameEvent& event) {
 }
 
 // Function to update the keyboard's state.
-bool BattleGround::keyPressed(const OIS::KeyEvent& key) {
-  for (unsigned int i=0; i<players.size(); i++)
-    players[i]->keyPressed(key);
-  return true;
-}
-
-// Function to update the keyboard's state.
 bool BattleGround::keyReleased(const OIS::KeyEvent& key) {
   if (key.key == OIS::KC_ESCAPE) {
     end = true;
-  } else {
-    for (unsigned int i=0; i<players.size(); i++)
-      players[i]->keyReleased(key);
   }
   return true;
 }

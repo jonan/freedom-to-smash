@@ -43,17 +43,12 @@ enum CharacterType {KID};
 class Character : public Object, public OIS::KeyListener {
   public:
     Character(Ogre::SceneManager &scene_manager, CharacterType type, const int num_player); // Constructor
+    ~Character(void); // Destructor
 
     /// Updates the character.
     /// This function must be called every frame.
     /// @param[in] event Ogre's FrameListener parameter.
     void update(const Ogre::FrameEvent& event);
-
-    // @{
-    /// Functions to update the keyboard's state.
-    virtual bool keyPressed  (const OIS::KeyEvent& key);
-    virtual bool keyReleased (const OIS::KeyEvent& key);
-    // @}
 
     /// Detects and solves collisions of the character with the battle ground.
     /// This function must be called every frame.
@@ -73,6 +68,12 @@ class Character : public Object, public OIS::KeyListener {
     // Funtions that need to be called every frame for the character to be updated.
     void animate (const Ogre::FrameEvent &event);
     void move    (const Ogre::FrameEvent &event);
+    // @}
+
+    // @{
+    // Functions to update the keyboard's state.
+    virtual bool keyPressed  (const OIS::KeyEvent& key);
+    virtual bool keyReleased (const OIS::KeyEvent& key);
     // @}
 
     bool action[NUM_ACTIONS]; // active actions
