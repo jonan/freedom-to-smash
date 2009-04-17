@@ -56,10 +56,9 @@ class Character : public Object, public OIS::KeyListener {
     void recoverFromPenetration(std::vector<Object*>& objects);
 
   private:
-    // Types of animations
-    enum {ATTACK_ANIMATION, FALL_ANIMATION, IDLE_ANIMATION, JUMP_ANIMATION, RUN_ANIMATION, NUM_ANIMATIONS};
-    // Current action(s)
-    enum {ATTACKING, FALLING, JUMPING, MOVING_LEFT, MOVING_RIGHT, NUM_ACTIONS};
+    // All the different states of the player
+    enum {ATTACK_1, ATTACK_2, DEFEND, DOUBLE_JUMP, FALL, IDLE, JUMP,
+          LAND, MOVE, SPECIAL_ATTACK_1, SPECIAL_ATTACK_2, NUM_STATES};
 
     // Prepares all animations so they can be used.
     void prepareAnimations(void);
@@ -70,19 +69,25 @@ class Character : public Object, public OIS::KeyListener {
     void move    (const Ogre::FrameEvent &event);
     // @}
 
+    // Player stops performing an action
+    void stopAction(const int type);
+
     // @{
     // Functions to update the keyboard's state.
     virtual bool keyPressed  (const OIS::KeyEvent& key);
     virtual bool keyReleased (const OIS::KeyEvent& key);
     // @}
 
-    bool action[NUM_ACTIONS]; // active actions
-    bool on_floor;
+    bool action[NUM_STATES]; // active actions
+    bool on_floor, has_double_jumped;
+    float jumping_time;
 
-    Ogre::AnimationState *animations[NUM_ANIMATIONS];
+    int direction;
+
+    Ogre::AnimationState *animations[NUM_STATES];
 
     // Controls
-    int attack_key, jump_key, move_left_key, move_right_key;
+    int attack_key, defend_key, jump_key, move_left_key, move_right_key, special_attack_key;
 
     DISALLOW_COPY_AND_ASSIGN(Character);
 };
