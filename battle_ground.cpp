@@ -82,8 +82,8 @@ void BattleGround::start(void) {
 // Function that's called at the beginning of every frame.
 bool BattleGround::frameStarted(const Ogre::FrameEvent& event) {
   for (unsigned int i=0; i<players.size(); i++) {
-    players[i]->recoverFromPenetration(objects);
     players[i]->update(event);
+    players[i]->recoverFromPenetration(objects);
   }
   return !end;
 }

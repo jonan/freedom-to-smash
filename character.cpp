@@ -81,26 +81,43 @@ void Character::update(const Ogre::FrameEvent& event) {
 
 // Detects and solves collisions of the character with the battle ground.
 void Character::recoverFromPenetration(std::vector<Object*>& objects) {
+  Ogre::AxisAlignedBox intersection_box, object_box;
+  Ogre::AxisAlignedBox character_box = *getBoundingBox();
   on_floor = false;
 
   for (unsigned int i=0; i<objects.size() && !on_floor; i++) {
-    Ogre::AxisAlignedBox intersection_box = getBoundingBox()->intersection(*objects[i]->getBoundingBox());
-    if (!intersection_box.isNull() ||  ( objects[i]->getBoundingBox()->getMaximum().y == getBoundingBox()->getMinimum().y &&
-                                         objects[i]->getBoundingBox()->getMaximum().x >  getBoundingBox()->getMinimum().x &&
-                                         objects[i]->getBoundingBox()->getMinimum().x <  getBoundingBox()->getMaximum().x    )
-                                                                                                                              ) {
-      on_floor = true;
-      if (action[FALL]) {
-        stopAction(FALL);
-        action[LAND] = true;
-        jumping_time = 0;
-        has_double_jumped = false;
-      }
-      if (!intersection_box.isNull()) {
-        double offset_y = node->getPosition().y-getBoundingBox()->getMinimum().y;
+    object_box = *objects[i]->getBoundingBox();
+    intersection_box = character_box.intersection(object_box);
+    if (!intersection_box.isNull()) {
+      // Collision detected
+      double offset_x = node->getPosition().x-getBoundingBox()->getMinimum().x;
+      double offset_y = node->getPosition().y-getBoundingBox()->getMinimum().y;
+      double width    = getBoundingBox()->getMaximum().x-getBoundingBox()->getMinimum().x;
+      double height   = getBoundingBox()->getMaximum().y-getBoundingBox()->getMinimum().y;
+
+      if (intersection_box.getMaximum().x == object_box.getMaximum().x) {
+        node->setPosition(intersection_box.getMaximum().x+offset_x,node->getPosition().y,node->getPosition().z);
+      } else if (intersection_box.getMinimum().x == object_box.getMinimum().x) {
+        node->setPosition(intersection_box.getMinimum().x-width+offset_x,node->getPosition().y,node->getPosition().z);
+      } else if (intersection_box.getMaximum().y == object_box.getMaximum().y) {
+        on_floor = true;
         node->setPosition(node->getPosition().x,intersection_box.getMaximum().y+offset_y,node->getPosition().z);
+      } else if (intersection_box.getMinimum().y == object_box.getMinimum().y) {
+        node->setPosition(node->getPosition().x,intersection_box.getMinimum().y-height+offset_y,node->getPosition().z);
       }
+    } else if ( ( object_box.getMaximum().y == character_box.getMinimum().y &&
+                  object_box.getMaximum().x >  character_box.getMinimum().x &&
+                  object_box.getMinimum().x <  character_box.getMaximum().x    )
+                                                                                 ) {
+      on_floor = true;
     }
+  }
+
+  if (on_floor && action[FALL]) {
+    stopAction(FALL);
+    action[LAND] = true;
+    jumping_time = 0;
+    has_double_jumped = false;
   }
 }
 
