@@ -173,11 +173,9 @@ void Character::animate(const Ogre::FrameEvent &event) {
     animations[i]->addTime(event.timeSinceLastFrame);
     if (animations[i]->hasEnded())
       stopAction(i);
-  } else if (action[DEFEND]) {
-    if ( !(action[ATTACK_2] || action[SPECIAL_ATTACK_2]) ) {
-      animations[DEFEND]->setEnabled(true);
-      animations[DEFEND]->addTime(event.timeSinceLastFrame);
-    }
+  } else if (action[DEFEND] && !action[LAND]) {
+    animations[DEFEND]->setEnabled(true);
+    animations[DEFEND]->addTime(event.timeSinceLastFrame);
   } else if (action[DOUBLE_JUMP] || action[JUMP]) {
     // Check what jump is the player performing
     int i = (action[JUMP]) ? JUMP : DOUBLE_JUMP;
@@ -241,7 +239,7 @@ bool Character::keyPressed(const OIS::KeyEvent& key) {
     action[MOVE] = false;
     action[DEFEND] = true;
   } else if (key.key == jump_key) {
-    if ( (action[JUMP] || action[FALL]) && !has_double_jumped ) {
+    if ( (action[JUMP] || action[FALL]) && !has_double_jumped && !action[DEFEND]) {
       stopAction(JUMP);
       stopAction(FALL);
       action[DOUBLE_JUMP] = true;
@@ -272,7 +270,8 @@ bool Character::keyPressed(const OIS::KeyEvent& key) {
 bool Character::keyReleased(const OIS::KeyEvent& key) {
   if (key.key == defend_key) {
     action[DEFEND] = false;
-  } else if (key.key == move_left_key || key.key == move_right_key) {
+  } else if ( (key.key == move_left_key  && direction == 1 ) || 
+              (key.key == move_right_key && direction == -1)    ) {
     action[MOVE] = false;
   }
   return true;
