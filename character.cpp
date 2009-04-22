@@ -106,6 +106,9 @@ void Character::recoverFromPenetration(std::vector<Object*>& objects) {
         on_floor = true;
         node->setPosition(node->getPosition().x,intersection_box.getMaximum().y+offset_y,node->getPosition().z);
       } else if (intersection_box.getMinimum().y == object_box.getMinimum().y) {
+        stopAction(JUMP);
+        stopAction(DOUBLE_JUMP);
+        action[FALL] = true;
         node->setPosition(node->getPosition().x,intersection_box.getMinimum().y-height+offset_y,node->getPosition().z);
       }
     } else if ( ( object_box.getMaximum().y == character_box.getMinimum().y &&
