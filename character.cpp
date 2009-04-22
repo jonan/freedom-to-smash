@@ -95,9 +95,12 @@ void Character::recoverFromPenetration(std::vector<Object*>& objects) {
       double width    = getBoundingBox()->getMaximum().x-getBoundingBox()->getMinimum().x;
       double height   = getBoundingBox()->getMaximum().y-getBoundingBox()->getMinimum().y;
 
-      if (intersection_box.getMaximum().x == object_box.getMaximum().x) {
+      double intersection_width  = intersection_box.getMaximum().x - intersection_box.getMinimum().x;
+      double intersection_height = intersection_box.getMaximum().y - intersection_box.getMinimum().y;
+
+      if (intersection_box.getMaximum().x == object_box.getMaximum().x && intersection_height > intersection_width) {
         node->setPosition(intersection_box.getMaximum().x+offset_x,node->getPosition().y,node->getPosition().z);
-      } else if (intersection_box.getMinimum().x == object_box.getMinimum().x) {
+      } else if (intersection_box.getMinimum().x == object_box.getMinimum().x && intersection_height > intersection_width) {
         node->setPosition(intersection_box.getMinimum().x-width+offset_x,node->getPosition().y,node->getPosition().z);
       } else if (intersection_box.getMaximum().y == object_box.getMaximum().y) {
         on_floor = true;
