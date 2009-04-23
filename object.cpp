@@ -20,6 +20,14 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #include <OgreEntity.h>
 #include <OgreSceneManager.h>
 
+#include "collision_box.hpp"
+
+// Constructor
+Object::Object(Ogre::SceneManager &scene_manager) {
+  this->scene_manager = &scene_manager;
+  collision_box = NULL;
+}
+
 // Set function.
 void Object::setEntity(const char *name) {
   bool done = false;
@@ -45,12 +53,17 @@ void Object::setEntity(const char *name) {
 void Object::setPosition(const Ogre::Vector3 &pos) {
   node = scene_manager->getRootSceneNode()->createChildSceneNode(pos);
   node->attachObject(entity);
-  node->showBoundingBox(true);
 }
 
 // Set function.
 void Object::setScale(const Ogre::Vector3 &scale) {
   node->setScale(scale);
+}
+
+// 
+void Object::setCollisionBoxSize(const double max_x, const double min_x, const double max_y, const double min_y) {
+  collision_box = new CollisionBox(max_x, min_x, max_y, min_y);
+  collision_box->setReferencePoint(*node);
 }
 
 // Function to get the bounding box of the object's entity.

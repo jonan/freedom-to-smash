@@ -44,16 +44,19 @@ BattleGround::BattleGround(void) {
   ground->setEntity("cube");
   ground->setPosition(Ogre::Vector3(0,-5,0));
   ground->setScale(Ogre::Vector3(10,1,1));
+  ground->setCollisionBoxSize(25,-25,2.5,-2.5);
   objects.push_back(ground);
   ground = new Object(*scene_manager);
   ground->setEntity("cube");
   ground->setPosition(Ogre::Vector3(-23,7,0));
   ground->setScale(Ogre::Vector3(3,0.5,1));
+  ground->setCollisionBoxSize(7.5,-7.5,1.25,-1.25);
   objects.push_back(ground);
   ground = new Object(*scene_manager);
   ground->setEntity("cube");
   ground->setPosition(Ogre::Vector3(23,7,0));
   ground->setScale(Ogre::Vector3(3,0.5,1));
+  ground->setCollisionBoxSize(7.5,-7.5,1.25,-1.25);
   objects.push_back(ground);
 }
 

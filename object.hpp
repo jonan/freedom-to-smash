@@ -25,33 +25,36 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #include "macros.hpp"
 
 namespace Ogre {
-class AxisAlignedBox;
 class Entity;
 class SceneNode;
 class SceneManager;
 class Vector3;
 }
 
+class CollisionBox;
+
 /// General object class.
 class Object {
   public:
-    explicit Object(Ogre::SceneManager &scene_manager) : scene_manager(&scene_manager) {} // Constructor
+    explicit Object(Ogre::SceneManager &scene_manager); // Constructor
 
     // @{
     /// Set functions.
-    void setEntity   (const char *name);
-    void setPosition (const Ogre::Vector3 &pos);
-    void setScale    (const Ogre::Vector3 &scale);
+    void setEntity           (const char *name);
+    void setPosition         (const Ogre::Vector3 &pos);
+    void setScale            (const Ogre::Vector3 &scale);
+    void setCollisionBoxSize (const double max_x, const double min_x, const double max_y, const double min_y);
     // @}
 
-    /// Function to get the bounding box of the object's entity.
-    /// @return Bounding box of the object's entity.
-    const Ogre::AxisAlignedBox* getBoundingBox(void);
+    /// 
+    const CollisionBox* getCollisionBox(void) {return collision_box;}
 
   protected:
     Ogre::Entity *entity;
     Ogre::SceneNode *node;
     Ogre::SceneManager *scene_manager;
+
+    CollisionBox *collision_box;
 
     DISALLOW_COPY_AND_ASSIGN(Object);
 };

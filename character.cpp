@@ -24,6 +24,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #include <OgreFrameListener.h>
 #include <OgreSceneNode.h>
 
+#include "collision_box.hpp"
 #include "input.hpp"
 
 // Constructor
@@ -33,6 +34,7 @@ Character::Character(Ogre::SceneManager &scene_manager, CharacterType type, cons
   has_double_jumped = false;
   setEntity("kid");
   setPosition(Ogre::Vector3(0,5,0));
+  setCollisionBoxSize(1.5,-1.5,2.2,-5.25);
   prepareAnimations();
   // Start with no action active
   for (int i=0; i < NUM_STATES; i++) action[i] = false;
@@ -81,39 +83,40 @@ void Character::update(const Ogre::FrameEvent& event) {
 
 // Detects and solves collisions of the character with the battle ground.
 void Character::recoverFromPenetration(std::vector<Object*>& objects) {
-  Ogre::AxisAlignedBox intersection_box, object_box;
-  Ogre::AxisAlignedBox character_box = *getBoundingBox();
+  CollisionBox intersection_box, object_box;
+  collision_box->setReferencePoint(*node);
+  CollisionBox character_box = *getCollisionBox();
   on_floor = false;
 
   for (unsigned int i=0; i<objects.size() && !on_floor; i++) {
-    object_box = *objects[i]->getBoundingBox();
+    object_box = *objects[i]->getCollisionBox();
     intersection_box = character_box.intersection(object_box);
     if (!intersection_box.isNull()) {
       // Collision detected
-      double offset_x = node->getPosition().x-getBoundingBox()->getMinimum().x;
-      double offset_y = node->getPosition().y-getBoundingBox()->getMinimum().y;
-      double width    = getBoundingBox()->getMaximum().x-getBoundingBox()->getMinimum().x;
-      double height   = getBoundingBox()->getMaximum().y-getBoundingBox()->getMinimum().y;
+      float offset_x = node->getPosition().x-character_box.getMinX();
+      float offset_y = node->getPosition().y-character_box.getMinY();
+      float width    = character_box.getWidth();
+      float height   = character_box.getHeight();
 
-      double intersection_width  = intersection_box.getMaximum().x - intersection_box.getMinimum().x;
-      double intersection_height = intersection_box.getMaximum().y - intersection_box.getMinimum().y;
+      float intersection_width  = intersection_box.getWidth();
+      float intersection_height = intersection_box.getHeight();
 
-      if (intersection_box.getMaximum().x == object_box.getMaximum().x && intersection_height > intersection_width) {
-        node->setPosition(intersection_box.getMaximum().x+offset_x,node->getPosition().y,node->getPosition().z);
-      } else if (intersection_box.getMinimum().x == object_box.getMinimum().x && intersection_height > intersection_width) {
-        node->setPosition(intersection_box.getMinimum().x-width+offset_x,node->getPosition().y,node->getPosition().z);
-      } else if (intersection_box.getMaximum().y == object_box.getMaximum().y) {
+      if (intersection_box.getMaxX() == object_box.getMaxX() && intersection_height > intersection_width) {
+        node->setPosition(intersection_box.getMaxX()+offset_x,node->getPosition().y,node->getPosition().z);
+      } else if (intersection_box.getMinX() == object_box.getMinX() && intersection_height > intersection_width) {
+        node->setPosition(intersection_box.getMinX()-width+offset_x,node->getPosition().y,node->getPosition().z);
+      } else if (intersection_box.getMaxY() == object_box.getMaxY()) {
         on_floor = true;
-        node->setPosition(node->getPosition().x,intersection_box.getMaximum().y+offset_y,node->getPosition().z);
-      } else if (intersection_box.getMinimum().y == object_box.getMinimum().y) {
+        node->setPosition(node->getPosition().x,intersection_box.getMaxY()+offset_y,node->getPosition().z);
+      } else if (intersection_box.getMinY() == object_box.getMinY()) {
         stopAction(JUMP);
         stopAction(DOUBLE_JUMP);
         action[FALL] = true;
-        node->setPosition(node->getPosition().x,intersection_box.getMinimum().y-height+offset_y,node->getPosition().z);
+        node->setPosition(node->getPosition().x,intersection_box.getMinY()-height+offset_y,node->getPosition().z);
       }
-    } else if ( ( object_box.getMaximum().y == character_box.getMinimum().y &&
-                  object_box.getMaximum().x >  character_box.getMinimum().x &&
-                  object_box.getMinimum().x <  character_box.getMaximum().x    )
+    } else if ( ( object_box.getMaxY() == character_box.getMinY() &&
+                  object_box.getMaxX() >  character_box.getMinX() &&
+                  object_box.getMinX() <  character_box.getMaxX()    )
                                                                                  ) {
       on_floor = true;
     }

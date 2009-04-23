@@ -41,7 +41,7 @@ battle_ground.o: battle_ground.cpp $(BATTLE_GROUND) $(CHARACTER) $(INPUT)
 boot.o: boot.cpp $(BOOT) $(INPUT)
 	$(CC) $(CFLAGS) boot.cpp
 
-character.o: character.cpp $(CHARACTER) $(INPUT)
+character.o: character.cpp $(CHARACTER) $(COLLISION_BOX) $(INPUT)
 	$(CC) $(CFLAGS) character.cpp
 
 collision_box.o: collision_box.cpp $(COLLISION_BOX) $(UTIL)
@@ -53,7 +53,7 @@ input.o: input.cpp $(INPUT)
 main.o: main.cpp $(BATTLE_GROUND) $(BOOT)
 	$(CC) $(CFLAGS) main.cpp
 
-object.o: object.cpp $(OBJECT)
+object.o: object.cpp $(OBJECT) $(COLLISION_BOX)
 	$(CC) $(CFLAGS) object.cpp
 
 server.o: server.cpp $(SERVER)
