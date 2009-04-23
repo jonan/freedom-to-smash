@@ -70,7 +70,7 @@ CollisionBox CollisionBox::intersection(const CollisionBox &box) {
     intersection_max_x = minimum(this->getMaxX(), box.getMaxX());
     intersection_min_x = maximum(this->getMinX(), box.getMinX());
     intersection_max_y = minimum(this->getMaxY(), box.getMaxY());
-    intersection_min_x = maximum(this->getMinY(), box.getMinY());
+    intersection_min_y = maximum(this->getMinY(), box.getMinY());
 
     // Check if there's an intersection
     if ( intersection_max_x > intersection_min_x &&
