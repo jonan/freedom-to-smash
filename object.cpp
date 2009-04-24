@@ -65,8 +65,3 @@ void Object::setCollisionBoxSize(const double max_x, const double min_x, const d
   collision_box = new CollisionBox(max_x, min_x, max_y, min_y);
   collision_box->setReferencePoint(*node);
 }
-
-// Function to get the bounding box of the object's entity.
-const Ogre::AxisAlignedBox* Object::getBoundingBox(void) {
-  return &entity->getWorldBoundingBox();
-}
