@@ -88,7 +88,7 @@ void Character::recoverFromPenetration(std::vector<Object*>& objects) {
   CollisionBox character_box = *getCollisionBox();
   on_floor = false;
 
-  for (unsigned int i=0; i<objects.size() && !on_floor; i++) {
+  for (unsigned int i=0; i<objects.size(); i++) {
     object_box = *objects[i]->getCollisionBox();
     intersection_box = character_box.intersection(object_box);
     if (!intersection_box.isNull()) {
