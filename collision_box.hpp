@@ -45,26 +45,24 @@ class CollisionBox {
     void setRelativeBoxPos (const float max_x, const float min_x, const float max_y, const float min_y);
     // @}
 
-    // @{
-    /// 
-    float getMaxX   (void) const {return point_x + max_x;}
-    float getMinX   (void) const {return point_x + min_x;}
-    float getMaxY   (void) const {return point_y + max_y;}
-    float getMinY   (void) const {return point_y + min_y;}
-    float getWidth  (void) const {return width;          }
-    float getHeight (void) const {return height;         }
-    // @}
-
-    /// 
-    bool isNull(void) const {return !(max_x || min_x || max_y || min_y);}
-
-    /// 
-    CollisionBox intersection(const CollisionBox &box) const;
-
     /// 
     int detectCollision(const CollisionBox &box) const;
 
   private:
+    // 
+    bool isNull(void) const {return !(max_x || min_x || max_y || min_y);}
+
+    // 
+    CollisionBox intersection(const CollisionBox &box) const;
+
+    // @{
+    // 
+    float getMaxX   (void) const {return point_x + max_x;}
+    float getMinX   (void) const {return point_x + min_x;}
+    float getMaxY   (void) const {return point_y + max_y;}
+    float getMinY   (void) const {return point_y + min_y;}
+    // @}
+
     float max_x, min_x, max_y, min_y;
     float point_x, point_y;
     float width, height;
