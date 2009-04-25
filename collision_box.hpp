@@ -26,6 +26,12 @@ namespace Ogre {
 class SceneNode;
 }
 
+enum { NO_COLLISION,
+       LEFT_COLLISION,
+       RIGHT_COLLISION,
+       TOP_COLLISION,
+       BOTTOM_COLLISION };
+
 /// 
 class CollisionBox {
   public:
@@ -53,7 +59,10 @@ class CollisionBox {
     bool isNull(void) const {return !(max_x || min_x || max_y || min_y);}
 
     /// 
-    CollisionBox intersection(const CollisionBox &box);
+    CollisionBox intersection(const CollisionBox &box) const;
+
+    /// 
+    int detectCollision(const CollisionBox &box) const;
 
   private:
     float max_x, min_x, max_y, min_y;

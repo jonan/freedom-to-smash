@@ -83,43 +83,32 @@ void Character::update(const Ogre::FrameEvent& event) {
 
 // Detects and solves collisions of the character with the battle ground.
 void Character::recoverFromPenetration(std::vector<Object*>& objects) {
-  CollisionBox intersection_box, object_box;
   collision_box->setReferencePoint(*node);
-  CollisionBox character_box = *getCollisionBox();
   on_floor = false;
 
   for (unsigned int i=0; i<objects.size(); i++) {
-    object_box = *objects[i]->getCollisionBox();
-    intersection_box = character_box.intersection(object_box);
-    if (!intersection_box.isNull()) {
-      // Collision detected
-      float intersection_width  = intersection_box.getWidth();
-      float intersection_height = intersection_box.getHeight();
-
-      if (intersection_box.getMaxX() == object_box.getMaxX() && intersection_height > intersection_width) {
+    switch (collision_box->detectCollision(*objects[i]->getCollisionBox())) {
+      case RIGHT_COLLISION:
+      case LEFT_COLLISION:
         stopAction(MOVE);
-      } else if (intersection_box.getMinX() == object_box.getMinX() && intersection_height > intersection_width) {
-        stopAction(MOVE);
-      } else if (intersection_box.getMaxY() == object_box.getMaxY()) {
-        on_floor = true;
-      } else if (intersection_box.getMinY() == object_box.getMinY()) {
+        break;
+      case TOP_COLLISION:
         stopAction(JUMP);
         stopAction(DOUBLE_JUMP);
         action[FALL] = true;
-      }
-    } else if ( ( object_box.getMaxY() == character_box.getMinY() &&
-                  object_box.getMaxX() >  character_box.getMinX() &&
-                  object_box.getMinX() <  character_box.getMaxX()    )
-                                                                      ) {
-      on_floor = true;
+        break;
+      case BOTTOM_COLLISION:
+        on_floor = true;
+        if (action[FALL]) {
+          stopAction(FALL);
+          action[LAND] = true;
+          jumping_time = 0;
+          has_double_jumped = false;
+        }
+        break;
+      default:
+        break;
     }
-  }
-
-  if (on_floor && action[FALL]) {
-    stopAction(FALL);
-    action[LAND] = true;
-    jumping_time = 0;
-    has_double_jumped = false;
   }
 }
 

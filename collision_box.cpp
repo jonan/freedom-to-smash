@@ -58,7 +58,7 @@ void CollisionBox::setRelativeBoxPos(const float max_x, const float min_x,
 }
 
 // 
-CollisionBox CollisionBox::intersection(const CollisionBox &box) {
+CollisionBox CollisionBox::intersection(const CollisionBox &box) const {
   CollisionBox intersection;
 
   if (!(this->isNull() || box.isNull())) {
@@ -80,4 +80,29 @@ CollisionBox CollisionBox::intersection(const CollisionBox &box) {
   }
 
   return intersection;
+}
+
+// 
+int CollisionBox::detectCollision(const CollisionBox &box) const {
+  int collision_type = NO_COLLISION;
+
+  CollisionBox intersection_box = intersection(box);
+
+  if (!intersection_box.isNull()) {
+    // Collision detected
+    float intersection_width  = intersection_box.getWidth();
+    float intersection_height = intersection_box.getHeight();
+
+    if (intersection_box.getMaxX() == box.getMaxX() && intersection_height > intersection_width) {
+      collision_type = RIGHT_COLLISION;
+    } else if (intersection_box.getMinX() == box.getMinX() && intersection_height > intersection_width) {
+      collision_type = LEFT_COLLISION;
+    } else if (intersection_box.getMaxY() == box.getMaxY()) {
+      collision_type = BOTTOM_COLLISION;
+    } else if (intersection_box.getMinY() == box.getMinY()) {
+      collision_type = TOP_COLLISION;
+    }
+  }
+
+  return collision_type;
 }
