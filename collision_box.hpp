@@ -44,9 +44,9 @@ class CollisionBox {
     /// @param[in] min_y   Minimum Y position relative to the reference point.
     /// @param[in] point_x X coordinate of the reference point.
     /// @param[in] point_y Y coordinate of the reference point.
-    CollisionBox( const float max_x   = 0, const float min_x   = 0,
-                  const float max_y   = 0, const float min_y   = 0,
-                  const float point_x = 0, const float point_y = 0 ); // Constructor
+    explicit CollisionBox( const float max_x   = 0, const float min_x   = 0,
+                           const float max_y   = 0, const float min_y   = 0,
+                           const float point_x = 0, const float point_y = 0 ); // Constructor
 
     // @{
     /// Functions to set the object's values.
