@@ -14,7 +14,7 @@
 # along with this program. If not, see <http://www.gnu.org/licenses/>
 
 # Global variables
-OBJECTS = battle_ground.o boot.o character.o collision_box.o input.o main.o object.o server.o
+OBJECTS = battle_ground.o boot.o character.o collision_box.o input.o main.o object.o platform.o server.o
 LIBRARIES = OGRE OIS
 CC = g++ -Wall -Wno-deprecated -g -c
 CFLAGS = $(shell pkg-config --cflags $(LIBRARIES))
@@ -28,6 +28,7 @@ COLLISION_BOX = collision_box.hpp
 INPUT = input.hpp $(MACROS)
 MACROS = macros.hpp
 OBJECT = object.hpp $(MACROS)
+PLATFORM = platform.hpp $(OBJECT)
 UTIL = util.hpp
 SERVER = server.hpp $(BATTLEGROUND) $(MACROS)
 
@@ -55,6 +56,9 @@ main.o: main.cpp $(BATTLE_GROUND) $(BOOT)
 
 object.o: object.cpp $(OBJECT) $(COLLISION_BOX)
 	$(CC) $(CFLAGS) object.cpp
+
+platform.o: platform.cpp $(PLATFORM) $(COLLISION_BOX)
+	$(CC) $(CFLAGS) platform.cpp
 
 server.o: server.cpp $(SERVER)
 	$(CC) $(CFLAGS) server.cpp
