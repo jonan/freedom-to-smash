@@ -33,6 +33,11 @@ class Vector3;
 
 class CollisionBox;
 
+/// Types of objects.
+enum {NORMAL,
+      CHARACTER,
+      PLATFORM};
+
 /// General object class.
 class Object {
   public:
@@ -46,6 +51,9 @@ class Object {
     void setScale            (const Ogre::Vector3 &scale);
     void setCollisionBoxSize (const double max_x, const double min_x, const double max_y, const double min_y);
     // @}
+
+    /// 
+    virtual const int getType(void) const {return NORMAL;}
 
     /// 
     const CollisionBox* getCollisionBox(void) {return collision_box;}

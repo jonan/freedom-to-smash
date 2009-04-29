@@ -45,6 +45,9 @@ class Character : public Object, public OIS::KeyListener {
     Character(Ogre::SceneManager &scene_manager, CharacterType type, const int num_player); // Constructor
     ~Character(void); // Destructor
 
+    /// 
+    virtual const int getType(void) const {return CHARACTER;}
+
     /// Updates the character.
     /// This function must be called every frame.
     /// @param[in] event Ogre's FrameListener parameter.
