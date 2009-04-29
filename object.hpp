@@ -37,6 +37,7 @@ class CollisionBox;
 class Object {
   public:
     explicit Object(Ogre::SceneManager &scene_manager); // Constructor
+    virtual ~Object(void) {} // Destructor
 
     // @{
     /// Set functions.
