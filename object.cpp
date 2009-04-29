@@ -20,6 +20,10 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #include <OgreEntity.h>
 #include <OgreSceneManager.h>
 
+// For debug code!!!!
+/*#include <Ogre.h>
+#include <string>*/
+
 #include "collision_box.hpp"
 
 // Constructor
@@ -64,4 +68,31 @@ void Object::setScale(const Ogre::Vector3 &scale) {
 void Object::setCollisionBoxSize(const double max_x, const double min_x, const double max_y, const double min_y) {
   collision_box = new CollisionBox(max_x, min_x, max_y, min_y);
   collision_box->setReferencePoint(*node);
+  // Debug code!!!!!
+  /*using namespace Ogre;
+  std::string name1, name2, name3, name = entity->getName();
+  name1 = name+"manual1";
+  name2 = name+"material";
+  name3 = name+"debugger";
+  ManualObject* myManualObject =  scene_manager->createManualObject(name1.c_str());
+
+  MaterialPtr myManualObjectMaterial = MaterialManager::getSingleton().create(name2.c_str(),name3.c_str());
+  myManualObjectMaterial->setReceiveShadows(false);
+  myManualObjectMaterial->getTechnique(0)->setLightingEnabled(true);
+  myManualObjectMaterial->getTechnique(0)->getPass(0)->setDiffuse(0,0,1,0);
+  myManualObjectMaterial->getTechnique(0)->getPass(0)->setAmbient(0,0,1);
+  myManualObjectMaterial->getTechnique(0)->getPass(0)->setSelfIllumination(0,0,1);
+
+  myManualObject->begin("manual1Material", Ogre::RenderOperation::OT_LINE_LIST);
+  myManualObject->position(min_x, min_y, 0);
+  myManualObject->position(max_x, min_y, 0);
+  myManualObject->position(max_x, min_y, 0);
+  myManualObject->position(max_x, max_y, 0);
+  myManualObject->position(max_x, max_y, 0);
+  myManualObject->position(min_x, max_y, 0);
+  myManualObject->position(min_x, max_y, 0);
+  myManualObject->position(min_x, min_y, 0);
+  myManualObject->end();
+
+  node->attachObject(myManualObject);*/
 }
