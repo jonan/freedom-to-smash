@@ -31,7 +31,8 @@ enum { NO_COLLISION,
        LEFT_COLLISION,
        RIGHT_COLLISION,
        TOP_COLLISION,
-       BOTTOM_COLLISION };
+       BOTTOM_COLLISION,
+       FULL_COLLISION   };
 
 /// Box used to detect collisions.
 /// The box is stored as a reference point that can be located

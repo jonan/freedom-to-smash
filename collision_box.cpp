@@ -58,7 +58,12 @@ int CollisionBox::detectCollision(const CollisionBox &box) const {
 
   if (!intersection_box.isNull()) {
     // Collision detected
-    if (intersection_box.getMaxX() == box.getMaxX() && intersection_box.height > intersection_box.width) {
+    if ( (intersection_box.width == width     && intersection_box.height == height    ) ||
+         (intersection_box.width == box.width && intersection_box.height == box.height) ||
+         (intersection_box.width == width     && intersection_box.height == box.height) ||
+         (intersection_box.width == box.width && intersection_box.height == height    )    ) {
+      collision_type = FULL_COLLISION;
+    } else if (intersection_box.getMaxX() == box.getMaxX() && intersection_box.height > intersection_box.width) {
       collision_type = RIGHT_COLLISION;
     } else if (intersection_box.getMinX() == box.getMinX() && intersection_box.height > intersection_box.width) {
       collision_type = LEFT_COLLISION;
