@@ -52,6 +52,7 @@ class CollisionBox {
     // @{
     /// Functions to set the object's values.
     void setReferencePoint (const Ogre::SceneNode &pos);
+    void setReferencePoint (const float point_x, const float point_y);
     void setRelativeBoxPos (const float max_x, const float min_x, const float max_y, const float min_y);
     // @}
 
@@ -60,19 +61,12 @@ class CollisionBox {
 
   private:
     // Returns if the CollisionBox is null or not.
-    bool isNull(void) const {return !(max_x || min_x || max_y || min_y);}
-
-    // @{
-    // Functions to get all the positions in world coordinates.
-    float getMaxX (void) const {return point_x + max_x;}
-    float getMinX (void) const {return point_x + min_x;}
-    float getMaxY (void) const {return point_y + max_y;}
-    float getMinY (void) const {return point_y + min_y;}
-    // @}
+    bool isNull(void) const {return !(rel_max_x || rel_min_x || rel_max_y || rel_min_y);}
 
     // Returns the intersection with the given CollisionBox.
     CollisionBox getIntersectionBox(const CollisionBox &box) const;
 
+    float rel_max_x, rel_min_x, rel_max_y, rel_min_y;
     float max_x, min_x, max_y, min_y;
     float point_x, point_y;
     float width, height;

@@ -27,27 +27,36 @@ CollisionBox::CollisionBox(const float max_x,   const float min_x,
                            const float point_x, const float point_y
                           ) {
   setRelativeBoxPos(max_x, min_x, max_y, min_y);
-  this->point_x = point_x;
-  this->point_y = point_y;
+  setReferencePoint(point_x, point_y);
 }
 
 // Function to set the object's values.
 void CollisionBox::setReferencePoint(const Ogre::SceneNode &pos) {
-  point_x = pos.getPosition().x;
-  point_y = pos.getPosition().y;
+  setReferencePoint( pos.getPosition().x, pos.getPosition().y );
+}
+
+// Function to set the object's values.
+void CollisionBox::setReferencePoint(const float point_x, const float point_y) {
+  this->point_x = point_x;
+  this->point_y = point_y;
+
+  max_x = point_x + rel_max_x;
+  min_x = point_x + rel_min_x;
+  max_y = point_y + rel_max_y;
+  min_y = point_y + rel_min_y;
 }
 
 // Function to set the object's values.
 void CollisionBox::setRelativeBoxPos(const float max_x, const float min_x,
                                      const float max_y, const float min_y
                                     ) {
-  this->max_x = max_x;
-  this->min_x = min_x;
-  this->max_y = max_y;
-  this->min_y = min_y;
+  rel_max_x = max_x;
+  rel_min_x = min_x;
+  rel_max_y = max_y;
+  rel_min_y = min_y;
 
-  width  = max_x-min_x;
-  height = max_y-min_y;
+  width  = rel_max_x-rel_min_x;
+  height = rel_max_y-rel_min_y;
 }
 
 // Detects the collision with the given box and returns the type of collision.
@@ -63,13 +72,13 @@ int CollisionBox::detectCollision(const CollisionBox &box) const {
          (intersection_box.width == width     && intersection_box.height == box.height) ||
          (intersection_box.width == box.width && intersection_box.height == height    )    ) {
       collision_type = FULL_COLLISION;
-    } else if (intersection_box.getMaxX() == box.getMaxX() && intersection_box.height > intersection_box.width) {
+    } else if (intersection_box.max_x == box.max_x && intersection_box.height > intersection_box.width) {
       collision_type = RIGHT_COLLISION;
-    } else if (intersection_box.getMinX() == box.getMinX() && intersection_box.height > intersection_box.width) {
+    } else if (intersection_box.min_x == box.min_x && intersection_box.height > intersection_box.width) {
       collision_type = LEFT_COLLISION;
-    } else if (intersection_box.getMaxY() == box.getMaxY()) {
+    } else if (intersection_box.max_y == box.max_y) {
       collision_type = BOTTOM_COLLISION;
-    } else if (intersection_box.getMinY() == box.getMinY()) {
+    } else if (intersection_box.min_y == box.min_y) {
       collision_type = TOP_COLLISION;
     }
   }
@@ -87,16 +96,17 @@ CollisionBox CollisionBox::getIntersectionBox(const CollisionBox &box) const {
     float intersection_max_y;
     float intersection_min_y;
 
-    intersection_max_x = minimum(this->getMaxX(), box.getMaxX());
-    intersection_min_x = maximum(this->getMinX(), box.getMinX());
-    intersection_max_y = minimum(this->getMaxY(), box.getMaxY());
-    intersection_min_y = maximum(this->getMinY(), box.getMinY());
+    intersection_max_x = minimum(max_x, box.max_x);
+    intersection_min_x = maximum(min_x, box.min_x);
+    intersection_max_y = minimum(max_y, box.max_y);
+    intersection_min_y = maximum(min_y, box.min_y);
 
     // Check if there's an intersection
     if ( intersection_max_x > intersection_min_x &&
          intersection_max_y > intersection_min_y    )
       intersection.setRelativeBoxPos(intersection_max_x, intersection_min_x,
                                      intersection_max_y, intersection_min_y);
+      intersection.setReferencePoint(0,0);
   }
 
   return intersection;
