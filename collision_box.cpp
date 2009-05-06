@@ -91,15 +91,10 @@ CollisionBox CollisionBox::getIntersectionBox(const CollisionBox &box) const {
   CollisionBox intersection;
 
   if (!(this->isNull() || box.isNull())) {
-    float intersection_max_x;
-    float intersection_min_x;
-    float intersection_max_y;
-    float intersection_min_y;
-
-    intersection_max_x = minimum(max_x, box.max_x);
-    intersection_min_x = maximum(min_x, box.min_x);
-    intersection_max_y = minimum(max_y, box.max_y);
-    intersection_min_y = maximum(min_y, box.min_y);
+    float intersection_max_x = minimum(max_x, box.max_x);
+    float intersection_min_x = maximum(min_x, box.min_x);
+    float intersection_max_y = minimum(max_y, box.max_y);
+    float intersection_min_y = maximum(min_y, box.min_y);
 
     // Check if there's an intersection
     if ( intersection_max_x > intersection_min_x &&
