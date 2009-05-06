@@ -22,11 +22,11 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #ifndef BATTLE_GROUND_HPP
 #define BATTLE_GROUND_HPP
 
+#include <vector>
+
 #include <OgreFrameListener.h>
 
 #include <OIS/OIS.h>
-
-#include <vector>
 
 #include "macros.hpp"
 
