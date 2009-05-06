@@ -29,8 +29,8 @@ INPUT = input.hpp $(MACROS)
 MACROS = macros.hpp
 OBJECT = object.hpp $(MACROS)
 PLATFORM = platform.hpp $(OBJECT)
+SERVER = server.hpp $(MACROS)
 UTIL = util.hpp
-SERVER = server.hpp $(BATTLEGROUND) $(MACROS)
 
 # Build dependencies
 freedom-to-smash: $(OBJECTS)
@@ -60,7 +60,7 @@ object.o: object.cpp $(OBJECT) $(COLLISION_BOX)
 platform.o: platform.cpp $(PLATFORM) $(COLLISION_BOX)
 	$(CC) $(CFLAGS) platform.cpp
 
-server.o: server.cpp $(SERVER)
+server.o: server.cpp $(SERVER) $(BATTLE_GROUND)
 	$(CC) $(CFLAGS) server.cpp
 
 # Make options

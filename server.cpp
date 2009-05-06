@@ -21,6 +21,8 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 
 #include <OgreRoot.h>
 
+#include "battle_ground.hpp"
+
 // Singleton pattern constructor
 Server* Server::getInstance(void) {
   static Server instance;
