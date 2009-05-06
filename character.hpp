@@ -24,34 +24,23 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 
 #include <vector>
 
+#include <OgreFrameListener.h>
+
 #include <OIS/OIS.h>
 
 #include "object.hpp"
-
-namespace Ogre {
-class AnimationState;
-class Entity;
-class FrameEvent;
-class SceneNode;
-class SceneManager;
-}
 
 /// Types of character.
 enum CharacterType {KID};
 
 /// Class to control a character.
-class Character : public Object, public OIS::KeyListener {
+class Character : public Object, public Ogre::FrameListener, public OIS::KeyListener {
   public:
     Character(Ogre::SceneManager &scene_manager, CharacterType type, const int num_player); // Constructor
     ~Character(void); // Destructor
 
     /// 
     virtual const int getType(void) const {return CHARACTER;}
-
-    /// Updates the character.
-    /// This function must be called every frame.
-    /// @param[in] event Ogre's FrameListener parameter.
-    void update(const Ogre::FrameEvent& event);
 
     /// Detects and solves collisions of the character with the battle ground.
     /// This function must be called every frame.
@@ -62,6 +51,9 @@ class Character : public Object, public OIS::KeyListener {
     // All the different states of the player
     enum {ATTACK_1, ATTACK_2, DEFEND, DOUBLE_JUMP, FALL, IDLE, JUMP,
           LAND, MOVE, SPECIAL_ATTACK_1, SPECIAL_ATTACK_2, NUM_STATES};
+
+    // Function that's called at the beginning of every frame.
+    virtual bool frameStarted(const Ogre::FrameEvent& event);
 
     // Prepares all animations so they can be used.
     void prepareAnimations(void);

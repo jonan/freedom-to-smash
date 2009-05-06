@@ -19,10 +19,8 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 
 #include <string>
 
-#include <OgreAnimationState.h>
 #include <OgreEntity.h>
-#include <OgreFrameListener.h>
-#include <OgreSceneNode.h>
+#include <OgreRoot.h>
 
 #include "collision_box.hpp"
 #include "input.hpp"
@@ -67,18 +65,13 @@ Character::Character(Ogre::SceneManager &scene_manager, CharacterType type, cons
   }
   // Initialize variables
   on_floor = false;
+  Ogre::Root::getSingleton().addFrameListener(this);
   Input::getInstance()->addKeyListener(this);
 }
 
 // Destructor
 Character::~Character(void) {
   Input::getInstance()->removeKeyListener(this);
-}
-
-// Updates the character.
-void Character::update(const Ogre::FrameEvent& event) {
-  animate(event);
-  move(event);
 }
 
 // Detects and solves collisions of the character with the battle ground.
@@ -110,6 +103,13 @@ void Character::recoverFromPenetration(std::vector<Object*>& objects) {
         break;
     }
   }
+}
+
+// Function that's called at the beginning of every frame.
+bool Character::frameStarted(const Ogre::FrameEvent& event) {
+  animate(event);
+  move(event);
+  return true;
 }
 
 // Prepares all animations so they can be used.
