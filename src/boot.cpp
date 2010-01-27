@@ -37,7 +37,7 @@ void defineResources(void) {
   Ogre::String section_name, type_name, arch_name;
   ConfigFile file;
 
-  file.load("resources.cfg");
+  file.load("../../resources.cfg");
   ConfigFile::SectionIterator section = file.getSectionIterator();
   while (section.hasMoreElements()) {
     section_name = section.peekNextKey();
@@ -75,7 +75,7 @@ void initializeAllResources(void) {
 // Loads all the necessary things for the game to run.
 void boot(void) {
   // Start Ogre
-  Ogre::Root *ogre_root = new Ogre::Root;
+  Ogre::Root *ogre_root = new Ogre::Root("../../plugins.cfg", "../../ogre.cfg", "../../Ogre.log");
   // For the moment plugins are loaded according to plugins.cfg
   //loadPlugins(ogre_root);
   defineResources();
