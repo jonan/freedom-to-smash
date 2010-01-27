@@ -16,21 +16,20 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 */
 
 /// @file
-/// 
+/// General utilities.
 /// @author Jonan
 
 #ifndef UTIL_HPP
 #define UTIL_HPP
 
+// @{
 /// 
 template<class T> const T& maximum(const T &a, const T &b) {
-  if (a>b) return a;
-  else return b;
+  return (a>b) ? a : b;
 }
-/// 
 template<class T> const T& minimum(const T &a, const T &b) {
-  if (a<b) return a;
-  else return b;
+  return (a<b) ? a : b;
 }
+// @}
 
 #endif // UTIL_HPP
