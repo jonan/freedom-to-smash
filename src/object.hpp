@@ -52,11 +52,11 @@ class Object {
     void setCollisionBoxSize (const double max_x, const double min_x, const double max_y, const double min_y);
     // @}
 
-    /// 
-    virtual const int getType(void) const {return NORMAL;}
+    ///
+    virtual int getType(void) const {return NORMAL;}
 
-    /// 
-    const CollisionBox* getCollisionBox(void) {return collision_box;}
+    ///
+    const CollisionBox* getCollisionBox(void) const {return collision_box;}
 
   protected:
     Ogre::Entity *entity;

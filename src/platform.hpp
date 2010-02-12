@@ -30,20 +30,20 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 
 class Character;
 
-/// 
+///
 class Platform : public Object, public Ogre::FrameListener {
   public:
     explicit Platform(Ogre::SceneManager &scene_manager); // Constructor
     ~Platform(void); // Destructor
 
-    /// 
-    virtual const int getType(void) const {return PLATFORM;}
+    ///
+    virtual int getType(void) const {return PLATFORM;}
 
-    /// 
+    ///
     void addPoint(const float x, const float y);
 
   private:
-    // 
+    //
     virtual bool frameStarted(const Ogre::FrameEvent& event);
 
     std::list<Ogre::Vector2*> points;

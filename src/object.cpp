@@ -20,9 +20,11 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #include <OgreEntity.h>
 #include <OgreSceneManager.h>
 
-// For debug code!!!!
-/*#include <Ogre.h>
-#include <string>*/
+/*
+// For debug code!
+#include <Ogre.h>
+#include <string>
+*/
 
 #include "collision_box.hpp"
 
@@ -64,12 +66,13 @@ void Object::setScale(const Ogre::Vector3 &scale) {
   node->setScale(scale);
 }
 
-// 
+//
 void Object::setCollisionBoxSize(const double max_x, const double min_x, const double max_y, const double min_y) {
   collision_box = new CollisionBox(max_x, min_x, max_y, min_y);
   collision_box->setReferencePoint(*node);
-  // Debug code!!!!!
-  /*using namespace Ogre;
+  /*
+  // Debug code!
+  using namespace Ogre;
   std::string name1, name2, name3, name = entity->getName();
   name1 = name+"manual1";
   name2 = name+"material";
@@ -94,5 +97,6 @@ void Object::setCollisionBoxSize(const double max_x, const double min_x, const d
   myManualObject->position(min_x, min_y, 0);
   myManualObject->end();
 
-  node->attachObject(myManualObject);*/
+  node->attachObject(myManualObject);
+  */
 }
