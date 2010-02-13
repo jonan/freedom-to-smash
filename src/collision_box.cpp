@@ -40,10 +40,7 @@ void CollisionBox::setReferencePoint(const Real &point_x, const Real &point_y) {
   this->point_x = point_x;
   this->point_y = point_y;
 
-  max_x = point_x + rel_max_x;
-  min_x = point_x + rel_min_x;
-  max_y = point_y + rel_max_y;
-  min_y = point_y + rel_min_y;
+  calculateMaxSize();
 }
 
 // Function to set the object's values.
@@ -55,8 +52,8 @@ void CollisionBox::setRelativeBoxPos(const Real &max_x, const Real &min_x,
   rel_max_y = max_y;
   rel_min_y = min_y;
 
-  width  = rel_max_x-rel_min_x;
-  height = rel_max_y-rel_min_y;
+  calculateWidthHeight();
+  calculateMaxSize();
 }
 
 // Detects the collision with the given box and returns the type of collision.
@@ -84,6 +81,20 @@ CollisionType CollisionBox::detectCollision(const CollisionBox &box) const {
   }
 
   return collision_type;
+}
+
+//
+void CollisionBox::calculateWidthHeight(void) {
+  width  = rel_max_x-rel_min_x;
+  height = rel_max_y-rel_min_y;
+}
+
+//
+void CollisionBox::calculateMaxSize(void) {
+  max_x = point_x + rel_max_x;
+  min_x = point_x + rel_min_x;
+  max_y = point_y + rel_max_y;
+  min_y = point_y + rel_min_y;
 }
 
 // Returns the intersection with the given object.

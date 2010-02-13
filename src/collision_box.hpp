@@ -65,6 +65,12 @@ class CollisionBox {
     // Returns if the CollisionBox is null or not.
     bool isNull(void) const {return !(rel_max_x || rel_min_x || rel_max_y || rel_min_y);}
 
+    // @{
+    //
+    void calculateWidthHeight(void);
+    void calculateMaxSize(void);
+    // @}
+
     // Returns the intersection with the given CollisionBox.
     CollisionBox getIntersectionBox(const CollisionBox &box) const;
 
