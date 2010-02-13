@@ -37,10 +37,10 @@ class Platform : public Object, public Ogre::FrameListener {
     ~Platform(void); // Destructor
 
     ///
-    virtual int getType(void) const {return PLATFORM;}
+    virtual ObjectType getType(void) const {return PLATFORM;}
 
     ///
-    void addPoint(const float x, const float y);
+    void addPoint(const Real x, const Real y);
 
   private:
     //

@@ -22,9 +22,9 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #include "util.hpp"
 
 // Constructor
-CollisionBox::CollisionBox(const float max_x,   const float min_x,
-                           const float max_y,   const float min_y,
-                           const float point_x, const float point_y
+CollisionBox::CollisionBox(const Real &max_x,   const Real &min_x,
+                           const Real &max_y,   const Real &min_y,
+                           const Real &point_x, const Real &point_y
                           ) {
   setRelativeBoxPos(max_x, min_x, max_y, min_y);
   setReferencePoint(point_x, point_y);
@@ -36,7 +36,7 @@ void CollisionBox::setReferencePoint(const Ogre::SceneNode &pos) {
 }
 
 // Function to set the object's values.
-void CollisionBox::setReferencePoint(const float point_x, const float point_y) {
+void CollisionBox::setReferencePoint(const Real &point_x, const Real &point_y) {
   this->point_x = point_x;
   this->point_y = point_y;
 
@@ -47,8 +47,8 @@ void CollisionBox::setReferencePoint(const float point_x, const float point_y) {
 }
 
 // Function to set the object's values.
-void CollisionBox::setRelativeBoxPos(const float max_x, const float min_x,
-                                     const float max_y, const float min_y
+void CollisionBox::setRelativeBoxPos(const Real &max_x, const Real &min_x,
+                                     const Real &max_y, const Real &min_y
                                     ) {
   rel_max_x = max_x;
   rel_min_x = min_x;
@@ -60,8 +60,8 @@ void CollisionBox::setRelativeBoxPos(const float max_x, const float min_x,
 }
 
 // Detects the collision with the given box and returns the type of collision.
-int CollisionBox::detectCollision(const CollisionBox &box) const {
-  int collision_type = NO_COLLISION;
+CollisionType CollisionBox::detectCollision(const CollisionBox &box) const {
+  CollisionType collision_type = NO_COLLISION;
 
   CollisionBox intersection_box = getIntersectionBox(box);
 
@@ -91,17 +91,15 @@ CollisionBox CollisionBox::getIntersectionBox(const CollisionBox &box) const {
   CollisionBox intersection;
 
   if (!(this->isNull() || box.isNull())) {
-    float intersection_max_x = minimum(max_x, box.max_x);
-    float intersection_min_x = maximum(min_x, box.min_x);
-    float intersection_max_y = minimum(max_y, box.max_y);
-    float intersection_min_y = maximum(min_y, box.min_y);
+    Real intersection_max_x = minimum(max_x, box.max_x);
+    Real intersection_min_x = maximum(min_x, box.min_x);
+    Real intersection_max_y = minimum(max_y, box.max_y);
+    Real intersection_min_y = maximum(min_y, box.min_y);
 
     // Check if there's an intersection
-    if ( intersection_max_x > intersection_min_x &&
-         intersection_max_y > intersection_min_y    )
+    if ( (intersection_max_x > intersection_min_x) && (intersection_max_y > intersection_min_y) )
       intersection.setRelativeBoxPos(intersection_max_x, intersection_min_x,
                                      intersection_max_y, intersection_min_y);
-      intersection.setReferencePoint(0,0);
   }
 
   return intersection;

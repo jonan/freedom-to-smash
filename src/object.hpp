@@ -34,9 +34,9 @@ class Vector3;
 class CollisionBox;
 
 /// Types of objects.
-enum {NORMAL,
-      CHARACTER,
-      PLATFORM};
+enum ObjectType {NORMAL,
+                 CHARACTER,
+                 PLATFORM};
 
 /// General object class.
 class Object {
@@ -49,11 +49,11 @@ class Object {
     void setEntity           (const char *name);
     void setPosition         (const Ogre::Vector3 &pos);
     void setScale            (const Ogre::Vector3 &scale);
-    void setCollisionBoxSize (const double max_x, const double min_x, const double max_y, const double min_y);
+    void setCollisionBoxSize (const Real &max_x, const Real &min_x, const Real &max_y, const Real &min_y);
     // @}
 
     ///
-    virtual int getType(void) const {return NORMAL;}
+    virtual ObjectType getType(void) const {return NORMAL;}
 
     ///
     const CollisionBox* getCollisionBox(void) const {return collision_box;}

@@ -38,8 +38,8 @@ Input::~Input(void) {
 // Constructor
 Input::Input(void) {
   setupOIS();
-  if (this->keyboard) this->keyboard->setEventCallback(this);
-  if (this->joystick) this->joystick->setEventCallback(this);
+  if (keyboard) keyboard->setEventCallback(this);
+  if (joystick) joystick->setEventCallback(this);
   Ogre::Root::getSingleton().addFrameListener(this);
 }
 

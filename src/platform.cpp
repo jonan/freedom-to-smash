@@ -38,12 +38,11 @@ Platform::~Platform(void) {
 }
 
 //
-void Platform::addPoint(const float x, const float y) {
-  Ogre::Vector2 *temp = new Ogre::Vector2(x, y);
-  points.push_back(temp);
+void Platform::addPoint(const Real x, const Real y) {
+  points.push_back(new Ogre::Vector2(x, y));
 }
 
-// 
+//
 bool Platform::frameStarted(const Ogre::FrameEvent& event) {
   // Move object
   node->translate(Ogre::Vector3(-0.5*event.timeSinceLastFrame,0,0));

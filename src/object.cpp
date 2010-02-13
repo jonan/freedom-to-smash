@@ -67,7 +67,7 @@ void Object::setScale(const Ogre::Vector3 &scale) {
 }
 
 //
-void Object::setCollisionBoxSize(const double max_x, const double min_x, const double max_y, const double min_y) {
+void Object::setCollisionBoxSize(const Real &max_x, const Real &min_x, const Real &max_y, const Real &min_y) {
   collision_box = new CollisionBox(max_x, min_x, max_y, min_y);
   collision_box->setReferencePoint(*node);
   /*

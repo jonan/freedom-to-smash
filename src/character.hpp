@@ -40,7 +40,7 @@ class Character : public Object, public Ogre::FrameListener, public OIS::KeyList
     ~Character(void); // Destructor
 
     ///
-    virtual int getType(void) const {return CHARACTER;}
+    virtual ObjectType getType(void) const {return CHARACTER;}
 
     /// Detects and solves collisions of the character with the battle ground.
     /// This function must be called every frame.

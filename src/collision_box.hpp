@@ -22,17 +22,19 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #ifndef COLLISION_BOX_HPP
 #define COLLISION_BOX_HPP
 
+#include "macros.hpp"
+
 namespace Ogre {
 class SceneNode;
 }
 
 /// Collisions types.
-enum { NO_COLLISION,
-       LEFT_COLLISION,
-       RIGHT_COLLISION,
-       TOP_COLLISION,
-       BOTTOM_COLLISION,
-       FULL_COLLISION   };
+enum CollisionType { NO_COLLISION,
+                     LEFT_COLLISION,
+                     RIGHT_COLLISION,
+                     TOP_COLLISION,
+                     BOTTOM_COLLISION,
+                     FULL_COLLISION   };
 
 /// Box used to detect collisions.
 /// The box is stored as a reference point that can be located
@@ -45,19 +47,19 @@ class CollisionBox {
     /// @param[in] min_y   Minimum Y position relative to the reference point.
     /// @param[in] point_x X coordinate of the reference point.
     /// @param[in] point_y Y coordinate of the reference point.
-    explicit CollisionBox( const float max_x   = 0, const float min_x   = 0,
-                           const float max_y   = 0, const float min_y   = 0,
-                           const float point_x = 0, const float point_y = 0 ); // Constructor
+    explicit CollisionBox( const Real &max_x   = 0, const Real &min_x   = 0,
+                           const Real &max_y   = 0, const Real &min_y   = 0,
+                           const Real &point_x = 0, const Real &point_y = 0 ); // Constructor
 
     // @{
     /// Functions to set the object's values.
     void setReferencePoint (const Ogre::SceneNode &pos);
-    void setReferencePoint (const float point_x, const float point_y);
-    void setRelativeBoxPos (const float max_x, const float min_x, const float max_y, const float min_y);
+    void setReferencePoint (const Real &point_x, const Real &point_y);
+    void setRelativeBoxPos (const Real &max_x, const Real &min_x, const Real &max_y, const Real &min_y);
     // @}
 
     /// Detects the collision with the given box and returns the type of collision.
-    int detectCollision(const CollisionBox &box) const;
+    CollisionType detectCollision(const CollisionBox &box) const;
 
   private:
     // Returns if the CollisionBox is null or not.
@@ -66,10 +68,12 @@ class CollisionBox {
     // Returns the intersection with the given CollisionBox.
     CollisionBox getIntersectionBox(const CollisionBox &box) const;
 
-    float rel_max_x, rel_min_x, rel_max_y, rel_min_y;
-    float max_x, min_x, max_y, min_y;
-    float point_x, point_y;
-    float width, height;
+    Real rel_max_x, rel_min_x, rel_max_y, rel_min_y;
+    Real max_x, min_x, max_y, min_y;
+    Real point_x, point_y;
+    Real width, height;
+
+    DISALLOW_COPY_AND_ASSIGN(CollisionBox);
 };
 
 #endif // COLLISION_BOX_HPP

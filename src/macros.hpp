@@ -22,6 +22,10 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #ifndef MACROS_HPP
 #define MACROS_HPP
 
+#include <OgrePrerequisites.h>
+
+using Ogre::Real;
+
 /// A macro to disallow the copy constructor and operator= functions.
 #define DISALLOW_COPY_AND_ASSIGN(TypeName) \
   TypeName(const TypeName&);               \
