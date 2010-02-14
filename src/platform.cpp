@@ -25,28 +25,33 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #include "collision_box.hpp"
 
 // Constructor
-Platform::Platform(Ogre::SceneManager &scene_manager) : Object(scene_manager) {
-  Ogre::Root::getSingleton().addFrameListener(this);
+Platform::Platform(Ogre::SceneManager &scene_manager)
+        : Object(scene_manager)
+{
+    Ogre::Root::getSingleton().addFrameListener(this);
 }
 
 // Destructor
-Platform::~Platform(void) {
-  Ogre::Root::getSingleton().removeFrameListener(this);
-  std::list<Ogre::Vector2*>::iterator it;
-  for (it = points.begin(); it != points.end(); it++)
-    delete (*it);
+Platform::~Platform(void)
+{
+    Ogre::Root::getSingleton().removeFrameListener(this);
+    std::list<Ogre::Vector2*>::iterator it;
+    for (it = points.begin(); it != points.end(); it++)
+        delete (*it);
 }
 
 //
-void Platform::addPoint(const Real x, const Real y) {
-  points.push_back(new Ogre::Vector2(x, y));
+void Platform::addPoint(const Real &x, const Real &y)
+{
+    points.push_back(new Ogre::Vector2(x, y));
 }
 
 //
-bool Platform::frameStarted(const Ogre::FrameEvent& event) {
-  // Move object
-  node->translate(Ogre::Vector3(-0.5*event.timeSinceLastFrame,0,0));
-  // Update collision box
-  collision_box->setReferencePoint(*node);
-  return true;
+bool Platform::frameStarted(const Ogre::FrameEvent &event)
+{
+    // Move object
+    node->translate(Ogre::Vector3(-0.5*event.timeSinceLastFrame,0,0));
+    // Update collision box
+    collision_box->setReferencePoint(*node);
+    return true;
 }

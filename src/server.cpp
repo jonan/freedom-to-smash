@@ -24,52 +24,57 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #include "battle_ground.hpp"
 
 // Singleton pattern constructor
-Server* Server::getInstance(void) {
-  static Server instance;
-  return &instance;
+Server* Server::getInstance(void)
+{
+    static Server instance;
+    return &instance;
 }
 
 // Destructor
-Server::~Server(void) {
-  enet_deinitialize();
-  enet_host_destroy(host_server);
+Server::~Server(void)
+{
+    enet_deinitialize();
+    enet_host_destroy(host_server);
 }
 
-// 
-void Server::start(void) {
-  Ogre::Root::getSingleton().addFrameListener(this);
-  ground->start();
+//
+void Server::start(void)
+{
+    Ogre::Root::getSingleton().addFrameListener(this);
+    ground->start();
 }
 
 // Constructor
-Server::Server(void) {
-  enet_initialize();
-  address = new ENetAddress;
-  address->host = ENET_HOST_ANY;
-  address->port = 3366;
-  host_server = enet_host_create(address,4,0,0);
-  ground = new BattleGround;
+Server::Server(void)
+{
+    enet_initialize();
+    address = new ENetAddress;
+    address->host = ENET_HOST_ANY;
+    address->port = 3366;
+    host_server = enet_host_create(address,4,0,0);
+    ground = new BattleGround;
 }
 
-// 
-bool Server::frameStarted(const Ogre::FrameEvent& /*event*/) {
-  ENetEvent event;
+//
+bool Server::frameStarted(const Ogre::FrameEvent &/*event*/)
+{
+    ENetEvent event;
 
-  while ( enet_host_service(host_server, &event, 0) > 0 ) {
-    switch (event.type) {
-      case ENET_EVENT_TYPE_CONNECT:
-        peers.push_back(event.peer);
-        break;
-      case ENET_EVENT_TYPE_RECEIVE:
-        enet_packet_destroy(event.packet);
-        break;
-      case ENET_EVENT_TYPE_DISCONNECT:
-        break;
-      case ENET_EVENT_TYPE_NONE:
-        // Impossible case, just to avoid compiler warnings
-        break;
+    while ( enet_host_service(host_server, &event, 0) > 0 ) {
+        switch (event.type) {
+        case ENET_EVENT_TYPE_CONNECT:
+            peers.push_back(event.peer);
+            break;
+        case ENET_EVENT_TYPE_RECEIVE:
+            enet_packet_destroy(event.packet);
+            break;
+        case ENET_EVENT_TYPE_DISCONNECT:
+            break;
+        case ENET_EVENT_TYPE_NONE:
+            // Impossible case, just to avoid compiler warnings
+            break;
+        }
     }
-  }
 
-  return true;
+    return true;
 }

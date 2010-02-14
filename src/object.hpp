@@ -25,10 +25,10 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #include "macros.hpp"
 
 namespace Ogre {
-class Entity;
-class SceneNode;
-class SceneManager;
-class Vector3;
+    class Entity;
+    class SceneNode;
+    class SceneManager;
+    class Vector3;
 }
 
 class CollisionBox;
@@ -40,7 +40,7 @@ enum ObjectType {NORMAL,
 
 /// General object class.
 class Object {
-  public:
+public:
     explicit Object(Ogre::SceneManager &scene_manager); // Constructor
     virtual ~Object(void) {} // Destructor
 
@@ -58,7 +58,7 @@ class Object {
     ///
     const CollisionBox* getCollisionBox(void) const {return collision_box;}
 
-  protected:
+protected:
     Ogre::Entity *entity;
     Ogre::SceneNode *node;
     Ogre::SceneManager *scene_manager;

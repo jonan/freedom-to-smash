@@ -16,7 +16,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 */
 
 /// @file
-/// 
+///
 /// @author Jonan
 
 #ifndef SERVER_HPP
@@ -34,20 +34,20 @@ struct _ENetAddress;
 struct _ENetHost;
 struct _ENetPeer;
 
-/// 
+///
 class Server : public Ogre::FrameListener {
-  public:
+public:
     static Server* getInstance(void); // Singleton pattern constructor
     ~Server(void); // Destructor
 
-    /// 
+    ///
     void start(void);
 
-  private:
+private:
     Server(void); // Constructor
 
-    // 
-    virtual bool frameStarted(const Ogre::FrameEvent& /*event*/);
+    //
+    virtual bool frameStarted(const Ogre::FrameEvent &/*event*/);
 
     BattleGround *ground;
 

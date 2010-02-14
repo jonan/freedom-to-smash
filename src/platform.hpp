@@ -32,7 +32,7 @@ class Character;
 
 ///
 class Platform : public Object, public Ogre::FrameListener {
-  public:
+public:
     explicit Platform(Ogre::SceneManager &scene_manager); // Constructor
     ~Platform(void); // Destructor
 
@@ -40,11 +40,11 @@ class Platform : public Object, public Ogre::FrameListener {
     virtual ObjectType getType(void) const {return PLATFORM;}
 
     ///
-    void addPoint(const Real x, const Real y);
+    void addPoint(const Real &x, const Real &y);
 
-  private:
+private:
     //
-    virtual bool frameStarted(const Ogre::FrameEvent& event);
+    virtual bool frameStarted(const Ogre::FrameEvent &event);
 
     std::list<Ogre::Vector2*> points;
     std::list<Character*>     characters;

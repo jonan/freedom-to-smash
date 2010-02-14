@@ -22,13 +22,14 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #include "battle_ground.hpp"
 #include "boot.hpp"
 
-int main(int argc, char *argv[]) {
-  boot();
-  BattleGround *battle = new BattleGround;
-  battle->addPlayer(1);
-  battle->addPlayer(2);
-  battle->start();
-  delete battle;
-  quit();
-  return 0;
+int main(int argc, char *argv[])
+{
+    boot();
+    BattleGround *battle = new BattleGround;
+    battle->addPlayer(1);
+    battle->addPlayer(2);
+    battle->start();
+    delete battle;
+    quit();
+    return 0;
 }

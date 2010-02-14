@@ -23,12 +23,14 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #define UTIL_HPP
 
 // @{
-/// 
-template<class T> const T& maximum(const T &a, const T &b) {
-  return (a>b) ? a : b;
+///
+template<class T> const T& maximum(const T &a, const T &b)
+{
+    return (a>b) ? a : b;
 }
-template<class T> const T& minimum(const T &a, const T &b) {
-  return (a<b) ? a : b;
+template<class T> const T& minimum(const T &a, const T &b)
+{
+    return (a<b) ? a : b;
 }
 // @}
 

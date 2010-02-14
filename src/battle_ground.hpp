@@ -35,7 +35,7 @@ class Object;
 
 /// Class to control all that happens in a battle ground.
 class BattleGround : public Ogre::FrameListener, public OIS::KeyListener {
-  public:
+public:
     BattleGround(void); // Constructor
     ~BattleGround(void); // Destructor
 
@@ -46,7 +46,7 @@ class BattleGround : public Ogre::FrameListener, public OIS::KeyListener {
     /// Starts the battle.
     void start(void);
 
-  private:
+private:
     // Function that's called at the beginning of every frame.
     virtual bool frameStarted(const Ogre::FrameEvent& event);
 

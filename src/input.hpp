@@ -33,35 +33,35 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 /// Class to control all input and who is listening to it.
 /// @todo Add joystick support.
 class Input : public Ogre::FrameListener, public OIS::KeyListener, public OIS::JoyStickListener {
-  public:
+public:
     static Input* getInstance(void); // Singleton pattern constructor
     ~Input(void); // Destructor
 
     // @{
     /// Functions to add listeners.
-    void addKeyListener      (OIS::KeyListener *listener)      {key_listeners.push_back(listener);     }
-    void addJoyStickListener (OIS::JoyStickListener *listener) {joystick_listeners.push_back(listener);}
+    void addKeyListener      (OIS::KeyListener &listener)      {key_listeners.push_back(&listener);     }
+    void addJoyStickListener (OIS::JoyStickListener &listener) {joystick_listeners.push_back(&listener);}
     // @}
 
     // @{
     /// Functions to remove listeners.
-    void removeKeyListener      (OIS::KeyListener *listener)      {key_listeners.remove(listener);     }
-    void removeJoyStickListener (OIS::JoyStickListener *listener) {joystick_listeners.remove(listener);}
+    void removeKeyListener      (OIS::KeyListener &listener)      {key_listeners.remove(&listener);     }
+    void removeJoyStickListener (OIS::JoyStickListener &listener) {joystick_listeners.remove(&listener);}
     // @}
 
-  private:
+private:
     Input(void); // Constructor
 
     // Setups OIS and all the input objects detected.
     void setupOIS(void);
 
     // Checks input after every frame.
-    virtual bool frameEnded(const Ogre::FrameEvent& event);
+    virtual bool frameEnded(const Ogre::FrameEvent &event);
 
     // @{
     // Functions to update the keyboard's state.
-    virtual bool keyPressed  (const OIS::KeyEvent& key);
-    virtual bool keyReleased (const OIS::KeyEvent& key);
+    virtual bool keyPressed  (const OIS::KeyEvent &key);
+    virtual bool keyReleased (const OIS::KeyEvent &key);
     // @}
 
     // @{

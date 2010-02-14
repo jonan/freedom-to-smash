@@ -25,7 +25,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #include "macros.hpp"
 
 namespace Ogre {
-class SceneNode;
+    class SceneNode;
 }
 
 /// Collisions types.
@@ -40,7 +40,7 @@ enum CollisionType { NO_COLLISION,
 /// The box is stored as a reference point that can be located
 /// anywhere and the maximum and minimum positions relative to that point.
 class CollisionBox {
-  public:
+public:
     /// @param[in] max_x   Maximum X position relative to the reference point.
     /// @param[in] min_x   Minimum X position relative to the reference point.
     /// @param[in] max_y   Maximum Y position relative to the reference point.
@@ -61,7 +61,7 @@ class CollisionBox {
     /// Detects the collision with the given box and returns the type of collision.
     CollisionType detectCollision(const CollisionBox &box) const;
 
-  private:
+private:
     // Returns if the CollisionBox is null or not.
     bool isNull(void) const {return !(rel_max_x || rel_min_x || rel_max_y || rel_min_y);}
 
