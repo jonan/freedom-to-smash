@@ -19,7 +19,6 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 
 #include <string>
 
-#include <OgreEntity.h>
 #include <OgreRoot.h>
 
 #include "collision_box.hpp"
@@ -27,7 +26,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 
 // Constructor
 Character::Character(Ogre::SceneManager &scene_manager, const CharacterType type, const int num_player)
-        : Object(scene_manager)
+        : AnimatedObject(scene_manager)
         , on_floor(true)
         , has_double_jumped(false)
         , jumping_time(0)
@@ -38,7 +37,8 @@ Character::Character(Ogre::SceneManager &scene_manager, const CharacterType type
     setCollisionBoxSize(1.5,-1.5,2.2,-5.25);
     prepareAnimations();
     // Start with no action active
-    for (int i=0; i < NUM_STATES; i++) action[i] = false;
+    for (int i=0; i < NUM_STATES; i++)
+        action[i] = false;
     // Define controls
     switch (num_player) {
     case 1:
@@ -73,6 +73,7 @@ Character::Character(Ogre::SceneManager &scene_manager, const CharacterType type
 // Destructor
 Character::~Character(void)
 {
+    Ogre::Root::getSingleton().removeFrameListener(this);
     Input::getInstance()->removeKeyListener(*this);
 }
 
@@ -82,8 +83,9 @@ void Character::recoverFromPenetration(const std::vector<Object*> &objects)
     collision_box->setReferencePoint(*node);
     on_floor = false;
 
-    for (unsigned int i=0; i<objects.size(); i++) {
-        switch (collision_box->detectCollision(*objects[i]->getCollisionBox())) {
+    std::vector<Object*>::const_iterator it = objects.begin();
+    for (it = objects.begin(); it != objects.end(); it++) {
+        switch (collision_box->detectCollision(*(*it)->getCollisionBox())) {
         case RIGHT_COLLISION:
         case LEFT_COLLISION:
             stopAction(MOVE);
@@ -109,7 +111,7 @@ void Character::recoverFromPenetration(const std::vector<Object*> &objects)
 }
 
 // Function that's called at the beginning of every frame.
-bool Character::frameStarted(const Ogre::FrameEvent& event)
+bool Character::frameStarted(const Ogre::FrameEvent &event)
 {
     animate(event);
     move(event);
@@ -119,37 +121,17 @@ bool Character::frameStarted(const Ogre::FrameEvent& event)
 // Prepares all animations so they can be used.
 void Character::prepareAnimations(void)
 {
-    animations[ATTACK_1] = entity->getAnimationState("attackforward1");
-    animations[ATTACK_1]->setLoop(false);
-    animations[ATTACK_1]->setEnabled(false);
-    animations[ATTACK_2] = entity->getAnimationState("attackneutral1");
-    animations[ATTACK_2]->setLoop(false);
-    animations[ATTACK_2]->setEnabled(false);
-    animations[DEFEND] = entity->getAnimationState("hurt1");
-    animations[DEFEND]->setLoop(false);
-    animations[DEFEND]->setEnabled(false);
-    animations[DOUBLE_JUMP] = entity->getAnimationState("jump1");
-    animations[DOUBLE_JUMP]->setLoop(false);
-    animations[DOUBLE_JUMP]->setEnabled(false);
-    animations[FALL] = entity->getAnimationState("fall1");
-    animations[FALL]->setLoop(false);
-    animations[FALL]->setEnabled(false);
-    animations[IDLE] = entity->getAnimationState("idle1");
-    animations[IDLE]->setLoop(true);
-    animations[IDLE]->setEnabled(false);
-    animations[LAND] = entity->getAnimationState("land1");
-    animations[LAND]->setLoop(false);
-    animations[LAND]->setEnabled(false);
-    animations[JUMP] = animations[DOUBLE_JUMP];
-    animations[MOVE] = entity->getAnimationState("run1");
-    animations[MOVE]->setLoop(true);
-    animations[MOVE]->setEnabled(false);
-    animations[SPECIAL_ATTACK_1] = entity->getAnimationState("attackup1");
-    animations[SPECIAL_ATTACK_1]->setLoop(false);
-    animations[SPECIAL_ATTACK_1]->setEnabled(false);
-    animations[SPECIAL_ATTACK_2] = entity->getAnimationState("attackdown1");
-    animations[SPECIAL_ATTACK_2]->setLoop(false);
-    animations[SPECIAL_ATTACK_2]->setEnabled(false);
+    createAnimation(ATTACK_1, "attackforward1");
+    createAnimation(ATTACK_2, "attackneutral1");
+    createAnimation(DEFEND, "hurt1");
+    createAnimation(DOUBLE_JUMP, "jump1");
+    createAnimation(FALL, "fall1");
+    createAnimation(IDLE, "idle1", true);
+    createAnimation(LAND, "land1");
+    createAnimation(JUMP, "jump1");
+    createAnimation(MOVE, "run1", true);
+    createAnimation(SPECIAL_ATTACK_1, "attackup1");
+    createAnimation(SPECIAL_ATTACK_2, "attackdown1");
 }
 
 // Funtion that needs to be called every frame for the character to be updated.

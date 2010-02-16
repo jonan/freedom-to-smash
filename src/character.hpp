@@ -28,13 +28,13 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 
 #include <OIS/OIS.h>
 
-#include "object.hpp"
+#include "animated_object.hpp"
 
 /// Types of character.
 enum CharacterType {KID};
 
 /// Class to control a character.
-class Character : public Object, public Ogre::FrameListener, public OIS::KeyListener {
+class Character : public AnimatedObject, public Ogre::FrameListener, public OIS::KeyListener {
 public:
     Character(Ogre::SceneManager &scene_manager, const CharacterType type, const int num_player); // Constructor
     ~Character(void); // Destructor
@@ -48,9 +48,6 @@ public:
     void recoverFromPenetration(const std::vector<Object*> &objects);
 
 private:
-    // All the different states of the player
-    enum {ATTACK_1, ATTACK_2, DEFEND, DOUBLE_JUMP, FALL, IDLE, JUMP,
-          LAND, MOVE, SPECIAL_ATTACK_1, SPECIAL_ATTACK_2, NUM_STATES};
 
     // Function that's called at the beginning of every frame.
     virtual bool frameStarted(const Ogre::FrameEvent &event);
@@ -69,17 +66,16 @@ private:
 
     // @{
     // Functions to update the keyboard's state.
-    virtual bool keyPressed  (const OIS::KeyEvent& key);
-    virtual bool keyReleased (const OIS::KeyEvent& key);
+    virtual bool keyPressed  (const OIS::KeyEvent &key);
+    virtual bool keyReleased (const OIS::KeyEvent &key);
     // @}
 
     bool action[NUM_STATES]; // active actions
+
     bool on_floor, has_double_jumped;
     Real jumping_time;
 
     int direction;
-
-    Ogre::AnimationState *animations[NUM_STATES];
 
     // Controls
     int attack_key, defend_key, jump_key, move_left_key, move_right_key, special_attack_key;

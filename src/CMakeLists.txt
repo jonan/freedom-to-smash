@@ -1,5 +1,6 @@
 set(
   SRC
+  animated_object.cpp
   battle_ground.cpp
   boot.cpp
   character.cpp
