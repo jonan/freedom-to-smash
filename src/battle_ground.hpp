@@ -48,12 +48,12 @@ public:
 
 private:
     // Function that's called at the beginning of every frame.
-    virtual bool frameStarted(const Ogre::FrameEvent& event);
+    virtual bool frameStarted(const Ogre::FrameEvent &event);
 
     // @{
     // Functions to update the keyboard's state.
-    virtual bool keyPressed  (const OIS::KeyEvent& key) {return true;}
-    virtual bool keyReleased (const OIS::KeyEvent& key);
+    virtual bool keyPressed  (const OIS::KeyEvent &key) {return true;}
+    virtual bool keyReleased (const OIS::KeyEvent &key);
     // @}
 
     Ogre::SceneManager *scene_manager;

@@ -145,10 +145,14 @@ void Character::animate(const Ogre::FrameEvent &event)
     if (action[ATTACK_1] || action[ATTACK_2] || action[SPECIAL_ATTACK_1] || action[SPECIAL_ATTACK_2]) {
         // Check what attack is the player performing
         int i;
-        if (action[ATTACK_1])         i = ATTACK_1;
-        else if (action[ATTACK_2])         i = ATTACK_2;
-        else if (action[SPECIAL_ATTACK_1]) i = SPECIAL_ATTACK_1;
-        else if (action[SPECIAL_ATTACK_2]) i = SPECIAL_ATTACK_2;
+        if (action[ATTACK_1])
+            i = ATTACK_1;
+        else if (action[ATTACK_2])
+            i = ATTACK_2;
+        else if (action[SPECIAL_ATTACK_1])
+            i = SPECIAL_ATTACK_1;
+        else if (action[SPECIAL_ATTACK_2])
+            i = SPECIAL_ATTACK_2;
         // Animate
         animations[i]->setEnabled(true);
         animations[i]->addTime(event.timeSinceLastFrame);

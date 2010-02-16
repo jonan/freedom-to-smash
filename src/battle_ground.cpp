@@ -25,8 +25,8 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 
 // Constructor
 BattleGround::BattleGround(void)
+        : end(false)
 {
-    end = false;
     // Initialize variables
     scene_manager = Ogre::Root::getSingleton().createSceneManager(Ogre::ST_GENERIC);
     viewport = Ogre::Root::getSingleton().getAutoCreatedWindow()->addViewport(NULL);
@@ -87,7 +87,7 @@ void BattleGround::start(void)
 }
 
 // Function that's called at the beginning of every frame.
-bool BattleGround::frameStarted(const Ogre::FrameEvent& event)
+bool BattleGround::frameStarted(const Ogre::FrameEvent &event)
 {
     for (unsigned int i=0; i<players.size(); i++)
         players[i]->recoverFromPenetration(objects);
@@ -95,7 +95,7 @@ bool BattleGround::frameStarted(const Ogre::FrameEvent& event)
 }
 
 // Function to update the keyboard's state.
-bool BattleGround::keyReleased(const OIS::KeyEvent& key)
+bool BattleGround::keyReleased(const OIS::KeyEvent &key)
 {
     if (key.key == OIS::KC_ESCAPE)
         end = true;
