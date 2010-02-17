@@ -17,6 +17,8 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 
 #include "battle_ground.hpp"
 
+#include <boost/foreach.hpp>
+
 #include <OgreRenderWindow.h>
 #include <OgreRoot.h>
 
@@ -64,18 +66,17 @@ BattleGround::BattleGround(void)
 // Destructor
 BattleGround::~BattleGround(void)
 {
-    for (unsigned int i=0; i<objects.size(); i++)
-        delete objects[i];
-    for (unsigned int i=0; i<players.size(); i++)
-        delete players[i];
     Input::getInstance()->removeKeyListener(*this);
+    BOOST_FOREACH(Object *obj, objects)
+        delete obj;
+    BOOST_FOREACH(Character *character, players)
+        delete character;
 }
 
 // Adds a player to the battle ground.
 void BattleGround::addPlayer(const int num_player)
 {
-    Character *player = new Character(*scene_manager, KID, num_player);
-    players.push_back(player);
+    players.push_back(new Character(*scene_manager, KID, num_player));
 }
 
 // Starts the battle.
@@ -89,8 +90,8 @@ void BattleGround::start(void)
 // Function that's called at the beginning of every frame.
 bool BattleGround::frameStarted(const Ogre::FrameEvent &event)
 {
-    for (unsigned int i=0; i<players.size(); i++)
-        players[i]->recoverFromPenetration(objects);
+    BOOST_FOREACH(Character *character, players)
+        character->recoverFromPenetration(objects);
     return !end;
 }
 

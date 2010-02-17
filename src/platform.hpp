@@ -22,8 +22,6 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #ifndef PLATFORM_HPP
 #define PLATFORM_HPP
 
-#include <list>
-
 #include <OgreFrameListener.h>
 
 #include "object.hpp"

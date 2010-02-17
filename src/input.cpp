@@ -17,7 +17,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 
 #include "input.hpp"
 
-#include <iostream>
+#include <boost/foreach.hpp>
 
 #include <OgreRenderWindow.h>
 #include <OgreRoot.h>
@@ -91,17 +91,15 @@ bool Input::frameEnded(const Ogre::FrameEvent &/*event*/)
 // Function to update the keyboard's state.
 bool Input::keyPressed(const OIS::KeyEvent &key)
 {
-    std::list<OIS::KeyListener*>::iterator it;
-    for (it = key_listeners.begin(); it != key_listeners.end(); it++)
-        (*it)->keyPressed(key);
+    BOOST_FOREACH(OIS::KeyListener *listener, key_listeners)
+        listener->keyPressed(key);
     return true;
 }
 
 // Function to update the keyboard's state.
 bool Input::keyReleased(const OIS::KeyEvent &key)
 {
-    std::list<OIS::KeyListener*>::iterator it;
-    for (it = key_listeners.begin(); it != key_listeners.end(); it++)
-        (*it)->keyReleased(key);
+    BOOST_FOREACH(OIS::KeyListener *listener, key_listeners)
+        listener->keyReleased(key);
     return true;
 }

@@ -17,10 +17,9 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 
 #include "platform.hpp"
 
+#include <boost/foreach.hpp>
+
 #include <OgreRoot.h>
-#include <OgreSceneNode.h>
-#include <OgreVector2.h>
-#include <OgreVector3.h>
 
 #include "collision_box.hpp"
 
@@ -35,9 +34,8 @@ Platform::Platform(Ogre::SceneManager &scene_manager)
 Platform::~Platform(void)
 {
     Ogre::Root::getSingleton().removeFrameListener(this);
-    std::list<Ogre::Vector2*>::iterator it;
-    for (it = points.begin(); it != points.end(); it++)
-        delete (*it);
+    BOOST_FOREACH(Ogre::Vector2 *p, points)
+        delete p;
 }
 
 //

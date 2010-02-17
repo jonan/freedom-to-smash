@@ -17,7 +17,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 
 #include "character.hpp"
 
-#include <string>
+#include <boost/foreach.hpp>
 
 #include <OgreRoot.h>
 
@@ -78,14 +78,13 @@ Character::~Character(void)
 }
 
 // Detects and solves collisions of the character with the battle ground.
-void Character::recoverFromPenetration(const std::vector<Object*> &objects)
+void Character::recoverFromPenetration(const std::list<Object*> &objects)
 {
     collision_box->setReferencePoint(*node);
     on_floor = false;
 
-    std::vector<Object*>::const_iterator it = objects.begin();
-    for (it = objects.begin(); it != objects.end(); it++) {
-        switch (collision_box->detectCollision(*(*it)->getCollisionBox())) {
+    BOOST_FOREACH(Object *obj, objects) {
+        switch (collision_box->detectCollision(*obj->getCollisionBox())) {
         case RIGHT_COLLISION:
         case LEFT_COLLISION:
             stopAction(MOVE);

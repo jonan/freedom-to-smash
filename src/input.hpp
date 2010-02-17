@@ -22,8 +22,6 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #ifndef INPUT_HPP
 #define INPUT_HPP
 
-#include <list>
-
 #include <OgreFrameListener.h>
 
 #include <OIS/OIS.h>

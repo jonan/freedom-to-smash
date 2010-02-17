@@ -22,8 +22,6 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #ifndef CHARACTER_HPP
 #define CHARACTER_HPP
 
-#include <vector>
-
 #include <OgreFrameListener.h>
 
 #include <OIS/OIS.h>
@@ -45,7 +43,7 @@ public:
     /// Detects and solves collisions of the character with the battle ground.
     /// This function must be called every frame.
     /// @param[in] objects All the objects in the battle ground.
-    void recoverFromPenetration(const std::vector<Object*> &objects);
+    void recoverFromPenetration(const std::list<Object*> &objects);
 
 private:
 
