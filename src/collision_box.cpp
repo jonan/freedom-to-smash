@@ -63,25 +63,25 @@ CollisionType CollisionBox::detectCollision(const CollisionBox &box) const
 {
     CollisionType collision_type = NO_COLLISION;
 
-    CollisionBox intersection_box = getIntersectionBox(box);
-
-    if (!intersection_box.isNull()) {
+    CollisionBox *intersection_box = getIntersectionBox(box);
+    if (!intersection_box->isNull()) {
         // Collision detected
-        if ( (intersection_box.width == width     && intersection_box.height == height    ) ||
-             (intersection_box.width == box.width && intersection_box.height == box.height) ||
-             (intersection_box.width == width     && intersection_box.height == box.height) ||
-             (intersection_box.width == box.width && intersection_box.height == height    )    ) {
+        if ( (intersection_box->width == width     && intersection_box->height == height    ) ||
+             (intersection_box->width == box.width && intersection_box->height == box.height) ||
+             (intersection_box->width == width     && intersection_box->height == box.height) ||
+             (intersection_box->width == box.width && intersection_box->height == height    )    ) {
             collision_type = FULL_COLLISION;
-        } else if (intersection_box.max_x == box.max_x && intersection_box.height > intersection_box.width) {
+        } else if (intersection_box->max_x == box.max_x && intersection_box->height > intersection_box->width) {
             collision_type = RIGHT_COLLISION;
-        } else if (intersection_box.min_x == box.min_x && intersection_box.height > intersection_box.width) {
+        } else if (intersection_box->min_x == box.min_x && intersection_box->height > intersection_box->width) {
             collision_type = LEFT_COLLISION;
-        } else if (intersection_box.max_y == box.max_y) {
+        } else if (intersection_box->max_y == box.max_y) {
             collision_type = BOTTOM_COLLISION;
-        } else if (intersection_box.min_y == box.min_y) {
+        } else if (intersection_box->min_y == box.min_y) {
             collision_type = TOP_COLLISION;
         }
     }
+    delete intersection_box;
 
     return collision_type;
 }
@@ -102,10 +102,11 @@ void CollisionBox::calculateMaxSize(void)
     min_y = point_y + rel_min_y;
 }
 
-// Returns the intersection with the given object.
-CollisionBox CollisionBox::getIntersectionBox(const CollisionBox &box) const
+// Returns the intersection with the given CollisionBox (needs to be deleted).
+CollisionBox* CollisionBox::getIntersectionBox(const CollisionBox &box) const
 {
-    CollisionBox intersection;
+    /// @todo Don't return a pointer to a dynamically allocated object.
+    CollisionBox *intersection = new CollisionBox;
 
     if (!(this->isNull() || box.isNull())) {
         Real intersection_max_x = minimum(max_x, box.max_x);
@@ -115,8 +116,8 @@ CollisionBox CollisionBox::getIntersectionBox(const CollisionBox &box) const
 
         // Check if there's an intersection
         if ( (intersection_max_x > intersection_min_x) && (intersection_max_y > intersection_min_y) )
-            intersection.setRelativeBoxPos(intersection_max_x, intersection_min_x,
-                                           intersection_max_y, intersection_min_y);
+            intersection->setRelativeBoxPos(intersection_max_x, intersection_min_x,
+                                            intersection_max_y, intersection_min_y);
     }
 
     return intersection;

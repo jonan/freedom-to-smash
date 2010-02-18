@@ -71,8 +71,8 @@ private:
     void calculateMaxSize(void);
     // @}
 
-    // Returns the intersection with the given CollisionBox.
-    CollisionBox getIntersectionBox(const CollisionBox &box) const;
+    // Returns the intersection with the given CollisionBox (needs to be deleted).
+    CollisionBox* getIntersectionBox(const CollisionBox &box) const;
 
     Real rel_max_x, rel_min_x, rel_max_y, rel_min_y;
     Real max_x, min_x, max_y, min_y;
