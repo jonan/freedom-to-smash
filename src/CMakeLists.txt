@@ -12,6 +12,25 @@ set(
   server.cpp
   )
 
+set(
+  HEADERS
+  animated_object.hpp
+  battle_ground.hpp
+  boot.hpp
+  character.hpp
+  collision_box.hpp
+  input.hpp
+  object.hpp
+  platform.hpp
+  server.hpp
+  )
+
+if(WIN32)
+    if(NOT CYGWIN)
+        list(APPEND SRC ${HEADERS})
+    endif()
+endif()
+
 add_definitions(-DOGRE_GUI_GLX -DOGRE_CONFIG_LITTLE_ENDIAN)
 
 set_property(SOURCE ${SRC} PROPERTY COMPILE_FLAGS "-Wall -g -I/usr/include/OGRE -I/usr/include/OIS")
