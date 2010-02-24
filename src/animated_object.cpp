@@ -17,8 +17,11 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 
 #include "animated_object.hpp"
 
+#include <boost/foreach.hpp>
+
 #include <OgreAnimationState.h>
 #include <OgreEntity.h>
+#include <OgreFrameListener.h>
 
 // Constructor
 AnimatedObject::AnimatedObject(Ogre::SceneManager &scene_manager)
@@ -30,7 +33,21 @@ AnimatedObject::AnimatedObject(Ogre::SceneManager &scene_manager)
 //
 void AnimatedObject::createAnimation(const int type, const char *name, const bool loop, const bool enabled)
 {
-    animations[type] = entity->getAnimationState(name);
-    animations[type]->setLoop(loop);
-    animations[type]->setEnabled(enabled);
+    animations[type].push_back(entity->getAnimationState(name));
+    animations[type].back()->setLoop(loop);
+    animations[type].back()->setEnabled(enabled);
+}
+
+//
+bool AnimatedObject::performAnimation(const int type, const Ogre::FrameEvent &event)
+{
+    bool end = false;
+    BOOST_FOREACH(Ogre::AnimationState *anim, animations[type]) {
+        anim->setEnabled(true);
+        anim->addTime(event.timeSinceLastFrame);
+        if (anim->hasEnded()) {
+            end = true;
+        }
+    }
+    return end;
 }

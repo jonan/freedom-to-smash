@@ -22,12 +22,15 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #ifndef ANIMATED_OBJECT_HPP
 #define ANIMATED_OBJECT_HPP
 
+#include <list>
+
 #include "object.hpp"
 
 namespace Ogre {
     class AnimationState;
 }
 
+///
 class AnimatedObject : public Object {
 public:
     AnimatedObject(Ogre::SceneManager &scene_manager); // Constructor
@@ -37,9 +40,16 @@ protected:
     enum {ATTACK_1, ATTACK_2, DEFEND, DOUBLE_JUMP, FALL, IDLE, JUMP,
           LAND, MOVE, SPECIAL_ATTACK_1, SPECIAL_ATTACK_2, NUM_STATES};
 
+    //
     void createAnimation(const int type, const char *name, const bool loop = false, const bool enabled = false);
 
-    Ogre::AnimationState *animations[NUM_STATES];
+    //
+    bool performAnimation(const int type, const Ogre::FrameEvent &event);
+
+    std::list<Ogre::AnimationState*> animations[NUM_STATES];
+
+private:
+    DISALLOW_COPY_AND_ASSIGN(AnimatedObject);
 };
 
 #endif // ANIMATED_OBJECT_HPP

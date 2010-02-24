@@ -46,7 +46,6 @@ public:
     void recoverFromPenetration(const std::list<Object*> &objects);
 
 private:
-
     // Function that's called at the beginning of every frame.
     virtual bool frameStarted(const Ogre::FrameEvent &event);
 

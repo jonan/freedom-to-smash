@@ -65,6 +65,7 @@ protected:
 
     CollisionBox *collision_box;
 
+private:
     DISALLOW_COPY_AND_ASSIGN(Object);
 };
 

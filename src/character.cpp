@@ -138,8 +138,8 @@ void Character::animate(const Ogre::FrameEvent &event)
 {
     // Disable all animations
     for (int i=0; i<NUM_STATES; i++)
-        if (animations[i])
-            animations[i]->setEnabled(false);
+        BOOST_FOREACH(Ogre::AnimationState *anim, animations[i])
+            anim->setEnabled(false);
     // Check what animations need to be enabled
     if (action[ATTACK_1] || action[ATTACK_2] || action[SPECIAL_ATTACK_1] || action[SPECIAL_ATTACK_2]) {
         // Check what attack is the player performing
@@ -153,33 +153,24 @@ void Character::animate(const Ogre::FrameEvent &event)
         else if (action[SPECIAL_ATTACK_2])
             i = SPECIAL_ATTACK_2;
         // Animate
-        animations[i]->setEnabled(true);
-        animations[i]->addTime(event.timeSinceLastFrame);
-        if (animations[i]->hasEnded())
+        if (performAnimation(i, event))
             stopAction(i);
     } else if (action[DEFEND] && !action[LAND]) {
-        animations[DEFEND]->setEnabled(true);
-        animations[DEFEND]->addTime(event.timeSinceLastFrame);
+        performAnimation(DEFEND, event);
     } else if (action[DOUBLE_JUMP] || action[JUMP]) {
         // Check what jump is the player performing
         int i = (action[JUMP]) ? JUMP : DOUBLE_JUMP;
-        animations[i]->setEnabled(true);
-        animations[i]->addTime(event.timeSinceLastFrame);
+        performAnimation(i, event);
     } else if (action[FALL]) {
-        animations[FALL]->setEnabled(true);
-        animations[FALL]->addTime(event.timeSinceLastFrame);
+        performAnimation(FALL, event);
     } else if (action[LAND]) {
-        animations[LAND]->setEnabled(true);
-        animations[LAND]->addTime(event.timeSinceLastFrame);
-        if (animations[LAND]->hasEnded())
+        if (performAnimation(LAND, event))
             stopAction(LAND);
     } else if (action[MOVE]) {
-        animations[MOVE]->setEnabled(true);
-        animations[MOVE]->addTime(event.timeSinceLastFrame);
+        performAnimation(MOVE, event);
     } else {
         action[IDLE] = true;
-        animations[IDLE]->setEnabled(true);
-        animations[IDLE]->addTime(event.timeSinceLastFrame);
+        performAnimation(IDLE, event);
     }
 }
 
@@ -209,12 +200,13 @@ void Character::move(const Ogre::FrameEvent &event)
 // Player stops performing an action
 void Character::stopAction(const int type)
 {
-    animations[type]->setTimePosition(0);
+    BOOST_FOREACH(Ogre::AnimationState *anim, animations[type])
+            anim->setTimePosition(0);
     action[type] = false;
 }
 
 // Function to update the keyboard's state.
-bool Character::keyPressed(const OIS::KeyEvent& key)
+bool Character::keyPressed(const OIS::KeyEvent &key)
 {
     if (key.key == attack_key) {
         if (action[DEFEND] && !action[SPECIAL_ATTACK_2]) {
@@ -254,7 +246,7 @@ bool Character::keyPressed(const OIS::KeyEvent& key)
 }
 
 // Function to update the keyboard's state.
-bool Character::keyReleased(const OIS::KeyEvent& key)
+bool Character::keyReleased(const OIS::KeyEvent &key)
 {
     if (key.key == defend_key) {
         action[DEFEND] = false;
