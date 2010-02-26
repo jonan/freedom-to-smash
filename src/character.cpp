@@ -32,8 +32,9 @@ Character::Character(Ogre::SceneManager &scene_manager, const CharacterType type
         , jumping_time(0)
         , direction(1)
 {
-    setEntity("kid");
+    setEntity("sinbad");
     setPosition(Ogre::Vector3(0,5,0));
+    node->yaw(Ogre::Degree(90));
     setCollisionBoxSize(1.5,-1.5,2.2,-5.25);
     prepareAnimations();
     // Start with no action active
@@ -120,17 +121,19 @@ bool Character::frameStarted(const Ogre::FrameEvent &event)
 // Prepares all animations so they can be used.
 void Character::prepareAnimations(void)
 {
-    createAnimation(ATTACK_1, "attackforward1");
-    createAnimation(ATTACK_2, "attackneutral1");
-    createAnimation(DEFEND, "hurt1");
-    createAnimation(DOUBLE_JUMP, "jump1");
-    createAnimation(FALL, "fall1");
-    createAnimation(IDLE, "idle1", true);
-    createAnimation(LAND, "land1");
-    createAnimation(JUMP, "jump1");
-    createAnimation(MOVE, "run1", true);
-    createAnimation(SPECIAL_ATTACK_1, "attackup1");
-    createAnimation(SPECIAL_ATTACK_2, "attackdown1");
+    createAnimation(ATTACK_1, "SliceVertical");
+    createAnimation(ATTACK_2, "SliceHorizontal");
+    createAnimation(DEFEND, "DrawSwords");
+    createAnimation(DOUBLE_JUMP, "JumpStart");
+    createAnimation(FALL, "JumpLoop");
+    createAnimation(IDLE, "IdleTop", true);
+    createAnimation(IDLE, "IdleBase", true);
+    createAnimation(LAND, "JumpEnd");
+    createAnimation(JUMP, "JumpStart");
+    createAnimation(MOVE, "RunTop", true);
+    createAnimation(MOVE, "RunBase", true);
+    createAnimation(SPECIAL_ATTACK_1, "SliceVertical");
+    createAnimation(SPECIAL_ATTACK_2, "SliceHorizontal");
 }
 
 // Funtion that needs to be called every frame for the character to be updated.
@@ -182,6 +185,7 @@ void Character::move(const Ogre::FrameEvent &event)
         if ( !(action[ATTACK_1] || action[ATTACK_2] || action[SPECIAL_ATTACK_1] || action[SPECIAL_ATTACK_2] || action[LAND]) ) {
             node->translate(Vector3(direction*5*event.timeSinceLastFrame,0,0));
             node->setDirection(0,0,-direction,Ogre::Node::TS_PARENT);
+            node->yaw(Ogre::Degree(90));
         }
     }
     if (action[DOUBLE_JUMP] || action[JUMP]) {
