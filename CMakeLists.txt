@@ -15,4 +15,12 @@ file(
   "${PROJECT_BINARY_DIR}"
   )
 
+# Copy the media files to the binary directory
+file(
+  COPY
+  "${PROJECT_SOURCE_DIR}/media"
+  DESTINATION
+  "${PROJECT_BINARY_DIR}"
+  )
+
 add_subdirectory(src)
