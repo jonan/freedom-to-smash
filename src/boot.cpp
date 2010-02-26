@@ -80,7 +80,7 @@ void initializeAllResources(void)
 void boot(void)
 {
     // Start Ogre
-    Ogre::Root *ogre_root = new Ogre::Root("../../plugins.cfg", "../../ogre.cfg", "../../Ogre.log");
+    Ogre::Root *ogre_root = new Ogre::Root("../plugins.cfg", "../ogre.cfg", "../Ogre.log");
     // For the moment plugins are loaded according to plugins.cfg
     //loadPlugins(ogre_root);
     defineResources();
