@@ -23,11 +23,22 @@ add_custom_target(
   )
 
 # Copy the media files to the binary directory
-file(
-  COPY
-  "${PROJECT_SOURCE_DIR}/media"
-  DESTINATION
-  "${PROJECT_BINARY_DIR}"
-  )
+if (WIN32)
+    file(
+      COPY
+      ${PROJECT_SOURCE_DIR}/media
+      DESTINATION
+      ${PROJECT_BINARY_DIR}
+      )
+else()
+    add_custom_command(
+      OUTPUT ${PROJECT_BINARY_DIR}/media
+      COMMAND ${CMAKE_COMMAND} -E create_symlink ${PROJECT_SOURCE_DIR}/media ${PROJECT_BINARY_DIR}/media
+      )
+    add_custom_target(
+      copy-media ALL
+      DEPENDS ${PROJECT_BINARY_DIR}/media
+      )
+endif()
 
 add_subdirectory(src)
