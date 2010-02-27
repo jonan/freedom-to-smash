@@ -9,6 +9,7 @@ set(
   main.cpp
   object.cpp
   platform.cpp
+  script.cpp
 #  server.cpp
   )
 
@@ -22,6 +23,7 @@ set(
   input.hpp
   object.hpp
   platform.hpp
+  script.hpp
 #  server.hpp
   )
 
