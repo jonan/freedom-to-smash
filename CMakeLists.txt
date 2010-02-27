@@ -10,7 +10,7 @@ find_package(OIS REQUIRED)
 
 include_directories(
   ${Boost_INCLUDE_DIRS}
-  ${LUA_INCLUDE_DIRS}
+  ${LUA_INCLUDE_DIR}
   ${OGRE_INCLUDE_DIRS}
   ${OIS_INCLUDE_DIRS}
   )
