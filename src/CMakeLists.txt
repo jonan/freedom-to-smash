@@ -10,7 +10,7 @@ set(
   object.cpp
   platform.cpp
   script.cpp
-#  server.cpp
+  server.cpp
   )
 
 set(
@@ -24,7 +24,7 @@ set(
   object.hpp
   platform.hpp
   script.hpp
-#  server.hpp
+  server.hpp
   )
 
 if(WIN32)
@@ -39,6 +39,7 @@ add_executable(freedom-to-smash ${SRC})
 set_target_properties(freedom-to-smash PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR})
 target_link_libraries(
   freedom-to-smash
+  ${ENET_LIBRARIES}
   ${LUA_LIBRARIES}
   ${OIS_LIBRARIES}
   ${OGRE_LIBRARIES}

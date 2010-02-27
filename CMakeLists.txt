@@ -4,12 +4,14 @@ project(freedom-to-smash)
 set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 
 find_package(Boost REQUIRED)
+find_package(ENet REQUIRED)
 find_package(Lua51 REQUIRED)
 find_package(OGRE REQUIRED)
 find_package(OIS REQUIRED)
 
 include_directories(
   ${Boost_INCLUDE_DIRS}
+  ${ENET_INCLUDE_DIR}
   ${LUA_INCLUDE_DIR}
   ${OGRE_INCLUDE_DIRS}
   ${OIS_INCLUDE_DIRS}
