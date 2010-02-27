@@ -9,7 +9,7 @@ set(
   main.cpp
   object.cpp
   platform.cpp
-  server.cpp
+#  server.cpp
   )
 
 set(
@@ -22,7 +22,7 @@ set(
   input.hpp
   object.hpp
   platform.hpp
-  server.hpp
+#  server.hpp
   )
 
 if(WIN32)
@@ -31,9 +31,12 @@ if(WIN32)
     endif()
 endif()
 
-add_definitions(-DOGRE_GUI_GLX -DOGRE_CONFIG_LITTLE_ENDIAN)
-
-set_property(SOURCE ${SRC} PROPERTY COMPILE_FLAGS "-Wall -g -I/usr/include/OGRE -I/usr/include/OIS")
-set(CMAKE_EXE_LINKER_FLAGS "-lOgreMain -lOIS -lenet")
+#set_property(SOURCE ${SRC} PROPERTY COMPILE_FLAGS "-Wall -g")
+#set(CMAKE_EXE_LINKER_FLAGS "-lenet")
 add_executable(freedom-to-smash ${SRC})
 set_target_properties(freedom-to-smash PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR})
+target_link_libraries(
+  freedom-to-smash
+  ${OIS_LIBRARIES}
+  ${OGRE_LIBRARIES}
+  )
