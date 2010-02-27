@@ -37,6 +37,7 @@ add_executable(freedom-to-smash ${SRC})
 set_target_properties(freedom-to-smash PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR})
 target_link_libraries(
   freedom-to-smash
+  ${LUA_LIBRARIES}
   ${OIS_LIBRARIES}
   ${OGRE_LIBRARIES}
   )
