@@ -19,6 +19,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 
 #include <boost/foreach.hpp>
 
+#include <OgreEntity.h>
 #include <OgreRoot.h>
 
 #include "collision_box.hpp"
@@ -33,6 +34,7 @@ Character::Character(Ogre::SceneManager &scene_manager, const CharacterType type
         , direction(1)
 {
     setEntity("sinbad");
+    entity->getSkeleton()->setBlendMode(Ogre::ANIMBLEND_CUMULATIVE);
     setPosition(Ogre::Vector3(0,5,0));
     node->yaw(Ogre::Degree(90));
     setCollisionBoxSize(1.5,-1.5,2.2,-5.25);
@@ -183,7 +185,7 @@ void Character::move(const Ogre::FrameEvent &event)
     using Ogre::Vector3;
     if (action[MOVE]) {
         if ( !(action[ATTACK_1] || action[ATTACK_2] || action[SPECIAL_ATTACK_1] || action[SPECIAL_ATTACK_2] || action[LAND]) ) {
-            node->translate(Vector3(direction*5*event.timeSinceLastFrame,0,0));
+            node->translate(Vector3(direction*10*event.timeSinceLastFrame,0,0));
             node->setDirection(0,0,-direction,Ogre::Node::TS_PARENT);
             node->yaw(Ogre::Degree(90));
         }
@@ -194,10 +196,10 @@ void Character::move(const Ogre::FrameEvent &event)
             stopAction(JUMP);
             stopAction(DOUBLE_JUMP);
         }
-        node->translate(Vector3(0,5*event.timeSinceLastFrame,0));
+        node->translate(Vector3(0,10*event.timeSinceLastFrame,0));
     } else if (!on_floor) {
         action[FALL] = true;
-        node->translate(Vector3(0,-5*event.timeSinceLastFrame,0));
+        node->translate(Vector3(0,-10*event.timeSinceLastFrame,0));
     }
 }
 
