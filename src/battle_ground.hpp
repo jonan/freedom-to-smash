@@ -24,7 +24,6 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 
 #include <OgreFrameListener.h>
 #include <OIS/OIS.h>
-#include <caelum/Caelum.h>
 
 #include "macros.hpp"
 
@@ -32,6 +31,7 @@ class Character;
 class Object;
 
 namespace Caelum { class CaelumSystem; }
+namespace Hydrax { class Hydrax; }
 
 /// Class to control all that happens in a battle ground.
 class BattleGround : public Ogre::FrameListener, public OIS::KeyListener {
@@ -57,7 +57,13 @@ private:
     virtual bool keyReleased (const OIS::KeyEvent &key);
     // @}
 
+	//! Creates a dynamic sky using the Caelum plugin.
+	//! The caelum system must then be updated periodically and eventually destroyed.
 	void createCaelumSky();
+
+	//! Creates an infinite water plane using the Hydrax plugin.
+	//! The hydrax system must then be updated periodically and eventually destroyed.
+	void createHydraxWater();
 
     Ogre::SceneManager *scene_manager;
     Ogre::Viewport *viewport;
@@ -67,6 +73,7 @@ private:
     std::list<Character*> players;
 
 	Caelum::CaelumSystem * mCaelumSystem;
+	Hydrax::Hydrax * mHydrax;
 
     bool end;
 

@@ -24,13 +24,18 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 
 #include <caelum/Caelum.h>
 
+#include <hydrax/Hydrax.h>
+#include <hydrax/Noise/Perlin/Perlin.h>
+#include <hydrax/Modules/ProjectedGrid/ProjectedGrid.h>
+
 #include "character.hpp"
 #include "input.hpp"
 
 // Constructor
 BattleGround::BattleGround(void)
         : end(false), 
-		mCaelumSystem(NULL)
+		mCaelumSystem(NULL),
+		mHydrax(NULL)
 {
     // Initialize variables
     scene_manager = Ogre::Root::getSingleton().createSceneManager(Ogre::ST_GENERIC);
@@ -69,14 +74,43 @@ BattleGround::BattleGround(void)
 
 	// Create the sky
 	createCaelumSky();
+
+	// Create hydrax water plane
+	createHydraxWater();
 }
+
+
+void BattleGround::createHydraxWater()
+{
+	mHydrax = new Hydrax::Hydrax(scene_manager, camera, viewport);
+
+	Hydrax::Module::ProjectedGrid * module 
+		= new Hydrax::Module::ProjectedGrid(
+		mHydrax,
+		new Hydrax::Noise::Perlin(),
+		Ogre::Plane(Ogre::Vector3(0,1,0), Ogre::Vector3(0,0,0)),
+		Hydrax::MaterialManager::NM_RTT,
+		Hydrax::Module::ProjectedGrid::Options());
+
+	mHydrax->setModule(static_cast<Hydrax::Module::Module*>(module));
+
+	mHydrax->loadCfg("HydraxDemo.hdx");
+
+	mHydrax->create();
+
+	mHydrax->setGlobalTransparency(0.9);
+}
+
 
 void BattleGround::createCaelumSky()
 {
 	// Create the sky
 	mCaelumSystem = new Caelum::CaelumSystem(Ogre::Root::getSingletonPtr(), scene_manager, 
 		(Caelum::CaelumSystem::CaelumComponent)(
-		Caelum::CaelumSystem::CaelumComponent::CAELUM_COMPONENTS_DEFAULT 
+		Caelum::CaelumSystem::CaelumComponent::CAELUM_COMPONENT_SKY_DOME
+		| Caelum::CaelumSystem::CaelumComponent::CAELUM_COMPONENT_SUN
+		/*| Caelum::CaelumSystem::CaelumComponent::CAELUM_COMPONENT_MOON*/
+		| Caelum::CaelumSystem::CaelumComponent::CAELUM_COMPONENT_IMAGE_STARFIELD
 		/*| Caelum::CaelumSystem::CaelumComponent::CAELUM_COMPONENT_PRECIPITATION*/
 		));
 
@@ -132,6 +166,9 @@ bool BattleGround::frameStarted(const Ogre::FrameEvent &event)
 	// Update Caelum
 	mCaelumSystem->notifyCameraChanged(this->camera);
 	mCaelumSystem->updateSubcomponents(event.timeSinceLastFrame);
+
+	// Update Hydrax
+	mHydrax->update(event.timeSinceLastFrame);
 
     return !end;
 }
