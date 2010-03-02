@@ -23,19 +23,22 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #define BATTLE_GROUND_HPP
 
 #include <OgreFrameListener.h>
-
 #include <OIS/OIS.h>
+#include <caelum/Caelum.h>
 
 #include "macros.hpp"
 
 class Character;
 class Object;
 
+namespace Caelum { class CaelumSystem; }
+
 /// Class to control all that happens in a battle ground.
 class BattleGround : public Ogre::FrameListener, public OIS::KeyListener {
 public:
     BattleGround(void); // Constructor
-    ~BattleGround(void); // Destructor
+    
+	~BattleGround(void); // Destructor
 
     /// Adds a player to the battle ground.
     /// @param[in] num_player Number of the player.
@@ -54,12 +57,16 @@ private:
     virtual bool keyReleased (const OIS::KeyEvent &key);
     // @}
 
+	void createCaelumSky();
+
     Ogre::SceneManager *scene_manager;
     Ogre::Viewport *viewport;
     Ogre::Camera *camera;
 
     std::list<Object*> objects;
     std::list<Character*> players;
+
+	Caelum::CaelumSystem * mCaelumSystem;
 
     bool end;
 

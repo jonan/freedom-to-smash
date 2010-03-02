@@ -22,12 +22,15 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #include <OgreRenderWindow.h>
 #include <OgreRoot.h>
 
+#include <caelum/Caelum.h>
+
 #include "character.hpp"
 #include "input.hpp"
 
 // Constructor
 BattleGround::BattleGround(void)
-        : end(false)
+        : end(false), 
+		mCaelumSystem(NULL)
 {
     // Initialize variables
     scene_manager = Ogre::Root::getSingleton().createSceneManager(Ogre::ST_GENERIC);
@@ -39,9 +42,11 @@ BattleGround::BattleGround(void)
     camera->setFarClipDistance(1000);
     camera->setAspectRatio(Ogre::Real(viewport->getActualWidth()) / Ogre::Real(viewport->getActualHeight()));
     viewport->setCamera(camera);
+
     // Default settings
     scene_manager->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
     scene_manager->setAmbientLight(Ogre::ColourValue(2.0,2.0,2.0));
+
     // Ground
     Object *ground = new Object(*scene_manager);
     ground->setEntity("cube");
@@ -61,6 +66,29 @@ BattleGround::BattleGround(void)
     ground->setScale(Ogre::Vector3(3,0.5,1));
     ground->setCollisionBoxSize(7.5,-7.5,1.25,-1.25);
     objects.push_back(ground);
+
+	// Create the sky
+	createCaelumSky();
+}
+
+void BattleGround::createCaelumSky()
+{
+	// Create the sky
+	mCaelumSystem = new Caelum::CaelumSystem(Ogre::Root::getSingletonPtr(), scene_manager, 
+		(Caelum::CaelumSystem::CaelumComponent)(
+		Caelum::CaelumSystem::CaelumComponent::CAELUM_COMPONENTS_DEFAULT 
+	/*	| Caelum::CaelumSystem::CaelumComponent::CAELUM_COMPONENT_PRECIPITATION*/
+		));
+
+	mCaelumSystem->setGlobalFogDensityMultiplier(0);
+	//mCaelumSystem->setSceneFogDensityMultiplier(0);
+	//mCaelumSystem->setManageSceneFog(false);
+	//mCamera->setFarClipDistance(1000000);
+	//mCaelumSystem->setTimeScale(4000);
+
+	//mCaelumSystem->getPrecipitationController()->createViewportInstance(viewport);
+	//mCaelumSystem->getPrecipitationController()->setIntensity(0.05);
+	//mCaelumSystem->getPrecipitationController()->setCameraSpeedScale(0.001);
 }
 
 // Destructor
@@ -92,6 +120,11 @@ bool BattleGround::frameStarted(const Ogre::FrameEvent &event)
 {
     BOOST_FOREACH(Character *character, players)
         character->recoverFromPenetration(objects);
+
+	// Update Caelum
+	mCaelumSystem->notifyCameraChanged(this->camera);
+	mCaelumSystem->updateSubcomponents(event.timeSinceLastFrame);
+
     return !end;
 }
 
