@@ -77,14 +77,22 @@ void BattleGround::createCaelumSky()
 	mCaelumSystem = new Caelum::CaelumSystem(Ogre::Root::getSingletonPtr(), scene_manager, 
 		(Caelum::CaelumSystem::CaelumComponent)(
 		Caelum::CaelumSystem::CaelumComponent::CAELUM_COMPONENTS_DEFAULT 
-	/*	| Caelum::CaelumSystem::CaelumComponent::CAELUM_COMPONENT_PRECIPITATION*/
+		/*| Caelum::CaelumSystem::CaelumComponent::CAELUM_COMPONENT_PRECIPITATION*/
 		));
 
 	mCaelumSystem->setGlobalFogDensityMultiplier(0);
+
+	// Some of the following settings seem to be supported by DX but NOT by OGL.
+	// They are hence commented out for now.
+
 	//mCaelumSystem->setSceneFogDensityMultiplier(0);
 	//mCaelumSystem->setManageSceneFog(false);
 	//mCamera->setFarClipDistance(1000000);
 	//mCaelumSystem->setTimeScale(4000);
+
+	//Caelum::FlatCloudLayer * clouds = mCaelumSystem->getCloudSystem()->getLayer(0);
+	//clouds->setCloudCover(0.6);
+	//clouds->setCloudBlendTime(1);
 
 	//mCaelumSystem->getPrecipitationController()->createViewportInstance(viewport);
 	//mCaelumSystem->getPrecipitationController()->setIntensity(0.05);
