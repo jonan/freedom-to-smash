@@ -82,6 +82,8 @@ BattleGround::BattleGround(void)
 
 void BattleGround::createHydraxWater()
 {
+#ifdef USE_HYDRAX
+
 	mHydrax = new Hydrax::Hydrax(scene_manager, camera, viewport);
 
 	Hydrax::Module::ProjectedGrid * module 
@@ -99,6 +101,8 @@ void BattleGround::createHydraxWater()
 	mHydrax->create();
 
 	mHydrax->setGlobalTransparency(0.9);
+
+#endif
 }
 
 
@@ -136,6 +140,12 @@ void BattleGround::createCaelumSky()
 // Destructor
 BattleGround::~BattleGround(void)
 {
+	// Destroy Caelum sky
+	delete mCaelumSystem;
+
+	// Destroy Hydrax
+	delete mHydrax;
+
     Input::getInstance()->removeKeyListener(*this);
     BOOST_FOREACH(Object *obj, objects)
         delete obj;
@@ -167,8 +177,11 @@ bool BattleGround::frameStarted(const Ogre::FrameEvent &event)
 	mCaelumSystem->notifyCameraChanged(this->camera);
 	mCaelumSystem->updateSubcomponents(event.timeSinceLastFrame);
 
+
+	#ifdef USE_HYDRAX
 	// Update Hydrax
 	mHydrax->update(event.timeSinceLastFrame);
+	#endif
 
     return !end;
 }
