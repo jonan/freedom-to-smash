@@ -9,6 +9,7 @@ set(
   main.cpp
   object.cpp
   platform.cpp
+  scene.cpp
   script.cpp
   server.cpp
   )
@@ -23,6 +24,7 @@ set(
   input.hpp
   object.hpp
   platform.hpp
+  scene.hpp
   script.hpp
   server.hpp
   )

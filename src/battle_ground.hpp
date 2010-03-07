@@ -22,17 +22,16 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #ifndef BATTLE_GROUND_HPP
 #define BATTLE_GROUND_HPP
 
-#include <OgreFrameListener.h>
-
 #include <OIS/OIS.h>
 
 #include "macros.hpp"
+#include "scene.hpp"
 
 class Character;
 class Object;
 
 /// Class to control all that happens in a battle ground.
-class BattleGround : public Ogre::FrameListener, public OIS::KeyListener {
+class BattleGround : public Scene, public OIS::KeyListener {
 public:
     BattleGround(void); // Constructor
     ~BattleGround(void); // Destructor
@@ -53,10 +52,6 @@ private:
     virtual bool keyPressed  (const OIS::KeyEvent &key) {return true;}
     virtual bool keyReleased (const OIS::KeyEvent &key);
     // @}
-
-    Ogre::SceneManager *scene_manager;
-    Ogre::Viewport *viewport;
-    Ogre::Camera *camera;
 
     std::list<Object*> objects;
     std::list<Character*> players;

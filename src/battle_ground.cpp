@@ -29,33 +29,26 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 BattleGround::BattleGround(void)
         : end(false)
 {
-    // Initialize variables
-    scene_manager = Ogre::Root::getSingleton().createSceneManager(Ogre::ST_GENERIC);
-    viewport = Ogre::Root::getSingleton().getAutoCreatedWindow()->addViewport(NULL);
-    camera = scene_manager->createCamera("BattleGround Camera");
-    camera->setPosition(Ogre::Vector3(0,0,-50));
-    camera->lookAt(Ogre::Vector3(0,4,0));
-    camera->setNearClipDistance(5);
-    camera->setFarClipDistance(1000);
-    camera->setAspectRatio(Ogre::Real(viewport->getActualWidth()) / Ogre::Real(viewport->getActualHeight()));
-    viewport->setCamera(camera);
     // Default settings
-    scene_manager->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
-    scene_manager->setAmbientLight(Ogre::ColourValue(2.0,2.0,2.0));
+    setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
+    setAmbientLight(Ogre::ColourValue(2.0,2.0,2.0));
+    // Create camera
+    int cam = addCamera("BattleGround Camera", Ogre::Vector3(0,0,-50), Ogre::Vector3(0,4,0));
+    useCamera(cam);
     // Ground
-    Object *ground = new Object(*scene_manager);
+    Object *ground = new Object(*manager);
     ground->setEntity("cube");
     ground->setPosition(Ogre::Vector3(0,-5,0));
     ground->setScale(Ogre::Vector3(10,1,1));
     ground->setCollisionBoxSize(25,-25,2.5,-2.5);
     objects.push_back(ground);
-    ground = new Object(*scene_manager);
+    ground = new Object(*manager);
     ground->setEntity("cube");
     ground->setPosition(Ogre::Vector3(-23,7,0));
     ground->setScale(Ogre::Vector3(3,0.5,1));
     ground->setCollisionBoxSize(7.5,-7.5,1.25,-1.25);
     objects.push_back(ground);
-    ground = new Object(*scene_manager);
+    ground = new Object(*manager);
     ground->setEntity("cube");
     ground->setPosition(Ogre::Vector3(23,7,0));
     ground->setScale(Ogre::Vector3(3,0.5,1));
@@ -76,7 +69,7 @@ BattleGround::~BattleGround(void)
 // Adds a player to the battle ground.
 void BattleGround::addPlayer(const int num_player)
 {
-    players.push_back(new Character(*scene_manager, KID, num_player));
+    players.push_back(new Character(*manager, KID, num_player));
 }
 
 // Starts the battle.
