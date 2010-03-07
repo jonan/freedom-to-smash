@@ -53,7 +53,6 @@ private:
     virtual bool keyReleased (const OIS::KeyEvent &key);
     // @}
 
-    std::list<Object*> objects;
     std::list<Character*> players;
 
     bool end;

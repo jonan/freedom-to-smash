@@ -36,32 +36,21 @@ BattleGround::BattleGround(void)
     int cam = addCamera("BattleGround Camera", Ogre::Vector3(0,0,-50), Ogre::Vector3(0,4,0));
     useCamera(cam);
     // Ground
-    Object *ground = new Object(*manager);
-    ground->setEntity("cube");
-    ground->setPosition(Ogre::Vector3(0,-5,0));
-    ground->setScale(Ogre::Vector3(10,1,1));
-    ground->setCollisionBoxSize(25,-25,2.5,-2.5);
-    objects.push_back(ground);
-    ground = new Object(*manager);
-    ground->setEntity("cube");
-    ground->setPosition(Ogre::Vector3(-23,7,0));
-    ground->setScale(Ogre::Vector3(3,0.5,1));
-    ground->setCollisionBoxSize(7.5,-7.5,1.25,-1.25);
-    objects.push_back(ground);
-    ground = new Object(*manager);
-    ground->setEntity("cube");
-    ground->setPosition(Ogre::Vector3(23,7,0));
-    ground->setScale(Ogre::Vector3(3,0.5,1));
-    ground->setCollisionBoxSize(7.5,-7.5,1.25,-1.25);
-    objects.push_back(ground);
+    addObject("cube", Ogre::Vector3(0,-5,0));
+    objects.back()->setScale(Ogre::Vector3(10,1,1));
+    objects.back()->setCollisionBoxSize(25,-25,2.5,-2.5);
+    addObject("cube", Ogre::Vector3(-23,7,0));
+    objects.back()->setScale(Ogre::Vector3(3,0.5,1));
+    objects.back()->setCollisionBoxSize(7.5,-7.5,1.25,-1.25);
+    addObject("cube", Ogre::Vector3(23,7,0));
+    objects.back()->setScale(Ogre::Vector3(3,0.5,1));
+    objects.back()->setCollisionBoxSize(7.5,-7.5,1.25,-1.25);
 }
 
 // Destructor
 BattleGround::~BattleGround(void)
 {
     Input::getInstance()->removeKeyListener(*this);
-    BOOST_FOREACH(Object *obj, objects)
-        delete obj;
     BOOST_FOREACH(Character *character, players)
         delete character;
 }

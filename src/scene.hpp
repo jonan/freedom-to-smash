@@ -37,12 +37,18 @@ namespace Ogre {
     class Vector3;
 }
 
+class Object;
+
 ///
 class Scene : public Ogre::FrameListener {
 public:
-    Scene();
+    Scene(void); // Constructor
+    ~Scene(void); // Destructor
 
 protected:
+    // Adds an object to the scene.
+    void addObject(const char *entity, const Ogre::Vector3 &position);
+
     // Adds a static camera.
     int addCamera(const Ogre::String &name, const Ogre::Vector3 &position,
                   const Ogre::Vector3 &look_at = Ogre::Vector3(0,0,0),
@@ -71,6 +77,8 @@ protected:
     std::vector<Ogre::Camera*> camera;
     Ogre::Viewport *viewport;
     std::list<Ogre::Light*> light;
+
+    std::list<Object*> objects;
 
 private:
     DISALLOW_COPY_AND_ASSIGN(Scene);
