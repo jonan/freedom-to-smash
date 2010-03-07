@@ -83,7 +83,6 @@ Character::~Character(void)
 // Detects and solves collisions of the character with the battle ground.
 void Character::recoverFromPenetration(const std::list<Object*> &objects)
 {
-    collision_box->setReferencePoint(*node);
     on_floor = false;
 
     BOOST_FOREACH(Object *obj, objects) {
@@ -182,10 +181,9 @@ void Character::animate(const Ogre::FrameEvent &event)
 // Funtion that needs to be called every frame for the character to be updated.
 void Character::move(const Ogre::FrameEvent &event)
 {
-    using Ogre::Vector3;
     if (action[MOVE]) {
         if ( !(action[ATTACK_1] || action[ATTACK_2] || action[SPECIAL_ATTACK_1] || action[SPECIAL_ATTACK_2] || action[LAND]) ) {
-            node->translate(Vector3(direction*10*event.timeSinceLastFrame,0,0));
+            translate(direction*10*event.timeSinceLastFrame, 0, 0);
             node->setDirection(0,0,-direction,Ogre::Node::TS_PARENT);
             node->yaw(Ogre::Degree(90));
         }
@@ -196,10 +194,10 @@ void Character::move(const Ogre::FrameEvent &event)
             stopAction(JUMP);
             stopAction(DOUBLE_JUMP);
         }
-        node->translate(Vector3(0,10*event.timeSinceLastFrame,0));
+        translate(0, 10*event.timeSinceLastFrame, 0);
     } else if (!on_floor) {
         action[FALL] = true;
-        node->translate(Vector3(0,-10*event.timeSinceLastFrame,0));
+        translate(0, -10*event.timeSinceLastFrame, 0);
     }
 }
 

@@ -58,6 +58,9 @@ public:
     ///
     const CollisionBox* getCollisionBox(void) const {return collision_box;}
 
+    //
+    void translate(Real x, Real y, Real z);
+
 protected:
     Ogre::Entity *entity;
     Ogre::SceneNode *node;

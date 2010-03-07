@@ -47,9 +47,6 @@ void Platform::addPoint(const Real &x, const Real &y)
 //
 bool Platform::frameStarted(const Ogre::FrameEvent &event)
 {
-    // Move object
-    node->translate(Ogre::Vector3(-0.5*event.timeSinceLastFrame,0,0));
-    // Update collision box
-    collision_box->setReferencePoint(*node);
+    translate(-0.5*event.timeSinceLastFrame, 0, 0);
     return true;
 }

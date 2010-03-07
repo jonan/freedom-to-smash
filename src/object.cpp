@@ -105,3 +105,12 @@ void Object::setCollisionBoxSize(const Real &max_x, const Real &min_x, const Rea
     node->attachObject(myManualObject);
     */
 }
+
+//
+void Object::translate(Real x, Real y, Real z)
+{
+    // Move object
+    node->translate(x, y, z);
+    // Update collision box
+    collision_box->setReferencePoint(*node);
+}
