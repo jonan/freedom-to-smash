@@ -38,23 +38,25 @@ Object::Object(Ogre::SceneManager &scene_manager)
 // Set function.
 void Object::setEntity(const char *name)
 {
-    bool done = false;
-    std::string mesh_name = name;
-    mesh_name += ".mesh";
-    std::string manager_name = name;
-    while (!done) {
-        try {
-            done = true;
-            manager_name += ".";
-            entity = scene_manager->createEntity(manager_name, mesh_name);
-        } catch (Ogre::Exception exception) {
-            if (exception.getNumber() == Ogre::Exception::ERR_DUPLICATE_ITEM)
-                done = false;
-            else
-                throw exception;
+    if (name) {
+        bool done = false;
+        std::string mesh_name = name;
+        mesh_name += ".mesh";
+        std::string manager_name = name;
+        while (!done) {
+            try {
+                done = true;
+                manager_name += ".";
+                entity = scene_manager->createEntity(manager_name, mesh_name);
+            } catch (Ogre::Exception exception) {
+                if (exception.getNumber() == Ogre::Exception::ERR_DUPLICATE_ITEM)
+                    done = false;
+                else
+                    throw exception;
+            }
         }
+        entity->setCastShadows(true);
     }
-    entity->setCastShadows(true);
 }
 
 // Set function.
