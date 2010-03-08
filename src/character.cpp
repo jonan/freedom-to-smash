@@ -86,27 +86,30 @@ void Character::recoverFromPenetration(const std::list<Object*> &objects)
     on_floor = false;
 
     BOOST_FOREACH(Object *obj, objects) {
-        switch (collision_box->detectCollision(*obj->getCollisionBox())) {
-        case RIGHT_COLLISION:
-        case LEFT_COLLISION:
-            stopAction(MOVE);
-            break;
-        case TOP_COLLISION:
-            stopAction(JUMP);
-            stopAction(DOUBLE_JUMP);
-            action[FALL] = true;
-            break;
-        case BOTTOM_COLLISION:
-            on_floor = true;
-            if (action[FALL]) {
-                stopAction(FALL);
-                action[LAND] = true;
-                jumping_time = 0;
-                has_double_jumped = false;
+        const CollisionBox *collision = obj->getCollisionBox();
+        if (collision) {
+            switch (collision_box->detectCollision(*collision)) {
+            case RIGHT_COLLISION:
+            case LEFT_COLLISION:
+                stopAction(MOVE);
+                break;
+            case TOP_COLLISION:
+                stopAction(JUMP);
+                stopAction(DOUBLE_JUMP);
+                action[FALL] = true;
+                break;
+            case BOTTOM_COLLISION:
+                on_floor = true;
+                if (action[FALL]) {
+                    stopAction(FALL);
+                    action[LAND] = true;
+                    jumping_time = 0;
+                    has_double_jumped = false;
+                }
+                break;
+            default:
+                break;
             }
-            break;
-        default:
-            break;
         }
     }
 }

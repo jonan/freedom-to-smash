@@ -30,9 +30,11 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 
 // Constructor
 Object::Object(Ogre::SceneManager &scene_manager)
+        : collision_box(NULL)
+        , entity(NULL)
+        , scene_manager(&scene_manager)
 {
-    this->scene_manager = &scene_manager;
-    collision_box = NULL;
+
 }
 
 // Set function.
@@ -63,7 +65,8 @@ void Object::setEntity(const char *name)
 void Object::setPosition(const Ogre::Vector3 &pos)
 {
     node = scene_manager->getRootSceneNode()->createChildSceneNode(pos);
-    node->attachObject(entity);
+    if (entity)
+        node->attachObject(entity);
 }
 
 // Set function.
