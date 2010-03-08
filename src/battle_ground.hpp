@@ -54,6 +54,7 @@ private:
     // @}
 
     std::list<Character*> players;
+    Ogre::SceneNode *cam_node;
 
     bool end;
 

@@ -33,7 +33,8 @@ BattleGround::BattleGround(void)
     setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
     setAmbientLight(Ogre::ColourValue(2.0,2.0,2.0));
     // Create camera
-    int cam = addCamera("BattleGround Camera", Ogre::Vector3(0,0,-50), Ogre::Vector3(0,4,0));
+    cam_node = manager->getRootSceneNode()->createChildSceneNode();
+    int cam = addCamera("BattleGround Camera", Ogre::Vector3(0,0,-50), *cam_node);
     useCamera(cam);
     // Ground
     addObject("cube", Ogre::Vector3(0,-5,0));
@@ -72,8 +73,13 @@ void BattleGround::start(void)
 // Function that's called at the beginning of every frame.
 bool BattleGround::frameStarted(const Ogre::FrameEvent &event)
 {
-    BOOST_FOREACH(Character *character, players)
+    Ogre::Vector3 average;
+    BOOST_FOREACH(Character *character, players) {
         character->recoverFromPenetration(objects);
+        average += character->getPosition();
+    }
+    average /= players.size();
+    cam_node->setPosition(average);
     return !end;
 }
 
