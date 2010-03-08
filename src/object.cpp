@@ -112,6 +112,12 @@ void Object::setCollisionBoxSize(const Real &max_x, const Real &min_x, const Rea
 }
 
 //
+const Ogre::Vector3& Object::getPosition(void)
+{
+    return node->getPosition();
+}
+
+//
 void Object::translate(Real x, Real y, Real z)
 {
     // Move object

@@ -53,6 +53,9 @@ public:
     // @}
 
     ///
+    const Ogre::Vector3& getPosition(void);
+
+    ///
     virtual ObjectType getType(void) const {return NORMAL;}
 
     ///
