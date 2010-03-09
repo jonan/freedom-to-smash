@@ -30,11 +30,17 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 
 // Constructor
 Object::Object(Ogre::SceneManager &scene_manager)
-        : collision_box(NULL)
+        : collision_box(new CollisionBox)
         , entity(NULL)
         , scene_manager(&scene_manager)
 {
 
+}
+
+// Destructor
+Object::~Object(void)
+{
+    delete collision_box;
 }
 
 // Set function.
@@ -78,7 +84,7 @@ void Object::setScale(const Ogre::Vector3 &scale)
 //
 void Object::setCollisionBoxSize(const Real &max_x, const Real &min_x, const Real &max_y, const Real &min_y)
 {
-    collision_box = new CollisionBox(max_x, min_x, max_y, min_y);
+    collision_box->setRelativeBoxPos(max_x, min_x, max_y, min_y);
     collision_box->setReferencePoint(*node);
     /*
     // Debug code!
