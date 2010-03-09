@@ -29,7 +29,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #include <OgreLight.h>
 #include <OgreSceneNode.h>
 
-#include "macros.hpp"
+#include "util.hpp"
 
 namespace Ogre {
     class Camera;

@@ -24,7 +24,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 
 #include <string>
 
-#include "macros.hpp"
+#include "util.hpp"
 
 // Lua classes
 class lua_State;

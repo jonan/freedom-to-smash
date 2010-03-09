@@ -22,7 +22,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #ifndef OBJECT_HPP
 #define OBJECT_HPP
 
-#include "macros.hpp"
+#include "util.hpp"
 
 namespace Ogre {
     class Entity;

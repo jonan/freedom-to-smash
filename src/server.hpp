@@ -26,7 +26,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 
 #include <OgreFrameListener.h>
 
-#include "macros.hpp"
+#include "util.hpp"
 
 class BattleGround;
 

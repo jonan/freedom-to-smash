@@ -26,7 +26,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 
 #include <OIS/OIS.h>
 
-#include "macros.hpp"
+#include "util.hpp"
 
 /// Class to control all input and who is listening to it.
 /// @todo Add joystick support.

@@ -22,8 +22,17 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #ifndef UTIL_HPP
 #define UTIL_HPP
 
+#include <OgrePrerequisites.h>
+
+using Ogre::Real;
+
+/// A macro to disallow the copy constructor and operator= functions.
+#define DISALLOW_COPY_AND_ASSIGN(TypeName) \
+  TypeName(const TypeName&);               \
+  void operator=(const TypeName&)
+
 // @{
-///
+/// Maximum and minimum function templates.
 template<class T> const T& maximum(const T &a, const T &b)
 {
     return (a>b) ? a : b;

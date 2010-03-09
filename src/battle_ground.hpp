@@ -24,8 +24,8 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 
 #include <OIS/OIS.h>
 
-#include "macros.hpp"
 #include "scene.hpp"
+#include "util.hpp"
 
 class Character;
 class Object;
