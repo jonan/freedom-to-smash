@@ -54,15 +54,10 @@ int Scene::addCamera(const Ogre::String &name, const Ogre::Vector3 &position,
                      const Ogre::Vector3 &look_at,
                      const unsigned int near_clip, const unsigned int far_clip)
 {
-    int last = camera.size();
-    camera.push_back(manager->createCamera(name));
-    camera[last]->setPosition(position);
-    camera[last]->lookAt(look_at);
-    camera[last]->setNearClipDistance(near_clip);
-    camera[last]->setFarClipDistance(far_clip);
-    camera[last]->setAspectRatio(Ogre::Real(viewport->getActualWidth()) / Ogre::Real(viewport->getActualHeight()));
+    Ogre::Camera *cam = createCamera(name, position, near_clip, far_clip);
+    cam->lookAt(look_at);
 
-    return last;
+    return camera.size()-1;
 }
 
 // Adds a static camera that follows a given node.
@@ -70,19 +65,14 @@ int Scene::addCamera(const Ogre::String &name, const Ogre::Vector3 &position,
                      Ogre::SceneNode &look_at, const unsigned int near_clip,
                      const unsigned int far_clip)
 {
-    int last = camera.size();
-    camera.push_back(manager->createCamera(name));
-    camera[last]->setPosition(position);
-    camera[last]->setAutoTracking(true, &look_at);
-    camera[last]->setNearClipDistance(near_clip);
-    camera[last]->setFarClipDistance(far_clip);
-    camera[last]->setAspectRatio(Ogre::Real(viewport->getActualWidth()) / Ogre::Real(viewport->getActualHeight()));
+    Ogre::Camera *cam = createCamera(name, position, near_clip, far_clip);
+    cam->setAutoTracking(true, &look_at);
 
-    return last;
+    return camera.size()-1;
 }
 
 // Use the given camera.
-void Scene::useCamera(const unsigned int num_camera) {
+void Scene::useCamera(const int num_camera) {
     camera[num_camera]->setAspectRatio(Ogre::Real(viewport->getActualWidth()) / Ogre::Real(viewport->getActualHeight()));
     viewport->setCamera(camera[num_camera]);
 }
@@ -106,4 +96,18 @@ void Scene::setAmbientLight(const Ogre::ColourValue &colour)
 void Scene::setShadowTechnique(const Ogre::ShadowTechnique technique)
 {
     manager->setShadowTechnique(technique);
+}
+
+//
+Ogre::Camera* Scene::createCamera(const Ogre::String &name, const Ogre::Vector3 &position,
+                                  const unsigned int near_clip, const unsigned int far_clip)
+{
+    Ogre::Camera *cam = manager->createCamera(name);
+    cam->setPosition(position);
+    cam->setNearClipDistance(near_clip);
+    cam->setFarClipDistance(far_clip);
+    cam->setAspectRatio(Ogre::Real(viewport->getActualWidth()) / Ogre::Real(viewport->getActualHeight()));
+    camera.push_back(cam);
+
+    return cam;
 }

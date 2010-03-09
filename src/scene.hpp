@@ -59,7 +59,7 @@ protected:
                   const unsigned int far_clip = 1000);
 
     // Use the given camera.
-    void useCamera(const unsigned int num_camera = 0);
+    void useCamera(const int num_camera = 0);
 
     // Adds a light.
     void addLight(const Ogre::String &name, const Ogre::Vector3 &position,
@@ -81,6 +81,10 @@ protected:
     std::list<Object*> objects;
 
 private:
+    //
+    Ogre::Camera* createCamera(const Ogre::String &name, const Ogre::Vector3 &position,
+                               const unsigned int near_clip, const unsigned int far_clip);
+
     DISALLOW_COPY_AND_ASSIGN(Scene);
 };
 
