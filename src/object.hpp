@@ -33,11 +33,6 @@ namespace Ogre {
 
 class CollisionBox;
 
-/// Types of objects.
-enum ObjectType {NORMAL,
-                 CHARACTER,
-                 PLATFORM};
-
 /// General object class.
 class Object {
 public:
@@ -46,23 +41,23 @@ public:
 
     // @{
     /// Set functions.
-    void setEntity           (const char *name);
+    void setEntity           (const String &name);
     void setPosition         (const Ogre::Vector3 &pos);
     void setScale            (const Ogre::Vector3 &scale);
-    void setCollisionBoxSize (const Real &max_x, const Real &min_x, const Real &max_y, const Real &min_y);
+    void setCollisionBoxSize (const Real max_x, const Real min_x, const Real max_y, const Real min_y);
     // @}
 
-    ///
-    const Ogre::Vector3& getPosition(void);
+    // @{
+    /// Get functions.
+    const Ogre::Vector3& getPosition     (void);
+    const CollisionBox&  getCollisionBox (void) const {return *collision_box;}
+    // @}
 
-    ///
-    virtual ObjectType getType(void) const {return NORMAL;}
-
-    ///
-    const CollisionBox* getCollisionBox(void) const {return collision_box;}
-
-    //
-    void translate(Real x, Real y, Real z);
+    /// Move the object.
+    /// @param[in] x Units to move in the x axes.
+    /// @param[in] y Units to move in the y axes.
+    /// @param[in] z Units to move in the z axes.
+    void translate(const Real x, const Real y, const Real z);
 
 protected:
     Ogre::Entity *entity;

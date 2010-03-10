@@ -37,9 +37,6 @@ public:
     Character(Ogre::SceneManager &scene_manager, const CharacterType type, const int num_player); // Constructor
     ~Character(void); // Destructor
 
-    ///
-    virtual ObjectType getType(void) const {return CHARACTER;}
-
     /// Detects and solves collisions of the character with the battle ground.
     /// This function must be called every frame.
     /// @param[in] objects All the objects in the battle ground.

@@ -35,9 +35,6 @@ public:
     ~Platform(void); // Destructor
 
     ///
-    virtual ObjectType getType(void) const {return PLATFORM;}
-
-    ///
     void addPoint(const Real &x, const Real &y);
 
 private:

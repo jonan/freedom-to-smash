@@ -44,27 +44,25 @@ Object::~Object(void)
 }
 
 // Set function.
-void Object::setEntity(const char *name)
+void Object::setEntity(const String &name)
 {
-    if (name) {
-        bool done = false;
-        std::string mesh_name = name;
-        mesh_name += ".mesh";
-        std::string manager_name = name;
-        while (!done) {
-            try {
-                done = true;
-                manager_name += ".";
-                entity = scene_manager->createEntity(manager_name, mesh_name);
-            } catch (Ogre::Exception exception) {
-                if (exception.getNumber() == Ogre::Exception::ERR_DUPLICATE_ITEM)
-                    done = false;
-                else
-                    throw exception;
-            }
+    bool done = false;
+    String mesh_name = name;
+    mesh_name += ".mesh";
+    String manager_name = name;
+    while (!done) {
+        try {
+            done = true;
+            manager_name += ".";
+            entity = scene_manager->createEntity(manager_name, mesh_name);
+        } catch (Ogre::Exception exception) {
+            if (exception.getNumber() == Ogre::Exception::ERR_DUPLICATE_ITEM)
+                done = false;
+            else
+                throw exception;
         }
-        entity->setCastShadows(true);
     }
+    entity->setCastShadows(true);
 }
 
 // Set function.
@@ -81,8 +79,8 @@ void Object::setScale(const Ogre::Vector3 &scale)
     node->setScale(scale);
 }
 
-//
-void Object::setCollisionBoxSize(const Real &max_x, const Real &min_x, const Real &max_y, const Real &min_y)
+// Set function.
+void Object::setCollisionBoxSize(const Real max_x, const Real min_x, const Real max_y, const Real min_y)
 {
     collision_box->setRelativeBoxPos(max_x, min_x, max_y, min_y);
     collision_box->setReferencePoint(*node);
@@ -117,14 +115,14 @@ void Object::setCollisionBoxSize(const Real &max_x, const Real &min_x, const Rea
     */
 }
 
-//
+// Get function.
 const Ogre::Vector3& Object::getPosition(void)
 {
     return node->getPosition();
 }
 
-//
-void Object::translate(Real x, Real y, Real z)
+// Move the object.
+void Object::translate(const Real x, const Real y, const Real z)
 {
     // Move object
     node->translate(x, y, z);
