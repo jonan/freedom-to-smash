@@ -30,9 +30,9 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 
 // Constructor
 Object::Object(Ogre::SceneManager &scene_manager)
-        : collision_box(new CollisionBox)
-        , entity(NULL)
+        : entity(NULL)
         , scene_manager(&scene_manager)
+        , collision_box(new CollisionBox)
 {
 
 }
