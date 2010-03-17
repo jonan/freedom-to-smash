@@ -38,13 +38,13 @@ Platform::~Platform(void)
         delete p;
 }
 
-//
+// Adds a point to where to move.
 void Platform::addPoint(const Real &x, const Real &y)
 {
     points.push_back(new Ogre::Vector2(x, y));
 }
 
-//
+// Function that's called at the beginning of every frame.
 bool Platform::frameStarted(const Ogre::FrameEvent &event)
 {
     translate(-0.5*event.timeSinceLastFrame, 0, 0);

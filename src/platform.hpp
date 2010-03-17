@@ -28,23 +28,22 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 
 class Character;
 
-///
+/// A Platform is an object that moves constantly between a set of points.
 class Platform : public Object, public Ogre::FrameListener {
 public:
     explicit Platform(Ogre::SceneManager &scene_manager); // Constructor
     ~Platform(void); // Destructor
 
-    ///
+    /// Adds a point to where to move.
+    /// @param[in] x X coordinate of the point.
+    /// @param[in] y Y coordinate of the point.
     void addPoint(const Real &x, const Real &y);
 
 private:
-    //
+    // Function that's called at the beginning of every frame.
     virtual bool frameStarted(const Ogre::FrameEvent &event);
 
     std::list<Ogre::Vector2*> points;
-    std::list<Character*>     characters;
-
-    Ogre::Vector2 *move_direction;
 
     DISALLOW_COPY_AND_ASSIGN(Platform);
 };
