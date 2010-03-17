@@ -45,4 +45,5 @@ target_link_libraries(
   ${LUA_LIBRARIES}
   ${OIS_LIBRARIES}
   ${OGRE_LIBRARIES}
+  ${OPENAL_LIBRARY}
   )
