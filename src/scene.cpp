@@ -98,7 +98,7 @@ void Scene::setShadowTechnique(const Ogre::ShadowTechnique technique)
     manager->setShadowTechnique(technique);
 }
 
-//
+// Creates a camera for the scene.
 Ogre::Camera* Scene::createCamera(const Ogre::String &name, const Ogre::Vector3 &position,
                                   const unsigned int near_clip, const unsigned int far_clip)
 {

@@ -16,7 +16,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 */
 
 /// @file
-/// The Platform class
+/// The Platform class.
 /// @author Jonan
 
 #ifndef PLATFORM_HPP

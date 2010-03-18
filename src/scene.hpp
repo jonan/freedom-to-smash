@@ -16,7 +16,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 */
 
 /// @file
-///
+/// The Scene class.
 /// @author Jonan
 
 #ifndef SCENE_HPP
@@ -39,7 +39,7 @@ namespace Ogre {
 
 class Object;
 
-///
+/// General Scene methods an attributes.
 class Scene : public Ogre::FrameListener {
 public:
     Scene(void); // Constructor
@@ -81,7 +81,7 @@ protected:
     std::list<Object*> objects;
 
 private:
-    //
+    // Creates a camera for the scene.
     Ogre::Camera* createCamera(const Ogre::String &name, const Ogre::Vector3 &position,
                                const unsigned int near_clip, const unsigned int far_clip);
 
