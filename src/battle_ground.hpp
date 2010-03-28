@@ -42,6 +42,8 @@ public:
 
     /// Starts the battle.
     void start(void);
+    /// Quits the battle.
+    void quit(void) {end=true;}
 
 private:
     // Function that's called at the beginning of every frame.
