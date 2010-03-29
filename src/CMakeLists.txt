@@ -35,8 +35,6 @@ if(WIN32)
     endif()
 endif()
 
-#set_property(SOURCE ${SRC} PROPERTY COMPILE_FLAGS "-Wall -g")
-#set(CMAKE_EXE_LINKER_FLAGS "-lenet")
 add_executable(freedom-to-smash ${SRC})
 set_target_properties(freedom-to-smash PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR})
 target_link_libraries(
