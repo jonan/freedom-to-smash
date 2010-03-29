@@ -21,12 +21,15 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 
 #include "battle_ground.hpp"
 #include "boot.hpp"
+#include "player.hpp"
 
 int main(int argc, char *argv[])
 {
     boot();
+    Player *player = new Player;
     BattleGround *battle = new BattleGround;
-    battle->createCharacter();
+    player->setBattleground(*battle);
+    player->setCharacter();
     battle->start();
     delete battle;
     quit();

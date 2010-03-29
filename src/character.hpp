@@ -24,18 +24,16 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 
 #include <OgreFrameListener.h>
 
-#include <OIS/OIS.h>
-
 #include "animated_object.hpp"
 
 /// Class to control a character.
-class Character : public AnimatedObject, public Ogre::FrameListener, public OIS::KeyListener {
+class Character : public AnimatedObject, public Ogre::FrameListener {
 public:
-    Character(Ogre::SceneManager &scene_manager, const int num_player); // Constructor
+    Character(Ogre::SceneManager &scene_manager); // Constructor
     ~Character(void); // Destructor
 
     // @{
-    ///
+    /// Start performing an action.
     void attack        (void);
     void defend        (void);
     void jump          (void);
@@ -45,7 +43,7 @@ public:
     // @}
 
     // @{
-    //
+    /// Stop performing an action.
     void stopDefending (void);
     void stopMoving    (void);
     // @}
@@ -70,12 +68,6 @@ private:
 
     // Player stops performing an action
     void stopAction(const int type);
-
-    // @{
-    // Functions to update the keyboard's state.
-    virtual bool keyPressed  (const OIS::KeyEvent &key);
-    virtual bool keyReleased (const OIS::KeyEvent &key);
-    // @}
 
     bool action[NUM_STATES]; // active actions
 

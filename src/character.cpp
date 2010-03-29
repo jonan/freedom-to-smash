@@ -26,7 +26,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #include "input.hpp"
 
 // Constructor
-Character::Character(Ogre::SceneManager &scene_manager, const int num_player)
+Character::Character(Ogre::SceneManager &scene_manager)
         : AnimatedObject(scene_manager)
         , on_floor(true)
         , has_double_jumped(false)
@@ -42,45 +42,16 @@ Character::Character(Ogre::SceneManager &scene_manager, const int num_player)
     // Start with no action active
     for (int i=0; i < NUM_STATES; i++)
         action[i] = false;
-    // Define controls
-    switch (num_player) {
-    case 1:
-        attack_key         = OIS::KC_NUMPAD1;
-        defend_key         = OIS::KC_DOWN;
-        jump_key           = OIS::KC_UP;
-        move_left_key      = OIS::KC_LEFT;
-        move_right_key     = OIS::KC_RIGHT;
-        special_attack_key = OIS::KC_NUMPAD2;
-        break;
-    case 2:
-        attack_key         = OIS::KC_G;
-        defend_key         = OIS::KC_S;
-        jump_key           = OIS::KC_W;
-        move_left_key      = OIS::KC_A;
-        move_right_key     = OIS::KC_D;
-        special_attack_key = OIS::KC_H;
-        break;
-    default:
-        attack_key         = OIS::KC_A;
-        defend_key         = OIS::KC_DOWN;
-        jump_key           = OIS::KC_UP;
-        move_left_key      = OIS::KC_LEFT;
-        move_right_key     = OIS::KC_RIGHT;
-        special_attack_key = OIS::KC_S;
-        break;
-    }
     Ogre::Root::getSingleton().addFrameListener(this);
-    Input::getInstance()->addKeyListener(*this);
 }
 
 // Destructor
 Character::~Character(void)
 {
     Ogre::Root::getSingleton().removeFrameListener(this);
-    Input::getInstance()->removeKeyListener(*this);
 }
 
-//
+// Start performing an attack.
 void Character::attack(void)
 {
     if (action[DEFEND] && !action[SPECIAL_ATTACK_2]) {
@@ -90,14 +61,14 @@ void Character::attack(void)
     }
 }
 
-//
+// Start defending.
 void Character::defend(void)
 {
     action[MOVE] = false;
     action[DEFEND] = true;
 }
 
-//
+// Start performing a jump.
 void Character::jump(void)
 {
     if ( (action[JUMP] || action[FALL]) && !has_double_jumped && !action[DEFEND]) {
@@ -114,7 +85,7 @@ void Character::jump(void)
     }
 }
 
-//
+// Start moving left.
 void Character::moveLeft(void)
 {
     if (!action[DEFEND]) {
@@ -123,7 +94,7 @@ void Character::moveLeft(void)
     }
 }
 
-//
+// Start performing an action.
 void Character::moveRight(void)
 {
     if (!action[DEFEND]) {
@@ -132,7 +103,7 @@ void Character::moveRight(void)
     }
 }
 
-//
+// Start moving right.
 void Character::specialAttack(void)
 {
     if (action[DEFEND] && !action[ATTACK_2]) {
@@ -142,13 +113,13 @@ void Character::specialAttack(void)
     }
 }
 
-//
+// Stop defending.
 void Character::stopDefending(void)
 {
     action[DEFEND] = false;
 }
 
-//
+// Stop moving.
 void Character::stopMoving(void)
 {
     action[MOVE] = false;
@@ -281,34 +252,4 @@ void Character::stopAction(const int type)
     BOOST_FOREACH(Ogre::AnimationState *anim, animations[type])
         anim->setTimePosition(0);
     action[type] = false;
-}
-
-// Function to update the keyboard's state.
-bool Character::keyPressed(const OIS::KeyEvent &key)
-{
-    if (key.key == attack_key)
-        attack();
-    else if (key.key == defend_key)
-        defend();
-    else if (key.key == jump_key)
-        jump();
-    else if (key.key == move_left_key)
-        moveLeft();
-    else if (key.key == move_right_key)
-        moveRight();
-    else if (key.key == special_attack_key)
-        specialAttack();
-    return true;
-}
-
-// Function to update the keyboard's state.
-bool Character::keyReleased(const OIS::KeyEvent &key)
-{
-    if (key.key == defend_key) {
-        stopDefending();
-    } else if ( (key.key == move_left_key  && direction == 1 ) ||
-                (key.key == move_right_key && direction == -1)    ) {
-        stopMoving();
-    }
-    return true;
 }
