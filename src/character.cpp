@@ -80,6 +80,80 @@ Character::~Character(void)
     Input::getInstance()->removeKeyListener(*this);
 }
 
+//
+void Character::attack(void)
+{
+    if (action[DEFEND] && !action[SPECIAL_ATTACK_2]) {
+        action[ATTACK_2] = true;
+    } else if (on_floor && !action[LAND]  && !action[SPECIAL_ATTACK_1]) {
+        action[ATTACK_1] = true;
+    }
+}
+
+//
+void Character::defend(void)
+{
+    action[MOVE] = false;
+    action[DEFEND] = true;
+}
+
+//
+void Character::jump(void)
+{
+    if ( (action[JUMP] || action[FALL]) && !has_double_jumped && !action[DEFEND]) {
+        stopAction(JUMP);
+        stopAction(FALL);
+        action[DOUBLE_JUMP] = true;
+        jumping_time = 0;
+        has_double_jumped = true;
+    } else if (on_floor) {
+        if (action[IDLE] || action[MOVE]) {
+            action[IDLE] = false;
+            action[JUMP] = true;
+        }
+    }
+}
+
+//
+void Character::moveLeft(void)
+{
+    if (!action[DEFEND]) {
+        action[MOVE] = true;
+        direction = 1;
+    }
+}
+
+//
+void Character::moveRight(void)
+{
+    if (!action[DEFEND]) {
+        action[MOVE] = true;
+        direction = -1;
+    }
+}
+
+//
+void Character::specialAttack(void)
+{
+    if (action[DEFEND] && !action[ATTACK_2]) {
+        action[SPECIAL_ATTACK_2] = true;
+    } else if (on_floor && !action[LAND] && !action[ATTACK_1]) {
+        action[SPECIAL_ATTACK_1] = true;
+    }
+}
+
+//
+void Character::stopDefending(void)
+{
+    action[DEFEND] = false;
+}
+
+//
+void Character::stopMoving(void)
+{
+    action[MOVE] = false;
+}
+
 // Detects and solves collisions of the character with the battle ground.
 void Character::recoverFromPenetration(const std::list<Object*> &objects)
 {
@@ -205,47 +279,25 @@ void Character::move(const Ogre::FrameEvent &event)
 void Character::stopAction(const int type)
 {
     BOOST_FOREACH(Ogre::AnimationState *anim, animations[type])
-            anim->setTimePosition(0);
+        anim->setTimePosition(0);
     action[type] = false;
 }
 
 // Function to update the keyboard's state.
 bool Character::keyPressed(const OIS::KeyEvent &key)
 {
-    if (key.key == attack_key) {
-        if (action[DEFEND] && !action[SPECIAL_ATTACK_2]) {
-            action[ATTACK_2] = true;
-        } else if (on_floor && !action[LAND]  && !action[SPECIAL_ATTACK_1]) {
-            action[ATTACK_1] = true;
-        }
-    } else if (key.key == defend_key) {
-        action[MOVE] = false;
-        action[DEFEND] = true;
-    } else if (key.key == jump_key) {
-        if ( (action[JUMP] || action[FALL]) && !has_double_jumped && !action[DEFEND]) {
-            stopAction(JUMP);
-            stopAction(FALL);
-            action[DOUBLE_JUMP] = true;
-            jumping_time = 0;
-            has_double_jumped = true;
-        } else if (on_floor) {
-            if (action[IDLE] || action[MOVE]) {
-                action[IDLE] = false;
-                action[JUMP] = true;
-            }
-        }
-    } else if (key.key == move_left_key || key.key == move_right_key) {
-        if (!action[DEFEND]) {
-            action[MOVE] = true;
-            direction = (key.key == move_left_key) ? 1 : -1;
-        }
-    } else if (key.key == special_attack_key) {
-        if (action[DEFEND] && !action[ATTACK_2]) {
-            action[SPECIAL_ATTACK_2] = true;
-        } else if (on_floor && !action[LAND] && !action[ATTACK_1]) {
-            action[SPECIAL_ATTACK_1] = true;
-        }
-    }
+    if (key.key == attack_key)
+        attack();
+    else if (key.key == defend_key)
+        defend();
+    else if (key.key == jump_key)
+        jump();
+    else if (key.key == move_left_key)
+        moveLeft();
+    else if (key.key == move_right_key)
+        moveRight();
+    else if (key.key == special_attack_key)
+        specialAttack();
     return true;
 }
 
@@ -253,10 +305,10 @@ bool Character::keyPressed(const OIS::KeyEvent &key)
 bool Character::keyReleased(const OIS::KeyEvent &key)
 {
     if (key.key == defend_key) {
-        action[DEFEND] = false;
+        stopDefending();
     } else if ( (key.key == move_left_key  && direction == 1 ) ||
                 (key.key == move_right_key && direction == -1)    ) {
-        action[MOVE] = false;
+        stopMoving();
     }
     return true;
 }

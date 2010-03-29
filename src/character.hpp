@@ -34,6 +34,22 @@ public:
     Character(Ogre::SceneManager &scene_manager, const int num_player); // Constructor
     ~Character(void); // Destructor
 
+    // @{
+    ///
+    void attack        (void);
+    void defend        (void);
+    void jump          (void);
+    void moveLeft      (void);
+    void moveRight     (void);
+    void specialAttack (void);
+    // @}
+
+    // @{
+    //
+    void stopDefending (void);
+    void stopMoving    (void);
+    // @}
+
     /// Detects and solves collisions of the character with the battle ground.
     /// This function must be called every frame.
     /// @param[in] objects All the objects in the battle ground.
