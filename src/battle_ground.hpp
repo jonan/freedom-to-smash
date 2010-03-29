@@ -37,8 +37,7 @@ public:
     ~BattleGround(void); // Destructor
 
     /// Adds a player to the battle ground.
-    /// @param[in] num_player Number of the player.
-    void addPlayer(const int num_player);
+    void addPlayer(void);
 
     /// Starts the battle.
     void start(void);

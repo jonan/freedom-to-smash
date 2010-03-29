@@ -57,9 +57,9 @@ BattleGround::~BattleGround(void)
 }
 
 // Adds a player to the battle ground.
-void BattleGround::addPlayer(const int num_player)
+void BattleGround::addPlayer(void)
 {
-    players.push_back(new Character(*manager, KID, num_player));
+    players.push_back(new Character(*manager, players.size()+1));
 }
 
 // Starts the battle.

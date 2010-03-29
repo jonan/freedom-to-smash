@@ -28,13 +28,10 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 
 #include "animated_object.hpp"
 
-/// Types of character.
-enum CharacterType {KID};
-
 /// Class to control a character.
 class Character : public AnimatedObject, public Ogre::FrameListener, public OIS::KeyListener {
 public:
-    Character(Ogre::SceneManager &scene_manager, const CharacterType type, const int num_player); // Constructor
+    Character(Ogre::SceneManager &scene_manager, const int num_player); // Constructor
     ~Character(void); // Destructor
 
     /// Detects and solves collisions of the character with the battle ground.

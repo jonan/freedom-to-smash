@@ -26,7 +26,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #include "input.hpp"
 
 // Constructor
-Character::Character(Ogre::SceneManager &scene_manager, const CharacterType type, const int num_player)
+Character::Character(Ogre::SceneManager &scene_manager, const int num_player)
         : AnimatedObject(scene_manager)
         , on_floor(true)
         , has_double_jumped(false)
