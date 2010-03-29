@@ -56,10 +56,12 @@ BattleGround::~BattleGround(void)
         delete character;
 }
 
-// Adds a player to the battle ground.
-void BattleGround::addPlayer(void)
+// Creates a character and adds it to the battle ground.
+Character* BattleGround::createCharacter(void)
 {
-    players.push_back(new Character(*manager, players.size()+1));
+    Character *character = new Character(*manager, players.size()+1);
+    players.push_back(character);
+    return character;
 }
 
 // Starts the battle.

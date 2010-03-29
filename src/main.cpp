@@ -26,7 +26,7 @@ int main(int argc, char *argv[])
 {
     boot();
     BattleGround *battle = new BattleGround;
-    battle->addPlayer();
+    battle->createCharacter();
     battle->start();
     delete battle;
     quit();

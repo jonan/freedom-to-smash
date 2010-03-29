@@ -36,8 +36,9 @@ public:
     BattleGround(void); // Constructor
     ~BattleGround(void); // Destructor
 
-    /// Adds a player to the battle ground.
-    void addPlayer(void);
+    /// Creates a character and adds it to the battle ground.
+    /// @return Created character.
+    Character* createCharacter(void);
 
     /// Starts the battle.
     void start(void);
