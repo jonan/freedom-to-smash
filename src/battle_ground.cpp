@@ -22,20 +22,32 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #include <OgreRenderWindow.h>
 #include <OgreRoot.h>
 
+#ifdef USE_CAELUM
 #include <caelum/Caelum.h>
+#endif
 
+#ifdef USE_HYDRAX
 #include <hydrax/Hydrax.h>
 #include <hydrax/Noise/Perlin/Perlin.h>
 #include <hydrax/Modules/ProjectedGrid/ProjectedGrid.h>
+#endif
 
 #include "character.hpp"
 #include "input.hpp"
 
 // Constructor
 BattleGround::BattleGround(void)
-        : end(false), 
+        : 
+
+#ifdef USE_CAELUM
 		mCaelumSystem(NULL),
-		mHydrax(NULL)
+#endif
+
+#ifdef USE_HYDRAX
+		mHydrax(NULL),
+#endif
+
+		end(false)
 {
     // Initialize variables
     scene_manager = Ogre::Root::getSingleton().createSceneManager(Ogre::ST_GENERIC);
@@ -108,6 +120,8 @@ void BattleGround::createHydraxWater()
 
 void BattleGround::createCaelumSky()
 {
+	#ifdef USE_CAELUM
+
 	// Create the sky
 	mCaelumSystem = new Caelum::CaelumSystem(Ogre::Root::getSingletonPtr(), scene_manager, 
 		(Caelum::CaelumSystem::CaelumComponent)(
@@ -135,16 +149,23 @@ void BattleGround::createCaelumSky()
 	//mCaelumSystem->getPrecipitationController()->createViewportInstance(viewport);
 	//mCaelumSystem->getPrecipitationController()->setIntensity(0.05);
 	//mCaelumSystem->getPrecipitationController()->setCameraSpeedScale(0.001);
+
+	#endif
 }
 
 // Destructor
 BattleGround::~BattleGround(void)
 {
+
+#ifdef USE_CAELUM
 	// Destroy Caelum sky
 	delete mCaelumSystem;
+#endif
 
+#ifdef USE_HYDRAX
 	// Destroy Hydrax
 	delete mHydrax;
+#endif
 
     Input::getInstance()->removeKeyListener(*this);
     BOOST_FOREACH(Object *obj, objects)
@@ -173,10 +194,11 @@ bool BattleGround::frameStarted(const Ogre::FrameEvent &event)
     BOOST_FOREACH(Character *character, players)
         character->recoverFromPenetration(objects);
 
+	#ifdef USE_CAELUM
 	// Update Caelum
 	mCaelumSystem->notifyCameraChanged(this->camera);
 	mCaelumSystem->updateSubcomponents(event.timeSinceLastFrame);
-
+	#endif
 
 	#ifdef USE_HYDRAX
 	// Update Hydrax

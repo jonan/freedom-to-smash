@@ -72,8 +72,13 @@ private:
     std::list<Object*> objects;
     std::list<Character*> players;
 
+#ifdef USE_CAELUM
 	Caelum::CaelumSystem * mCaelumSystem;
+#endif
+	
+#ifdef USE_HYDRAX
 	Hydrax::Hydrax * mHydrax;
+#endif
 
     bool end;
 
