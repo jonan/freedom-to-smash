@@ -29,23 +29,21 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 /// Class to control a character.
 class Character : public AnimatedObject, public Ogre::FrameListener {
 public:
-    Character(Ogre::SceneManager &scene_manager); // Constructor
+    explicit Character(Ogre::SceneManager &scene_manager); // Constructor
     ~Character(void); // Destructor
 
     // @{
     /// Start performing an action.
-    void attack        (void);
-    void defend        (void);
-    void jump          (void);
-    void moveLeft      (void);
-    void moveRight     (void);
-    void specialAttack (void);
+    void attack (void);
+    void jump   (void);
+    void defend (void);
+    void move   (const bool right);
     // @}
 
     // @{
     /// Stop performing an action.
-    void stopDefending (void);
-    void stopMoving    (void);
+    void stopDefending (void) {stopAction(DEFEND);}
+    void stopMoving    (void) {stopAction(MOVE);  }
     // @}
 
     /// Detects and solves collisions of the character with the battle ground.
@@ -55,8 +53,7 @@ public:
 
 private:
     // All the different states of a character.
-    enum {ATTACK_1, ATTACK_2, DEFEND, DOUBLE_JUMP, FALL, IDLE, JUMP,
-          LAND, MOVE, SPECIAL_ATTACK_1, SPECIAL_ATTACK_2, NUM_STATES};
+    enum {ATTACK, DEFEND, FALL, IDLE, JUMP, LAND, MOVE, NUM_STATES};
 
     // Function that's called at the beginning of every frame.
     virtual bool frameStarted(const Ogre::FrameEvent &event);
@@ -66,8 +63,9 @@ private:
 
     // @{
     // Funtions that need to be called every frame for the character to be updated.
-    void animate (const Ogre::FrameEvent &event);
-    void move    (const Ogre::FrameEvent &event);
+    void frameCheck     (void);
+    void frameAnimation (const Ogre::FrameEvent &event);
+    void frameMovement  (const Ogre::FrameEvent &event);
     // @}
 
     // Player stops performing an action
@@ -79,9 +77,6 @@ private:
     Real jumping_time;
 
     int direction;
-
-    // Controls
-    int attack_key, defend_key, jump_key, move_left_key, move_right_key, special_attack_key;
 
     DISALLOW_COPY_AND_ASSIGN(Character);
 };

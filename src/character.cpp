@@ -54,75 +54,45 @@ Character::~Character(void)
 // Start performing an attack.
 void Character::attack(void)
 {
-    if (action[DEFEND] && !action[SPECIAL_ATTACK_2]) {
-        action[ATTACK_2] = true;
-    } else if (on_floor && !action[LAND]  && !action[SPECIAL_ATTACK_1]) {
-        action[ATTACK_1] = true;
+    if (action[IDLE] || action[MOVE]) {
+        stopAction(IDLE);
+        action[ATTACK] = true;
+    }
+}
+
+// Start performing a jump.
+void Character::jump(void)
+{
+    if ( (action[JUMP] || action[FALL]) && !has_double_jumped) {
+        stopAction(JUMP);
+        stopAction(FALL);
+        action[JUMP] = true;
+        jumping_time = 0;
+        has_double_jumped = true;
+    } else if (on_floor) {
+        if (!action[ATTACK] && !action[DEFEND] && !action[LAND]) {
+            stopAction(IDLE);
+            action[JUMP] = true;
+        }
     }
 }
 
 // Start defending.
 void Character::defend(void)
 {
-    action[MOVE] = false;
-    action[DEFEND] = true;
-}
-
-// Start performing a jump.
-void Character::jump(void)
-{
-    if ( (action[JUMP] || action[FALL]) && !has_double_jumped && !action[DEFEND]) {
-        stopAction(JUMP);
-        stopAction(FALL);
-        action[DOUBLE_JUMP] = true;
-        jumping_time = 0;
-        has_double_jumped = true;
-    } else if (on_floor) {
-        if (action[IDLE] || action[MOVE]) {
-            action[IDLE] = false;
-            action[JUMP] = true;
-        }
+    if (on_floor && action[IDLE]) {
+        stopAction(IDLE);
+        action[DEFEND] = true;
     }
 }
 
-// Start moving left.
-void Character::moveLeft(void)
+// Start moving.
+void Character::move(const bool right)
 {
     if (!action[DEFEND]) {
         action[MOVE] = true;
-        direction = 1;
+        direction = (right) ? -1 : 1;
     }
-}
-
-// Start performing an action.
-void Character::moveRight(void)
-{
-    if (!action[DEFEND]) {
-        action[MOVE] = true;
-        direction = -1;
-    }
-}
-
-// Start moving right.
-void Character::specialAttack(void)
-{
-    if (action[DEFEND] && !action[ATTACK_2]) {
-        action[SPECIAL_ATTACK_2] = true;
-    } else if (on_floor && !action[LAND] && !action[ATTACK_1]) {
-        action[SPECIAL_ATTACK_1] = true;
-    }
-}
-
-// Stop defending.
-void Character::stopDefending(void)
-{
-    action[DEFEND] = false;
-}
-
-// Stop moving.
-void Character::stopMoving(void)
-{
-    action[MOVE] = false;
 }
 
 // Detects and solves collisions of the character with the battle ground.
@@ -133,13 +103,15 @@ void Character::recoverFromPenetration(const std::list<Object*> &objects)
     BOOST_FOREACH(Object *obj, objects) {
         switch (collision_box->detectCollision(obj->getCollisionBox())) {
         case RIGHT_COLLISION:
+            if (direction == -1)
+                stopAction(MOVE);
+            break;
         case LEFT_COLLISION:
-            stopAction(MOVE);
+            if (direction == 1)
+                stopAction(MOVE);
             break;
         case TOP_COLLISION:
             stopAction(JUMP);
-            stopAction(DOUBLE_JUMP);
-            action[FALL] = true;
             break;
         case BOTTOM_COLLISION:
             on_floor = true;
@@ -159,89 +131,70 @@ void Character::recoverFromPenetration(const std::list<Object*> &objects)
 // Function that's called at the beginning of every frame.
 bool Character::frameStarted(const Ogre::FrameEvent &event)
 {
-    animate(event);
-    move(event);
+    frameCheck();
+    frameAnimation(event);
+    frameMovement(event);
     return true;
 }
 
 // Prepares all animations so they can be used.
 void Character::prepareAnimations(void)
 {
-    createAnimation(ATTACK_1, "SliceVertical");
-    createAnimation(ATTACK_2, "SliceHorizontal");
+    createAnimation(ATTACK, "SliceVertical");
     createAnimation(DEFEND, "DrawSwords");
-    createAnimation(DOUBLE_JUMP, "JumpStart");
-    createAnimation(FALL, "JumpLoop");
+    createAnimation(FALL, "JumpLoop", true);
     createAnimation(IDLE, "IdleTop", true);
     createAnimation(IDLE, "IdleBase", true);
-    createAnimation(LAND, "JumpEnd");
     createAnimation(JUMP, "JumpStart");
+    createAnimation(LAND, "JumpEnd");
     createAnimation(MOVE, "RunTop", true);
     createAnimation(MOVE, "RunBase", true);
-    createAnimation(SPECIAL_ATTACK_1, "SliceVertical");
-    createAnimation(SPECIAL_ATTACK_2, "SliceHorizontal");
 }
 
 // Funtion that needs to be called every frame for the character to be updated.
-void Character::animate(const Ogre::FrameEvent &event)
+void Character::frameCheck(void)
+{
+    if (on_floor) {
+        if (!action[ATTACK] && !action[DEFEND] && !action[LAND] && !action[MOVE]) {
+            action[IDLE] = true;
+        }
+    } else if (!action[JUMP]) {
+        action[FALL] = true;
+    }
+}
+
+// Funtion that needs to be called every frame for the character to be updated.
+void Character::frameAnimation(const Ogre::FrameEvent &event)
 {
     // Disable all animations
     for (int i=0; i<NUM_STATES; i++)
         BOOST_FOREACH(Ogre::AnimationState *anim, animations[i])
             anim->setEnabled(false);
     // Check what animations need to be enabled
-    if (action[ATTACK_1] || action[ATTACK_2] || action[SPECIAL_ATTACK_1] || action[SPECIAL_ATTACK_2]) {
-        // Check what attack is the player performing
-        int i;
-        if (action[ATTACK_1])
-            i = ATTACK_1;
-        else if (action[ATTACK_2])
-            i = ATTACK_2;
-        else if (action[SPECIAL_ATTACK_1])
-            i = SPECIAL_ATTACK_1;
-        else if (action[SPECIAL_ATTACK_2])
-            i = SPECIAL_ATTACK_2;
-        // Animate
-        if (performAnimation(i, event))
-            stopAction(i);
-    } else if (action[DEFEND] && !action[LAND]) {
-        performAnimation(DEFEND, event);
-    } else if (action[DOUBLE_JUMP] || action[JUMP]) {
-        // Check what jump is the player performing
-        int i = (action[JUMP]) ? JUMP : DOUBLE_JUMP;
-        performAnimation(i, event);
-    } else if (action[FALL]) {
-        performAnimation(FALL, event);
-    } else if (action[LAND]) {
-        if (performAnimation(LAND, event))
-            stopAction(LAND);
-    } else if (action[MOVE]) {
-        performAnimation(MOVE, event);
-    } else {
-        action[IDLE] = true;
-        performAnimation(IDLE, event);
+    for (int i=0; i<NUM_STATES; i++) {
+        if (action[i]) {
+            if (performAnimation(i, event) && i!=JUMP) {
+                stopAction(i);
+            }
+        }
     }
 }
 
 // Funtion that needs to be called every frame for the character to be updated.
-void Character::move(const Ogre::FrameEvent &event)
+void Character::frameMovement(const Ogre::FrameEvent &event)
 {
     if (action[MOVE]) {
-        if ( !(action[ATTACK_1] || action[ATTACK_2] || action[SPECIAL_ATTACK_1] || action[SPECIAL_ATTACK_2] || action[LAND]) ) {
-            translate(direction*10*event.timeSinceLastFrame, 0, 0);
-            node->setDirection(0,0,-direction,Ogre::Node::TS_PARENT);
-            node->yaw(Ogre::Degree(90));
-        }
+        translate(direction*10*event.timeSinceLastFrame, 0, 0);
+        node->setDirection(0,0,-direction,Ogre::Node::TS_PARENT);
+        node->yaw(Ogre::Degree(90));
     }
-    if (action[DOUBLE_JUMP] || action[JUMP]) {
+    if (action[JUMP]) {
         jumping_time += event.timeSinceLastFrame;
         if (jumping_time > 1.5) {
             stopAction(JUMP);
-            stopAction(DOUBLE_JUMP);
         }
         translate(0, 10*event.timeSinceLastFrame, 0);
-    } else if (!on_floor) {
-        action[FALL] = true;
+    } else if (action[FALL]) {
         translate(0, -10*event.timeSinceLastFrame, 0);
     }
 }

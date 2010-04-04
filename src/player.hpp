@@ -51,7 +51,8 @@ private:
     BattleGround *battle_ground;
 
     // Controls
-    int attack_key, defend_key, jump_key, move_left_key, move_right_key, special_attack_key;
+    int attack_key, jump_key;
+    int up_key, down_key, right_key, left_key;
 
     DISALLOW_COPY_AND_ASSIGN(Player);
 };

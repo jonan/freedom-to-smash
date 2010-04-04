@@ -28,12 +28,12 @@ Player::Player(void)
 {
     Input::getInstance()->addKeyListener(*this);
     // Controls will be loaded from a config file
-    attack_key         = OIS::KC_A;
-    defend_key         = OIS::KC_DOWN;
-    jump_key           = OIS::KC_UP;
-    move_left_key      = OIS::KC_LEFT;
-    move_right_key     = OIS::KC_RIGHT;
-    special_attack_key = OIS::KC_S;
+    attack_key = OIS::KC_A;
+    jump_key   = OIS::KC_S;
+    up_key     = OIS::KC_UP;
+    down_key   = OIS::KC_DOWN;
+    right_key  = OIS::KC_RIGHT;
+    left_key   = OIS::KC_LEFT;
 }
 
 // Destructor
@@ -53,16 +53,14 @@ bool Player::keyPressed(const OIS::KeyEvent &key)
 {
     if (key.key == attack_key)
         character->attack();
-    else if (key.key == defend_key)
-        character->defend();
     else if (key.key == jump_key)
         character->jump();
-    else if (key.key == move_left_key)
-        character->moveLeft();
-    else if (key.key == move_right_key)
-        character->moveRight();
-    else if (key.key == special_attack_key)
-        character->specialAttack();
+    else if (key.key == down_key)
+        character->defend();
+    else if (key.key == right_key)
+        character->move(true);
+    else if (key.key == left_key)
+        character->move(false);
     return true;
 }
 
@@ -71,9 +69,9 @@ bool Player::keyReleased(const OIS::KeyEvent &key)
 {
     if (key.key == OIS::KC_ESCAPE)
         battle_ground->quit();
-    else if (key.key == defend_key)
+    else if (key.key == down_key)
         character->stopDefending();
-    else if (key.key == move_left_key || key.key == move_right_key)
+    else if (key.key == right_key || key.key == left_key)
         character->stopMoving();
     return true;
 }
