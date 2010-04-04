@@ -16,7 +16,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 */
 
 /// @file
-/// The Object class.
+/// The AnimatedObject class.
 /// @author Jonan
 
 #ifndef ANIMATED_OBJECT_HPP
@@ -30,23 +30,20 @@ namespace Ogre {
     class AnimationState;
 }
 
-///
+/// An AnimatedObject is a normal Object with animations.
 class AnimatedObject : public Object {
 public:
-    AnimatedObject(Ogre::SceneManager &scene_manager); // Constructor
+    AnimatedObject(Ogre::SceneManager &scene_manager, const int num_animations); // Constructor
+    ~AnimatedObject(void); // Destructor
 
 protected:
-    // All the different states of the player
-    enum {ATTACK_1, ATTACK_2, DEFEND, DOUBLE_JUMP, FALL, IDLE, JUMP,
-          LAND, MOVE, SPECIAL_ATTACK_1, SPECIAL_ATTACK_2, NUM_STATES};
-
     //
     void createAnimation(const int type, const char *name, const bool loop = false, const bool enabled = false);
 
     //
     bool performAnimation(const int type, const Ogre::FrameEvent &event);
 
-    std::list<Ogre::AnimationState*> animations[NUM_STATES];
+    std::list<Ogre::AnimationState*> *animations;
 
 private:
     DISALLOW_COPY_AND_ASSIGN(AnimatedObject);

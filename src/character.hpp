@@ -54,6 +54,10 @@ public:
     void recoverFromPenetration(const std::list<Object*> &objects);
 
 private:
+    // All the different states of a character.
+    enum {ATTACK_1, ATTACK_2, DEFEND, DOUBLE_JUMP, FALL, IDLE, JUMP,
+          LAND, MOVE, SPECIAL_ATTACK_1, SPECIAL_ATTACK_2, NUM_STATES};
+
     // Function that's called at the beginning of every frame.
     virtual bool frameStarted(const Ogre::FrameEvent &event);
 

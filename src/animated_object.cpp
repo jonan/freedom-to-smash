@@ -24,10 +24,16 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #include <OgreFrameListener.h>
 
 // Constructor
-AnimatedObject::AnimatedObject(Ogre::SceneManager &scene_manager)
+AnimatedObject::AnimatedObject(Ogre::SceneManager &scene_manager, const int num_animations)
         : Object(scene_manager)
 {
+    animations = new std::list<Ogre::AnimationState*>[num_animations];
+}
 
+// Destructor
+AnimatedObject::~AnimatedObject(void)
+{
+    delete [] animations;
 }
 
 //
