@@ -34,7 +34,7 @@ Object::Object(Ogre::SceneManager &scene_manager)
         , scene_manager(&scene_manager)
         , collision_box(new CollisionBox)
 {
-
+    node = scene_manager.getRootSceneNode()->createChildSceneNode();
 }
 
 // Destructor
@@ -46,31 +46,14 @@ Object::~Object(void)
 // Set function.
 void Object::setEntity(const String &name)
 {
-    bool done = false;
-    String mesh_name = name;
-    mesh_name += ".mesh";
-    String manager_name = name;
-    while (!done) {
-        try {
-            done = true;
-            manager_name += ".";
-            entity = scene_manager->createEntity(manager_name, mesh_name);
-        } catch (Ogre::Exception exception) {
-            if (exception.getNumber() == Ogre::Exception::ERR_DUPLICATE_ITEM)
-                done = false;
-            else
-                throw exception;
-        }
-    }
-    entity->setCastShadows(true);
+    entity = createEntity(name);
+    node->attachObject(entity);
 }
 
 // Set function.
 void Object::setPosition(const Ogre::Vector3 &pos)
 {
-    node = scene_manager->getRootSceneNode()->createChildSceneNode(pos);
-    if (entity)
-        node->attachObject(entity);
+    node->setPosition(pos);
 }
 
 // Set function.
@@ -128,4 +111,28 @@ void Object::translate(const Real x, const Real y, const Real z)
     node->translate(x, y, z);
     // Update collision box
     collision_box->setReferencePoint(*node);
+}
+
+// Creates a new entity and returns a pointer to it.
+Ogre::Entity* Object::createEntity(const String &name)
+{
+    bool done = false;
+    Ogre::Entity *entity;
+    String mesh_name = name;
+    mesh_name += ".mesh";
+    String manager_name = name;
+    while (!done) {
+        try {
+            done = true;
+            manager_name += ".";
+            entity = scene_manager->createEntity(manager_name, mesh_name);
+        } catch (Ogre::Exception exception) {
+            if (exception.getNumber() == Ogre::Exception::ERR_DUPLICATE_ITEM)
+                done = false;
+            else
+                throw exception;
+        }
+    }
+    entity->setCastShadows(true);
+    return entity;
 }

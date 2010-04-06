@@ -60,6 +60,9 @@ public:
     void translate(const Real x, const Real y, const Real z);
 
 protected:
+    // Creates a new entity and returns a pointer to it.
+    Ogre::Entity* createEntity(const String &name);
+
     Ogre::Entity *entity;
     Ogre::SceneNode *node;
     Ogre::SceneManager *scene_manager;
