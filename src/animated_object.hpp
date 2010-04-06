@@ -36,6 +36,11 @@ public:
     AnimatedObject(Ogre::SceneManager &scene_manager, const int num_animations); // Constructor
     ~AnimatedObject(void); // Destructor
 
+    /// Attachs an new entity to a bone of the objects main entity.
+    /// @param[in] entity_name Name of the new entity.
+    /// @param[in] bone_name Name of the main entity's bone.
+    void attachEntityToBone(const String &entity_name, const String &bone_name);
+
 protected:
     //
     void createAnimation(const int type, const char *name, const bool loop = false, const bool enabled = false);
@@ -44,6 +49,7 @@ protected:
     bool performAnimation(const int type, const Ogre::FrameEvent &event);
 
     std::list<Ogre::AnimationState*> *animations;
+    std::list<Ogre::Entity*> attached_entities;
 
 private:
     DISALLOW_COPY_AND_ASSIGN(AnimatedObject);

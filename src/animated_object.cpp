@@ -36,6 +36,13 @@ AnimatedObject::~AnimatedObject(void)
     delete [] animations;
 }
 
+// Attachs an new entity to a bone of the objects main entity.
+void AnimatedObject::attachEntityToBone(const String &entity_name, const String &bone_name)
+{
+    attached_entities.push_back(createEntity(entity_name));
+    entity->attachObjectToBone(bone_name, attached_entities.back());
+}
+
 //
 void AnimatedObject::createAnimation(const int type, const char *name, const bool loop, const bool enabled)
 {

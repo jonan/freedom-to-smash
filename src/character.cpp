@@ -35,6 +35,8 @@ Character::Character(Ogre::SceneManager &scene_manager)
 {
     setEntity("sinbad");
     entity->getSkeleton()->setBlendMode(Ogre::ANIMBLEND_CUMULATIVE);
+    attachEntityToBone("Sword", "Handle.L");
+    attachEntityToBone("Sword", "Handle.R");
     setPosition(Ogre::Vector3(0,5,0));
     node->yaw(Ogre::Degree(90));
     setCollisionBoxSize(1.5,-1.5,2.2,-5.25);
