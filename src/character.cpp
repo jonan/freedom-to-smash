@@ -22,7 +22,6 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #include <OgreEntity.h>
 #include <OgreRoot.h>
 
-#include "collision_box.hpp"
 #include "input.hpp"
 
 // Constructor
@@ -39,7 +38,6 @@ Character::Character(Ogre::SceneManager &scene_manager)
     attachEntityToBone("Sword", "Handle.R");
     setPosition(Ogre::Vector3(0,5,0));
     node->yaw(Ogre::Degree(90));
-    setCollisionBoxSize(1.5,-1.5,2.2,-5.25);
     prepareAnimations();
     // Start with no action active
     for (int i=0; i < NUM_STATES; i++)
@@ -103,7 +101,7 @@ void Character::recoverFromPenetration(const std::list<Object*> &objects)
     on_floor = false;
 
     BOOST_FOREACH(Object *obj, objects) {
-        switch (collision_box->detectCollision(obj->getCollisionBox())) {
+        switch (detectCollision(*obj)) {
         case RIGHT_COLLISION:
             if (direction == -1)
                 stopAction(MOVE);

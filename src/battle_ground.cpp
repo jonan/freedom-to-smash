@@ -39,13 +39,10 @@ BattleGround::BattleGround(void)
     // Ground
     addObject("cube", Ogre::Vector3(0,-5,0));
     objects.back()->setScale(Ogre::Vector3(10,1,1));
-    objects.back()->setCollisionBoxSize(25,-25,2.5,-2.5);
     addObject("cube", Ogre::Vector3(-23,7,0));
     objects.back()->setScale(Ogre::Vector3(3,0.5,1));
-    objects.back()->setCollisionBoxSize(7.5,-7.5,1.25,-1.25);
     addObject("cube", Ogre::Vector3(23,7,0));
     objects.back()->setScale(Ogre::Vector3(3,0.5,1));
-    objects.back()->setCollisionBoxSize(7.5,-7.5,1.25,-1.25);
 }
 
 // Destructor

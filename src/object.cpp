@@ -20,19 +20,10 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #include <OgreEntity.h>
 #include <OgreSceneManager.h>
 
-/*
-// For debug code!
-#include <Ogre.h>
-#include <string>
-*/
-
-#include "collision_box.hpp"
-
 // Constructor
 Object::Object(Ogre::SceneManager &scene_manager)
         : entity(NULL)
         , scene_manager(&scene_manager)
-        , collision_box(new CollisionBox)
 {
     node = scene_manager.getRootSceneNode()->createChildSceneNode();
 }
@@ -40,7 +31,7 @@ Object::Object(Ogre::SceneManager &scene_manager)
 // Destructor
 Object::~Object(void)
 {
-    delete collision_box;
+
 }
 
 // Set function.
@@ -62,44 +53,8 @@ void Object::setScale(const Ogre::Vector3 &scale)
     node->setScale(scale);
 }
 
-// Set function.
-void Object::setCollisionBoxSize(const Real max_x, const Real min_x, const Real max_y, const Real min_y)
-{
-    collision_box->setRelativeBoxPos(max_x, min_x, max_y, min_y);
-    collision_box->setReferencePoint(*node);
-    /*
-    // Debug code!
-    using namespace Ogre;
-    std::string name1, name2, name3, name = entity->getName();
-    name1 = name+"manual1";
-    name2 = name+"material";
-    name3 = name+"debugger";
-    ManualObject* myManualObject =  scene_manager->createManualObject(name1.c_str());
-
-    MaterialPtr myManualObjectMaterial = MaterialManager::getSingleton().create(name2.c_str(),name3.c_str());
-    myManualObjectMaterial->setReceiveShadows(false);
-    myManualObjectMaterial->getTechnique(0)->setLightingEnabled(true);
-    myManualObjectMaterial->getTechnique(0)->getPass(0)->setDiffuse(0,0,1,0);
-    myManualObjectMaterial->getTechnique(0)->getPass(0)->setAmbient(0,0,1);
-    myManualObjectMaterial->getTechnique(0)->getPass(0)->setSelfIllumination(0,0,1);
-
-    myManualObject->begin("manual1Material", Ogre::RenderOperation::OT_LINE_LIST);
-    myManualObject->position(min_x, min_y, 0);
-    myManualObject->position(max_x, min_y, 0);
-    myManualObject->position(max_x, min_y, 0);
-    myManualObject->position(max_x, max_y, 0);
-    myManualObject->position(max_x, max_y, 0);
-    myManualObject->position(min_x, max_y, 0);
-    myManualObject->position(min_x, max_y, 0);
-    myManualObject->position(min_x, min_y, 0);
-    myManualObject->end();
-
-    node->attachObject(myManualObject);
-    */
-}
-
 // Get function.
-const Ogre::Vector3& Object::getPosition(void)
+const Ogre::Vector3& Object::getPosition(void) const
 {
     return node->getPosition();
 }
@@ -107,10 +62,13 @@ const Ogre::Vector3& Object::getPosition(void)
 // Move the object.
 void Object::translate(const Real x, const Real y, const Real z)
 {
-    // Move object
     node->translate(x, y, z);
-    // Update collision box
-    collision_box->setReferencePoint(*node);
+}
+
+// Detects the collision with another object.
+CollisionType Object::detectCollision(const Object &obj) const
+{
+    return NO_COLLISION;
 }
 
 // Creates a new entity and returns a pointer to it.

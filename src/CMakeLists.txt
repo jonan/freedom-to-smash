@@ -4,7 +4,6 @@ set(
   battle_ground.cpp
   boot.cpp
   character.cpp
-  collision_box.cpp
   input.cpp
   main.cpp
   object.cpp
@@ -21,7 +20,6 @@ set(
   battle_ground.hpp
   boot.hpp
   character.hpp
-  collision_box.hpp
   input.hpp
   object.hpp
   platform.hpp
