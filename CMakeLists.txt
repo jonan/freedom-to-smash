@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 2.6)
 project(freedom-to-smash)
 
+add_subdirectory(bullet)
+
 set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 
 find_package(Boost REQUIRED)
