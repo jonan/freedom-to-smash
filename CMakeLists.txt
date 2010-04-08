@@ -2,6 +2,14 @@ cmake_minimum_required(VERSION 2.6)
 project(freedom-to-smash)
 
 add_subdirectory(bullet)
+set(
+  BULLET_LIBRARIES
+  BulletCollision
+  BulletDynamics
+  BulletMultiThreaded
+  BulletSoftBody
+  LinearMath
+  )
 
 set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 
@@ -13,6 +21,8 @@ find_package(OIS REQUIRED)
 find_package(OpenAL REQUIRED)
 
 include_directories(
+  ${PROJECT_SOURCE_DIR}/bullet
+  ${PROJECT_SOURCE_DIR}/src
   ${Boost_INCLUDE_DIRS}
   ${ENET_INCLUDE_DIR}
   ${LUA_INCLUDE_DIR}
