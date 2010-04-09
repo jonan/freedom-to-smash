@@ -17,6 +17,8 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 
 #include "collision_scene.hpp"
 
+#include <btBulletCollisionCommon.h>
+
 namespace physics {
 
 // Constructor

@@ -22,9 +22,12 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #ifndef PHYSICS_COLLISION_SCENE_HPP
 #define PHYSICS_COLLISION_SCENE_HPP
 
-#include "btBulletCollisionCommon.h"
-
 #include "util.hpp"
+
+class btAxisSweep3;
+class btCollisionDispatcher;
+class btCollisionWorld;
+class btDefaultCollisionConfiguration;
 
 namespace physics {
 
