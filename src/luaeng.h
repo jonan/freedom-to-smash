@@ -15,8 +15,8 @@ You should have received a copy of the GNU General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>
 */
 
-
-#pragma once
+#ifndef _LUAENG_H
+#define _LUAENG_H
 
 #include <iostream>
 #include <sstream>
@@ -33,14 +33,13 @@ extern "C"
 	#include "lua.h"
 	#include "lualib.h"
 	#include "lauxlib.h"
-
-	extern int luaopen_test(lua_State * L);
 }
 
 
 //! Provides several utility methods to make Lua integration
-//! and usage easier from C++.
+//! and usage easier from C++. 
 //!
+//! @remark Some of the methods provided are not thread-safe.
 class LuaEng
 {
 
@@ -136,35 +135,39 @@ public:
 		SWIG_NewPointerObj(L, ptr, pTypeInfo, owned);
 	}
 
-	//! Starts a call to a Lua function. After starting a call, the function parameters
+	//! Begins a call to a Lua function. After starting a call, the function parameters
 	//! should be pushed into the stack.
 	//!
 	//! @param L Pointer to the Lua state.
-	//! @param name El nombre de la función LUA a llamar.
-	static void EmpezarLlamada(lua_State * L, std::string const & nombre) 
+	//! @param name Name of the Lua function to call.
+	//!
+	//! @remark BeginCall and EndCall are not thread-safe. The user must guarantee
+	//! that BeginCall and EndCall pairs are executed atomically.
+	static void BeginCall(lua_State * L, std::string const & name) 
 	{
-		mTop = lua_gettop(L); // Obtenemos el índice de la cima de la pila.
-		lua_pushstring(L, nombre.c_str());               // Empujamos nombre de la función
-		lua_gettable(L, LUA_GLOBALSINDEX);               // Índice global.
+		mTop = lua_gettop(L); // Obtain the index of the top of the stack.
+		lua_pushstring(L, name.c_str()); // Push the function name.
+		lua_gettable(L, LUA_GLOBALSINDEX);
 		if (!lua_isfunction(L, -1)) 
 		{
-			// Nos aseguramos de que la pila 
-			// quede como al principio
+			// We couldn't find it or it isn't a function. Fix the stack so that it 
+			// recovers its original state and throw an exception.
+
 			lua_settop(L, mTop);
 			throw std::runtime_error(
-				std::string("Error LuaEng::LlamarFuncion. No se pudo encontrar funcion ") +
-				nombre
+				std::string("LuaEng::BeginCall error. Function could not be found: ") +
+				name
 				);
 		}
 	}
 
-	//! Termina de realizarse la llamada. (Realiza la llamada en sí). 
-	//! En el momento de ser llamada esta función deben estar
-	//! los argumentos en la pila. 
+	//! It finishes a call. (It carries out the call itself). 
+	//! The arguments to pass to the function must have been pushed into the Lua 
+	//! stack before calling this method.
 	//!
-	//! @param L Puntero a lua_State
-	//! @param numArgs Numero de argumentos
-	static void TerminarLlamada(lua_State * L, int numArgs)
+	//! @param L Pointer to the Lua state.
+	//! @param numArgs Number of arguments that have been pushed into the stack.
+	static void EndCall(lua_State * L, int numArgs)
 	{
 		if (lua_pcall(L, numArgs, 0, 0) != 0)  // Llama a la función con numArgs argumentos. 
 		{
@@ -175,4 +178,7 @@ public:
 	}
 
 
-}; 
+}; // !LuaEng
+
+
+#endif
