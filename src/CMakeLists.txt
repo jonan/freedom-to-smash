@@ -1,6 +1,7 @@
 set(
   SRC
   physics/collision_scene.cpp
+  physics/shapes_manager.cpp
   animated_object.cpp
   battle_ground.cpp
   boot.cpp
@@ -18,6 +19,7 @@ set(
 set(
   HEADERS
   physics/collision_scene.hpp
+  physics/shapes_manager.hpp
   animated_object.hpp
   battle_ground.hpp
   boot.hpp
