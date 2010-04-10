@@ -102,18 +102,18 @@ void Character::recoverFromPenetration(const std::list<Object*> &objects)
 
     BOOST_FOREACH(Object *obj, objects) {
         switch (detectCollision(*obj)) {
-        case RIGHT_COLLISION:
+        case physics::RIGHT_COLLISION:
             if (direction == -1)
                 stopAction(MOVE);
             break;
-        case LEFT_COLLISION:
+        case physics::LEFT_COLLISION:
             if (direction == 1)
                 stopAction(MOVE);
             break;
-        case TOP_COLLISION:
+        case physics::TOP_COLLISION:
             stopAction(JUMP);
             break;
-        case BOTTOM_COLLISION:
+        case physics::BOTTOM_COLLISION:
             on_floor = true;
             if (action[FALL]) {
                 stopAction(FALL);

@@ -22,6 +22,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #ifndef OBJECT_HPP
 #define OBJECT_HPP
 
+#include "physics/collision_object.hpp"
 #include "util.hpp"
 
 namespace Ogre {
@@ -31,16 +32,8 @@ namespace Ogre {
     class Vector3;
 }
 
-/// Collisions types.
-enum CollisionType { NO_COLLISION,
-                     LEFT_COLLISION,
-                     RIGHT_COLLISION,
-                     TOP_COLLISION,
-                     BOTTOM_COLLISION,
-                     FULL_COLLISION   };
-
 /// General object class.
-class Object {
+class Object : public physics::CollisionObject {
 public:
     explicit Object(Ogre::SceneManager &scene_manager); // Constructor
     virtual ~Object(void); // Destructor
@@ -62,11 +55,6 @@ public:
     /// @param[in] y Units to move in the y axes.
     /// @param[in] z Units to move in the z axes.
     void translate(const Real x, const Real y, const Real z);
-
-    /// Detects the collision with another object.
-    /// @param[in] obj Object.
-    /// @return Type of collision.
-    CollisionType detectCollision(const Object &obj) const;
 
 protected:
     // Creates a new entity and returns a pointer to it.

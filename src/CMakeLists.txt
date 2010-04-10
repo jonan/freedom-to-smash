@@ -1,5 +1,6 @@
 set(
   SRC
+  physics/collision_object.cpp
   physics/collision_scene.cpp
   physics/shapes_manager.cpp
   animated_object.cpp
@@ -18,6 +19,7 @@ set(
 
 set(
   HEADERS
+  physics/collision_scene.hpp
   physics/collision_scene.hpp
   physics/shapes_manager.hpp
   animated_object.hpp

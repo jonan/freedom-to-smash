@@ -65,12 +65,6 @@ void Object::translate(const Real x, const Real y, const Real z)
     node->translate(x, y, z);
 }
 
-// Detects the collision with another object.
-CollisionType Object::detectCollision(const Object &obj) const
-{
-    return NO_COLLISION;
-}
-
 // Creates a new entity and returns a pointer to it.
 Ogre::Entity* Object::createEntity(const String &name)
 {
