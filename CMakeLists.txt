@@ -22,15 +22,23 @@ include_directories(
 if(WIN32)
     add_definitions(-DNOMINMAX)
     link_libraries(winmm.lib)
-	link_libraries(ws2_32.lib)
+    link_libraries(ws2_32.lib)
 endif()
 
 # Copy the configuration files to the binary directory
-add_custom_command(
-  OUTPUT ${PROJECT_BINARY_DIR}/plugins.cfg
-  COMMAND ${CMAKE_COMMAND} -E copy ${PROJECT_SOURCE_DIR}/plugins.cfg ${PROJECT_BINARY_DIR}/plugins.cfg
-  MAIN_DEPENDENCY ${PROJECT_SOURCE_DIR}/plugins.cfg
-  )
+if(WIN32)
+    add_custom_command(
+      OUTPUT ${PROJECT_BINARY_DIR}/plugins.cfg
+      COMMAND ${CMAKE_COMMAND} -E copy ${PROJECT_SOURCE_DIR}/plugins.cfg.win32 ${PROJECT_BINARY_DIR}/plugins.cfg
+      MAIN_DEPENDENCY ${PROJECT_SOURCE_DIR}/plugins.cfg.win32
+      )
+else()
+    add_custom_command(
+      OUTPUT ${PROJECT_BINARY_DIR}/plugins.cfg
+      COMMAND ${CMAKE_COMMAND} -E copy ${PROJECT_SOURCE_DIR}/plugins.cfg.unix ${PROJECT_BINARY_DIR}/plugins.cfg
+      MAIN_DEPENDENCY ${PROJECT_SOURCE_DIR}/plugins.cfg.unix
+      )
+endif()
 add_custom_command(
   OUTPUT ${PROJECT_BINARY_DIR}/resources.cfg
   COMMAND ${CMAKE_COMMAND} -E copy ${PROJECT_SOURCE_DIR}/resources.cfg ${PROJECT_BINARY_DIR}/resources.cfg
@@ -42,7 +50,7 @@ add_custom_target(
   )
 
 # Copy the media files to the binary directory
-if (WIN32)
+if(WIN32)
     file(
       COPY
       ${PROJECT_SOURCE_DIR}/media

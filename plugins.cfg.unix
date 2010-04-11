@@ -1,6 +1,2 @@
-# Linux
 PluginFolder=/usr/lib/OGRE
-# Windows
-#PluginFolder=.
-
 Plugin=RenderSystem_GL
