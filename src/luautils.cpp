@@ -4,8 +4,8 @@
  //http://windrealm.com/tutorials/reading-a-lua-configuration-file-from-c.php#downloads
 
 
-#include "luautils.h"
-#include "LuaEng.h"
+#include "luautils.hpp"
+#include "luaeng.hpp"
 
 #include <string>
 
