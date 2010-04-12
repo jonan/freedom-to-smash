@@ -3,8 +3,8 @@ project(freedom-to-smash)
 
 set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 
+# Necessary libraries
 find_package(Boost REQUIRED)
-find_package(ENet REQUIRED)
 find_package(Lua51 REQUIRED)
 find_package(OGRE REQUIRED)
 find_package(OIS REQUIRED)
@@ -12,12 +12,18 @@ find_package(OpenAL REQUIRED)
 
 include_directories(
   ${Boost_INCLUDE_DIRS}
-  ${ENET_INCLUDE_DIR}
   ${LUA_INCLUDE_DIR}
   ${OGRE_INCLUDE_DIRS}
   ${OIS_INCLUDE_DIRS}
   ${OPENAL_INCLUDE_DIR}
   )
+
+# Optional libraries
+find_package(ENet)
+
+if(ENET_FOUND)
+    include_directories(${ENET_INCLUDE_DIR})
+endif()
 
 if(WIN32)
     add_definitions(-DNOMINMAX)

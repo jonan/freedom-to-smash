@@ -12,7 +12,6 @@ set(
   player.cpp
   scene.cpp
   script.cpp
-  server.cpp
   )
 
 set(
@@ -28,8 +27,13 @@ set(
   player.hpp
   scene.hpp
   script.hpp
-  server.hpp
   )
+
+# Compile the network code only if ENet was found
+if(ENET_FOUND)
+    list(APPEND SRC server.cpp)
+    list(APPEND HEADERS server.hpp)
+endif()
 
 if(WIN32)
     if(NOT CYGWIN)
@@ -39,6 +43,7 @@ endif()
 
 add_executable(freedom-to-smash ${SRC})
 set_target_properties(freedom-to-smash PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR})
+# Link necessary libraries
 target_link_libraries(
   freedom-to-smash
   ${ENET_LIBRARIES}
@@ -47,3 +52,7 @@ target_link_libraries(
   ${OGRE_LIBRARIES}
   ${OPENAL_LIBRARY}
   )
+# Link optional libraries
+if(ENET_FOUND)
+    target_link_libraries(freedom-to-smash ${ENET_LIBRARIES})
+endif()
