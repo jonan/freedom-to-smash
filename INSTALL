@@ -1,0 +1,12 @@
+=== INSTALL ===
+
+*** DEBIAN ***
+
+(as root)
+# aptitude install g++ cmake make libogre-dev libois-dev libboost-all-dev liblua5.1-0-dev libopenal-dev libsdl1.2-dev
+
+(in the source directory)
+$ mkdir build
+$ cd build
+$ cmake ..
+$ make
