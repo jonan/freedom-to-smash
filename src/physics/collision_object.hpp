@@ -24,6 +24,11 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 
 #include "util.hpp"
 
+#include <LinearMath/btTransform.h>
+
+class btCollisionShape;
+class btTransform;
+
 namespace physics {
 
 /// Collisions types.
@@ -34,11 +39,16 @@ enum CollisionType { NO_COLLISION,
                      BOTTOM_COLLISION,
                      FULL_COLLISION   };
 
-/// General object class.
+/// Class to create object that will be able to collide.
 class CollisionObject {
 public:
     CollisionObject(void); // Constructor
     virtual ~CollisionObject(void) {} // Destructor
+
+    // @{
+    /// Set functions.
+    void setShape(btCollisionShape &shape, const btTransform &center_offset = btTransform::getIdentity());
+    // @}
 
     /// Detects the collision with another object.
     /// @param[in] obj Object.
@@ -46,6 +56,9 @@ public:
     CollisionType detectCollision(const CollisionObject &obj) const;
 
 private:
+    btCollisionShape *shape;
+    btTransform *offset;
+
     DISALLOW_COPY_AND_ASSIGN(CollisionObject);
 };
 

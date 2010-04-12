@@ -17,12 +17,21 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 
 #include "collision_object.hpp"
 
+#include <btBulletCollisionCommon.h>
+
 namespace physics {
 
 // Constructor
 CollisionObject::CollisionObject(void)
 {
+    offset = new btTransform;
+}
 
+// Set function.
+void CollisionObject::setShape(btCollisionShape &shape, const btTransform &center_offset)
+{
+    this->shape = &shape;
+    *offset = center_offset;
 }
 
 // Detects the collision with another object.
