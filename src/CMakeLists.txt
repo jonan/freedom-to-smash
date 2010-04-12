@@ -51,6 +51,7 @@ target_link_libraries(
   ${OIS_LIBRARIES}
   ${OGRE_LIBRARIES}
   ${OPENAL_LIBRARY}
+  ${SDL_LIBRARY}
   )
 # Link optional libraries
 if(ENET_FOUND)

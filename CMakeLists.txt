@@ -9,6 +9,7 @@ find_package(Lua51 REQUIRED)
 find_package(OGRE REQUIRED)
 find_package(OIS REQUIRED)
 find_package(OpenAL REQUIRED)
+find_package(SDL REQUIRED)
 
 include_directories(
   ${Boost_INCLUDE_DIRS}
@@ -16,6 +17,7 @@ include_directories(
   ${OGRE_INCLUDE_DIRS}
   ${OIS_INCLUDE_DIRS}
   ${OPENAL_INCLUDE_DIR}
+  ${SDL_INCLUDE_DIR}
   )
 
 # Optional libraries
