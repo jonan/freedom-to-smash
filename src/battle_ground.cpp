@@ -127,6 +127,7 @@ void BattleGround::createCaelumSky()
 		(Caelum::CaelumSystem::CaelumComponent)(
 		Caelum::CaelumSystem::CaelumComponent::CAELUM_COMPONENT_SKY_DOME
 		| Caelum::CaelumSystem::CaelumComponent::CAELUM_COMPONENT_SUN
+		| Caelum::CaelumSystem::CaelumComponent::CAELUM_COMPONENT_CLOUDS
 		/*| Caelum::CaelumSystem::CaelumComponent::CAELUM_COMPONENT_MOON*/
 		| Caelum::CaelumSystem::CaelumComponent::CAELUM_COMPONENT_IMAGE_STARFIELD
 		/*| Caelum::CaelumSystem::CaelumComponent::CAELUM_COMPONENT_PRECIPITATION*/
@@ -197,7 +198,7 @@ bool BattleGround::frameStarted(const Ogre::FrameEvent &event)
 	#ifdef USE_CAELUM
 	// Update Caelum
 	mCaelumSystem->notifyCameraChanged(this->camera);
-	mCaelumSystem->updateSubcomponents(event.timeSinceLastFrame);
+	mCaelumSystem->updateSubcomponents(event.timeSinceLastFrame * 1000);
 	#endif
 
 	#ifdef USE_HYDRAX
