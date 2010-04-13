@@ -19,7 +19,23 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 
 #include <btBulletCollisionCommon.h>
 
+#include "collision_object.hpp"
+
 namespace physics {
+
+//
+void CollisionScene::addCollisionObject(CollisionObject *obj)
+{
+    obj->setCollisionScene(this);
+    world->addCollisionObject(obj->getCollisionObject());
+}
+
+//
+void CollisionScene::removeCollisionObject(CollisionObject *obj)
+{
+    obj->setCollisionScene(NULL);
+    world->removeCollisionObject(obj->getCollisionObject());
+}
 
 // Constructor
 CollisionScene::CollisionScene(void)

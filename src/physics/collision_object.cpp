@@ -19,12 +19,15 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 
 #include <btBulletCollisionCommon.h>
 
+#include "collision_scene.hpp"
+
 namespace physics {
 
 // Constructor
 CollisionObject::CollisionObject(void)
         : offset(new btTransform)
         , collision_object(new btCollisionObject)
+        , scene(NULL)
 {
 
 }
@@ -32,6 +35,7 @@ CollisionObject::CollisionObject(void)
 // Desctructor
 CollisionObject::~CollisionObject(void)
 {
+    if (scene) scene->removeCollisionObject(this);
     delete offset;
     delete collision_object;
 }

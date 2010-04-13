@@ -32,6 +32,8 @@ class btTransform;
 
 namespace physics {
 
+class CollisionScene;
+
 /// Collisions types.
 enum CollisionType { NO_COLLISION,
                      LEFT_COLLISION,
@@ -49,6 +51,12 @@ public:
     // @{
     /// Set functions.
     void setShape(btCollisionShape &shape, const btTransform &center_offset = btTransform::getIdentity());
+    void setCollisionScene(CollisionScene *scene) {this->scene = scene;}
+    // @}
+
+    // @{
+    /// Get functions.
+    btCollisionObject* getCollisionObject(void) {return collision_object;}
     // @}
 
     /// Detects the collision with another object.
@@ -59,6 +67,8 @@ public:
 private:
     btTransform *offset;
     btCollisionObject *collision_object;
+
+    CollisionScene *scene;
 
     DISALLOW_COPY_AND_ASSIGN(CollisionObject);
 };

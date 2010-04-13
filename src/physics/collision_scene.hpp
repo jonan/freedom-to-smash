@@ -31,8 +31,17 @@ class btDefaultCollisionConfiguration;
 
 namespace physics {
 
+class CollisionObject;
+
 /// A physic scene with collision detection.
 class CollisionScene {
+public:
+    // @{
+    ///
+    void addCollisionObject    (CollisionObject *obj);
+    void removeCollisionObject (CollisionObject *obj);
+    // @}
+
 protected:
     CollisionScene(void); // Constructor
     ~CollisionScene(void); // Destructor
