@@ -18,7 +18,6 @@ Ogre::Vector3 lua_vectorexpr( lua_State * L, const char * expr,
 
 
 
-//}
 
 
 #endif

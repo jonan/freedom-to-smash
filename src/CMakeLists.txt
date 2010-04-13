@@ -16,7 +16,7 @@ set(
   
   luautils.cpp
   lua_evaluator.cpp
-  luaeng.cpp
+  lua_engine.cpp
   )
 
 set(
@@ -37,11 +37,11 @@ set(
   swigrt.h
   luautils.hpp
   lua_evaluator.hpp
-  luaeng.hpp
+  lua_engine.hpp
   )
   
   
-SOURCE_GROUP(Lua FILES luautils.cpp luautils.hpp lua_evaluator.cpp lua_evaluator.hpp luaeng.cpp luaeng.hpp)
+SOURCE_GROUP(Lua FILES luautils.cpp luautils.hpp lua_evaluator.cpp lua_evaluator.hpp lua_engine.cpp lua_engine.hpp)
 SOURCE_GROUP(Lua\\Generated FILES swigrt.h)
 
   

@@ -16,7 +16,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 */
 
 
-#include "luaeng.hpp"
+#include "lua_engine.hpp"
 
 
 int LuaEngine::mTop = 0;
