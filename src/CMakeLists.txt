@@ -13,6 +13,10 @@ set(
   scene.cpp
   script.cpp
   server.cpp
+  
+  luautils.cpp
+  luaeval.cpp
+  luaeng.cpp
   )
 
 set(
@@ -29,8 +33,18 @@ set(
   scene.hpp
   script.hpp
   server.hpp
+  
+  swigrt.h
+  luautils.hpp
+  luaeval.hpp
+  luaeng.hpp
   )
+  
+  
+SOURCE_GROUP(Lua FILES luautils.cpp luautils.hpp luaeval.cpp luaeval.hpp luaeng.cpp luaeng.hpp)
+SOURCE_GROUP(Lua\Generated FILES swigrt.h)
 
+  
 if(WIN32)
     if(NOT CYGWIN)
         list(APPEND SRC ${HEADERS})
