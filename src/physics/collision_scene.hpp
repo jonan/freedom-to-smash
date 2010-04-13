@@ -22,6 +22,8 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #ifndef PHYSICS_COLLISION_SCENE_HPP
 #define PHYSICS_COLLISION_SCENE_HPP
 
+#include <list>
+
 #include "util.hpp"
 
 class btAxisSweep3;
@@ -48,6 +50,7 @@ protected:
 
 private:
     btCollisionWorld *world;
+    std::list<CollisionObject*> collision_objects;
 
     btDefaultCollisionConfiguration *configuration;
     btCollisionDispatcher *dispatcher;

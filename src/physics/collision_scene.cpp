@@ -28,6 +28,7 @@ void CollisionScene::addCollisionObject(CollisionObject *obj)
 {
     obj->setCollisionScene(this);
     world->addCollisionObject(obj->getCollisionObject());
+    collision_objects.push_back(obj);
 }
 
 //
@@ -35,6 +36,7 @@ void CollisionScene::removeCollisionObject(CollisionObject *obj)
 {
     obj->setCollisionScene(NULL);
     world->removeCollisionObject(obj->getCollisionObject());
+    collision_objects.remove(obj);
 }
 
 // Constructor
@@ -48,6 +50,8 @@ CollisionScene::CollisionScene(void)
 
 // Destructor
 CollisionScene::~CollisionScene(void) {
+    while (!collision_objects.empty())
+        removeCollisionObject(collision_objects.front());
     delete world;
     delete broadphase;
     delete dispatcher;
