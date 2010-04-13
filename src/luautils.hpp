@@ -44,6 +44,7 @@ Returns 0 if there's an error, 1 otherwise.
 */
 int lua_boolexpr( lua_State* L, const char* expr );
 
+
 Ogre::Vector3 lua_vectorexpr( lua_State * L, const char * expr, 
 							 Ogre::Vector3 const & def );
 

@@ -15,7 +15,7 @@ set(
   server.cpp
   
   luautils.cpp
-  luaeval.cpp
+  lua_evaluator.cpp
   luaeng.cpp
   )
 
@@ -36,13 +36,13 @@ set(
   
   swigrt.h
   luautils.hpp
-  luaeval.hpp
+  lua_evaluator.hpp
   luaeng.hpp
   )
   
   
-SOURCE_GROUP(Lua FILES luautils.cpp luautils.hpp luaeval.cpp luaeval.hpp luaeng.cpp luaeng.hpp)
-SOURCE_GROUP(Lua\Generated FILES swigrt.h)
+SOURCE_GROUP(Lua FILES luautils.cpp luautils.hpp lua_evaluator.cpp lua_evaluator.hpp luaeng.cpp luaeng.hpp)
+SOURCE_GROUP(Lua\\Generated FILES swigrt.h)
 
   
 if(WIN32)
