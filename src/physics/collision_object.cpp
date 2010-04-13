@@ -23,14 +23,23 @@ namespace physics {
 
 // Constructor
 CollisionObject::CollisionObject(void)
+        : offset(new btTransform)
+        , collision_object(new btCollisionObject)
 {
-    offset = new btTransform;
+
+}
+
+// Desctructor
+CollisionObject::~CollisionObject(void)
+{
+    delete offset;
+    delete collision_object;
 }
 
 // Set function.
 void CollisionObject::setShape(btCollisionShape &shape, const btTransform &center_offset)
 {
-    this->shape = &shape;
+    collision_object->setCollisionShape(&shape);
     *offset = center_offset;
 }
 

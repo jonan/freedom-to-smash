@@ -26,6 +26,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 
 #include <LinearMath/btTransform.h>
 
+class btCollisionObject;
 class btCollisionShape;
 class btTransform;
 
@@ -43,7 +44,7 @@ enum CollisionType { NO_COLLISION,
 class CollisionObject {
 public:
     CollisionObject(void); // Constructor
-    virtual ~CollisionObject(void) {} // Destructor
+    virtual ~CollisionObject(void); // Destructor
 
     // @{
     /// Set functions.
@@ -56,8 +57,8 @@ public:
     CollisionType detectCollision(const CollisionObject &obj) const;
 
 private:
-    btCollisionShape *shape;
     btTransform *offset;
+    btCollisionObject *collision_object;
 
     DISALLOW_COPY_AND_ASSIGN(CollisionObject);
 };
