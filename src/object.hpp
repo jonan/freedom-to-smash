@@ -54,7 +54,7 @@ public:
     /// @param[in] x Units to move in the x axes.
     /// @param[in] y Units to move in the y axes.
     /// @param[in] z Units to move in the z axes.
-    void translate(const Real x, const Real y, const Real z);
+    void translate(const Real &x, const Real &y, const Real &z);
 
 protected:
     // Creates a new entity and returns a pointer to it.

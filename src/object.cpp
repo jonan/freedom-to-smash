@@ -60,7 +60,7 @@ const Ogre::Vector3& Object::getPosition(void) const
 }
 
 // Move the object.
-void Object::translate(const Real x, const Real y, const Real z)
+void Object::translate(const Real &x, const Real &y, const Real &z)
 {
     node->translate(x, y, z);
 }

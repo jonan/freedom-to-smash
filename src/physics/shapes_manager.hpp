@@ -39,7 +39,7 @@ public:
 
     // @{
     /// Functions to get the different physic shapes.
-    btBoxShape* getBoxShape(const float width, const float height, const float depth);
+    btBoxShape* getBoxShape(const Real &width, const Real &height, const Real &depth);
     // @}
 
 private:
@@ -47,7 +47,7 @@ private:
 
     // @{
     // Functions to find a given shape.
-    btBoxShape* findBoxShape(const float width, const float height, const float depth);
+    btBoxShape* findBoxShape(const Real &width, const Real &height, const Real &depth);
     // @}
 
     std::list<btBoxShape*> box_shapes;

@@ -41,7 +41,7 @@ Scene::~Scene(void)
 }
 
 // Adds an object to the scene.
-void Scene::addObject(const char *entity, const Ogre::Vector3 &position)
+void Scene::addObject(const String &entity, const Ogre::Vector3 &position)
 {
     Object *obj = new Object(*manager);
     obj->setEntity(entity);

@@ -38,7 +38,7 @@ ShapesManager::~ShapesManager(void) {
 }
 
 // Function to get a box shape.
-btBoxShape* ShapesManager::getBoxShape(const float width, const float height, const float depth) {
+btBoxShape* ShapesManager::getBoxShape(const Real &width, const Real &height, const Real &depth) {
     btBoxShape* temp = findBoxShape(width, height, depth);
     if (!temp) {
         temp = new btBoxShape(btVector3(width/2, height/2, depth/2));
@@ -48,7 +48,7 @@ btBoxShape* ShapesManager::getBoxShape(const float width, const float height, co
 }
 
 // Functions to find a given box shape.
-btBoxShape* ShapesManager::findBoxShape(const float width, const float height, const float depth) {
+btBoxShape* ShapesManager::findBoxShape(const Real &width, const Real &height, const Real &depth) {
     btBoxShape* temp = NULL;
     btVector3 half_size;
     BOOST_FOREACH(btBoxShape *shape, box_shapes) {
