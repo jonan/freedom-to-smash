@@ -23,6 +23,9 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 
 #include "input.hpp"
 
+#include "lua_engine.hpp"
+#include "lua_evaluator.hpp"
+
 // Loads the Ogre plugins that will be used.
 void loadPlugins(Ogre::Root *ogre_root)
 {
@@ -79,6 +82,14 @@ void initializeAllResources(void)
 // Loads all the necessary things for the game to run.
 void boot(void)
 {
+	// Runs the first script
+	lua_State * L = lua_open();
+	luaopen_base(L);
+	LuaEngine::RunFile(L, "../../scripts/config.lua");
+	lua_close(L);
+
+	system("pause");
+
     // Start Ogre
     Ogre::Root *ogre_root = new Ogre::Root;
     // For the moment plugins are loaded according to plugins.cfg
