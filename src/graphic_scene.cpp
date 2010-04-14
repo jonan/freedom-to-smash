@@ -15,7 +15,7 @@ You should have received a copy of the GNU General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>
 */
 
-#include "scene.hpp"
+#include "graphic_scene.hpp"
 
 #include <boost/foreach.hpp>
 
@@ -27,21 +27,21 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #include "object.hpp"
 
 // Constructor
-Scene::Scene(void)
+GraphicScene::GraphicScene(void)
 {
     manager = Ogre::Root::getSingleton().createSceneManager(Ogre::ST_GENERIC);
     viewport = Ogre::Root::getSingleton().getAutoCreatedWindow()->addViewport(NULL);
 }
 
 // Destructor
-Scene::~Scene(void)
+GraphicScene::~GraphicScene(void)
 {
     BOOST_FOREACH(Object *obj, objects)
         delete obj;
 }
 
 // Adds an object to the scene.
-void Scene::addObject(const String &entity, const Ogre::Vector3 &position)
+void GraphicScene::addObject(const String &entity, const Ogre::Vector3 &position)
 {
     Object *obj = new Object(*manager);
     obj->setEntity(entity);
@@ -50,9 +50,9 @@ void Scene::addObject(const String &entity, const Ogre::Vector3 &position)
 }
 
 // Adds a static camera.
-int Scene::addCamera(const Ogre::String &name, const Ogre::Vector3 &position,
-                     const Ogre::Vector3 &look_at,
-                     const unsigned int near_clip, const unsigned int far_clip)
+int GraphicScene::addCamera(const Ogre::String &name, const Ogre::Vector3 &position,
+                            const Ogre::Vector3 &look_at,
+                            const unsigned int near_clip, const unsigned int far_clip)
 {
     Ogre::Camera *cam = createCamera(name, position, near_clip, far_clip);
     cam->lookAt(look_at);
@@ -61,9 +61,9 @@ int Scene::addCamera(const Ogre::String &name, const Ogre::Vector3 &position,
 }
 
 // Adds a static camera that follows a given node.
-int Scene::addCamera(const Ogre::String &name, const Ogre::Vector3 &position,
-                     Ogre::SceneNode &look_at, const unsigned int near_clip,
-                     const unsigned int far_clip)
+int GraphicScene::addCamera(const Ogre::String &name, const Ogre::Vector3 &position,
+                            Ogre::SceneNode &look_at, const unsigned int near_clip,
+                            const unsigned int far_clip)
 {
     Ogre::Camera *cam = createCamera(name, position, near_clip, far_clip);
     cam->setAutoTracking(true, &look_at);
@@ -72,13 +72,13 @@ int Scene::addCamera(const Ogre::String &name, const Ogre::Vector3 &position,
 }
 
 // Use the given camera.
-void Scene::useCamera(const int num_camera) {
+void GraphicScene::useCamera(const int num_camera) {
     camera[num_camera]->setAspectRatio(Ogre::Real(viewport->getActualWidth()) / Ogre::Real(viewport->getActualHeight()));
     viewport->setCamera(camera[num_camera]);
 }
 
 // Adds a light.
-void Scene::addLight(const Ogre::String &name, const Ogre::Vector3 &position,
+void GraphicScene::addLight(const Ogre::String &name, const Ogre::Vector3 &position,
                      const Ogre::Light::LightTypes &type)
 {
     light.push_back(manager->createLight(name));
@@ -87,20 +87,20 @@ void Scene::addLight(const Ogre::String &name, const Ogre::Vector3 &position,
 }
 
 // Sets the ambient light.
-void Scene::setAmbientLight(const Ogre::ColourValue &colour)
+void GraphicScene::setAmbientLight(const Ogre::ColourValue &colour)
 {
     manager->setAmbientLight(colour);
 }
 
 // Sets the type of technique to use when creating the scene's shadows.
-void Scene::setShadowTechnique(const Ogre::ShadowTechnique technique)
+void GraphicScene::setShadowTechnique(const Ogre::ShadowTechnique technique)
 {
     manager->setShadowTechnique(technique);
 }
 
 // Creates a camera for the scene.
-Ogre::Camera* Scene::createCamera(const Ogre::String &name, const Ogre::Vector3 &position,
-                                  const unsigned int near_clip, const unsigned int far_clip)
+Ogre::Camera* GraphicScene::createCamera(const Ogre::String &name, const Ogre::Vector3 &position,
+                                         const unsigned int near_clip, const unsigned int far_clip)
 {
     Ogre::Camera *cam = manager->createCamera(name);
     cam->setPosition(position);

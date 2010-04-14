@@ -7,12 +7,13 @@ set(
   battle_ground.cpp
   boot.cpp
   character.cpp
+  graphic_scene.cpp
   input.cpp
   main.cpp
   object.cpp
   platform.cpp
   player.cpp
-  scene.cpp
+#  scene.cpp
   script.cpp
   server.cpp
   )
@@ -26,11 +27,12 @@ set(
   battle_ground.hpp
   boot.hpp
   character.hpp
+  graphic_scene.hpp
   input.hpp
   object.hpp
   platform.hpp
   player.hpp
-  scene.hpp
+#  scene.hpp
   script.hpp
   server.hpp
   )

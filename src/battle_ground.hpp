@@ -25,14 +25,14 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #include <OIS/OIS.h>
 
 #include "physics/collision_scene.hpp"
-#include "scene.hpp"
+#include "graphic_scene.hpp"
 #include "util.hpp"
 
 class Character;
 class Object;
 
 /// Class to control all that happens in a battle ground.
-class BattleGround : public Scene, public physics::CollisionScene, public OIS::KeyListener {
+class BattleGround : public GraphicScene, public physics::CollisionScene, public OIS::KeyListener {
 public:
     BattleGround(void); // Constructor
     ~BattleGround(void); // Destructor

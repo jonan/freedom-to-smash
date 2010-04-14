@@ -16,11 +16,11 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 */
 
 /// @file
-/// The Scene class.
+/// The GraphicScene class.
 /// @author Jonan
 
-#ifndef SCENE_HPP
-#define SCENE_HPP
+#ifndef GRAPHIC_SCENE_HPP
+#define GRAPHIC_SCENE_HPP
 
 #include <list>
 #include <vector>
@@ -39,11 +39,11 @@ namespace Ogre {
 
 class Object;
 
-/// General Scene methods an attributes.
-class Scene : public Ogre::FrameListener {
+/// Class to control all the graphical elements of a scene.
+class GraphicScene : public Ogre::FrameListener {
 public:
-    Scene(void); // Constructor
-    ~Scene(void); // Destructor
+    GraphicScene(void); // Constructor
+    ~GraphicScene(void); // Destructor
 
 protected:
     // Adds an object to the scene.
@@ -85,7 +85,7 @@ private:
     Ogre::Camera* createCamera(const Ogre::String &name, const Ogre::Vector3 &position,
                                const unsigned int near_clip, const unsigned int far_clip);
 
-    DISALLOW_COPY_AND_ASSIGN(Scene);
+    DISALLOW_COPY_AND_ASSIGN(GraphicScene);
 };
 
-#endif // SCENE_HPP
+#endif // GRAPHIC_SCENE_HPP
