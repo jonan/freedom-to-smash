@@ -28,7 +28,6 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 
 class btCollisionObject;
 class btCollisionShape;
-class btTransform;
 
 namespace physics {
 
