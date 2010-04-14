@@ -20,6 +20,9 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #include <OgreEntity.h>
 #include <OgreSceneManager.h>
 
+#include "physics/converter_functions.hpp"
+#include "physics/shapes_manager.hpp"
+
 // Constructor
 Object::Object(Ogre::SceneManager &scene_manager)
         : entity(NULL)
@@ -39,6 +42,11 @@ void Object::setEntity(const String &name)
 {
     entity = createEntity(name);
     node->attachObject(entity);
+    // Create a physic shape from the entity's bounding box
+    Ogre::AxisAlignedBox bounding_box = entity->getWorldBoundingBox();
+    btVector3 size = physics::vector3(bounding_box.getMaximum() - bounding_box.getMinimum());
+    btCollisionShape *shape = physics::ShapesManager::getInstance()->getBoxShape(size);
+    setShape(*shape);
 }
 
 // Set function.
