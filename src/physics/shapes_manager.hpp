@@ -28,6 +28,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 
 // Bullet classes
 class btBoxShape;
+class btCollisionShape;
 class btVector3;
 
 namespace physics {
@@ -40,7 +41,7 @@ public:
 
     // @{
     /// Functions to get the different physic shapes.
-    btBoxShape* getBoxShape(const btVector3 &size);
+    btCollisionShape* getBoxShape(const btVector3 &size);
     // @}
 
 private:

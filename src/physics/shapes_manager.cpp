@@ -38,7 +38,7 @@ ShapesManager::~ShapesManager(void) {
 }
 
 // Function to get a box shape.
-btBoxShape* ShapesManager::getBoxShape(const btVector3 &size) {
+btCollisionShape* ShapesManager::getBoxShape(const btVector3 &size) {
     btBoxShape* temp = findBoxShape(size);
     if (!temp) {
         temp = new btBoxShape(size/2);
