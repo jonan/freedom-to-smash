@@ -175,8 +175,10 @@ void Character::frameAnimation(const Ogre::FrameEvent &event)
     // Check what animations need to be enabled
     for (int i=0; i<NUM_STATES; i++) {
         if (action[i]) {
-            if (performAnimation(i, event) && i!=JUMP) {
-                stopAction(i);
+            if (!(i==MOVE && !on_floor)) {
+                if (performAnimation(i, event) && i!=JUMP) {
+                    stopAction(i);
+                }
             }
         }
     }
