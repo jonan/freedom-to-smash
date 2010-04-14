@@ -28,6 +28,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 
 // Bullet classes
 class btBoxShape;
+class btVector3;
 
 namespace physics {
 
@@ -39,7 +40,7 @@ public:
 
     // @{
     /// Functions to get the different physic shapes.
-    btBoxShape* getBoxShape(const Real &width, const Real &height, const Real &depth);
+    btBoxShape* getBoxShape(const btVector3 &size);
     // @}
 
 private:
@@ -47,7 +48,7 @@ private:
 
     // @{
     // Functions to find a given shape.
-    btBoxShape* findBoxShape(const Real &width, const Real &height, const Real &depth);
+    btBoxShape* findBoxShape(const btVector3 &size);
     // @}
 
     std::list<btBoxShape*> box_shapes;

@@ -38,23 +38,22 @@ ShapesManager::~ShapesManager(void) {
 }
 
 // Function to get a box shape.
-btBoxShape* ShapesManager::getBoxShape(const Real &width, const Real &height, const Real &depth) {
-    btBoxShape* temp = findBoxShape(width, height, depth);
+btBoxShape* ShapesManager::getBoxShape(const btVector3 &size) {
+    btBoxShape* temp = findBoxShape(size);
     if (!temp) {
-        temp = new btBoxShape(btVector3(width/2, height/2, depth/2));
+        temp = new btBoxShape(size/2);
         box_shapes.push_back(temp);
     }
     return temp;
 }
 
 // Functions to find a given box shape.
-btBoxShape* ShapesManager::findBoxShape(const Real &width, const Real &height, const Real &depth) {
+btBoxShape* ShapesManager::findBoxShape(const btVector3 &size) {
     btBoxShape* temp = NULL;
-    btVector3 half_size;
+    btVector3 half_size = size/2;
     BOOST_FOREACH(btBoxShape *shape, box_shapes) {
         if (!temp) {
-            half_size = shape->getHalfExtentsWithMargin();
-            if (half_size.x() == width/2 && half_size.y() == height/2 && half_size.z() == depth/2)
+            if (half_size == shape->getHalfExtentsWithMargin())
                 temp = shape;
         }
     }
