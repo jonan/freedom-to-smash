@@ -88,8 +88,6 @@ void boot(void)
 	LuaEngine::RunFile(L, "../../scripts/config.lua");
 	lua_close(L);
 
-	system("pause");
-
     // Start Ogre
     Ogre::Root *ogre_root = new Ogre::Root;
     // For the moment plugins are loaded according to plugins.cfg
