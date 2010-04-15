@@ -3,9 +3,6 @@
 
 #include <AL/al.h>
 
-namespace audio
-{
-
 class SoundBuffer {
 public:
     SoundBuffer(const char* name, const char* path, const char* extension);
@@ -18,7 +15,5 @@ private:
     const char* mName;
     ALuint mBuffer;
 };
-
-}
 
 #endif // SOUNDBUFFER_HPP

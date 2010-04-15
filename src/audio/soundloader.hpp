@@ -3,8 +3,6 @@
 
 #include <AL/al.h>
 
-namespace audio
-{
 
 class SoundLoader {
 public:
@@ -14,5 +12,4 @@ private:
     SoundLoader();
 };
 
-}
 #endif // SOUNDLOADER_HPP

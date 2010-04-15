@@ -1,8 +1,5 @@
 #include "soundresources.hpp"
 
-#include <string>
-using namespace audio;
-
 
 SoundResources* SoundResources::getInstance()
 {
@@ -22,17 +19,19 @@ SoundResources::~SoundResources()
     mBufferList.clear();
 }
 
-SoundBuffer* SoundResources::loadSound(const char* name, const char* extension, const char* location)
+SoundBuffer* SoundResources::loadSound(const char* name, const char* extension)
 {
-    std::string path = location; path += name; path += extension;
+    Ogre::String path = defaultLocation;
+    path += name; path += extension;
     SoundBuffer* buffer = new SoundBuffer(name, path.c_str(), extension);
     mBufferList.push_back(buffer);
     return buffer;
 }
 
-SoundBuffer* SoundResources::getSound(const char* name)
+SoundBuffer* SoundResources::getSound(const char* name, const char* extension)
 {
-    std::string temp = name;
+    Ogre::String temp = name;
+
     std::list<SoundBuffer*>::iterator it;
     // Find name ocurrences in buffer list
     for( it = mBufferList.begin(); it != mBufferList.end(); it++ )
@@ -40,9 +39,10 @@ SoundBuffer* SoundResources::getSound(const char* name)
         if (temp == (*it)->getName())
             return *it;
     }
-    return loadSound(name);
+    return loadSound(name, extension);
 }
 
 SoundResources::SoundResources()
 {
+    defaultLocation = "media/sound/";
 }

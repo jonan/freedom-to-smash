@@ -6,38 +6,30 @@
 #include "soundresources.hpp"
 #include "soundsource.hpp"
 
-namespace audio {
-
 class SoundManager {
 public:
     static SoundManager* getInstance();
     ~SoundManager();
 
-    void createSource(const char* name, const char* songName, const char* extension=".wav");
-
+    void setSourceFolder(const char* path);
+    SoundSource* createSource(const char* sourceName, const char* songName, const char* extension=".wav");
+    void setVolume(ALfloat vol);
 
 protected:
     SoundManager();
     bool init();
-    void foo();
 
     // OpenAL vars
     ALCdevice *mDevice;
     ALCcontext *mContext;
+    ALfloat volume;
     // Listener Values
     ALfloat mListenerPos[3];
     ALfloat mListenerVel[3];
     ALfloat mListenerOri[6];
-    // Background Values
-    ALfloat mBackgroundPos[3];
-    ALfloat mBackgroundVel[3];
-    ALuint  mBackgrondSrc;
-
     // ResourceManager
     SoundResources *mResourceManager;
-    // SoundSourcesList
+    std::list<SoundSource*> mSourceList;
 };
-
-}
 
 #endif // SOUNDMANAGER_HPP

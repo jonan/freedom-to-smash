@@ -11,13 +11,15 @@ public:
     void play() { alSourcePlay(mSource);}
     void pause() { alSourcePause(mSource);}
     void stop() { alSourceStop(mSource);}
+    void setVolume(ALfloat num) { alSourcef(mSource, AL_GAIN, num);}
+
 
 private:
-    // Background Values
+    const char* name;
+    ALuint *mBuffer;
+    ALuint  mSource;
     ALfloat mPosition[3];
     ALfloat mVelocity[3];
-    ALuint  mSource;
-    ALuint *mBuffer;
 };
 
 #endif // SOUNDSOURCE_HPP
