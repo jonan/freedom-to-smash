@@ -3,7 +3,7 @@
 
 #include "soundbuffer.hpp"
 #include "../util.hpp"
-#include <string>
+#include <list>
 
 class SoundResources {
 public:
