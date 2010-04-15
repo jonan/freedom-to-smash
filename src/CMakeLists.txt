@@ -12,6 +12,10 @@ set(
   player.cpp
   scene.cpp
   script.cpp
+  audio/soundmanager.cpp
+  audio/soundloader.cpp
+  audio/soundresources.cpp
+  audio/soundbuffer.cpp
   )
 
 set(
@@ -27,6 +31,10 @@ set(
   player.hpp
   scene.hpp
   script.hpp
+  audio/soundmanager.hpp
+  audio/soundloader.hpp
+  audio/soundresources.hpp
+  audio/soundbuffer.hpp
   )
 
 # Compile the network code only if ENet was found

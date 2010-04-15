@@ -22,6 +22,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #include <OgreRoot.h>
 
 #include "input.hpp"
+#include "audio/soundmanager.hpp"
 
 // Loads the Ogre plugins that will be used.
 void loadPlugins(Ogre::Root *ogre_root)
@@ -88,6 +89,8 @@ void boot(void)
     initializeAllResources();
     // Start capturing all input
     Input::getInstance();
+    // Start OpenAL
+    audio::SoundManager::getInstance();
 }
 
 // Shuts down all the systems and frees memory.
