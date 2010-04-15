@@ -23,7 +23,6 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #include <OgreRoot.h>
 
 #include "character.hpp"
-#include "input.hpp"
 
 // Constructor
 BattleGround::BattleGround(void)
@@ -48,7 +47,6 @@ BattleGround::BattleGround(void)
 // Destructor
 BattleGround::~BattleGround(void)
 {
-    Input::getInstance()->removeKeyListener(*this);
     BOOST_FOREACH(Character *character, players)
         delete character;
 }
@@ -65,7 +63,6 @@ Character* BattleGround::createCharacter(void)
 void BattleGround::start(void)
 {
     Ogre::Root::getSingleton().addFrameListener(this);
-    Input::getInstance()->addKeyListener(*this);
     Ogre::Root::getSingleton().startRendering();
 }
 
@@ -80,12 +77,4 @@ bool BattleGround::frameStarted(const Ogre::FrameEvent &event)
     average /= players.size();
     cam_node->setPosition(average);
     return !end;
-}
-
-// Function to update the keyboard's state.
-bool BattleGround::keyReleased(const OIS::KeyEvent &key)
-{
-    if (key.key == OIS::KC_ESCAPE)
-        end = true;
-    return true;
 }

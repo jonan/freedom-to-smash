@@ -22,8 +22,6 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #ifndef BATTLE_GROUND_HPP
 #define BATTLE_GROUND_HPP
 
-#include <OIS/OIS.h>
-
 #include "physics/collision_scene.hpp"
 #include "graphic_scene.hpp"
 #include "util.hpp"
@@ -32,7 +30,7 @@ class Character;
 class Object;
 
 /// Class to control all that happens in a battle ground.
-class BattleGround : public GraphicScene, public physics::CollisionScene, public OIS::KeyListener {
+class BattleGround : public GraphicScene, public physics::CollisionScene {
 public:
     BattleGround(void); // Constructor
     ~BattleGround(void); // Destructor
@@ -49,12 +47,6 @@ public:
 private:
     // Function that's called at the beginning of every frame.
     virtual bool frameStarted(const Ogre::FrameEvent &event);
-
-    // @{
-    // Functions to update the keyboard's state.
-    virtual bool keyPressed  (const OIS::KeyEvent &key) {return true;}
-    virtual bool keyReleased (const OIS::KeyEvent &key);
-    // @}
 
     std::list<Character*> players;
     Ogre::SceneNode *cam_node;
