@@ -17,6 +17,8 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 
 #include "scene.hpp"
 
+#include "object.hpp"
+
 // Constructor
 Scene::Scene(void)
 {
@@ -27,4 +29,11 @@ Scene::Scene(void)
 Scene::~Scene(void)
 {
 
+}
+
+// Adds an object to the scene.
+void Scene::addObject(const String &entity, const Ogre::Vector3 &position)
+{
+    GraphicScene::addObject(entity, position);
+    physics::CollisionScene::addCollisionObject(objects.back());
 }

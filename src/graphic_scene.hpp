@@ -47,7 +47,7 @@ public:
 
 protected:
     // Adds an object to the scene.
-    void addObject(const String &entity, const Ogre::Vector3 &position);
+    virtual void addObject(const String &entity, const Ogre::Vector3 &position);
 
     // Adds a static camera.
     int addCamera(const Ogre::String &name, const Ogre::Vector3 &position,

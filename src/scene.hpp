@@ -31,6 +31,10 @@ public:
     Scene(void); // Constructor
     ~Scene(void); // Destructor
 
+protected:
+    // Adds an object to the scene.
+    virtual void addObject(const String &entity, const Ogre::Vector3 &position);
+
 private:
     DISALLOW_COPY_AND_ASSIGN(Scene);
 };
