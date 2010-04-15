@@ -22,15 +22,14 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #ifndef BATTLE_GROUND_HPP
 #define BATTLE_GROUND_HPP
 
-#include "physics/collision_scene.hpp"
-#include "graphic_scene.hpp"
+#include "scene.hpp"
 #include "util.hpp"
 
 class Character;
 class Object;
 
 /// Class to control all that happens in a battle ground.
-class BattleGround : public GraphicScene, public physics::CollisionScene {
+class BattleGround : public Scene {
 public:
     BattleGround(void); // Constructor
     ~BattleGround(void); // Destructor

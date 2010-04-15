@@ -13,7 +13,7 @@ set(
   object.cpp
   platform.cpp
   player.cpp
-#  scene.cpp
+  scene.cpp
   script.cpp
   server.cpp
   )
@@ -32,7 +32,7 @@ set(
   object.hpp
   platform.hpp
   player.hpp
-#  scene.hpp
+  scene.hpp
   script.hpp
   server.hpp
   )
