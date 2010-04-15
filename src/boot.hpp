@@ -29,4 +29,9 @@ void boot(void);
 /// It has to be called last thing in the program.
 void quit(void);
 
+//! Runs the config script and parses it.
+//! As of now, the config script doesn't have much use other than
+//! testing the DDL system.
+void HandleConfigScript();
+
 #endif // BOOT_HPP

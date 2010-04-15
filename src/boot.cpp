@@ -21,6 +21,8 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #include <OgreRenderSystem.h>
 #include <OgreRoot.h>
 
+#include <boost/format.hpp>
+
 #include "input.hpp"
 
 #include "lua_engine.hpp"
@@ -79,14 +81,43 @@ void initializeAllResources(void)
     Ogre::ResourceGroupManager::getSingleton().initialiseAllResourceGroups();
 }
 
+
+void HandleConfigScript()
+{
+	lua_State * L = lua_open();
+	luaopen_base(L);
+	LuaEngine::RunFile(L, "../../scripts/config.lua");
+
+	bool welcomeMessageEnabled = false;
+	std::string welcomeMessage;
+	int majorVersion = 0, minorVersion = 0;
+	double num = 0;
+	
+	LuaEvaluator eval(L);
+	eval.evalBool("Config.MsgEnabled", welcomeMessageEnabled);
+	eval.evalString("Config.WelcomeMessage", welcomeMessage);
+	eval.evalInt("Config.MajorVersion", majorVersion);
+	eval.evalInt("Config.MinorVersion", minorVersion);
+	eval.evalNumber("Config.Num", num);
+
+	if(welcomeMessageEnabled)
+		std::cout << welcomeMessage << std::endl;
+
+	std::string versionMsg = boost::str(
+		boost::format("Version: (%d, %d)") % majorVersion % minorVersion
+		);
+	std::cout << versionMsg << std::endl;
+	std::cout << "Num: " << num << std::endl;
+
+	lua_close(L);
+}
+
+
 // Loads all the necessary things for the game to run.
 void boot(void)
 {
 	// Runs the first script
-	lua_State * L = lua_open();
-	luaopen_base(L);
-	LuaEngine::RunFile(L, "../../scripts/config.lua");
-	lua_close(L);
+	HandleConfigScript();
 
     // Start Ogre
     Ogre::Root *ogre_root = new Ogre::Root;
