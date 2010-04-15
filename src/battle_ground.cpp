@@ -34,6 +34,7 @@ BattleGround::BattleGround(void)
     setAmbientLight(Ogre::ColourValue(2.0,2.0,2.0));
     // Create camera
     cam_node = manager->getRootSceneNode()->createChildSceneNode();
+	cam_node->setPosition(Ogre::Vector3(0,4,0)); 
     int cam = addCamera("BattleGround Camera", Ogre::Vector3(0,0,-50), *cam_node);
     useCamera(cam);
     // Ground
@@ -81,7 +82,7 @@ bool BattleGround::frameStarted(const Ogre::FrameEvent &event)
         average += character->getPosition();
     }
     average /= players.size();
-    cam_node->setPosition(average);
+    //cam_node->setPosition(average);
     return !end;
 }
 
