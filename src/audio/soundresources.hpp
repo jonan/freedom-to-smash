@@ -24,6 +24,8 @@ public:
     SoundBuffer* getSound(const char* name,
                            const char* extension = ".wav");
 
+    void unloadAllBuffers();
+
 private:
     SoundResources();
 

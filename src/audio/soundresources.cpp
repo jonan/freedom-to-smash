@@ -9,14 +9,7 @@ SoundResources* SoundResources::getInstance()
 
 SoundResources::~SoundResources()
 {
-    // Delete buffers
-    std::list<SoundBuffer*>::iterator it;
-    for( it = mBufferList.begin(); it != mBufferList.end(); it++ )
-    {
-        delete (*it);
-    }
-    // Clear List
-    mBufferList.clear();
+    unloadAllBuffers();
 }
 
 SoundBuffer* SoundResources::loadSound(const char* name, const char* extension)
@@ -40,6 +33,18 @@ SoundBuffer* SoundResources::getSound(const char* name, const char* extension)
             return *it;
     }
     return loadSound(name, extension);
+}
+
+void SoundResources::unloadAllBuffers()
+{
+    // Delete buffers
+    std::list<SoundBuffer*>::iterator it;
+    for( it = mBufferList.begin(); it != mBufferList.end(); it++ )
+    {
+        delete (*it);
+    }
+    // Clear List
+    mBufferList.clear();
 }
 
 SoundResources::SoundResources()

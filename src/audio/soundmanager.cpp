@@ -21,6 +21,9 @@ SoundManager::~SoundManager()
     }
     mSourceList.clear();
 
+    // Delete all buffers created
+    mResourceManager->unloadAllBuffers();
+
     // Exit OpenAL
     alcMakeContextCurrent(NULL); // Deatach Context
     if (mContext) alcDestroyContext(mContext);
