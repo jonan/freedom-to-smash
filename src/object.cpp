@@ -53,6 +53,7 @@ void Object::setEntity(const String &name)
 void Object::setPosition(const Ogre::Vector3 &pos)
 {
     node->setPosition(pos);
+    physics::CollisionObject::setPosition(btTransform(btQuaternion(0,0,0,1), btVector3(pos.x, pos.y, pos.z)));
 }
 
 // Set function.

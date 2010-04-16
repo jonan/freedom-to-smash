@@ -47,6 +47,12 @@ void CollisionObject::setShape(btCollisionShape &shape, const btTransform &cente
     *offset = center_offset;
 }
 
+// Set function.
+void CollisionObject::setPosition(const btTransform &pos)
+{
+    collision_object->setWorldTransform(pos);
+}
+
 // Detects the collision with another object.
 CollisionType CollisionObject::detectCollision(const CollisionObject &obj) const
 {

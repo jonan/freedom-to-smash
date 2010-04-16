@@ -51,6 +51,7 @@ public:
     /// Set functions.
     void setShape(btCollisionShape &shape, const btTransform &center_offset = btTransform::getIdentity());
     void setCollisionScene(CollisionScene *scene) {this->scene = scene;}
+    void setPosition(const btTransform &pos);
     // @}
 
     // @{
