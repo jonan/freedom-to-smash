@@ -20,8 +20,9 @@ set(
 
 set(
   HEADERS
+  physics/collision_object.hpp
   physics/collision_scene.hpp
-  physics/collision_scene.hpp
+  physics/converter_functions.hpp
   physics/shapes_manager.hpp
   animated_object.hpp
   battle_ground.hpp
@@ -35,6 +36,7 @@ set(
   scene.hpp
   script.hpp
   server.hpp
+  util.hpp
   )
 
 if(WIN32)
