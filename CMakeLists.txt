@@ -20,6 +20,7 @@ include_directories(
 if(WIN32)
     add_definitions(-DNOMINMAX)
     link_libraries(winmm.lib)
+	link_libraries(ws2_32.lib)
 endif()
 
 # Copy the configuration files to the binary directory
