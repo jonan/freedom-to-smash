@@ -12,6 +12,9 @@ set(
   player.cpp
   scene.cpp
   script.cpp
+  
+  ScheduledItem.cpp
+  Scheduler.cpp
   )
 
 set(
@@ -27,7 +30,15 @@ set(
   player.hpp
   scene.hpp
   script.hpp
+  
+  Scheduler.h
+  ScheduledItem.h
+  ITask.h
   )
+  
+
+SOURCE_GROUP(Scheduler FILES ITask.h Scheduler.h Scheduler.cpp ScheduledItem.h ScheduledItem.cpp)  
+
 
 # Compile the network code only if ENet was found
 if(ENET_FOUND)
