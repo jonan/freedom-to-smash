@@ -175,7 +175,7 @@ void BattleGround::createCaelumSky()
 
 	//mCaelumSystem->setSceneFogDensityMultiplier(0);
 	//mCaelumSystem->setManageSceneFog(false);
-	//mCamera->setFarClipDistance(1000000);
+	//mCamera->setFarClipDistance(100000000);
 	//mCaelumSystem->setTimeScale(4000);
 
 	//Caelum::FlatCloudLayer * clouds = mCaelumSystem->getCloudSystem()->getLayer(0);
