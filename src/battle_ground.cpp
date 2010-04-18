@@ -32,6 +32,10 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #include <hydrax/Modules/ProjectedGrid/ProjectedGrid.h>
 #endif
 
+#ifdef USE_SKYX
+#include <SkyX.h>
+#endif
+
 #include "character.hpp"
 #include "input.hpp"
 
@@ -45,6 +49,10 @@ BattleGround::BattleGround(void)
 
 #ifdef USE_HYDRAX
 		mHydrax(NULL),
+#endif
+
+#ifdef USE_SKYX
+		mSkyX(NULL),
 #endif
 
 		end(false)
@@ -87,8 +95,27 @@ BattleGround::BattleGround(void)
 	// Create the sky
 	createCaelumSky();
 
+	// Create the sky
+	createSkyX();
+
 	// Create hydrax water plane
 	createHydraxWater();
+}
+
+
+void BattleGround::createSkyX()
+{
+#ifdef USE_SKYX
+
+	/* CREATE SKYX */
+	mSkyX = new SkyX::SkyX(scene_manager, camera);
+	mSkyX->create();
+	mSkyX->getVCloudsManager()->create();
+	SkyX::AtmosphereManager::Options atOpt = mSkyX->getAtmosphereManager()->getOptions();
+	atOpt.RayleighMultiplier = 0.0045f;
+	mSkyX->getAtmosphereManager()->setOptions(atOpt);
+
+#endif
 }
 
 
@@ -113,6 +140,14 @@ void BattleGround::createHydraxWater()
 	mHydrax->create();
 
 	mHydrax->setGlobalTransparency(0.9);
+
+
+	//#ifdef USE_CAELUM
+	//Ogre::MaterialPtr mat = mTerrain->getMaterial();
+	//Ogre::Technique * tech = mat->createTechnique();
+	//mHydrax->getMaterialManager()->addDepthTechnique(
+	//	tech);
+	//#endif
 
 #endif
 }
@@ -204,6 +239,11 @@ bool BattleGround::frameStarted(const Ogre::FrameEvent &event)
 	#ifdef USE_HYDRAX
 	// Update Hydrax
 	mHydrax->update(event.timeSinceLastFrame);
+	#endif
+
+	#ifdef USE_SKYX
+	// Update SkyX
+	mSkyX->update(event.timeSinceLastFrame);
 	#endif
 
     return !end;
