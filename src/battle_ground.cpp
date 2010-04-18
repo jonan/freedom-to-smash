@@ -53,15 +53,15 @@ BattleGround::BattleGround(void)
     scene_manager = Ogre::Root::getSingleton().createSceneManager(Ogre::ST_GENERIC);
     viewport = Ogre::Root::getSingleton().getAutoCreatedWindow()->addViewport(NULL);
     camera = scene_manager->createCamera("BattleGround Camera");
-    camera->setPosition(Ogre::Vector3(0,0,-50));
-    camera->lookAt(Ogre::Vector3(0,4,0));
+    camera->setPosition(Ogre::Vector3(0,20,-50*2));
+    camera->lookAt(Ogre::Vector3(0,4-12,0));
     camera->setNearClipDistance(5);
     camera->setFarClipDistance(1000);
     camera->setAspectRatio(Ogre::Real(viewport->getActualWidth()) / Ogre::Real(viewport->getActualHeight()));
     viewport->setCamera(camera);
 
     // Default settings
-    scene_manager->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
+    //scene_manager->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
     scene_manager->setAmbientLight(Ogre::ColourValue(2.0,2.0,2.0));
 
     // Ground
