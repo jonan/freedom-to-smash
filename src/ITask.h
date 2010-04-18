@@ -19,14 +19,14 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 
 #include <boost/shared_ptr.hpp>
 
-	//! Representa una Tarea. Es decir, una acción a ejecutar en un momento dado.
-	//! 
+	//! Represents a task. That is, an action to run at a specified time.
+	//! That action is meant to be specified by overriding the Execute function.
 	class ITask
 	{
 
 	public:
 
-		//! Construye el objeto.
+		//! Constructs a task.
 		//!
 		ITask()
 		{
@@ -38,11 +38,11 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 
 		typedef boost::shared_ptr<ITask> Ptr;
 
-		/**
-		Función miembro llamada automáticamente por el Scheduler
-		en el momento apropiado. Si devuelve cero, la Tarea se quita
-		automáticamente del Scheduler.
-		*/
+		//! Member function called automatically by the Scheduler when
+		//! the time is right. If it returns false, the task will be
+		//! automatically removed from the scheduler, whether it was
+		//! originally meant to repeat itself or not.
+		//!
 		virtual bool Execute() = 0;
 
 	};

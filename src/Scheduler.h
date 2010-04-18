@@ -1,5 +1,17 @@
-/**
-File: Scheduler.h
+/*
+Copyright (C) 2007-2010 Luis Rodríguez Gil <zstars@gmail.com>
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License version 3 as
+published by the Free Software Foundation.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program. If not, see <http://www.gnu.org/licenses/>
 */
 
 #pragma once
@@ -11,11 +23,10 @@ File: Scheduler.h
 #include "ScheduledItem.h"
 
 
-	//!
-	//! Clase Scheduler (Programador). Permite planificar Tareas, que serán ejecutadas
-	//! al pasar determinado tiempo. El tiempo de la clase es relativo. La clase está
-	//! optimizada para la ejecución e inserción de tareas. 
-	//!
+	//! Lets the user program Tasks easily, which will be executed after a 
+	//! certain amount of time has elapsed, and optionally repeat themselves
+	//! periodically. Time units used by the class are relative. The class
+	//! is optimized for task execution and insertion.
 	class Scheduler
 	{
 		unsigned long lastID;
@@ -23,15 +34,14 @@ File: Scheduler.h
 		unsigned long mCurrentTime;
 		std::set< ScheduledItem::Ptr, ScheduledItem::LessThanFunctor> mSet;
 
-		//! Función privada.
-		//! Genera una nueva ID de Tarea. Las IDs deben ser únicas dentro del
-		//! mismo Scheduler. Entre otras cosas, sirven para diferenciar a los
-		//! objetos ScheduledItem que tienen el mismo tiempo de ejecución y
-		//! la misma prioridad, permitiéndo ordenarlos estrictamente.
+		//! Generates a new Task ID. IDs should be unique within the same 
+		//! Scheduler. One of their purposes is to be able to tell apart
+		//! ScheduledItems with the same execution time and the same priority,
+		//! allowing strict ordering. 
 		unsigned long GenerateNewID();
 
-		//! Función privada.
-		//! Ejecuta las Tareas que debe. Llamado por Update().
+		//! Runs pending tasks.
+		//!
 		void RunDueTasks();
 
 	public:
@@ -46,59 +56,59 @@ File: Scheduler.h
 		};
 
 
-		//! Inicializa el Scheduler, opcionalmente con un tiempo concreto.
+		//! Starts the scheduler, optionally, with a given time.
 		//!
-		//! @param curtime Tiempo actual. Es relativo así que puede ser dado 
-		//! en cualquier unidad.
+		//! @param curtime Current time. Can be any time unit, as long
+		//! as there is consistency.
 		Scheduler(unsigned long curtime = 0);
 
-		//! Asigna un valor al tiempo interno.
+		//! Assigns a value to the internal time.
 		//!
 		void SetInternalTime(unsigned long curtime);
 
 
-		//! Añade una nueva tarea al Scheduler. Las tareas deben heredar de ITask.
-		//! La primera ejecución tendrá lugar después de que pase el número de unidades
-		//! de tiempo especificadas por el parámetro wait. 
+		//! Adds a new task to the scheduler. Tasks must inherit from ITask.
+		//! The first execution will take place after the amount of time units
+		//! specified by the wait parameter elapses.
 		//!
-		//! @param task Puntero a la Tarea a ejecutar.
+		//! @param task Smart pointer to the task to execute.
 		//!
-		//! @param wait Tiempo a esperar antes de ejecutar la Tarea por primera vez.
+		//! @param wait Time to wait before executing the task for the first time.
 		//!
-		//! @param times Número de veces a ejecutar la Tarea, esperando inicialmente
-		//! según wait y tras cada vez adicional, según frequency.
+		//! @param times Number of times to execute the task, waiting the first time
+		//! "wait" time units, and from then on, "frequency" time units.
 		//!
-		//! @param frequency Tiempo a esperar tras cada ejecución para la siguiente.
-		//! Si toma el valor ITask::FREQ_ASWAIT se considera que la frecuencia es la
-		//! de wait.
+		//! @param frequency Time to wait after each run for the next.
+		//! If it takes the value ITask::FREQ_ASWAIT the frequency will be the
+		//! same as "wait".
 		//!
-		//! @param priority La prioridad puede ser PRIORITY_LOW, PRIORITY_NORMAL, 
-		//! PRIORITY_HIGH, o cualquier número, siendo las prioridades negativas las más 
-		//!	bajas. 
+		//! @param priority Priority may be PRIORITY_LOW, PRIORITY_NORMAL, 
+		//! PRIORITY_HIGH, or any number, being negative priorities the lowest.
 		//!
-		//! @return Un TaskID identificando la Tarea.
+		//! @return TaskID which identifies the Task.
 		//!
-		//! @remark Una tarea no se ejecuta nunca más de una vez por ciclo (Update).
-		//! En caso de que el delta exceda la frecuencia, la Tarea se ejecutará
-		//! al siguiente ciclo, o a los siguientes, hasta llegar al número de veces
-		//! apropiado.
+		//! @remark A task is never run more than once per cycle (Update).
+		//! Should the delta exceed the frequency, the task would be run
+		//! on the next cycle, or the next ones, until the appropiate number
+		//! of times is reached. 
 		TaskID AddTask(ITask::Ptr const & task, unsigned long wait, long times = 1,
 			long frequency = ITask::FREQ_ASWAIT, int priority = ITask::PRIORITY_NORMAL );
 
 
-		//! Quita una Tarea del Scheduler, utilizando el identificador de Tarea 
-		//! (TaskID).
-		//! @param taskID El TaskID devuelto al añadir la Tarea.
+		//! Removes a Task from the Scheduler, using its TaskID.
+		//!
+		//! @param taskID TaskID which was returned when adding the task to the 
+		//! Scheduler.
 		void RemoveTask(TaskID taskID);
 
 
-		//! Inicializa al tiempo especificado.
+		//! Initializes the time as specified.
 		//!
-		//! @param time El tiempo, en cualquier unidad.
+		//! @param time Time, in any unit.
 		void Initialize(unsigned long const & time);
 
-		//! Actualiza el Scheduler, actualizando el tiempo y ejecutando todas
-		//! aquellas tareas pendientes.
+		//! Updates the scheduler, running every pending tasks and updating
+		//! the internal timer according to the delta.
 		//!
 		//! @param delta Un incremento de tiempo, generalmente el incremento de
 		//! tiempo pasado desde la última llamada a este mismo Update.
@@ -110,13 +120,12 @@ File: Scheduler.h
 		void Update(unsigned long const & delta);
 
 
-		//! Ejecuta las tareas pendientes sin modificar el cronómetro interno.
+		//! Runs pending tasks without updating the internal timer.
 		//!
 		void RunPendingTasksOnly();
 
 
-		//! Solamente actualiza el cronómetro interno mediante un incremento,
-		//! sin ejecutar ninguna tarea pendiente.
+		//! Updates the internal timer, without running any pending task.
 		//!
 		void UpdateOnly(unsigned long const & delta);
 
