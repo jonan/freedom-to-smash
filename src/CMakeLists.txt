@@ -2,6 +2,7 @@ set(
   SRC
   physics/collision_object.cpp
   physics/collision_scene.cpp
+  physics/debug_drawer.cpp
   physics/shapes_manager.cpp
   animated_object.cpp
   battle_ground.cpp
@@ -23,6 +24,7 @@ set(
   physics/collision_object.hpp
   physics/collision_scene.hpp
   physics/converter_functions.hpp
+  physics/debug_drawer.hpp
   physics/shapes_manager.hpp
   animated_object.hpp
   battle_ground.hpp
