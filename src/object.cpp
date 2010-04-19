@@ -78,6 +78,7 @@ const Ogre::Vector3& Object::getPosition(void) const
 void Object::translate(const Real &x, const Real &y, const Real &z)
 {
     node->translate(x, y, z);
+    physics::CollisionObject::setPosition(btTransform(btQuaternion(0,0,0,1), physics::vector3(node->getPosition())));
 }
 
 // Creates a new entity and returns a pointer to it.
