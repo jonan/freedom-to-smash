@@ -33,6 +33,7 @@ class btDefaultCollisionConfiguration;
 
 namespace physics {
 
+class DebugDrawer;
 class CollisionObject;
 
 /// A physic scene with collision detection.
@@ -48,6 +49,12 @@ protected:
     CollisionScene(void); // Constructor
     ~CollisionScene(void); // Destructor
 
+    // Creates a debug drawer that draws the physic shapes.
+    void createDebugDrawer(Ogre::SceneManager &scene_manager);
+
+    // Draws the physic shapes.
+    void drawDebugLines(void);
+
 private:
     btCollisionWorld *world;
     std::list<CollisionObject*> collision_objects;
@@ -55,6 +62,8 @@ private:
     btDefaultCollisionConfiguration *configuration;
     btCollisionDispatcher *dispatcher;
     btAxisSweep3 *broadphase;
+
+    DebugDrawer *debug_drawer;
 
     DISALLOW_COPY_AND_ASSIGN(CollisionScene);
 };

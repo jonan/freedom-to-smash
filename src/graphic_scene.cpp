@@ -79,7 +79,7 @@ void GraphicScene::useCamera(const int num_camera) {
 
 // Adds a light.
 void GraphicScene::addLight(const Ogre::String &name, const Ogre::Vector3 &position,
-                     const Ogre::Light::LightTypes &type)
+                            const Ogre::Light::LightTypes &type)
 {
     light.push_back(manager->createLight(name));
     light.back()->setPosition(position);

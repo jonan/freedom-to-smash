@@ -19,6 +19,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 
 #include <btBulletCollisionCommon.h>
 
+#include "debug_drawer.hpp"
 #include "collision_object.hpp"
 
 namespace physics {
@@ -43,6 +44,7 @@ void CollisionScene::removeCollisionObject(CollisionObject *obj)
 CollisionScene::CollisionScene(void)
         : configuration(new btDefaultCollisionConfiguration)
         , dispatcher(new btCollisionDispatcher(configuration))
+        , debug_drawer(NULL)
 {
     broadphase = new btAxisSweep3(btVector3(-1000,-1000,-1000), btVector3(1000,1000,1000));
     world = new btCollisionWorld(dispatcher, broadphase, configuration);
@@ -56,6 +58,21 @@ CollisionScene::~CollisionScene(void) {
     delete broadphase;
     delete dispatcher;
     delete configuration;
+    delete debug_drawer;
+}
+
+// Creates a debug drawer that draws the physic shapes.
+void CollisionScene::createDebugDrawer(Ogre::SceneManager &scene_manager)
+{
+    debug_drawer = new DebugDrawer(scene_manager);
+    world->setDebugDrawer(debug_drawer);
+}
+
+// Draws the physic shapes.
+void CollisionScene::drawDebugLines(void)
+{
+    world->debugDrawWorld();
+    debug_drawer->draw();
 }
 
 } // namespace physics
