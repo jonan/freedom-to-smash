@@ -19,8 +19,8 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 /// The AnimatedObject class.
 /// @author Jonan
 
-#ifndef ANIMATED_OBJECT_HPP
-#define ANIMATED_OBJECT_HPP
+#ifndef GRAPHICS_ANIMATED_OBJECT_HPP
+#define GRAPHICS_ANIMATED_OBJECT_HPP
 
 #include <list>
 
@@ -55,4 +55,4 @@ private:
     DISALLOW_COPY_AND_ASSIGN(AnimatedObject);
 };
 
-#endif // ANIMATED_OBJECT_HPP
+#endif // GRAPHICS_ANIMATED_OBJECT_HPP

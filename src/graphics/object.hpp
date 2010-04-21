@@ -19,8 +19,8 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 /// The Object class.
 /// @author Jonan
 
-#ifndef OBJECT_HPP
-#define OBJECT_HPP
+#ifndef GRAPHICS_OBJECT_HPP
+#define GRAPHICS_OBJECT_HPP
 
 #include "physics/collision_object.hpp"
 #include "util.hpp"
@@ -68,4 +68,4 @@ private:
     DISALLOW_COPY_AND_ASSIGN(Object);
 };
 
-#endif // OBJECT_HPP
+#endif // GRAPHICS_OBJECT_HPP

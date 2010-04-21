@@ -19,8 +19,8 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 /// The GraphicScene class.
 /// @author Jonan
 
-#ifndef GRAPHIC_SCENE_HPP
-#define GRAPHIC_SCENE_HPP
+#ifndef GRAPHICS_GRAPHIC_SCENE_HPP
+#define GRAPHICS_GRAPHIC_SCENE_HPP
 
 #include <list>
 #include <vector>
@@ -88,4 +88,4 @@ private:
     DISALLOW_COPY_AND_ASSIGN(GraphicScene);
 };
 
-#endif // GRAPHIC_SCENE_HPP
+#endif // GRAPHICS_GRAPHIC_SCENE_HPP
