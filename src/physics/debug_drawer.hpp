@@ -22,8 +22,6 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #ifndef PHYSICS_DEBUG_DRAWER_HPP
 #define PHYSICS_DEBUG_DRAWER_HPP
 
-#include <iostream>
-
 #include <btBulletCollisionCommon.h>
 
 #include "util.hpp"
@@ -47,13 +45,19 @@ class DebugDrawer : public btIDebugDraw {
 
   private:
     // @{
-    // Abstract inherited functions.
+    // Set and Get methods.
+    virtual void setDebugMode (int mode)       {debug_mode = mode;}
+    virtual int  getDebugMode (void    ) const {return debug_mode;}
+    // @}
+
+    // Adds a new line to the drawing queue.
     virtual void drawLine(const btVector3 &from, const btVector3 &to, const btVector3 &color);
+
+    // @{
+    // Abstract inherited functions.
     virtual void drawContactPoint(const btVector3 &point_on_b, const btVector3 &normal_on_b, btScalar distance, int life_time, const btVector3 &color) {}
     virtual void reportErrorWarning(const char *warning_string) {}
     virtual void draw3dText(const btVector3 &location, const char *text_string) {}
-    virtual void setDebugMode(int debug_mode) {this->debug_mode = debug_mode;}
-    virtual int  getDebugMode(void) const {return debug_mode;}
     // @}
 
     int debug_mode;

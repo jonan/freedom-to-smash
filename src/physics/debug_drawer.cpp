@@ -17,9 +17,10 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 
 #include "debug_drawer.hpp"
 
-#include <string>
-
-#include <Ogre.h>
+// Ogre
+#include <OgreManualObject.h>
+#include <OgreMaterialManager.h>
+#include <OgreSceneManager.h>
 
 #include "converter_functions.hpp"
 
@@ -32,13 +33,16 @@ DebugDrawer::DebugDrawer(Ogre::SceneManager &scene_manager)
         , debug_lines(new Ogre::ManualObject("PhysicsDebugDrawer lines"))
 {
   debug_lines->setDynamic(true);
+
   String material_name = "PhysicsDebugDrawer material";
   Ogre::MaterialPtr material = Ogre::MaterialManager::getSingleton().getDefaultSettings()->clone(material_name);
   material->setReceiveShadows(false);
   material->getTechnique(0)->setLightingEnabled(false);
+
   debug_lines->begin(material_name, Ogre::RenderOperation::OT_LINE_LIST);
   debug_lines->position(Ogre::Vector3::ZERO);
   debug_lines->colour(Ogre::ColourValue::Blue);
+
   scene_manager.getRootSceneNode()->attachObject(debug_lines);
 }
 
@@ -55,7 +59,7 @@ void DebugDrawer::draw(void)
   restart = true;
 }
 
-// Adds a new line to the draw queue.
+// Adds a new line to the drawing queue.
 void DebugDrawer::drawLine(const btVector3 &from, const btVector3 &to, const btVector3 &color)
 {
   if (restart) {
