@@ -30,6 +30,8 @@ namespace Ogre {
     class AnimationState;
 }
 
+namespace graphics {
+
 /// An AnimatedObject is a normal Object with animations.
 class AnimatedObject : public Object {
 public:
@@ -54,5 +56,7 @@ protected:
 private:
     DISALLOW_COPY_AND_ASSIGN(AnimatedObject);
 };
+
+} // namespace graphics
 
 #endif // GRAPHICS_ANIMATED_OBJECT_HPP

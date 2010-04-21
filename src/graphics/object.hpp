@@ -32,6 +32,8 @@ namespace Ogre {
     class Vector3;
 }
 
+namespace graphics {
+
 /// General object class.
 class Object : public physics::CollisionObject {
 public:
@@ -67,5 +69,7 @@ protected:
 private:
     DISALLOW_COPY_AND_ASSIGN(Object);
 };
+
+} // namespace graphics
 
 #endif // GRAPHICS_OBJECT_HPP

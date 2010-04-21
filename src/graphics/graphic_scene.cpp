@@ -26,6 +26,8 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 
 #include "object.hpp"
 
+namespace graphics {
+
 // Constructor
 GraphicScene::GraphicScene(void)
 {
@@ -111,3 +113,5 @@ Ogre::Camera* GraphicScene::createCamera(const Ogre::String &name, const Ogre::V
 
     return cam;
 }
+
+} // namespace graphics

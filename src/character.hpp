@@ -27,7 +27,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #include "graphics/animated_object.hpp"
 
 /// Class to control a character.
-class Character : public AnimatedObject, public Ogre::FrameListener {
+class Character : public graphics::AnimatedObject, public Ogre::FrameListener {
 public:
     explicit Character(Ogre::SceneManager &scene_manager); // Constructor
     ~Character(void); // Destructor

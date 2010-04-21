@@ -23,6 +23,8 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #include <OgreEntity.h>
 #include <OgreFrameListener.h>
 
+namespace graphics {
+
 // Constructor
 AnimatedObject::AnimatedObject(Ogre::SceneManager &scene_manager, const int num_animations)
         : Object(scene_manager)
@@ -64,3 +66,5 @@ bool AnimatedObject::performAnimation(const int type, const Ogre::FrameEvent &ev
     }
     return end;
 }
+
+} // namespace graphics

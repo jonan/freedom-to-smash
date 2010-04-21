@@ -37,6 +37,8 @@ namespace Ogre {
     class Vector3;
 }
 
+namespace graphics {
+
 class Object;
 
 /// Class to control all the graphical elements of a scene.
@@ -87,5 +89,7 @@ private:
 
     DISALLOW_COPY_AND_ASSIGN(GraphicScene);
 };
+
+} // namespace graphics
 
 #endif // GRAPHICS_GRAPHIC_SCENE_HPP

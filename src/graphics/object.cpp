@@ -23,6 +23,8 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #include "physics/converter_functions.hpp"
 #include "physics/shapes_manager.hpp"
 
+namespace graphics {
+
 // Constructor
 Object::Object(Ogre::SceneManager &scene_manager)
         : entity(NULL)
@@ -104,3 +106,5 @@ Ogre::Entity* Object::createEntity(const String &name)
     entity->setCastShadows(true);
     return entity;
 }
+
+} // namespace graphics

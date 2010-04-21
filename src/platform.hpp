@@ -29,7 +29,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 class Character;
 
 /// A Platform is an object that moves constantly between a set of points.
-class Platform : public Object, public Ogre::FrameListener {
+class Platform : public graphics::Object, public Ogre::FrameListener {
 public:
     explicit Platform(Ogre::SceneManager &scene_manager); // Constructor
     ~Platform(void); // Destructor
