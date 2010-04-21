@@ -16,11 +16,11 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 */
 
 /// @file
-/// The physics::CollisionScene class.
+/// The physics::Scene class.
 /// @author Jonan
 
-#ifndef PHYSICS_COLLISION_SCENE_HPP
-#define PHYSICS_COLLISION_SCENE_HPP
+#ifndef PHYSICS_SCENE_HPP
+#define PHYSICS_SCENE_HPP
 
 #include <list>
 
@@ -42,7 +42,7 @@ class DebugDrawer;
 class CollisionObject;
 
 /// A physic scene with collision detection.
-class CollisionScene {
+class Scene {
 public:
     // @{
     ///
@@ -57,8 +57,8 @@ public:
     void detectCollisions(void);
 
 protected:
-    CollisionScene(void); // Constructor
-    ~CollisionScene(void); // Destructor
+    Scene(void); // Constructor
+    ~Scene(void); // Destructor
 
 #if DEBUG_PHYSIC_SHAPES
     // Creates a debug drawer that draws the physic shapes.
@@ -80,9 +80,9 @@ private:
     DebugDrawer *debug_drawer;
 #endif
 
-    DISALLOW_COPY_AND_ASSIGN(CollisionScene);
+    DISALLOW_COPY_AND_ASSIGN(Scene);
 };
 
 } // namespace physics
 
-#endif // PHYSICS_COLLISION_SCENE_HPP
+#endif // PHYSICS_SCENE_HPP

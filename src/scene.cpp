@@ -35,5 +35,5 @@ Scene::~Scene(void)
 void Scene::addObject(const String &entity, const Ogre::Vector3 &position)
 {
     GraphicScene::addObject(entity, position);
-    physics::CollisionScene::addCollisionObject(objects.back());
+    physics::Scene::addCollisionObject(objects.back());
 }

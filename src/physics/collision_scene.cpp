@@ -28,23 +28,23 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 namespace physics {
 
 //
-void CollisionScene::addCollisionObject(CollisionObject *obj)
+void Scene::addCollisionObject(CollisionObject *obj)
 {
-    obj->setCollisionScene(this);
+    obj->setScene(this);
     world->addCollisionObject(obj->getCollisionObject());
     collision_objects.push_back(obj);
 }
 
 //
-void CollisionScene::removeCollisionObject(CollisionObject *obj)
+void Scene::removeCollisionObject(CollisionObject *obj)
 {
-    obj->setCollisionScene(NULL);
+    obj->setScene(NULL);
     world->removeCollisionObject(obj->getCollisionObject());
     collision_objects.remove(obj);
 }
 
 //
-void CollisionScene::detectCollisions(void)
+void Scene::detectCollisions(void)
 {
     world->performDiscreteCollisionDetection();
 #if DEBUG_PHYSIC_SHAPES
@@ -53,7 +53,7 @@ void CollisionScene::detectCollisions(void)
 }
 
 // Constructor
-CollisionScene::CollisionScene(void)
+Scene::Scene(void)
         : configuration(new btDefaultCollisionConfiguration)
         , dispatcher(new btCollisionDispatcher(configuration))
 #if DEBUG_PHYSIC_SHAPES
@@ -65,7 +65,7 @@ CollisionScene::CollisionScene(void)
 }
 
 // Destructor
-CollisionScene::~CollisionScene(void) {
+Scene::~Scene(void) {
     while (!collision_objects.empty())
         removeCollisionObject(collision_objects.front());
     delete world;
@@ -79,14 +79,14 @@ CollisionScene::~CollisionScene(void) {
 
 #if DEBUG_PHYSIC_SHAPES
 // Creates a debug drawer that draws the physic shapes.
-void CollisionScene::createDebugDrawer(Ogre::SceneManager &scene_manager)
+void Scene::createDebugDrawer(Ogre::SceneManager &scene_manager)
 {
     debug_drawer = new DebugDrawer(scene_manager);
     world->setDebugDrawer(debug_drawer);
 }
 
 // Draws the physic shapes.
-void CollisionScene::drawDebugLines(void)
+void Scene::drawDebugLines(void)
 {
     world->debugDrawWorld();
     debug_drawer->draw();

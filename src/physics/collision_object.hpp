@@ -31,7 +31,7 @@ class btCollisionShape;
 
 namespace physics {
 
-class CollisionScene;
+class Scene;
 
 /// Collisions types.
 enum { NO_COLLISION     = 0    ,
@@ -49,7 +49,7 @@ public:
     // @{
     /// Set functions.
     void setShape(btCollisionShape &shape, const btTransform &center_offset = btTransform::getIdentity());
-    void setCollisionScene(CollisionScene *scene) {this->scene = scene;}
+    void setScene(Scene *scene) {this->scene = scene;}
     void setPosition(const btTransform &pos);
     // @}
 
@@ -67,7 +67,7 @@ private:
     btTransform *offset;
     btCollisionObject *collision_object;
 
-    CollisionScene *scene;
+    Scene *scene;
 
     DISALLOW_COPY_AND_ASSIGN(CollisionObject);
 };
