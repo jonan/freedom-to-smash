@@ -17,10 +17,9 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 
 #include "shapes_manager.hpp"
 
-#include <iostream>
-
+// Boost
 #include <boost/foreach.hpp>
-
+// Bullet
 #include <btBulletCollisionCommon.h>
 
 namespace physics {
@@ -31,15 +30,9 @@ ShapesManager* ShapesManager::getInstance(void) {
     return &instance;
 }
 
-// Destructor
-ShapesManager::~ShapesManager(void) {
-    BOOST_FOREACH(btBoxShape *shape, box_shapes)
-        delete shape;
-}
-
 // Function to get a box shape.
 btCollisionShape* ShapesManager::getBoxShape(const btVector3 &size) {
-    btBoxShape* temp = findBoxShape(size);
+    btBoxShape *temp = findBoxShape(size);
     if (!temp) {
         temp = new btBoxShape(size/2);
         box_shapes.push_back(temp);
@@ -47,9 +40,15 @@ btCollisionShape* ShapesManager::getBoxShape(const btVector3 &size) {
     return temp;
 }
 
+// Destructor
+ShapesManager::~ShapesManager(void) {
+    BOOST_FOREACH(btBoxShape *shape, box_shapes)
+        delete shape;
+}
+
 // Functions to find a given box shape.
 btBoxShape* ShapesManager::findBoxShape(const btVector3 &size) {
-    btBoxShape* temp = NULL;
+    btBoxShape *temp = NULL;
     btVector3 half_size = size/2;
     BOOST_FOREACH(btBoxShape *shape, box_shapes) {
         if (!temp) {

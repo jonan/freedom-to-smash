@@ -33,11 +33,10 @@ class btVector3;
 
 namespace physics {
 
-/// Stores all physic shapes to make sure there isn't any duplicated.
+/// Stores all physic shapes to make sure none are duplicated.
 class ShapesManager {
 public:
     static ShapesManager* getInstance(void); // Singleton pattern constructor
-    ~ShapesManager(void); // Destructor
 
     // @{
     /// Functions to get the different physic shapes.
@@ -46,6 +45,7 @@ public:
 
 private:
     ShapesManager(void) {} // Constructor
+    ~ShapesManager(void); // Destructor
 
     // @{
     // Functions to find a given shape.
