@@ -19,38 +19,12 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 
 #include <btBulletCollisionCommon.h>
 
+#include "collision_object.hpp"
 #if DEBUG_PHYSIC_SHAPES
 #include "debug_drawer.hpp"
 #endif
 
-#include "collision_object.hpp"
-
 namespace physics {
-
-//
-void Scene::addCollisionObject(CollisionObject *obj)
-{
-    obj->setScene(this);
-    world->addCollisionObject(obj->getCollisionObject());
-    collision_objects.push_back(obj);
-}
-
-//
-void Scene::removeCollisionObject(CollisionObject *obj)
-{
-    obj->setScene(NULL);
-    world->removeCollisionObject(obj->getCollisionObject());
-    collision_objects.remove(obj);
-}
-
-//
-void Scene::detectCollisions(void)
-{
-    world->performDiscreteCollisionDetection();
-#if DEBUG_PHYSIC_SHAPES
-    drawDebugLines();
-#endif
-}
 
 // Constructor
 Scene::Scene(void)
@@ -81,16 +55,45 @@ Scene::~Scene(void) {
 // Creates a debug drawer that draws the physic shapes.
 void Scene::createDebugDrawer(Ogre::SceneManager &scene_manager)
 {
-    debug_drawer = new DebugDrawer(scene_manager);
-    world->setDebugDrawer(debug_drawer);
+    if (!debug_drawer) {
+        debug_drawer = new DebugDrawer(scene_manager);
+        world->setDebugDrawer(debug_drawer);
+    }
 }
 
 // Draws the physic shapes.
 void Scene::drawDebugLines(void)
 {
-    world->debugDrawWorld();
-    debug_drawer->draw();
+    if (debug_drawer) {
+        world->debugDrawWorld();
+        debug_drawer->draw();
+    }
 }
 #endif
+
+// Add an objects to the scene.
+void Scene::addCollisionObject(CollisionObject *obj)
+{
+    obj->setScene(this);
+    world->addCollisionObject(obj->getCollisionObject());
+    collision_objects.push_back(obj);
+}
+
+// Remove an objects from the scene.
+void Scene::removeCollisionObject(CollisionObject *obj)
+{
+    obj->setScene(NULL);
+    world->removeCollisionObject(obj->getCollisionObject());
+    collision_objects.remove(obj);
+}
+
+// Detects all the collisions between the objects in the scene.
+void Scene::detectCollisions(void)
+{
+    world->performDiscreteCollisionDetection();
+#if DEBUG_PHYSIC_SHAPES
+    drawDebugLines();
+#endif
+}
 
 } // namespace physics

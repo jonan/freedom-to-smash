@@ -26,6 +26,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 
 #include "util.hpp"
 
+// Bullet
 class btAxisSweep3;
 class btCollisionDispatcher;
 class btCollisionWorld;
@@ -35,38 +36,39 @@ namespace physics {
 
 #define DEBUG_PHYSIC_SHAPES 1
 
+class CollisionObject;
 #if DEBUG_PHYSIC_SHAPES
 class DebugDrawer;
 #endif
 
-class CollisionObject;
-
 /// A physic scene with collision detection.
 class Scene {
 public:
-    // @{
-    ///
-    void addCollisionObject    (CollisionObject *obj);
-    void removeCollisionObject (CollisionObject *obj);
-    // @}
-
-    ///
-    btCollisionDispatcher* getDispatcher(void) {return dispatcher;}
-
-    ///
-    void detectCollisions(void);
-
-protected:
     Scene(void); // Constructor
     ~Scene(void); // Destructor
 
 #if DEBUG_PHYSIC_SHAPES
-    // Creates a debug drawer that draws the physic shapes.
+    /// Creates a debug drawer that draws the physic shapes.
+    /// @param[in] scene_manager The SceneManager where to draw.
     void createDebugDrawer(Ogre::SceneManager &scene_manager);
 
-    // Draws the physic shapes.
+    /// Draws the physic shapes.
     void drawDebugLines(void);
 #endif
+
+    // @{
+    /// Add or remove objects from the scene.
+    void addCollisionObject    (CollisionObject *obj);
+    void removeCollisionObject (CollisionObject *obj);
+    // @}
+
+    // @{
+    /// Get functions.
+    btCollisionDispatcher* getDispatcher(void) {return dispatcher;}
+    // @}
+
+    /// Detects all the collisions between the objects in the scene.
+    void detectCollisions(void);
 
 private:
     btCollisionWorld *world;

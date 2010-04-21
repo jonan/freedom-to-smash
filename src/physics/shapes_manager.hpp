@@ -26,7 +26,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 
 #include "util.hpp"
 
-// Bullet classes
+// Bullet
 class btBoxShape;
 class btCollisionShape;
 class btVector3;
