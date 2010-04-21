@@ -4,8 +4,8 @@ set(
   graphics/graphic_scene.cpp
   graphics/object.cpp
   physics/collision_object.cpp
-  physics/collision_scene.cpp
   physics/debug_drawer.cpp
+  physics/scene.cpp
   physics/shapes_manager.cpp
   battle_ground.cpp
   boot.cpp
@@ -24,9 +24,9 @@ set(
   graphics/graphic_scene.hpp
   graphics/object.hpp
   physics/collision_object.hpp
-  physics/collision_scene.hpp
   physics/converter_functions.hpp
   physics/debug_drawer.hpp
+  physics/scene.hpp
   physics/shapes_manager.hpp
   battle_ground.hpp
   boot.hpp

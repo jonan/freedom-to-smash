@@ -22,7 +22,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #ifndef SCENE_HPP
 #define SCENE_HPP
 
-#include "physics/collision_scene.hpp"
+#include "physics/scene.hpp"
 #include "graphics/graphic_scene.hpp"
 
 /// Class to control all the graphical elements of a scene.

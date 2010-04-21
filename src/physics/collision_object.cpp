@@ -19,7 +19,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 
 #include <btBulletCollisionCommon.h>
 
-#include "collision_scene.hpp"
+#include "scene.hpp"
 
 namespace physics {
 
