@@ -22,6 +22,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #ifndef OBJECT_HPP
 #define OBJECT_HPP
 
+#include "physics/collision_object.hpp"
 #include "util.hpp"
 
 namespace Ogre {
@@ -31,33 +32,29 @@ namespace Ogre {
     class Vector3;
 }
 
-class CollisionBox;
-
 /// General object class.
-class Object {
+class Object : public physics::CollisionObject {
 public:
     explicit Object(Ogre::SceneManager &scene_manager); // Constructor
     virtual ~Object(void); // Destructor
 
     // @{
     /// Set functions.
-    void setEntity           (const String &name);
-    void setPosition         (const Ogre::Vector3 &pos);
-    void setScale            (const Ogre::Vector3 &scale);
-    void setCollisionBoxSize (const Real max_x, const Real min_x, const Real max_y, const Real min_y);
+    void setEntity   (const String &name);
+    void setPosition (const Ogre::Vector3 &pos);
+    void setScale    (const Ogre::Vector3 &scale);
     // @}
 
     // @{
     /// Get functions.
-    const Ogre::Vector3& getPosition     (void);
-    const CollisionBox&  getCollisionBox (void) const {return *collision_box;}
+    const Ogre::Vector3& getPosition (void) const;
     // @}
 
     /// Move the object.
     /// @param[in] x Units to move in the x axes.
     /// @param[in] y Units to move in the y axes.
     /// @param[in] z Units to move in the z axes.
-    void translate(const Real x, const Real y, const Real z);
+    void translate(const Real &x, const Real &y, const Real &z);
 
 protected:
     // Creates a new entity and returns a pointer to it.
@@ -66,8 +63,6 @@ protected:
     Ogre::Entity *entity;
     Ogre::SceneNode *node;
     Ogre::SceneManager *scene_manager;
-
-    CollisionBox *collision_box;
 
 private:
     DISALLOW_COPY_AND_ASSIGN(Object);

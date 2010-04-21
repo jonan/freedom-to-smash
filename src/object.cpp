@@ -20,19 +20,13 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #include <OgreEntity.h>
 #include <OgreSceneManager.h>
 
-/*
-// For debug code!
-#include <Ogre.h>
-#include <string>
-*/
-
-#include "collision_box.hpp"
+#include "physics/converter_functions.hpp"
+#include "physics/shapes_manager.hpp"
 
 // Constructor
 Object::Object(Ogre::SceneManager &scene_manager)
         : entity(NULL)
         , scene_manager(&scene_manager)
-        , collision_box(new CollisionBox)
 {
     node = scene_manager.getRootSceneNode()->createChildSceneNode();
 }
@@ -40,7 +34,7 @@ Object::Object(Ogre::SceneManager &scene_manager)
 // Destructor
 Object::~Object(void)
 {
-    delete collision_box;
+
 }
 
 // Set function.
@@ -48,69 +42,43 @@ void Object::setEntity(const String &name)
 {
     entity = createEntity(name);
     node->attachObject(entity);
+    // Create a physic shape from the entity's bounding box
+    Ogre::AxisAlignedBox bounding_box = entity->getBoundingBox();
+    btVector3 size = physics::vector3(bounding_box.getMaximum() - bounding_box.getMinimum());
+    btCollisionShape *shape = physics::ShapesManager::getInstance()->getBoxShape(size);
+    setShape(*shape);
 }
 
 // Set function.
 void Object::setPosition(const Ogre::Vector3 &pos)
 {
     node->setPosition(pos);
+    physics::CollisionObject::setPosition(btTransform(btQuaternion(0,0,0,1), btVector3(pos.x, pos.y, pos.z)));
 }
 
 // Set function.
 void Object::setScale(const Ogre::Vector3 &scale)
 {
     node->setScale(scale);
-}
-
-// Set function.
-void Object::setCollisionBoxSize(const Real max_x, const Real min_x, const Real max_y, const Real min_y)
-{
-    collision_box->setRelativeBoxPos(max_x, min_x, max_y, min_y);
-    collision_box->setReferencePoint(*node);
-    /*
-    // Debug code!
-    using namespace Ogre;
-    std::string name1, name2, name3, name = entity->getName();
-    name1 = name+"manual1";
-    name2 = name+"material";
-    name3 = name+"debugger";
-    ManualObject* myManualObject =  scene_manager->createManualObject(name1.c_str());
-
-    MaterialPtr myManualObjectMaterial = MaterialManager::getSingleton().create(name2.c_str(),name3.c_str());
-    myManualObjectMaterial->setReceiveShadows(false);
-    myManualObjectMaterial->getTechnique(0)->setLightingEnabled(true);
-    myManualObjectMaterial->getTechnique(0)->getPass(0)->setDiffuse(0,0,1,0);
-    myManualObjectMaterial->getTechnique(0)->getPass(0)->setAmbient(0,0,1);
-    myManualObjectMaterial->getTechnique(0)->getPass(0)->setSelfIllumination(0,0,1);
-
-    myManualObject->begin("manual1Material", Ogre::RenderOperation::OT_LINE_LIST);
-    myManualObject->position(min_x, min_y, 0);
-    myManualObject->position(max_x, min_y, 0);
-    myManualObject->position(max_x, min_y, 0);
-    myManualObject->position(max_x, max_y, 0);
-    myManualObject->position(max_x, max_y, 0);
-    myManualObject->position(min_x, max_y, 0);
-    myManualObject->position(min_x, max_y, 0);
-    myManualObject->position(min_x, min_y, 0);
-    myManualObject->end();
-
-    node->attachObject(myManualObject);
-    */
+    // Create a physic shape from the entity's bounding box
+    Ogre::AxisAlignedBox bounding_box = entity->getBoundingBox();
+    btVector3 size = physics::vector3(bounding_box.getMaximum() - bounding_box.getMinimum());
+    size *= physics::vector3(scale);
+    btCollisionShape *shape = physics::ShapesManager::getInstance()->getBoxShape(size);
+    setShape(*shape);
 }
 
 // Get function.
-const Ogre::Vector3& Object::getPosition(void)
+const Ogre::Vector3& Object::getPosition(void) const
 {
     return node->getPosition();
 }
 
 // Move the object.
-void Object::translate(const Real x, const Real y, const Real z)
+void Object::translate(const Real &x, const Real &y, const Real &z)
 {
-    // Move object
     node->translate(x, y, z);
-    // Update collision box
-    collision_box->setReferencePoint(*node);
+    physics::CollisionObject::setPosition(btTransform(btQuaternion(0,0,0,1), physics::vector3(node->getPosition())));
 }
 
 // Creates a new entity and returns a pointer to it.

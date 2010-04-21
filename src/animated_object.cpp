@@ -44,7 +44,7 @@ void AnimatedObject::attachEntityToBone(const String &entity_name, const String 
 }
 
 //
-void AnimatedObject::createAnimation(const int type, const char *name, const bool loop, const bool enabled)
+void AnimatedObject::createAnimation(const int type, const String &name, const bool loop, const bool enabled)
 {
     animations[type].push_back(entity->getAnimationState(name));
     animations[type].back()->setLoop(loop);

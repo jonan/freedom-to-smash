@@ -43,7 +43,7 @@ public:
 
 protected:
     //
-    void createAnimation(const int type, const char *name, const bool loop = false, const bool enabled = false);
+    void createAnimation(const int type, const String &name, const bool loop = false, const bool enabled = false);
 
     //
     bool performAnimation(const int type, const Ogre::FrameEvent &event);

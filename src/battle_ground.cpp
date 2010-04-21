@@ -23,7 +23,6 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #include <OgreRoot.h>
 
 #include "character.hpp"
-#include "input.hpp"
 
 // Constructor
 BattleGround::BattleGround(void)
@@ -39,19 +38,18 @@ BattleGround::BattleGround(void)
     // Ground
     addObject("cube", Ogre::Vector3(0,-5,0));
     objects.back()->setScale(Ogre::Vector3(10,1,1));
-    objects.back()->setCollisionBoxSize(25,-25,2.5,-2.5);
     addObject("cube", Ogre::Vector3(-23,7,0));
     objects.back()->setScale(Ogre::Vector3(3,0.5,1));
-    objects.back()->setCollisionBoxSize(7.5,-7.5,1.25,-1.25);
     addObject("cube", Ogre::Vector3(23,7,0));
     objects.back()->setScale(Ogre::Vector3(3,0.5,1));
-    objects.back()->setCollisionBoxSize(7.5,-7.5,1.25,-1.25);
+#if DEBUG_PHYSIC_SHAPES
+    createDebugDrawer(*manager);
+#endif
 }
 
 // Destructor
 BattleGround::~BattleGround(void)
 {
-    Input::getInstance()->removeKeyListener(*this);
     BOOST_FOREACH(Character *character, players)
         delete character;
 }
@@ -61,6 +59,7 @@ Character* BattleGround::createCharacter(void)
 {
     Character *character = new Character(*manager);
     players.push_back(character);
+    physics::CollisionScene::addCollisionObject(character);
     return character;
 }
 
@@ -68,13 +67,13 @@ Character* BattleGround::createCharacter(void)
 void BattleGround::start(void)
 {
     Ogre::Root::getSingleton().addFrameListener(this);
-    Input::getInstance()->addKeyListener(*this);
     Ogre::Root::getSingleton().startRendering();
 }
 
 // Function that's called at the beginning of every frame.
 bool BattleGround::frameStarted(const Ogre::FrameEvent &event)
 {
+    detectCollisions();
     Ogre::Vector3 average(0,0,0);
     BOOST_FOREACH(Character *character, players) {
         character->recoverFromPenetration(objects);
@@ -83,12 +82,4 @@ bool BattleGround::frameStarted(const Ogre::FrameEvent &event)
     average /= players.size();
     cam_node->setPosition(average);
     return !end;
-}
-
-// Function to update the keyboard's state.
-bool BattleGround::keyReleased(const OIS::KeyEvent &key)
-{
-    if (key.key == OIS::KC_ESCAPE)
-        end = true;
-    return true;
 }

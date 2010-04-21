@@ -21,8 +21,6 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 
 #include <OgreRoot.h>
 
-#include "collision_box.hpp"
-
 // Constructor
 Platform::Platform(Ogre::SceneManager &scene_manager)
         : Object(scene_manager)
