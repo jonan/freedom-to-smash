@@ -42,7 +42,9 @@ BattleGround::BattleGround(void)
     objects.back()->setScale(Ogre::Vector3(3,0.5,1));
     addObject("cube", Ogre::Vector3(23,7,0));
     objects.back()->setScale(Ogre::Vector3(3,0.5,1));
+#if DEBUG_PHYSIC_SHAPES
     createDebugDrawer(*manager);
+#endif
 }
 
 // Destructor
@@ -72,7 +74,6 @@ void BattleGround::start(void)
 bool BattleGround::frameStarted(const Ogre::FrameEvent &event)
 {
     detectCollisions();
-    drawDebugLines();
     Ogre::Vector3 average;
     BOOST_FOREACH(Character *character, players) {
         character->recoverFromPenetration(objects);
