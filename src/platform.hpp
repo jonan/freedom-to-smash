@@ -24,7 +24,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 
 #include <OgreFrameListener.h>
 
-#include "object.hpp"
+#include "graphics/object.hpp"
 
 class Character;
 

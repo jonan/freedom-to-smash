@@ -17,7 +17,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 
 #include "scene.hpp"
 
-#include "object.hpp"
+#include "graphics/object.hpp"
 
 // Constructor
 Scene::Scene(void)

@@ -24,7 +24,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 
 #include <OgreFrameListener.h>
 
-#include "animated_object.hpp"
+#include "graphics/animated_object.hpp"
 
 /// Class to control a character.
 class Character : public AnimatedObject, public Ogre::FrameListener {

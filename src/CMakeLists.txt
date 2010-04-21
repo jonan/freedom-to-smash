@@ -1,17 +1,17 @@
 set(
   SRC
+  graphics/animated_object.cpp
+  graphics/graphic_scene.cpp
+  graphics/object.cpp
   physics/collision_object.cpp
   physics/collision_scene.cpp
   physics/debug_drawer.cpp
   physics/shapes_manager.cpp
-  animated_object.cpp
   battle_ground.cpp
   boot.cpp
   character.cpp
-  graphic_scene.cpp
   input.cpp
   main.cpp
-  object.cpp
   platform.cpp
   player.cpp
   scene.cpp
@@ -20,18 +20,18 @@ set(
 
 set(
   HEADERS
+  graphics/animated_object.hpp
+  graphics/graphic_scene.hpp
+  graphics/object.hpp
   physics/collision_object.hpp
   physics/collision_scene.hpp
   physics/converter_functions.hpp
   physics/debug_drawer.hpp
   physics/shapes_manager.hpp
-  animated_object.hpp
   battle_ground.hpp
   boot.hpp
   character.hpp
-  graphic_scene.hpp
   input.hpp
-  object.hpp
   platform.hpp
   player.hpp
   scene.hpp
