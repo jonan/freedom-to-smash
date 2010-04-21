@@ -26,6 +26,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 
 #include <LinearMath/btTransform.h>
 
+// Bullet
 class btCollisionObject;
 class btCollisionShape;
 
@@ -58,7 +59,7 @@ public:
     btCollisionObject* getCollisionObject(void) {return collision_object;}
     // @}
 
-    /// Detects the collision with another object.
+    /// Detects collisions with the given object.
     /// @param[in] obj Object.
     /// @return Type of collision.
     int detectCollision(const Object &obj) const;
@@ -72,6 +73,6 @@ private:
     DISALLOW_COPY_AND_ASSIGN(Object);
 };
 
-}
+} // namespace physics
 
 #endif // PHYSICS_OBJECT_HPP

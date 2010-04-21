@@ -53,7 +53,7 @@ void Object::setPosition(const btTransform &pos)
     collision_object->setWorldTransform(pos);
 }
 
-// Detects the collision with another object.
+// Detects collisions with the given object.
 int Object::detectCollision(const Object &obj) const
 {
     int collision_type = NO_COLLISION;
@@ -67,35 +67,33 @@ int Object::detectCollision(const Object &obj) const
             obj_0 = static_cast<btCollisionObject*>(contact->getBody0());
             obj_1 = static_cast<btCollisionObject*>(contact->getBody1());
 
-            int temp = 0;
+            int obj_num = 0;
             if (obj_0 == collision_object && obj_1 == obj.collision_object)
-                temp = 1;
+                obj_num = 1;
             else if (obj_1 == collision_object && obj_0 == obj.collision_object)
-                temp = 2;
+                obj_num = 2;
 
-            if (temp) {
+            if (obj_num) {
                 int num_contacts = contact->getNumContacts();
-                if (num_contacts) {
-                    btVector3 average(0,0,0);
-                    for (int j=0; j<num_contacts; j++) {
-                        if (temp==1)
-                            average += contact->getContactPoint(j).m_localPointA;
-                        else
-                            average += contact->getContactPoint(j).m_localPointB;
-                    }
-                    if (average.getX() > 0 && abs(average.getY()) < abs(average.getX()))
-                        collision_type |= LEFT_COLLISION;
-                    if (average.getX() < 0 && abs(average.getY()) < abs(average.getX()))
-                        collision_type |= RIGHT_COLLISION;
-                    if (average.getY() < 0 && abs(average.getX()) < abs(average.getY()))
-                        collision_type |= BOTTOM_COLLISION;
-                    if (average.getY() > 0 && abs(average.getX()) < abs(average.getY()))
-                        collision_type |= TOP_COLLISION;
+                btVector3 average(0,0,0);
+                for (int j=0; j<num_contacts; j++) {
+                    if (obj_num==1)
+                        average += contact->getContactPoint(j).m_localPointA;
+                    else
+                        average += contact->getContactPoint(j).m_localPointB;
                 }
+                if (average.getX() > 0 && abs(average.getY()) < abs(average.getX()))
+                    collision_type |= LEFT_COLLISION;
+                if (average.getX() < 0 && abs(average.getY()) < abs(average.getX()))
+                    collision_type |= RIGHT_COLLISION;
+                if (average.getY() < 0 && abs(average.getX()) < abs(average.getY()))
+                    collision_type |= BOTTOM_COLLISION;
+                if (average.getY() > 0 && abs(average.getX()) < abs(average.getY()))
+                    collision_type |= TOP_COLLISION;
             }
         }
     }
     return collision_type;
 }
 
-}
+} // namespace physics
