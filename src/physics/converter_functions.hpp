@@ -31,10 +31,10 @@ namespace physics {
 // @{
 /// Functions to convert between Ogre's and Bullet's types.
 inline btQuaternion quaternion (const Ogre::Quaternion &q) {return btQuaternion(q.x, q.y, q.z, q.w);}
-inline Ogre::Quaternion quaternion (const btQuaternion &q) {return Ogre::Quaternion(q.w(), q.x(), q.y(), q.z());}
+inline btVector3    vector3    (const Ogre::Vector3    &v) {return btVector3(v.x, v.y, v.z);        }
 
-inline btVector3 vector3(const Ogre::Vector3 &v) {return btVector3(v.x, v.y, v.z);}
-inline Ogre::Vector3 vector3(const btVector3 &v) {return Ogre::Vector3(v.x(), v.y(), v.z());}
+inline Ogre::Quaternion quaternion (const btQuaternion &q) {return Ogre::Quaternion(q.w(), q.x(), q.y(), q.z());}
+inline Ogre::Vector3    vector3    (const btVector3    &v) {return Ogre::Vector3(v.x(), v.y(), v.z());          }
 // @}
 
 } // namespace physics
