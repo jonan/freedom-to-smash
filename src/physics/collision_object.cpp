@@ -54,9 +54,48 @@ void CollisionObject::setPosition(const btTransform &pos)
 }
 
 // Detects the collision with another object.
-CollisionType CollisionObject::detectCollision(const CollisionObject &obj) const
+int CollisionObject::detectCollision(const CollisionObject &obj) const
 {
-    return NO_COLLISION;
+    int collision_type = NO_COLLISION;
+    if (scene) {
+        btCollisionDispatcher *dispatcher = scene->getDispatcher();
+        int num_manifolds = dispatcher->getNumManifolds();
+        btPersistentManifold *contact;
+        btCollisionObject *obj_0, *obj_1;
+        for (int i=0; i<num_manifolds; i++) {
+            contact = dispatcher->getManifoldByIndexInternal(i);
+            obj_0 = static_cast<btCollisionObject*>(contact->getBody0());
+            obj_1 = static_cast<btCollisionObject*>(contact->getBody1());
+
+            int temp = 0;
+            if (obj_0 == collision_object && obj_1 == obj.collision_object)
+                temp = 1;
+            else if (obj_1 == collision_object && obj_0 == obj.collision_object)
+                temp = 2;
+
+            if (temp) {
+                int num_contacts = contact->getNumContacts();
+                if (num_contacts) {
+                    btVector3 average(0,0,0);
+                    for (int j=0; j<num_contacts; j++) {
+                        if (temp==1)
+                            average += contact->getContactPoint(j).m_localPointA;
+                        else
+                            average += contact->getContactPoint(j).m_localPointB;
+                    }
+                    if (average.getX() > 0 && abs(average.getY()) < abs(average.getX()))
+                        collision_type |= LEFT_COLLISION;
+                    if (average.getX() < 0 && abs(average.getY()) < abs(average.getX()))
+                        collision_type |= RIGHT_COLLISION;
+                    if (average.getY() < 0 && abs(average.getX()) < abs(average.getY()))
+                        collision_type |= BOTTOM_COLLISION;
+                    if (average.getY() > 0 && abs(average.getX()) < abs(average.getY()))
+                        collision_type |= TOP_COLLISION;
+                }
+            }
+        }
+    }
+    return collision_type;
 }
 
 }

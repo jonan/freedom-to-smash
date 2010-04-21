@@ -71,6 +71,7 @@ void BattleGround::start(void)
 // Function that's called at the beginning of every frame.
 bool BattleGround::frameStarted(const Ogre::FrameEvent &event)
 {
+    detectCollisions();
     drawDebugLines();
     Ogre::Vector3 average;
     BOOST_FOREACH(Character *character, players) {

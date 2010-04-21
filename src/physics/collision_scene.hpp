@@ -45,6 +45,12 @@ public:
     void removeCollisionObject (CollisionObject *obj);
     // @}
 
+    ///
+    btCollisionDispatcher* getDispatcher(void) {return dispatcher;}
+
+    ///
+    void detectCollisions(void);
+
 protected:
     CollisionScene(void); // Constructor
     ~CollisionScene(void); // Destructor

@@ -34,12 +34,11 @@ namespace physics {
 class CollisionScene;
 
 /// Collisions types.
-enum CollisionType { NO_COLLISION,
-                     LEFT_COLLISION,
-                     RIGHT_COLLISION,
-                     TOP_COLLISION,
-                     BOTTOM_COLLISION,
-                     FULL_COLLISION   };
+enum { NO_COLLISION     = 0    ,
+       LEFT_COLLISION   = 1<<0 ,
+       RIGHT_COLLISION  = 1<<1 ,
+       TOP_COLLISION    = 1<<2 ,
+       BOTTOM_COLLISION = 1<<3 };
 
 /// Class to create object that will be able to collide.
 class CollisionObject {
@@ -62,7 +61,7 @@ public:
     /// Detects the collision with another object.
     /// @param[in] obj Object.
     /// @return Type of collision.
-    CollisionType detectCollision(const CollisionObject &obj) const;
+    int detectCollision(const CollisionObject &obj) const;
 
 private:
     btTransform *offset;

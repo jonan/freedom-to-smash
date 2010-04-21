@@ -40,6 +40,12 @@ void CollisionScene::removeCollisionObject(CollisionObject *obj)
     collision_objects.remove(obj);
 }
 
+//
+void CollisionScene::detectCollisions(void)
+{
+    world->performDiscreteCollisionDetection();
+}
+
 // Constructor
 CollisionScene::CollisionScene(void)
         : configuration(new btDefaultCollisionConfiguration)
