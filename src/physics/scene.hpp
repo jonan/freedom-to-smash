@@ -36,7 +36,7 @@ namespace physics {
 
 #define DEBUG_PHYSIC_SHAPES 1
 
-class CollisionObject;
+class Object;
 #if DEBUG_PHYSIC_SHAPES
 class DebugDrawer;
 #endif
@@ -58,8 +58,8 @@ public:
 
     // @{
     /// Add or remove objects from the scene.
-    void addCollisionObject    (CollisionObject *obj);
-    void removeCollisionObject (CollisionObject *obj);
+    void addCollisionObject    (Object *obj);
+    void removeCollisionObject (Object *obj);
     // @}
 
     // @{
@@ -72,7 +72,7 @@ public:
 
 private:
     btCollisionWorld *world;
-    std::list<CollisionObject*> collision_objects;
+    std::list<Object*> collision_objects;
 
     btDefaultCollisionConfiguration *configuration;
     btCollisionDispatcher *dispatcher;

@@ -16,11 +16,11 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 */
 
 /// @file
-/// The physics::CollisionObject class.
+/// The physics::Object class.
 /// @author Jonan
 
-#ifndef PHYSICS_COLLISION_OBJECT_HPP
-#define PHYSICS_COLLISION_OBJECT_HPP
+#ifndef PHYSICS_OBJECT_HPP
+#define PHYSICS_OBJECT_HPP
 
 #include "util.hpp"
 
@@ -41,10 +41,10 @@ enum { NO_COLLISION     = 0    ,
        BOTTOM_COLLISION = 1<<3 };
 
 /// Class to create object that will be able to collide.
-class CollisionObject {
+class Object {
 public:
-    CollisionObject(void); // Constructor
-    virtual ~CollisionObject(void); // Destructor
+    Object(void); // Constructor
+    virtual ~Object(void); // Destructor
 
     // @{
     /// Set functions.
@@ -61,7 +61,7 @@ public:
     /// Detects the collision with another object.
     /// @param[in] obj Object.
     /// @return Type of collision.
-    int detectCollision(const CollisionObject &obj) const;
+    int detectCollision(const Object &obj) const;
 
 private:
     btTransform *offset;
@@ -69,9 +69,9 @@ private:
 
     Scene *scene;
 
-    DISALLOW_COPY_AND_ASSIGN(CollisionObject);
+    DISALLOW_COPY_AND_ASSIGN(Object);
 };
 
 }
 
-#endif // PHYSICS_COLLISION_OBJECT_HPP
+#endif // PHYSICS_OBJECT_HPP

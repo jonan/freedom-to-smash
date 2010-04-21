@@ -22,7 +22,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #ifndef GRAPHICS_OBJECT_HPP
 #define GRAPHICS_OBJECT_HPP
 
-#include "physics/collision_object.hpp"
+#include "physics/object.hpp"
 #include "util.hpp"
 
 namespace Ogre {
@@ -35,7 +35,7 @@ namespace Ogre {
 namespace graphics {
 
 /// General object class.
-class Object : public physics::CollisionObject {
+class Object : public physics::Object {
 public:
     explicit Object(Ogre::SceneManager &scene_manager); // Constructor
     virtual ~Object(void); // Destructor

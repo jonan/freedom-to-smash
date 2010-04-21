@@ -15,7 +15,7 @@ You should have received a copy of the GNU General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>
 */
 
-#include "collision_object.hpp"
+#include "object.hpp"
 
 #include <btBulletCollisionCommon.h>
 
@@ -24,7 +24,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 namespace physics {
 
 // Constructor
-CollisionObject::CollisionObject(void)
+Object::Object(void)
         : offset(new btTransform)
         , collision_object(new btCollisionObject)
         , scene(NULL)
@@ -33,7 +33,7 @@ CollisionObject::CollisionObject(void)
 }
 
 // Desctructor
-CollisionObject::~CollisionObject(void)
+Object::~Object(void)
 {
     if (scene) scene->removeCollisionObject(this);
     delete offset;
@@ -41,20 +41,20 @@ CollisionObject::~CollisionObject(void)
 }
 
 // Set function.
-void CollisionObject::setShape(btCollisionShape &shape, const btTransform &center_offset)
+void Object::setShape(btCollisionShape &shape, const btTransform &center_offset)
 {
     collision_object->setCollisionShape(&shape);
     *offset = center_offset;
 }
 
 // Set function.
-void CollisionObject::setPosition(const btTransform &pos)
+void Object::setPosition(const btTransform &pos)
 {
     collision_object->setWorldTransform(pos);
 }
 
 // Detects the collision with another object.
-int CollisionObject::detectCollision(const CollisionObject &obj) const
+int Object::detectCollision(const Object &obj) const
 {
     int collision_type = NO_COLLISION;
     if (scene) {

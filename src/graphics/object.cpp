@@ -55,7 +55,7 @@ void Object::setEntity(const String &name)
 void Object::setPosition(const Ogre::Vector3 &pos)
 {
     node->setPosition(pos);
-    physics::CollisionObject::setPosition(btTransform(btQuaternion(0,0,0,1), btVector3(pos.x, pos.y, pos.z)));
+    physics::Object::setPosition(btTransform(btQuaternion(0,0,0,1), btVector3(pos.x, pos.y, pos.z)));
 }
 
 // Set function.
@@ -80,7 +80,7 @@ const Ogre::Vector3& Object::getPosition(void) const
 void Object::translate(const Real &x, const Real &y, const Real &z)
 {
     node->translate(x, y, z);
-    physics::CollisionObject::setPosition(btTransform(btQuaternion(0,0,0,1), physics::vector3(node->getPosition())));
+    physics::Object::setPosition(btTransform(btQuaternion(0,0,0,1), physics::vector3(node->getPosition())));
 }
 
 // Creates a new entity and returns a pointer to it.

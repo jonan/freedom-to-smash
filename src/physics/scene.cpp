@@ -19,7 +19,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 
 #include <btBulletCollisionCommon.h>
 
-#include "collision_object.hpp"
+#include "object.hpp"
 #if DEBUG_PHYSIC_SHAPES
 #include "debug_drawer.hpp"
 #endif
@@ -72,7 +72,7 @@ void Scene::drawDebugLines(void)
 #endif
 
 // Add an objects to the scene.
-void Scene::addCollisionObject(CollisionObject *obj)
+void Scene::addCollisionObject(Object *obj)
 {
     obj->setScene(this);
     world->addCollisionObject(obj->getCollisionObject());
@@ -80,7 +80,7 @@ void Scene::addCollisionObject(CollisionObject *obj)
 }
 
 // Remove an objects from the scene.
-void Scene::removeCollisionObject(CollisionObject *obj)
+void Scene::removeCollisionObject(Object *obj)
 {
     obj->setScene(NULL);
     world->removeCollisionObject(obj->getCollisionObject());
