@@ -1,0 +1,56 @@
+/*
+Copyright (C) 2007-2010 Luis Roduez Gil <zstars@gmail.com>
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License version 3 as
+published by the Free Software Foundation.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program. If not, see <http://www.gnu.org/licenses/>
+*/
+
+#include "ScheduledItem.h"
+
+
+
+    ScheduledItem::ScheduledItem() : mExecutionsSoFar(0)
+    {
+
+    }
+
+    bool ScheduledItem::LessThanFunctor::operator()( Ptr const & e1, Ptr const & e2 )
+    {
+        if(e1->mNextExecutionTime < e2->mNextExecutionTime)
+        {
+            return true;
+        }
+        else if(e1->mNextExecutionTime == e2->mNextExecutionTime)
+        {
+            if(e1->mPriority < e2->mPriority)
+            {
+                return true;
+            }
+            else if(e1->mPriority == e2->mPriority)
+            {
+                assert(e1->mID != e2->mID);
+
+                if(e1->mID < e2->mID)
+                    return true;
+                else return false;
+            }
+            else
+            {
+                return false;
+            }
+
+        }
+        else
+        {
+            return false;
+        }
+    }
