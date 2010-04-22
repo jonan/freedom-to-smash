@@ -26,7 +26,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #include "graphics/graphic_scene.hpp"
 
 /// Class to control all the graphical elements of a scene.
-class Scene : protected physics::Scene, protected graphics::GraphicScene {
+class Scene : protected physics::Scene, protected graphics::Scene {
 public:
     Scene(void); // Constructor
     ~Scene(void); // Destructor
