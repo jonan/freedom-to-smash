@@ -17,13 +17,13 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 
 #include "scene.hpp"
 
-#include <boost/foreach.hpp>
-
+// Ogre
 #include <OgreRenderWindow.h>
 #include <OgreRoot.h>
 #include <OgreSceneManager.h>
 #include <OgreViewport.h>
 
+// FtS
 #include <object.hpp>
 
 namespace graphics {
@@ -35,28 +35,12 @@ Scene::Scene(void)
     viewport = Ogre::Root::getSingleton().getAutoCreatedWindow()->addViewport(NULL);
 }
 
-// Destructor
-Scene::~Scene(void)
-{
-    BOOST_FOREACH(::Object *obj, objects)
-        delete obj;
-}
-
-// Adds an object to the scene.
-void Scene::addObject(const String &entity, const Ogre::Vector3 &position)
-{
-    ::Object *obj = new ::Object(*manager);
-    obj->setEntity(entity);
-    obj->setPosition(position);
-    objects.push_back(obj);
-}
-
 // Adds a static camera.
 int Scene::addCamera(const Ogre::String &name, const Ogre::Vector3 &position,
-                            const Ogre::Vector3 &look_at,
-                            const unsigned int near_clip, const unsigned int far_clip)
+                     const Ogre::Vector3 &look_at,
+                     const unsigned int near_clip, const unsigned int far_clip)
 {
-    Ogre::Camera *cam = createCamera(name, position, near_clip, far_clip);
+    Ogre::Camera *cam = &createCamera(name, position, near_clip, far_clip);
     cam->lookAt(look_at);
 
     return camera.size()-1;
@@ -64,10 +48,10 @@ int Scene::addCamera(const Ogre::String &name, const Ogre::Vector3 &position,
 
 // Adds a static camera that follows a given node.
 int Scene::addCamera(const Ogre::String &name, const Ogre::Vector3 &position,
-                            Ogre::SceneNode &look_at, const unsigned int near_clip,
-                            const unsigned int far_clip)
+                     Ogre::SceneNode &look_at, const unsigned int near_clip,
+                     const unsigned int far_clip)
 {
-    Ogre::Camera *cam = createCamera(name, position, near_clip, far_clip);
+    Ogre::Camera *cam = &createCamera(name, position, near_clip, far_clip);
     cam->setAutoTracking(true, &look_at);
 
     return camera.size()-1;
@@ -81,7 +65,7 @@ void Scene::useCamera(const int num_camera) {
 
 // Adds a light.
 void Scene::addLight(const Ogre::String &name, const Ogre::Vector3 &position,
-                            const Ogre::Light::LightTypes &type)
+                     const Ogre::Light::LightTypes &type)
 {
     light.push_back(manager->createLight(name));
     light.back()->setPosition(position);
@@ -100,9 +84,9 @@ void Scene::setShadowTechnique(const Ogre::ShadowTechnique technique)
     manager->setShadowTechnique(technique);
 }
 
-// Creates a camera for the scene.
-Ogre::Camera* Scene::createCamera(const Ogre::String &name, const Ogre::Vector3 &position,
-                                         const unsigned int near_clip, const unsigned int far_clip)
+// Creates a static camera for the scene.
+Ogre::Camera& Scene::createCamera(const String &name, const Ogre::Vector3 &position,
+                                  const unsigned int near_clip, const unsigned int far_clip)
 {
     Ogre::Camera *cam = manager->createCamera(name);
     cam->setPosition(position);
@@ -111,7 +95,7 @@ Ogre::Camera* Scene::createCamera(const Ogre::String &name, const Ogre::Vector3 
     cam->setAspectRatio(Ogre::Real(viewport->getActualWidth()) / Ogre::Real(viewport->getActualHeight()));
     camera.push_back(cam);
 
-    return cam;
+    return *cam;
 }
 
 } // namespace graphics
