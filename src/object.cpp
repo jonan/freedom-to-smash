@@ -36,7 +36,7 @@ void Object::setEntity(const String &name)
     // Create a physic shape from the entity's bounding box
     Ogre::AxisAlignedBox bounding_box = entity->getBoundingBox();
     btVector3 size = physics::vector3(bounding_box.getMaximum() - bounding_box.getMinimum());
-    btCollisionShape *shape = physics::ShapesManager::getInstance()->getBoxShape(size);
+    btCollisionShape *shape = &physics::ShapesManager::getInstance().getBoxShape(size);
     setShape(*shape);
 }
 
@@ -55,7 +55,7 @@ void Object::setScale(const Ogre::Vector3 &scale)
     Ogre::AxisAlignedBox bounding_box = entity->getBoundingBox();
     btVector3 size = physics::vector3(bounding_box.getMaximum() - bounding_box.getMinimum());
     size *= physics::vector3(scale);
-    btCollisionShape *shape = physics::ShapesManager::getInstance()->getBoxShape(size);
+    btCollisionShape *shape = &physics::ShapesManager::getInstance().getBoxShape(size);
     setShape(*shape);
 }
 

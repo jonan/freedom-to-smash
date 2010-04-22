@@ -59,7 +59,7 @@ Character* BattleGround::createCharacter(void)
 {
     Character *character = new Character(getManager());
     players.push_back(character);
-    physics::Scene::addCollisionObject(character);
+    physics::Scene::addCollisionObject(*character);
     return character;
 }
 

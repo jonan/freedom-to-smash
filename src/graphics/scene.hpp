@@ -41,7 +41,6 @@ public:
     ~Scene(void) {} // Destructor
 
 protected:
-
     // @{
     // Get functions.
     Ogre::SceneManager& getManager(void) {return *manager;}
