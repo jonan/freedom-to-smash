@@ -11,6 +11,7 @@ set(
   character.cpp
   input.cpp
   main.cpp
+  object.cpp
   platform.cpp
   player.cpp
   scene.cpp
@@ -30,6 +31,7 @@ set(
   boot.hpp
   character.hpp
   input.hpp
+  object.hpp
   platform.hpp
   player.hpp
   scene.hpp

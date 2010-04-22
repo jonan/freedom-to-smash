@@ -24,7 +24,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #include <OgreSceneManager.h>
 #include <OgreViewport.h>
 
-#include "object.hpp"
+#include <object.hpp>
 
 namespace graphics {
 
@@ -38,14 +38,14 @@ GraphicScene::GraphicScene(void)
 // Destructor
 GraphicScene::~GraphicScene(void)
 {
-    BOOST_FOREACH(Object *obj, objects)
+    BOOST_FOREACH(::Object *obj, objects)
         delete obj;
 }
 
 // Adds an object to the scene.
 void GraphicScene::addObject(const String &entity, const Ogre::Vector3 &position)
 {
-    Object *obj = new Object(*manager);
+    ::Object *obj = new ::Object(*manager);
     obj->setEntity(entity);
     obj->setPosition(position);
     objects.push_back(obj);

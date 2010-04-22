@@ -37,9 +37,9 @@ namespace Ogre {
     class Vector3;
 }
 
-namespace graphics {
-
 class Object;
+
+namespace graphics {
 
 /// Class to control all the graphical elements of a scene.
 class GraphicScene : public Ogre::FrameListener {

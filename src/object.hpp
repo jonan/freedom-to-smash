@@ -15,26 +15,23 @@ You should have received a copy of the GNU General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>
 */
 
-#include "scene.hpp"
+/// @file
+/// The Object class.
+/// @author Jonan
+
+#ifndef OBJECT_HPP
+#define OBJECT_HPP
 
 #include "graphics/object.hpp"
-#include "object.hpp"
 
-// Constructor
-Scene::Scene(void)
-{
+/// General object class.
+class Object : public graphics::Object {
+public:
+    explicit Object(Ogre::SceneManager &scene_manager, const int num_animations = 0); // Constructor
+    virtual ~Object(void) {} // Destructor
 
-}
+private:
+    DISALLOW_COPY_AND_ASSIGN(Object);
+};
 
-// Destructor
-Scene::~Scene(void)
-{
-
-}
-
-// Adds an object to the scene.
-void Scene::addObject(const String &entity, const Ogre::Vector3 &position)
-{
-    GraphicScene::addObject(entity, position);
-    physics::Scene::addCollisionObject(objects.back());
-}
+#endif // OBJECT_HPP
