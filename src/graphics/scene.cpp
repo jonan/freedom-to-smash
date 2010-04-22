@@ -20,11 +20,6 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 // Ogre
 #include <OgreRenderWindow.h>
 #include <OgreRoot.h>
-#include <OgreSceneManager.h>
-#include <OgreViewport.h>
-
-// FtS
-#include <object.hpp>
 
 namespace graphics {
 

@@ -16,37 +16,31 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 */
 
 /// @file
-/// The Object class.
+/// The graphics::Object class.
 /// @author Jonan
 
 #ifndef GRAPHICS_OBJECT_HPP
 #define GRAPHICS_OBJECT_HPP
 
+// C++
 #include <list>
 
-#include "physics/object.hpp"
-#include "util.hpp"
-
-namespace Ogre {
-    class Entity;
-    class SceneNode;
-    class SceneManager;
-    class Vector3;
-}
+// FtS
+#include <util.hpp>
 
 namespace graphics {
 
 /// General object class.
-class Object : public physics::Object {
+class Object {
 public:
     explicit Object(Ogre::SceneManager &scene_manager, const int num_animations = 0); // Constructor
     virtual ~Object(void); // Destructor
 
     // @{
     /// Set functions.
-    void setEntity   (const String &name);
-    void setPosition (const Ogre::Vector3 &pos);
-    void setScale    (const Ogre::Vector3 &scale);
+    virtual void setEntity   (const String &name);
+    virtual void setPosition (const Ogre::Vector3 &pos);
+    virtual void setScale    (const Ogre::Vector3 &scale);
     // @}
 
     // @{
@@ -54,35 +48,37 @@ public:
     const Ogre::Vector3& getPosition (void) const;
     // @}
 
-    /// Move the object.
-    /// @param[in] x Units to move in the x axes.
-    /// @param[in] y Units to move in the y axes.
-    /// @param[in] z Units to move in the z axes.
-    void translate(const Real &x, const Real &y, const Real &z);
-
     /// Attachs an new entity to a bone of the objects main entity.
     /// @param[in] entity_name Name of the new entity.
     /// @param[in] bone_name Name of the main entity's bone.
     void attachEntityToBone(const String &entity_name, const String &bone_name);
 
+    /// Move the object.
+    /// @param[in] x Units to move in the x axes.
+    /// @param[in] y Units to move in the y axes.
+    /// @param[in] z Units to move in the z axes.
+    virtual void translate(const Real &x, const Real &y, const Real &z);
+
 protected:
     // Creates a new entity and returns a pointer to it.
-    Ogre::Entity* createEntity(const String &name);
+    Ogre::Entity& createEntity(const String &name);
 
-    //
+    // Creates a new animation.
     void createAnimation(const int type, const String &name, const bool loop = false, const bool enabled = false);
 
-    //
+    // Advances the animation and returns true if it has ended.
     bool performAnimation(const int type, const Ogre::FrameEvent &event);
 
     Ogre::Entity *entity;
     Ogre::SceneNode *node;
-    Ogre::SceneManager *scene_manager;
 
     std::list<Ogre::AnimationState*> *animations;
-    std::list<Ogre::Entity*> attached_entities;
 
 private:
+    Ogre::SceneManager *scene_manager;
+
+    std::list<Ogre::Entity*> attached_entities;
+
     DISALLOW_COPY_AND_ASSIGN(Object);
 };
 

@@ -23,12 +23,26 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #define OBJECT_HPP
 
 #include "graphics/object.hpp"
+#include "physics/object.hpp"
 
 /// General object class.
-class Object : public graphics::Object {
+class Object : public graphics::Object, public physics::Object {
 public:
     explicit Object(Ogre::SceneManager &scene_manager, const int num_animations = 0); // Constructor
     virtual ~Object(void) {} // Destructor
+
+    // @{
+    /// Set functions.
+    virtual void setEntity   (const String &name);
+    virtual void setPosition (const Ogre::Vector3 &pos);
+    virtual void setScale    (const Ogre::Vector3 &scale);
+    // @}
+
+    /// Move the object.
+    /// @param[in] x Units to move in the x axes.
+    /// @param[in] y Units to move in the y axes.
+    /// @param[in] z Units to move in the z axes.
+    virtual void translate(const Real &x, const Real &y, const Real &z);
 
 private:
     DISALLOW_COPY_AND_ASSIGN(Object);
