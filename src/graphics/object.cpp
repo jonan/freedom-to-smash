@@ -17,6 +17,13 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 
 #include "object.hpp"
 
+#include <boost/foreach.hpp>
+
+#include <OgreAnimationState.h>
+#include <OgreEntity.h>
+#include <OgreFrameListener.h>
+
+
 #include <OgreEntity.h>
 #include <OgreSceneManager.h>
 
@@ -26,17 +33,49 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 namespace graphics {
 
 // Constructor
-Object::Object(Ogre::SceneManager &scene_manager)
+Object::Object(Ogre::SceneManager &scene_manager, const int num_animations)
         : entity(NULL)
         , scene_manager(&scene_manager)
+        , animations(NULL)
 {
     node = scene_manager.getRootSceneNode()->createChildSceneNode();
+    if (num_animations)
+        animations = new std::list<Ogre::AnimationState*>[num_animations];
 }
 
 // Destructor
 Object::~Object(void)
 {
+    delete [] animations;
+}
 
+// Attachs an new entity to a bone of the objects main entity.
+void Object::attachEntityToBone(const String &entity_name, const String &bone_name)
+{
+    attached_entities.push_back(createEntity(entity_name));
+    entity->attachObjectToBone(bone_name, attached_entities.back());
+}
+
+//
+void Object::createAnimation(const int type, const String &name, const bool loop, const bool enabled)
+{
+    animations[type].push_back(entity->getAnimationState(name));
+    animations[type].back()->setLoop(loop);
+    animations[type].back()->setEnabled(enabled);
+}
+
+//
+bool Object::performAnimation(const int type, const Ogre::FrameEvent &event)
+{
+    bool end = false;
+    BOOST_FOREACH(Ogre::AnimationState *anim, animations[type]) {
+        anim->setEnabled(true);
+        anim->addTime(event.timeSinceLastFrame);
+        if (anim->hasEnded()) {
+            end = true;
+        }
+    }
+    return end;
 }
 
 // Set function.

@@ -1,6 +1,5 @@
 set(
   SRC
-  graphics/animated_object.cpp
   graphics/graphic_scene.cpp
   graphics/object.cpp
   physics/debug_drawer.cpp
@@ -20,7 +19,6 @@ set(
 
 set(
   HEADERS
-  graphics/animated_object.hpp
   graphics/graphic_scene.hpp
   graphics/object.hpp
   physics/converter_functions.hpp

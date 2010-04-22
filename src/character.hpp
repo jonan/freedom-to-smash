@@ -24,10 +24,10 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 
 #include <OgreFrameListener.h>
 
-#include "graphics/animated_object.hpp"
+#include "graphics/object.hpp"
 
 /// Class to control a character.
-class Character : public graphics::AnimatedObject, public Ogre::FrameListener {
+class Character : public graphics::Object, public Ogre::FrameListener {
 public:
     explicit Character(Ogre::SceneManager &scene_manager); // Constructor
     ~Character(void); // Destructor

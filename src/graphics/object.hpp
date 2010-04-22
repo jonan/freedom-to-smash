@@ -22,6 +22,8 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #ifndef GRAPHICS_OBJECT_HPP
 #define GRAPHICS_OBJECT_HPP
 
+#include <list>
+
 #include "physics/object.hpp"
 #include "util.hpp"
 
@@ -37,7 +39,7 @@ namespace graphics {
 /// General object class.
 class Object : public physics::Object {
 public:
-    explicit Object(Ogre::SceneManager &scene_manager); // Constructor
+    explicit Object(Ogre::SceneManager &scene_manager, const int num_animations = 0); // Constructor
     virtual ~Object(void); // Destructor
 
     // @{
@@ -58,13 +60,27 @@ public:
     /// @param[in] z Units to move in the z axes.
     void translate(const Real &x, const Real &y, const Real &z);
 
+    /// Attachs an new entity to a bone of the objects main entity.
+    /// @param[in] entity_name Name of the new entity.
+    /// @param[in] bone_name Name of the main entity's bone.
+    void attachEntityToBone(const String &entity_name, const String &bone_name);
+
 protected:
     // Creates a new entity and returns a pointer to it.
     Ogre::Entity* createEntity(const String &name);
 
+    //
+    void createAnimation(const int type, const String &name, const bool loop = false, const bool enabled = false);
+
+    //
+    bool performAnimation(const int type, const Ogre::FrameEvent &event);
+
     Ogre::Entity *entity;
     Ogre::SceneNode *node;
     Ogre::SceneManager *scene_manager;
+
+    std::list<Ogre::AnimationState*> *animations;
+    std::list<Ogre::Entity*> attached_entities;
 
 private:
     DISALLOW_COPY_AND_ASSIGN(Object);
