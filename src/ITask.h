@@ -19,31 +19,31 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 
 #include <boost/shared_ptr.hpp>
 
-	//! Represents a task. That is, an action to run at a specified time.
-	//! That action is meant to be specified by overriding the Execute function.
-	class ITask
-	{
+    //! Represents a task. That is, an action to run at a specified time.
+    //! That action is meant to be specified by overriding the Execute function.
+    class ITask
+    {
 
-	public:
+    public:
 
-		//! Constructs a task.
-		//!
-		ITask()
-		{
-		}
+        //! Constructs a task.
+        //!
+        ITask()
+        {
+        }
 
-		enum { PRIORITY_LOW = -1, PRIORITY_NORMAL, PRIORITY_HIGH };
-		enum { EXEC_FOREVER = -1, EXEC_NONE, EXEC_ONCE };
-		enum { FREQ_ASWAIT = -1 };
+        enum { PRIORITY_LOW = -1, PRIORITY_NORMAL, PRIORITY_HIGH };
+        enum { EXEC_FOREVER = -1, EXEC_NONE, EXEC_ONCE };
+        enum { FREQ_ASWAIT = -1 };
 
-		typedef boost::shared_ptr<ITask> Ptr;
+        typedef boost::shared_ptr<ITask> Ptr;
 
-		//! Member function called automatically by the Scheduler when
-		//! the time is right. If it returns false, the task will be
-		//! automatically removed from the scheduler, whether it was
-		//! originally meant to repeat itself or not.
-		//!
-		virtual bool Execute() = 0;
+        //! Member function called automatically by the Scheduler when
+        //! the time is right. If it returns false, the task will be
+        //! automatically removed from the scheduler, whether it was
+        //! originally meant to repeat itself or not.
+        //!
+        virtual bool Execute() = 0;
 
-	};
+    };
 

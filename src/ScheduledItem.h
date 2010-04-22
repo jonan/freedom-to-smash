@@ -24,28 +24,28 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #include <boost/shared_ptr.hpp>
 
 
-	//! Intermediary class which represents a scheduled task.
-	//!
-	struct ScheduledItem
-	{
-		typedef boost::shared_ptr<ScheduledItem> Ptr;
+    //! Intermediary class which represents a scheduled task.
+    //!
+    struct ScheduledItem
+    {
+        typedef boost::shared_ptr<ScheduledItem> Ptr;
 
 
-		ScheduledItem();
+        ScheduledItem();
 
 
-		ITask::Ptr mTaskPtr;
-		unsigned long mNextExecutionTime;
-		unsigned long mID;
-		long mRemainingExecutions;
-		unsigned long mExecutionsSoFar;
-		long mFrequency;
-		int mPriority;
+        ITask::Ptr mTaskPtr;
+        unsigned long mNextExecutionTime;
+        unsigned long mID;
+        long mRemainingExecutions;
+        unsigned long mExecutionsSoFar;
+        long mFrequency;
+        int mPriority;
 
 
-		struct LessThanFunctor
-		{
-			bool operator()(Ptr const & e1, Ptr const & e2);
-		};
+        struct LessThanFunctor
+        {
+            bool operator()(Ptr const & e1, Ptr const & e2);
+        };
 
-	};
+    };
