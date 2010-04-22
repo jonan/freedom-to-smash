@@ -15,24 +15,19 @@ You should have received a copy of the GNU General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>
 */
 
-#include "scene.hpp"
+#include <scene.hpp>
 
 // Boost
 #include <boost/foreach.hpp>
 
-#include "graphics/object.hpp"
-#include "object.hpp"
-
-// Constructor
-Scene::Scene(void)
-{
-
-}
+// FtS
+#include <graphics/object.hpp>
+#include <object.hpp>
 
 // Destructor
 Scene::~Scene(void)
 {
-    BOOST_FOREACH(::Object *obj, objects)
+    BOOST_FOREACH(Object *obj, objects)
         delete obj;
 }
 

@@ -22,18 +22,20 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #ifndef SCENE_HPP
 #define SCENE_HPP
 
+// Ogre
 #include <OgreFrameListener.h>
 
-#include "physics/scene.hpp"
-#include "graphics/scene.hpp"
+// FtS
+#include <physics/scene.hpp>
+#include <graphics/scene.hpp>
 
 // FtS
 class Object;
 
-/// Class to control all the graphical elements of a scene.
+/// Class to control the graphical and physic objects in a scene.
 class Scene : protected physics::Scene, protected graphics::Scene, public Ogre::FrameListener {
 public:
-    Scene(void); // Constructor
+    Scene(void) {} // Constructor
     ~Scene(void); // Destructor
 
 protected:
