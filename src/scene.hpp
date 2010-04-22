@@ -22,18 +22,28 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #ifndef SCENE_HPP
 #define SCENE_HPP
 
+#include <OgreFrameListener.h>
+
 #include "physics/scene.hpp"
-#include "graphics/graphic_scene.hpp"
+#include "graphics/scene.hpp"
+
+// FtS
+class Object;
 
 /// Class to control all the graphical elements of a scene.
-class Scene : protected physics::Scene, protected graphics::GraphicScene {
+class Scene : protected physics::Scene, protected graphics::Scene, public Ogre::FrameListener {
 public:
     Scene(void); // Constructor
     ~Scene(void); // Destructor
 
 protected:
     // Adds an object to the scene.
-    virtual void addObject(const String &entity, const Ogre::Vector3 &position);
+    void addObject(const String &entity, const Ogre::Vector3 &position);
+
+    // This function is called at the beginnig of every frame.
+    virtual bool frameStarted(const Ogre::FrameEvent &event) = 0;
+
+    std::list<Object*> objects;
 
 private:
     DISALLOW_COPY_AND_ASSIGN(Scene);

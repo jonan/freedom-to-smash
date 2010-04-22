@@ -32,7 +32,7 @@ BattleGround::BattleGround(void)
     setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
     setAmbientLight(Ogre::ColourValue(2.0,2.0,2.0));
     // Create camera
-    cam_node = manager->getRootSceneNode()->createChildSceneNode();
+    cam_node = getManager().getRootSceneNode()->createChildSceneNode();
     int cam = addCamera("BattleGround Camera", Ogre::Vector3(0,0,-50), *cam_node);
     useCamera(cam);
     // Ground
@@ -43,7 +43,7 @@ BattleGround::BattleGround(void)
     addObject("cube", Ogre::Vector3(23,7,0));
     objects.back()->setScale(Ogre::Vector3(3,0.5,1));
 #if DEBUG_PHYSIC_SHAPES
-    createDebugDrawer(*manager);
+    createDebugDrawer(getManager());
 #endif
 }
 
@@ -57,9 +57,9 @@ BattleGround::~BattleGround(void)
 // Creates a character and adds it to the battle ground.
 Character* BattleGround::createCharacter(void)
 {
-    Character *character = new Character(*manager);
+    Character *character = new Character(getManager());
     players.push_back(character);
-    physics::Scene::addCollisionObject(character);
+    physics::Scene::addCollisionObject(*character);
     return character;
 }
 

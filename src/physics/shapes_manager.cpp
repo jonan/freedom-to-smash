@@ -15,7 +15,7 @@ You should have received a copy of the GNU General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>
 */
 
-#include "shapes_manager.hpp"
+#include <physics/shapes_manager.hpp>
 
 // Boost
 #include <boost/foreach.hpp>
@@ -25,19 +25,19 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 namespace physics {
 
 // Singleton pattern constructor
-ShapesManager* ShapesManager::getInstance(void) {
+ShapesManager& ShapesManager::getInstance(void) {
     static ShapesManager instance;
-    return &instance;
+    return instance;
 }
 
 // Function to get a box shape.
-btCollisionShape* ShapesManager::getBoxShape(const btVector3 &size) {
+btCollisionShape& ShapesManager::getBoxShape(const btVector3 &size) {
     btBoxShape *temp = findBoxShape(size);
     if (!temp) {
         temp = new btBoxShape(size/2);
         box_shapes.push_back(temp);
     }
-    return temp;
+    return *temp;
 }
 
 // Destructor

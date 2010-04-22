@@ -22,9 +22,11 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #ifndef PHYSICS_SHAPES_MANAGER_HPP
 #define PHYSICS_SHAPES_MANAGER_HPP
 
+// C++
 #include <list>
 
-#include "util.hpp"
+// FtS
+#include <util.hpp>
 
 // Bullet
 class btBoxShape;
@@ -36,11 +38,11 @@ namespace physics {
 /// Stores all physic shapes to make sure none are duplicated.
 class ShapesManager {
 public:
-    static ShapesManager* getInstance(void); // Singleton pattern constructor
+    static ShapesManager& getInstance(void); // Singleton pattern constructor
 
     // @{
     /// Functions to get the different physic shapes.
-    btCollisionShape* getBoxShape(const btVector3 &size);
+    btCollisionShape& getBoxShape(const btVector3 &size);
     // @}
 
 private:

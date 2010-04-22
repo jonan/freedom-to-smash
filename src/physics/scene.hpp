@@ -22,9 +22,11 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #ifndef PHYSICS_SCENE_HPP
 #define PHYSICS_SCENE_HPP
 
+// C++
 #include <list>
 
-#include "util.hpp"
+// FtS
+#include <util.hpp>
 
 // Bullet
 class btAxisSweep3;
@@ -58,13 +60,13 @@ public:
 
     // @{
     /// Add or remove objects from the scene.
-    void addCollisionObject    (Object *obj);
-    void removeCollisionObject (Object *obj);
+    void addCollisionObject    (Object &obj);
+    void removeCollisionObject (Object &obj);
     // @}
 
     // @{
     /// Get functions.
-    btCollisionDispatcher* getDispatcher(void) {return dispatcher;}
+    btCollisionDispatcher& getDispatcher(void) {return *dispatcher;}
     // @}
 
     /// Detects all the collisions between the objects in the scene.

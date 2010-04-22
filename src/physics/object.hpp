@@ -22,9 +22,11 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #ifndef PHYSICS_OBJECT_HPP
 #define PHYSICS_OBJECT_HPP
 
-#include "util.hpp"
-
+// Bullet
 #include <LinearMath/btTransform.h>
+
+// FtS
+#include <util.hpp>
 
 // Bullet
 class btCollisionObject;
@@ -56,7 +58,7 @@ public:
 
     // @{
     /// Get functions.
-    btCollisionObject* getCollisionObject(void) {return collision_object;}
+    btCollisionObject& getCollisionObject(void) {return *collision_object;}
     // @}
 
     /// Detects collisions with the given object.

@@ -15,11 +15,13 @@ You should have received a copy of the GNU General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>
 */
 
-#include "object.hpp"
+#include <physics/object.hpp>
 
+// Bullet
 #include <btBulletCollisionCommon.h>
 
-#include "scene.hpp"
+// FtS
+#include <physics/scene.hpp>
 
 namespace physics {
 
@@ -35,7 +37,7 @@ Object::Object(void)
 // Desctructor
 Object::~Object(void)
 {
-    if (scene) scene->removeCollisionObject(this);
+    if (scene) scene->removeCollisionObject(*this);
     delete offset;
     delete collision_object;
 }
@@ -58,7 +60,7 @@ int Object::detectCollision(const Object &obj) const
 {
     int collision_type = NO_COLLISION;
     if (scene) {
-        btCollisionDispatcher *dispatcher = scene->getDispatcher();
+        btCollisionDispatcher *dispatcher = &scene->getDispatcher();
         int num_manifolds = dispatcher->getNumManifolds();
         btPersistentManifold *contact;
         btCollisionObject *obj_0, *obj_1;

@@ -1,8 +1,7 @@
 set(
   SRC
-  graphics/animated_object.cpp
-  graphics/graphic_scene.cpp
   graphics/object.cpp
+  graphics/scene.cpp
   physics/debug_drawer.cpp
   physics/object.cpp
   physics/scene.cpp
@@ -12,6 +11,7 @@ set(
   character.cpp
   input.cpp
   main.cpp
+  object.cpp
   platform.cpp
   player.cpp
   scene.cpp
@@ -23,9 +23,8 @@ set(
 
 set(
   HEADERS
-  graphics/animated_object.hpp
-  graphics/graphic_scene.hpp
   graphics/object.hpp
+  graphics/scene.hpp
   physics/converter_functions.hpp
   physics/debug_drawer.hpp
   physics/object.hpp
@@ -35,6 +34,7 @@ set(
   boot.hpp
   character.hpp
   input.hpp
+  object.hpp
   platform.hpp
   player.hpp
   scene.hpp

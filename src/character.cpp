@@ -26,7 +26,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 
 // Constructor
 Character::Character(Ogre::SceneManager &scene_manager)
-        : AnimatedObject(scene_manager, NUM_STATES)
+        : Object(scene_manager, NUM_STATES)
         , on_floor(true)
         , has_double_jumped(false)
         , jumping_time(0)

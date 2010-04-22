@@ -15,14 +15,15 @@ You should have received a copy of the GNU General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>
 */
 
-#include "debug_drawer.hpp"
+#include <physics/debug_drawer.hpp>
 
 // Ogre
 #include <OgreManualObject.h>
 #include <OgreMaterialManager.h>
 #include <OgreSceneManager.h>
 
-#include "converter_functions.hpp"
+// FtS
+#include <physics/converter_functions.hpp>
 
 namespace physics {
 

@@ -22,14 +22,11 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #ifndef PHYSICS_DEBUG_DRAWER_HPP
 #define PHYSICS_DEBUG_DRAWER_HPP
 
+// Bullet
 #include <btBulletCollisionCommon.h>
 
-#include "util.hpp"
-
-namespace Ogre {
-    class ManualObject;
-    class SceneManager;
-}
+// FtS
+#include <util.hpp>
 
 namespace physics {
 

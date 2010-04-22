@@ -41,7 +41,7 @@ Scene::Scene(void)
 // Destructor
 Scene::~Scene(void) {
     while (!collision_objects.empty())
-        removeCollisionObject(collision_objects.front());
+        removeCollisionObject(*collision_objects.front());
     delete world;
     delete broadphase;
     delete dispatcher;
@@ -72,19 +72,19 @@ void Scene::drawDebugLines(void)
 #endif
 
 // Add an objects to the scene.
-void Scene::addCollisionObject(Object *obj)
+void Scene::addCollisionObject(Object &obj)
 {
-    obj->setScene(this);
-    world->addCollisionObject(obj->getCollisionObject());
-    collision_objects.push_back(obj);
+    obj.setScene(this);
+    world->addCollisionObject(&obj.getCollisionObject());
+    collision_objects.push_back(&obj);
 }
 
 // Remove an objects from the scene.
-void Scene::removeCollisionObject(Object *obj)
+void Scene::removeCollisionObject(Object &obj)
 {
-    obj->setScene(NULL);
-    world->removeCollisionObject(obj->getCollisionObject());
-    collision_objects.remove(obj);
+    obj.setScene(NULL);
+    world->removeCollisionObject(&obj.getCollisionObject());
+    collision_objects.remove(&obj);
 }
 
 // Detects all the collisions between the objects in the scene.

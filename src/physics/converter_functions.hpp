@@ -22,8 +22,9 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #ifndef PHYSICS_CONVERTER_FUNCTIONS_HPP
 #define PHYSICS_CONVERTER_FUNCTIONS_HPP
 
+// Bullet
 #include <LinearMath/btQuaternion.h>
-
+// Ogre
 #include <OgreVector3.h>
 
 namespace physics {
