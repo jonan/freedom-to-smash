@@ -1,6 +1,7 @@
 #include "soundloader.hpp"
 
 #include <SDL/SDL_audio.h> // Temporal Testing Solution
+using namespace audio;
 
 SoundLoader::SoundLoader()
 {

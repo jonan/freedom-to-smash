@@ -1,6 +1,7 @@
 #include "soundsource.hpp"
 
 #include <string.h>
+using namespace audio;
 
 SoundSource::SoundSource(const char* name, ALuint *buffer)
 {

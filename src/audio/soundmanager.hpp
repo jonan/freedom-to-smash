@@ -6,6 +6,9 @@
 #include "soundresources.hpp"
 #include "soundsource.hpp"
 
+
+namespace audio {
+
 class SoundManager {
 public:
     static SoundManager* getInstance();
@@ -31,5 +34,7 @@ protected:
     SoundResources *mResourceManager;
     std::list<SoundSource*> mSourceList;
 };
+
+}
 
 #endif // SOUNDMANAGER_HPP

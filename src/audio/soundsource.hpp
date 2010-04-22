@@ -3,6 +3,8 @@
 
 #include <AL/al.h>
 
+namespace audio {
+
 class SoundSource {
 public:
     SoundSource(const char* name, ALuint *buffer);
@@ -22,4 +24,5 @@ private:
     ALfloat mVelocity[3];
 };
 
+}
 #endif // SOUNDSOURCE_HPP

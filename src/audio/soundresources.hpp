@@ -5,6 +5,8 @@
 #include "../util.hpp"
 #include <list>
 
+namespace audio {
+
 class SoundResources {
 public:
     static SoundResources* getInstance();
@@ -34,4 +36,5 @@ private:
     Ogre::String defaultLocation;
 };
 
+}
 #endif // SOUNDRESOURCES_HPP

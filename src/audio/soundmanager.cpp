@@ -3,7 +3,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-
+using namespace audio;
 
 SoundManager* SoundManager::getInstance()
 {

@@ -90,7 +90,7 @@ void boot(void)
     // Start capturing all input
     Input::getInstance();
     // Start OpenAL
-    SoundManager::getInstance();
+    audio::SoundManager::getInstance();
 }
 
 // Shuts down all the systems and frees memory.

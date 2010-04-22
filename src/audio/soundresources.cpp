@@ -1,5 +1,5 @@
 #include "soundresources.hpp"
-
+using namespace audio;
 
 SoundResources* SoundResources::getInstance()
 {

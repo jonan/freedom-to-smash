@@ -3,6 +3,8 @@
 #include <string.h>
 #include "soundloader.hpp"
 
+using namespace audio;
+
 SoundBuffer::SoundBuffer(const char* name, const char* path, const char* extension)
 {
     this->mName = strdup(name);
