@@ -1,7 +1,7 @@
 set(
   SRC
-  graphics/graphic_scene.cpp
   graphics/object.cpp
+  graphics/scene.cpp
   physics/debug_drawer.cpp
   physics/object.cpp
   physics/scene.cpp
@@ -20,8 +20,8 @@ set(
 
 set(
   HEADERS
-  graphics/graphic_scene.hpp
   graphics/object.hpp
+  graphics/scene.hpp
   physics/converter_functions.hpp
   physics/debug_drawer.hpp
   physics/object.hpp

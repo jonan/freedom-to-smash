@@ -23,7 +23,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #define SCENE_HPP
 
 #include "physics/scene.hpp"
-#include "graphics/graphic_scene.hpp"
+#include "graphics/scene.hpp"
 
 /// Class to control all the graphical elements of a scene.
 class Scene : protected physics::Scene, protected graphics::Scene {
