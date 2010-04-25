@@ -22,10 +22,11 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #ifndef OBJECT_HPP
 #define OBJECT_HPP
 
-#include "graphics/object.hpp"
-#include "physics/object.hpp"
+// FtS
+#include <graphics/object.hpp>
+#include <physics/object.hpp>
 
-/// General object class.
+/// General object with graphic and physic properties.
 class Object : public graphics::Object, public physics::Object {
 public:
     explicit Object(Ogre::SceneManager &scene_manager, const int num_animations = 0); // Constructor

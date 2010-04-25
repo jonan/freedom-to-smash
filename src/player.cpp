@@ -15,11 +15,12 @@ You should have received a copy of the GNU General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>
 */
 
-#include "player.hpp"
+#include <player.hpp>
 
-#include "battle_ground.hpp"
-#include "character.hpp"
-#include "input.hpp"
+// FtS
+#include <battle_ground.hpp>
+#include <character.hpp>
+#include <input.hpp>
 
 // Constructor
 Player::Player(void)

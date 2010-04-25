@@ -22,9 +22,11 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #ifndef PLATFORM_HPP
 #define PLATFORM_HPP
 
+// Ogre
 #include <OgreFrameListener.h>
 
-#include "graphics/object.hpp"
+// FtS
+#include <graphics/object.hpp>
 
 class Character;
 

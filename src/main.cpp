@@ -19,9 +19,10 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 /// The main function.
 /// @author Jonan
 
-#include "battle_ground.hpp"
-#include "boot.hpp"
-#include "player.hpp"
+// FtS
+#include <battle_ground.hpp>
+#include <boot.hpp>
+#include <player.hpp>
 
 int main(int argc, char *argv[])
 {

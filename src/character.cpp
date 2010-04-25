@@ -15,14 +15,16 @@ You should have received a copy of the GNU General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>
 */
 
-#include "character.hpp"
+#include <character.hpp>
 
+// Boost
 #include <boost/foreach.hpp>
-
+// Ogre
 #include <OgreEntity.h>
 #include <OgreRoot.h>
 
-#include "input.hpp"
+// FtS
+#include <input.hpp>
 
 // Constructor
 Character::Character(Ogre::SceneManager &scene_manager)

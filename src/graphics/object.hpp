@@ -30,7 +30,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 
 namespace graphics {
 
-/// General object class.
+/// Class to control the graphical representation of an object.
 class Object {
 public:
     explicit Object(Ogre::SceneManager &scene_manager, const int num_animations = 0); // Constructor

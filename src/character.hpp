@@ -22,9 +22,11 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #ifndef CHARACTER_HPP
 #define CHARACTER_HPP
 
+// Ogre
 #include <OgreFrameListener.h>
 
-#include "object.hpp"
+// FtS
+#include <object.hpp>
 
 /// Class to control a character.
 class Character : public Object, public Ogre::FrameListener {

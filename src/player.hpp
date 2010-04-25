@@ -22,9 +22,11 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #ifndef PLAYER_HPP
 #define PLAYER_HPP
 
+// OIS
 #include <OIS/OIS.h>
 
-#include "util.hpp"
+// FtS
+#include <util.hpp>
 
 class BattleGround;
 class Character;

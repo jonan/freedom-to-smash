@@ -15,12 +15,14 @@ You should have received a copy of the GNU General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>
 */
 
-#include "object.hpp"
+#include <object.hpp>
 
+// Ogre
 #include <Ogre.h>
 
-#include "physics/converter_functions.hpp"
-#include "physics/shapes_manager.hpp"
+// FtS
+#include <physics/converter_functions.hpp>
+#include <physics/shapes_manager.hpp>
 
 // Constructor
 Object::Object(Ogre::SceneManager &scene_manager, const int num_animations)
@@ -51,7 +53,7 @@ void Object::setPosition(const Ogre::Vector3 &pos)
 void Object::setScale(const Ogre::Vector3 &scale)
 {
     graphics::Object::setScale(scale);
-    // Create a physic shape from the entity's bounding box
+    // Update the physic shape
     Ogre::AxisAlignedBox bounding_box = entity->getBoundingBox();
     btVector3 size = physics::vector3(bounding_box.getMaximum() - bounding_box.getMinimum());
     size *= physics::vector3(scale);

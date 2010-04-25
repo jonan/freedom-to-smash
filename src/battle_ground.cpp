@@ -15,14 +15,16 @@ You should have received a copy of the GNU General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>
 */
 
-#include "battle_ground.hpp"
+#include <battle_ground.hpp>
 
+// Boost
 #include <boost/foreach.hpp>
-
+// Ogre
 #include <OgreRenderWindow.h>
 #include <OgreRoot.h>
 
-#include "character.hpp"
+// FtS
+#include <character.hpp>
 
 // Constructor
 BattleGround::BattleGround(void)

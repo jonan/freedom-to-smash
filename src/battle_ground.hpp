@@ -22,9 +22,10 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #ifndef BATTLE_GROUND_HPP
 #define BATTLE_GROUND_HPP
 
-#include "scene.hpp"
-#include "util.hpp"
+// FtS
+#include <scene.hpp>
 
+// FtS
 class Character;
 class Object;
 

@@ -22,6 +22,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #ifndef UTIL_HPP
 #define UTIL_HPP
 
+// Ogre
 #include <OgrePrerequisites.h>
 
 using Ogre::Real;

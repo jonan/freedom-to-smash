@@ -22,11 +22,13 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #ifndef INPUT_HPP
 #define INPUT_HPP
 
+// Ogre
 #include <OgreFrameListener.h>
-
+// OIS
 #include <OIS/OIS.h>
 
-#include "util.hpp"
+// FtS
+#include <util.hpp>
 
 /// Class to control all input and who is listening to it.
 /// @todo Add joystick support.
