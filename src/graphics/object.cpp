@@ -118,7 +118,7 @@ bool Object::performAnimation(const int type, const Ogre::FrameEvent &event)
     bool end = false;
     BOOST_FOREACH(Ogre::AnimationState *anim, animations[type]) {
         anim->setEnabled(true);
-        anim->addTime(event.timeSinceLastFrame);
+        anim->addTime(event.timeSinceLastFrame*1.5);
         if (anim->hasEnded()) {
             end = true;
         }

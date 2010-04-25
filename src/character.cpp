@@ -186,18 +186,22 @@ void Character::frameAnimation(const Ogre::FrameEvent &event)
 void Character::frameMovement(const Ogre::FrameEvent &event)
 {
     if (action[MOVE]) {
-        translate(direction*10*event.timeSinceLastFrame, 0, 0);
+        translate(direction*25*event.timeSinceLastFrame, 0, 0);
         node->setDirection(0,0,-direction,Ogre::Node::TS_PARENT);
         node->yaw(Ogre::Degree(90));
     }
-    if (action[JUMP]) {
-        jumping_time += event.timeSinceLastFrame;
-        if (jumping_time > 1.5) {
-            stopAction(JUMP);
+    if (action[JUMP] || action[FALL]) {
+        Real initial_speed = 0;
+        if (action[JUMP]) {
+            initial_speed = 80;
+            if (calculateVerticalSpeed(initial_speed) <= 0) {
+                stopAction(JUMP);
+                jumping_time = 0;
+                initial_speed = 0;
+            }
         }
-        translate(0, 10*event.timeSinceLastFrame, 0);
-    } else if (action[FALL]) {
-        translate(0, -10*event.timeSinceLastFrame, 0);
+        jumping_time += event.timeSinceLastFrame;
+        translate(0, calculateVerticalSpeed(initial_speed)*event.timeSinceLastFrame, 0);
     }
 }
 
@@ -207,4 +211,11 @@ void Character::stopAction(const int type)
     BOOST_FOREACH(Ogre::AnimationState *anim, animations[type])
         anim->setTimePosition(0);
     action[type] = false;
+}
+
+// Calculates the current vertical speed.
+const Real Character::calculateVerticalSpeed(const Real &start_speed)
+{
+    const static Real GRAVITY = 300;
+    return (start_speed - (GRAVITY * jumping_time));
 }
