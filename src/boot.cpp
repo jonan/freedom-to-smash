@@ -15,21 +15,15 @@ You should have received a copy of the GNU General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>
 */
 
-#include "boot.hpp"
+#include <boot.hpp>
 
+// Ogre
 #include <OgreConfigFile.h>
 #include <OgreRenderSystem.h>
 #include <OgreRoot.h>
 
-#include "input.hpp"
-
-// Loads the Ogre plugins that will be used.
-void loadPlugins(Ogre::Root *ogre_root)
-{
-    ogre_root->loadPlugin("RenderSystem_GL"); // OpenGL
-    ogre_root->loadPlugin("Plugin_ParticleFX"); // Particle system
-    //ogre_root->loadPlugin("Plugin_OctreeSceneManager"); // Octree-based scene graph and manager
-}
+// FtS
+#include <input.hpp>
 
 // Defines where resources are (according to resources.cfg).
 void defineResources(void)
@@ -54,18 +48,18 @@ void defineResources(void)
 }
 
 // Setups Ogre's render system.
-void setupRenderSystem(Ogre::Root *ogre_root)
+void setupRenderSystem(Ogre::Root &ogre_root)
 {
     // Try to use previous configuration (stored in ogre.cfg)
-    if (!ogre_root->restoreConfig()) {
+    if (!ogre_root.restoreConfig()) {
         // If there's no configuration file set defaults
-        Ogre::RenderSystem* render_system = ogre_root->getRenderSystemByName("OpenGL Rendering Subsystem");
-        ogre_root->setRenderSystem(render_system);
+        Ogre::RenderSystem *render_system = ogre_root.getRenderSystemByName("OpenGL Rendering Subsystem");
+        ogre_root.setRenderSystem(render_system);
         render_system->setConfigOption("Full Screen", "No");
         render_system->setConfigOption("Video Mode", "800 x 600");
-        ogre_root->saveConfig();
+        ogre_root.saveConfig();
     }
-    ogre_root->initialise(true, "Freedom to Smash");
+    ogre_root.initialise(true, "Freedom to Smash");
 }
 
 // Initializes all the resources the program will need.
@@ -81,10 +75,8 @@ void boot(void)
 {
     // Start Ogre
     Ogre::Root *ogre_root = new Ogre::Root;
-    // For the moment plugins are loaded according to plugins.cfg
-    //loadPlugins(ogre_root);
     defineResources();
-    setupRenderSystem(ogre_root);
+    setupRenderSystem(*ogre_root);
     initializeAllResources();
     // Start capturing all input
     Input::getInstance();
