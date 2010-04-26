@@ -32,7 +32,6 @@ Character::Character(Ogre::SceneManager &scene_manager)
         , on_floor(true)
         , has_double_jumped(false)
         , jumping_time(0)
-        , direction(1)
 {
     setEntity("sinbad");
     entity->getSkeleton()->setBlendMode(Ogre::ANIMBLEND_CUMULATIVE);
@@ -89,11 +88,11 @@ void Character::defend(void)
 }
 
 // Start moving.
-void Character::move(const bool right)
+void Character::move(const MoveDirection direction)
 {
     if (!action[DEFEND]) {
         action[MOVE] = true;
-        direction = (right) ? -1 : 1;
+        this->direction = direction;
     }
 }
 
@@ -106,11 +105,11 @@ void Character::recoverFromPenetration(const std::list<Object*> &objects)
     BOOST_FOREACH(Object *obj, objects) {
         collision = detectCollision(*obj);
         if (collision & physics::RIGHT_COLLISION) {
-            if (direction == -1)
+            if (direction == RIGHT)
                 stopAction(MOVE);
         }
         if (collision & physics::LEFT_COLLISION) {
-            if (direction == 1)
+            if (direction == LEFT)
                 stopAction(MOVE);
         }
         if (collision & physics::TOP_COLLISION) {
@@ -186,8 +185,10 @@ void Character::frameAnimation(const Ogre::FrameEvent &event)
 void Character::frameMovement(const Ogre::FrameEvent &event)
 {
     if (action[MOVE]) {
-        translate(direction*25*event.timeSinceLastFrame, 0, 0);
-        node->setDirection(0,0,-direction,Ogre::Node::TS_PARENT);
+        int dir = 1;
+        if (direction == RIGHT) dir = -1;
+        translate(dir*25*event.timeSinceLastFrame, 0, 0);
+        node->setDirection(0,0,-dir,Ogre::Node::TS_PARENT);
         node->yaw(Ogre::Degree(90));
     }
     if (action[JUMP] || action[FALL]) {

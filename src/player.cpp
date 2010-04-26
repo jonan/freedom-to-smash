@@ -59,9 +59,9 @@ bool Player::keyPressed(const OIS::KeyEvent &key)
     else if (key.key == down_key)
         character->defend();
     else if (key.key == right_key)
-        character->move(true);
+        character->move(RIGHT);
     else if (key.key == left_key)
-        character->move(false);
+        character->move(LEFT);
     return true;
 }
 
@@ -72,7 +72,8 @@ bool Player::keyReleased(const OIS::KeyEvent &key)
         battle_ground->quit();
     else if (key.key == down_key)
         character->stopDefending();
-    else if (key.key == right_key || key.key == left_key)
+    else if (    (key.key == right_key && character->getDirection() == RIGHT)
+              || (key.key == left_key  && character->getDirection() == LEFT ) )
         character->stopMoving();
     return true;
 }

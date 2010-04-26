@@ -28,6 +28,8 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 // FtS
 #include <object.hpp>
 
+enum MoveDirection {RIGHT, LEFT};
+
 /// Class to control a character.
 class Character : public Object, public Ogre::FrameListener {
 public:
@@ -35,11 +37,16 @@ public:
     ~Character(void); // Destructor
 
     // @{
+    /// Get functions.
+    MoveDirection getDirection(void) {return direction;}
+    // @}
+
+    // @{
     /// Start performing an action.
     void attack (void);
     void jump   (void);
     void defend (void);
-    void move   (const bool right);
+    void move   (const MoveDirection direction);
     // @}
 
     // @{
@@ -81,7 +88,7 @@ private:
     bool on_floor, has_double_jumped;
     Real jumping_time;
 
-    int direction;
+    MoveDirection direction;
 
     DISALLOW_COPY_AND_ASSIGN(Character);
 };
