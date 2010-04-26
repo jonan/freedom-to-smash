@@ -20,7 +20,6 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #include <iostream>
 #include <sstream>
 #include <string>
-#include <windows.h>
 #include <stdexcept>
 
 
@@ -86,7 +85,7 @@ public:
 			ss << "[LUA]" << 
 				lua_tostring(ls, -1) << std::endl;
 			lua_pop(ls, 1);
-			MessageBox(0, ss.str().c_str(), "LUA error", 0);
+			//MessageBox(0, ss.str().c_str(), "LUA error", 0);
 			std::cerr << ss.str() << std::endl;
 		}
 	}
