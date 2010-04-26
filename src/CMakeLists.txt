@@ -19,6 +19,10 @@ set(
 
   ScheduledItem.cpp
   Scheduler.cpp
+
+  luautils.cpp
+  lua_evaluator.cpp
+  lua_engine.cpp
   )
 
 set(
@@ -44,11 +48,18 @@ set(
   Scheduler.h
   ScheduledItem.h
   ITask.h
+  server.hpp
+
+  swigrt.h
+  luautils.hpp
+  lua_evaluator.hpp
+  lua_engine.hpp
   )
 
+SOURCE_GROUP(Lua FILES luautils.cpp luautils.hpp lua_evaluator.cpp lua_evaluator.hpp lua_engine.cpp lua_engine.hpp)
+SOURCE_GROUP(Lua\\Generated FILES swigrt.h)
 
 SOURCE_GROUP(Scheduler FILES ITask.h Scheduler.h Scheduler.cpp ScheduledItem.h ScheduledItem.cpp)
-
 
 # Compile the network code only if ENet was found
 if(ENET_FOUND)
