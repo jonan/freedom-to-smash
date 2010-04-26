@@ -1,6 +1,7 @@
 #include "soundloader.hpp"
 
 #include <SDL/SDL_audio.h> // Temporal Testing Solution
+
 using namespace audio;
 
 SoundLoader::SoundLoader()
@@ -23,7 +24,8 @@ void SoundLoader::loadWAV(const char* path, ALuint &buffer)
 
 void SoundLoader::loadOgg(const char* path, ALuint &buffer)
 {
-    // Not implemented yet
+
+
 }
 
 //@} load Song

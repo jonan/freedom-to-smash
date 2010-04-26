@@ -18,7 +18,7 @@ public:
     /// Load and especific sound & return its buffer
     /// @return Loaded SoundBuffer
     SoundBuffer* loadSound(const char* name,
-                           const char* extension = ".wav");
+                           const char* extension);
 
     /// Look if sound its loaded & return its buffer,
     /// in case the sound its not loaded this funcion will load it
