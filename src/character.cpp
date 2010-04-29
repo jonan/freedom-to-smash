@@ -31,6 +31,8 @@ Character::Character(Ogre::SceneManager &scene_manager)
         : Object(scene_manager, NUM_STATES)
         , on_floor(true)
         , has_double_jumped(false)
+        , collision_right(false)
+        , collision_left(false)
         , jumping_time(0)
 {
     setEntity("sinbad");
@@ -104,14 +106,8 @@ void Character::recoverFromPenetration(const std::list<Object*> &objects)
     int collision;
     BOOST_FOREACH(Object *obj, objects) {
         collision = detectCollision(*obj);
-        if (collision & physics::RIGHT_COLLISION) {
-            if (direction == RIGHT)
-                stopAction(MOVE);
-        }
-        if (collision & physics::LEFT_COLLISION) {
-            if (direction == LEFT)
-                stopAction(MOVE);
-        }
+        collision_right = collision & physics::RIGHT_COLLISION;
+        collision_left  = collision & physics::LEFT_COLLISION;
         if (collision & physics::TOP_COLLISION) {
             stopAction(JUMP);
         }
@@ -185,11 +181,16 @@ void Character::frameAnimation(const Ogre::FrameEvent &event)
 void Character::frameMovement(const Ogre::FrameEvent &event)
 {
     if (action[MOVE]) {
-        int dir = 1;
-        if (direction == RIGHT) dir = -1;
-        translate(dir*25*event.timeSinceLastFrame, 0, 0);
-        node->setDirection(0,0,-dir,Ogre::Node::TS_PARENT);
-        node->yaw(Ogre::Degree(90));
+        int dir = 0;
+        if (direction == RIGHT && !collision_right)
+            dir = -1;
+        else if (direction == LEFT  && !collision_left )
+            dir = 1;
+        if (dir) {
+            translate(dir*25*event.timeSinceLastFrame, 0, 0);
+            node->setDirection(0,0,-dir,Ogre::Node::TS_PARENT);
+            node->yaw(Ogre::Degree(90));
+        }
     }
     if (action[JUMP] || action[FALL]) {
         Real initial_speed = 0;

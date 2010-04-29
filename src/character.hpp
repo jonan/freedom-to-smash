@@ -86,6 +86,7 @@ private:
     bool action[NUM_STATES]; // active actions
 
     bool on_floor, has_double_jumped;
+    bool collision_right, collision_left;
     Real jumping_time;
 
     MoveDirection direction;
