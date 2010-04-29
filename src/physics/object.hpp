@@ -67,6 +67,7 @@ public:
     int detectCollision(const Object &obj) const;
 
 private:
+    btCollisionShape *shape;
     btTransform *offset;
     btCollisionObject *collision_object;
 

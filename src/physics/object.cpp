@@ -27,7 +27,8 @@ namespace physics {
 
 // Constructor
 Object::Object(void)
-        : offset(new btTransform)
+        : shape(NULL)
+        , offset(new btTransform)
         , collision_object(new btCollisionObject)
         , scene(NULL)
 {
@@ -45,8 +46,9 @@ Object::~Object(void)
 // Set function.
 void Object::setShape(btCollisionShape &shape, const btTransform &center_offset)
 {
-    collision_object->setCollisionShape(&shape);
+    this->shape = &shape;
     *offset = center_offset;
+    collision_object->setCollisionShape(&shape);
 }
 
 // Set function.
@@ -60,10 +62,11 @@ int Object::detectCollision(const Object &obj) const
 {
     int collision_type = NO_COLLISION;
     if (scene) {
-        btCollisionDispatcher *dispatcher = &scene->getDispatcher();
-        int num_manifolds = dispatcher->getNumManifolds();
         btPersistentManifold *contact;
         btCollisionObject *obj_0, *obj_1;
+        btVector3 average,aabb_min, aabb_max;
+        btCollisionDispatcher *dispatcher = &scene->getDispatcher();
+        int num_manifolds = dispatcher->getNumManifolds();
         for (int i=0; i<num_manifolds; i++) {
             contact = dispatcher->getManifoldByIndexInternal(i);
             obj_0 = static_cast<btCollisionObject*>(contact->getBody0());
@@ -77,21 +80,29 @@ int Object::detectCollision(const Object &obj) const
 
             if (obj_num) {
                 int num_contacts = contact->getNumContacts();
-                btVector3 average(0,0,0);
+                average.setValue(0,0,0);
                 for (int j=0; j<num_contacts; j++) {
                     if (obj_num==1)
                         average += contact->getContactPoint(j).m_localPointA;
                     else
                         average += contact->getContactPoint(j).m_localPointB;
                 }
-                if (average.getX() > 0 && abs(average.getY()) < abs(average.getX()))
-                    collision_type |= LEFT_COLLISION;
-                if (average.getX() < 0 && abs(average.getY()) < abs(average.getX()))
-                    collision_type |= RIGHT_COLLISION;
-                if (average.getY() < 0 && abs(average.getX()) < abs(average.getY()))
-                    collision_type |= BOTTOM_COLLISION;
-                if (average.getY() > 0 && abs(average.getX()) < abs(average.getY()))
-                    collision_type |= TOP_COLLISION;
+                average /= num_contacts;
+                shape->getAabb(*offset, aabb_min, aabb_max);
+                const Real half_width = (aabb_max.x() - aabb_min.x())/2;
+                const Real half_height = (aabb_max.y() - aabb_min.y())/2;
+                const bool up_down = half_height-abs(average.getY()) < half_width-abs(average.getX());
+                if (up_down) {
+                    if (average.getY() < 0)
+                        collision_type |= BOTTOM_COLLISION;
+                    else
+                        collision_type |= TOP_COLLISION;
+                } else {
+                    if (average.getX() > 0)
+                        collision_type |= LEFT_COLLISION;
+                    else
+                        collision_type |= RIGHT_COLLISION;
+                }
             }
         }
     }

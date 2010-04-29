@@ -104,10 +104,11 @@ void Character::recoverFromPenetration(const std::list<Object*> &objects)
     on_floor = false;
 
     int collision;
+    collision_right = collision_left = false;
     BOOST_FOREACH(Object *obj, objects) {
         collision = detectCollision(*obj);
-        collision_right = collision & physics::RIGHT_COLLISION;
-        collision_left  = collision & physics::LEFT_COLLISION;
+        collision_right |= collision & physics::RIGHT_COLLISION;
+        collision_left  |= collision & physics::LEFT_COLLISION;
         if (collision & physics::TOP_COLLISION) {
             stopAction(JUMP);
         }
@@ -184,7 +185,7 @@ void Character::frameMovement(const Ogre::FrameEvent &event)
         int dir = 0;
         if (direction == RIGHT && !collision_right)
             dir = -1;
-        else if (direction == LEFT  && !collision_left )
+        else if (direction == LEFT  && !collision_left)
             dir = 1;
         if (dir) {
             translate(dir*25*event.timeSinceLastFrame, 0, 0);
