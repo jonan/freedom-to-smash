@@ -36,7 +36,7 @@ class btDefaultCollisionConfiguration;
 
 namespace physics {
 
-#define DEBUG_PHYSIC_SHAPES 1
+#define DEBUG_PHYSIC_SHAPES 0
 
 class Object;
 #if DEBUG_PHYSIC_SHAPES

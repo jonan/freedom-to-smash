@@ -24,6 +24,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #include <OgreRoot.h>
 
 // FtS
+#include <physics/shapes_manager.hpp>
 #include <input.hpp>
 
 // Constructor
@@ -46,6 +47,10 @@ Character::Character(Ogre::SceneManager &scene_manager)
     for (int i=0; i < NUM_STATES; i++)
         action[i] = false;
     Ogre::Root::getSingleton().addFrameListener(this);
+    // Create a physic shape from the entity's bounding box
+    btVector3 size(3.0,10.0,2.0);
+    btCollisionShape *shape = &physics::ShapesManager::getInstance().getBoxShape(size);
+    setShape(*shape);
 }
 
 // Destructor
