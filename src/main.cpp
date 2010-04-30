@@ -27,8 +27,11 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 int main(int argc, char *argv[])
 {
     boot();
-    Player *player = new Player;
+    Player *player = new Player(1);
     BattleGround *battle = new BattleGround;
+    player->setBattleground(*battle);
+    player->setCharacter();
+    player = new Player(2);
     player->setBattleground(*battle);
     player->setCharacter();
     battle->start();

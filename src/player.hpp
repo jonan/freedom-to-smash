@@ -34,7 +34,7 @@ class Character;
 ///
 class Player : public OIS::KeyListener {
 public:
-    Player(void); // Constructor
+    Player(const int num); // Constructor
     ~Player(void); // Destructor
 
     ///

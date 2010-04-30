@@ -23,18 +23,27 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #include <input.hpp>
 
 // Constructor
-Player::Player(void)
+Player::Player(const int num)
         : character(NULL)
         , battle_ground(NULL)
 {
     Input::getInstance()->addKeyListener(*this);
     // Controls will be loaded from a config file
-    attack_key = OIS::KC_A;
-    jump_key   = OIS::KC_S;
-    up_key     = OIS::KC_UP;
-    down_key   = OIS::KC_DOWN;
-    right_key  = OIS::KC_RIGHT;
-    left_key   = OIS::KC_LEFT;
+    if (num == 1) {
+        attack_key = OIS::KC_NUMPAD1;
+        jump_key   = OIS::KC_NUMPAD2;
+        up_key     = OIS::KC_UP;
+        down_key   = OIS::KC_DOWN;
+        right_key  = OIS::KC_RIGHT;
+        left_key   = OIS::KC_LEFT;
+    } else if (num == 2) {
+        attack_key = OIS::KC_G;
+        jump_key   = OIS::KC_H;
+        up_key     = OIS::KC_W;
+        down_key   = OIS::KC_S;
+        right_key  = OIS::KC_D;
+        left_key   = OIS::KC_A;
+    }
 }
 
 // Destructor
