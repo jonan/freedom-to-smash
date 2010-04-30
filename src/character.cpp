@@ -129,6 +129,13 @@ void Character::recoverFromPenetration(const std::list<Object*> &objects)
     }
 }
 
+//
+void Character::reset(void)
+{
+    setPosition(Ogre::Vector3(0,5,0));
+    jumping_time = 0;
+}
+
 // Function that's called at the beginning of every frame.
 bool Character::frameStarted(const Ogre::FrameEvent &event)
 {

@@ -210,6 +210,10 @@ void BattleGround::start(void)
 bool BattleGround::frameStarted(const Ogre::FrameEvent &event)
 {
     detectCollisions();
+    BOOST_FOREACH(Character *character, players) {
+        if (character->getPosition().y < -100)
+            character->reset();
+    }
     Ogre::Vector3 average(0,0,0);
     BOOST_FOREACH(Character *character, players) {
         character->recoverFromPenetration(objects);

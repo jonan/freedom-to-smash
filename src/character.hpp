@@ -60,6 +60,9 @@ public:
     /// @param[in] objects All the objects in the battle ground.
     void recoverFromPenetration(const std::list<Object*> &objects);
 
+    ///
+    void reset(void);
+
 private:
     // All the different states of a character.
     enum {ATTACK, DEFEND, FALL, IDLE, JUMP, LAND, MOVE, NUM_STATES};
