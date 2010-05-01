@@ -18,6 +18,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 /// @file
 /// The graphics::Scene class.
 /// @author Jonan
+/// @author LRG
 
 #ifndef GRAPHICS_SCENE_HPP
 #define GRAPHICS_SCENE_HPP
@@ -32,13 +33,21 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 // FtS
 #include <util.hpp>
 
+namespace Caelum {class CaelumSystem;}
+namespace Hydrax {class Hydrax;      }
+namespace SkyX   {class SkyX;        }
+
 namespace graphics {
+
+#define USE_CAELUM 0
+#define USE_HYDRAX 0
+#define USE_SKYX   0
 
 /// Class to control all the graphical elements of a scene.
 class Scene {
 public:
     Scene(void); // Constructor
-    ~Scene(void) {} // Destructor
+    ~Scene(void); // Destructor
 
 protected:
     // @{
@@ -68,6 +77,13 @@ protected:
     // Sets the type of technique to use when creating the scene's shadows.
     void setShadowTechnique(const Ogre::ShadowTechnique technique);
 
+    // Creates a dynamic sky using the Caelum plugin.
+    void createCaelumSky(void);
+    // Creates an infinite water plane using the Hydrax plugin.
+    void createHydraxWater(void);
+    // Creates a dynamic sky using the SkyX plugin.
+    void createSkyX(void);
+
 private:
     // Creates a static camera for the scene.
     Ogre::Camera& createCamera(const String &name, const Ogre::Vector3 &position,
@@ -77,6 +93,18 @@ private:
     Ogre::Viewport *viewport;
     std::vector<Ogre::Camera*> camera;
     std::list<Ogre::Light*> light;
+
+#if USE_CAELUM
+    Caelum::CaelumSystem * mCaelumSystem;
+#endif
+
+#if USE_HYDRAX
+    Hydrax::Hydrax * mHydrax;
+#endif
+
+#if USE_SKYX
+    SkyX::SkyX * mSkyX;
+#endif
 
     DISALLOW_COPY_AND_ASSIGN(Scene);
 };
