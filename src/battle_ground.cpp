@@ -19,10 +19,6 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 
 // Boost
 #include <boost/foreach.hpp>
-// Hydrax
-#include <hydrax/Hydrax.h>
-#include <hydrax/Noise/Perlin/Perlin.h>
-#include <hydrax/Modules/ProjectedGrid/ProjectedGrid.h>
 // Ogre
 #include <OgreRenderWindow.h>
 #include <OgreRoot.h>
@@ -79,6 +75,7 @@ void BattleGround::start(void)
 // Function that's called at the beginning of every frame.
 bool BattleGround::frameStarted(const Ogre::FrameEvent &event)
 {
+    updateWaterPlane(event.timeSinceLastFrame);
     detectCollisions();
     BOOST_FOREACH(Character *character, players) {
         if (character->getPosition().y < -100)
@@ -97,12 +94,9 @@ bool BattleGround::frameStarted(const Ogre::FrameEvent &event)
     mCaelumSystem->updateSubcomponents(event.timeSinceLastFrame * 1000);
 #endif
 
-#if USE_HYDRAX
-    mHydrax->update(event.timeSinceLastFrame);
-#endif
-
 #if USE_SKYX
     mSkyX->update(event.timeSinceLastFrame);
 #endif
+
     return !end;
 }

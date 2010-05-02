@@ -20,15 +20,13 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 // Ogre
 #include <OgreRenderWindow.h>
 #include <OgreRoot.h>
-
-#if USE_CAELUM
-#include <caelum/Caelum.h>
-#endif
-
-#if USE_HYDRAX
+// Hydrax
 #include <hydrax/Hydrax.h>
 #include <hydrax/Noise/Perlin/Perlin.h>
 #include <hydrax/Modules/ProjectedGrid/ProjectedGrid.h>
+
+#if USE_CAELUM
+#include <caelum/Caelum.h>
 #endif
 
 #if USE_SKYX
@@ -38,14 +36,11 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 namespace graphics {
 
 // Constructor
-Scene::Scene(void)
+Scene::Scene(const bool water_plane)
+        : hydrax(NULL)
 
 #if USE_CAELUM
-        : mCaelumSystem(NULL)
-#endif
-
-#if USE_HYDRAX
-        , mHydrax(NULL)
+        , mCaelumSystem(NULL)
 #endif
 
 #if USE_SKYX
@@ -55,21 +50,20 @@ Scene::Scene(void)
 {
     manager = Ogre::Root::getSingleton().createSceneManager(Ogre::ST_GENERIC);
     viewport = Ogre::Root::getSingleton().getAutoCreatedWindow()->addViewport(NULL);
+    if (water_plane)
+        createWaterPlane();
 
     createCaelumSky();
     createSkyX();
-    createHydraxWater();
 }
 
 // Constructor
 Scene::~Scene(void)
 {
+    delete hydrax;
+
 #if USE_CAELUM
     delete mCaelumSystem;
-#endif
-
-#if USE_HYDRAX
-    delete mHydrax;
 #endif
 }
 
@@ -129,6 +123,32 @@ void Scene::setShadowTechnique(const Ogre::ShadowTechnique technique)
     manager->setShadowTechnique(technique);
 }
 
+// Creates an infinite water plane.
+void Scene::createWaterPlane(void)
+{
+    hydrax = new Hydrax::Hydrax(manager, &getCurrentCamera(), viewport);
+
+    Hydrax::Module::ProjectedGrid *module
+            = new Hydrax::Module::ProjectedGrid(
+                    hydrax,
+                    new Hydrax::Noise::Perlin(),
+                    Ogre::Plane(Ogre::Vector3(0,1,0),
+                                Ogre::Vector3(0,0,0)),
+                    Hydrax::MaterialManager::NM_RTT,
+                    Hydrax::Module::ProjectedGrid::Options());
+
+    hydrax->setModule(static_cast<Hydrax::Module::Module*>(module));
+    hydrax->loadCfg("HydraxDemo.hdx");
+    hydrax->create();
+    hydrax->setGlobalTransparency(0.9);
+}
+
+// Updates the water plane.
+void Scene::updateWaterPlane(const Real &time)
+{
+    if (hydrax) hydrax->update(time);
+}
+
 // Creates a dynamic sky using the Caelum plugin.
 void Scene::createCaelumSky(void)
 {
@@ -161,38 +181,6 @@ void Scene::createCaelumSky(void)
     //mCaelumSystem->getPrecipitationController()->createViewportInstance(viewport);
     //mCaelumSystem->getPrecipitationController()->setIntensity(0.05);
     //mCaelumSystem->getPrecipitationController()->setCameraSpeedScale(0.001);
-#endif
-}
-
-// Creates an infinite water plane using the Hydrax plugin.
-void Scene::createHydraxWater(void)
-{
-#if USE_HYDRAX
-    mHydrax = new Hydrax::Hydrax(manager, &getCurrentCamera(), viewport);
-
-    Hydrax::Module::ProjectedGrid * module
-        = new Hydrax::Module::ProjectedGrid(
-        mHydrax,
-        new Hydrax::Noise::Perlin(),
-        Ogre::Plane(Ogre::Vector3(0,1,0), Ogre::Vector3(0,0,0)),
-        Hydrax::MaterialManager::NM_RTT,
-        Hydrax::Module::ProjectedGrid::Options());
-
-    mHydrax->setModule(static_cast<Hydrax::Module::Module*>(module));
-
-    mHydrax->loadCfg("HydraxDemo.hdx");
-
-    mHydrax->create();
-
-    mHydrax->setGlobalTransparency(0.9);
-
-
-    //#ifdef USE_CAELUM
-    //Ogre::MaterialPtr mat = mTerrain->getMaterial();
-    //Ogre::Technique * tech = mat->createTechnique();
-    //mHydrax->getMaterialManager()->addDepthTechnique(
-    //	tech);
-    //#endif
 #endif
 }
 
