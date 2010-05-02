@@ -96,9 +96,16 @@ int Scene::addCamera(const Ogre::String &name, const Ogre::Vector3 &position,
 }
 
 // Use the given camera.
-void Scene::useCamera(const int num_camera) {
+void Scene::useCamera(const int num_camera)
+{
     camera[num_camera]->setAspectRatio(Ogre::Real(viewport->getActualWidth()) / Ogre::Real(viewport->getActualHeight()));
     viewport->setCamera(camera[num_camera]);
+}
+
+// Returns the active camera.
+Ogre::Camera& Scene::getCurrentCamera(void)
+{
+    return *viewport->getCamera();
 }
 
 // Adds a light.

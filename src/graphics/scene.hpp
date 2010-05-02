@@ -67,6 +67,8 @@ protected:
 
     // Use the given camera.
     void useCamera(const int num_camera = 0);
+    // Returns the active camera.
+    Ogre::Camera& getCurrentCamera(void);
 
     // Adds a light.
     void addLight(const String &name, const Ogre::Vector3 &position,
