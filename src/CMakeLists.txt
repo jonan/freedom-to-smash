@@ -80,6 +80,7 @@ target_link_libraries(
   freedom-to-smash
   ${BULLET_LIBRARIES}
   ${ENET_LIBRARIES}
+  Hydrax
   ${LUA_LIBRARIES}
   ${OIS_LIBRARIES}
   ${OGRE_LIBRARIES}

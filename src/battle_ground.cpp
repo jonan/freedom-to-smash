@@ -19,6 +19,10 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 
 // Boost
 #include <boost/foreach.hpp>
+// Hydrax
+#include <hydrax/Hydrax.h>
+#include <hydrax/Noise/Perlin/Perlin.h>
+#include <hydrax/Modules/ProjectedGrid/ProjectedGrid.h>
 // Ogre
 #include <OgreRenderWindow.h>
 #include <OgreRoot.h>

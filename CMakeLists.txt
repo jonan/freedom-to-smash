@@ -1,16 +1,6 @@
 cmake_minimum_required(VERSION 2.6)
 project(freedom-to-smash)
 
-add_subdirectory(bullet)
-set(
-  BULLET_LIBRARIES
-  BulletCollision
-  BulletDynamics
-  BulletMultiThreaded
-  BulletSoftBody
-  LinearMath
-  )
-
 set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 
 # Necessary libraries
@@ -22,6 +12,7 @@ find_package(OpenAL REQUIRED)
 find_package(SDL REQUIRED)
 
 include_directories(
+  ${PROJECT_SOURCE_DIR}
   ${PROJECT_SOURCE_DIR}/bullet
   ${PROJECT_SOURCE_DIR}/src
   ${Boost_INCLUDE_DIRS}
@@ -87,5 +78,17 @@ else()
       DEPENDS ${PROJECT_BINARY_DIR}/media
       )
 endif()
+
+add_subdirectory(bullet)
+set(
+  BULLET_LIBRARIES
+  BulletCollision
+  BulletDynamics
+  BulletMultiThreaded
+  BulletSoftBody
+  LinearMath
+  )
+
+add_subdirectory(hydrax)
 
 add_subdirectory(src)

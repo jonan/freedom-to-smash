@@ -168,7 +168,7 @@ void Scene::createCaelumSky(void)
 void Scene::createHydraxWater(void)
 {
 #if USE_HYDRAX
-    mHydrax = new Hydrax::Hydrax(scene_manager, camera, viewport);
+    mHydrax = new Hydrax::Hydrax(manager, &getCurrentCamera(), viewport);
 
     Hydrax::Module::ProjectedGrid * module
         = new Hydrax::Module::ProjectedGrid(
