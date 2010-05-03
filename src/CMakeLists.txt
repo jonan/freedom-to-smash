@@ -11,18 +11,16 @@ set(
   character.cpp
   input.cpp
   main.cpp
+  lua_engine.cpp
+  lua_evaluator.cpp
+  luautils.cpp
   object.cpp
   platform.cpp
   player.cpp
   scene.cpp
-  script.cpp
-
-  ScheduledItem.cpp
   Scheduler.cpp
-
-  luautils.cpp
-  lua_evaluator.cpp
-  lua_engine.cpp
+  ScheduledItem.cpp
+  script.cpp
   )
 
 set(
@@ -56,10 +54,9 @@ set(
   lua_engine.hpp
   )
 
-SOURCE_GROUP(Lua FILES luautils.cpp luautils.hpp lua_evaluator.cpp lua_evaluator.hpp lua_engine.cpp lua_engine.hpp)
-SOURCE_GROUP(Lua\\Generated FILES swigrt.h)
-
-SOURCE_GROUP(Scheduler FILES ITask.h Scheduler.h Scheduler.cpp ScheduledItem.h ScheduledItem.cpp)
+source_group(Lua FILES luautils.cpp luautils.hpp lua_evaluator.cpp lua_evaluator.hpp lua_engine.cpp lua_engine.hpp)
+source_group(Lua\\Generated FILES swigrt.h)
+source_group(Scheduler FILES ITask.h Scheduler.h Scheduler.cpp ScheduledItem.h ScheduledItem.cpp)
 
 # Compile the network code only if ENet was found
 if(ENET_FOUND)
@@ -80,7 +77,7 @@ target_link_libraries(
   freedom-to-smash
   ${BULLET_LIBRARIES}
   ${ENET_LIBRARIES}
-  Hydrax
+  ${HYDRAX_LIBRARIES}
   ${LUA_LIBRARIES}
   ${OIS_LIBRARIES}
   ${OGRE_LIBRARIES}

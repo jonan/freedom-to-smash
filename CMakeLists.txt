@@ -90,5 +90,6 @@ set(
   )
 
 add_subdirectory(hydrax)
+set(HYDRAX_LIBRARIES Hydrax)
 
 add_subdirectory(src)

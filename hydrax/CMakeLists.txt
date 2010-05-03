@@ -1,5 +1,5 @@
 set(
-  Hydrax_SRCS
+  HYDRAX_SRCS
   Modules/ProjectedGrid/ProjectedGrid.cpp
   Modules/RadialGrid/RadialGrid.cpp
   Modules/SimpleGrid/SimpleGrid.cpp
@@ -22,4 +22,4 @@ set(
   TextureManager.cpp
   )
 
-add_library(Hydrax STATIC ${Hydrax_SRCS})
+add_library(Hydrax STATIC ${HYDRAX_SRCS})
