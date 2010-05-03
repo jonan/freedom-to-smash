@@ -3,7 +3,7 @@
 This source file is part of Hydrax.
 Visit ---
 
-Copyright (C) 2008 Xavier VerguÌn Gonz·lez <xavierverguin@hotmail.com>
+Copyright (C) 2008 Xavier Vergu√≠n Gonz√°lez <xavierverguin@hotmail.com>
                                            <xavyiy@gmail.com>
 
 This program is free software; you can redistribute it and/or modify it under
@@ -411,14 +411,22 @@ namespace Hydrax
 
 		if (mCreated)
 		{
+#if OGRE_VERSION_MAJOR >= 1 && OGRE_VERSION_MINOR >= 7
+			mWorldMatrix = mEntity->getParentSceneNode()->_getFullTransform();
+#else
 			mEntity->getParentSceneNode()->getWorldTransforms(&mWorldMatrix);
+#endif
 		}
 		else
 		{
 			Ogre::SceneNode *mTmpSN = new Ogre::SceneNode(0);
 		    mTmpSN->setPosition(mHydrax->getPosition());
 
+#if OGRE_VERSION_MAJOR >= 1 && OGRE_VERSION_MINOR >= 7
+			mWorldMatrix = mTmpSN->_getFullTransform();
+#else
 			mTmpSN->getWorldTransforms(&mWorldMatrix);
+#endif
 
 		    delete mTmpSN;
 		}
@@ -432,14 +440,22 @@ namespace Hydrax
 
 		if (mCreated)
 		{
+#if OGRE_VERSION_MAJOR >= 1 && OGRE_VERSION_MINOR >= 7
+			mWorldMatrix = mEntity->getParentSceneNode()->_getFullTransform();
+#else
 			mEntity->getParentSceneNode()->getWorldTransforms(&mWorldMatrix);
+#endif
 		}
 		else
 		{
 			Ogre::SceneNode *mTmpSN = new Ogre::SceneNode(0);
 		    mTmpSN->setPosition(mHydrax->getPosition());
 
+#if OGRE_VERSION_MAJOR >= 1 && OGRE_VERSION_MINOR >= 7
+			mWorldMatrix = mTmpSN->_getFullTransform();
+#else
 			mTmpSN->getWorldTransforms(&mWorldMatrix);
+#endif
 
 		    delete mTmpSN;
 		}
