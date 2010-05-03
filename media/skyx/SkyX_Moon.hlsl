@@ -3,7 +3,7 @@
 This source file is part of SkyX.
 Visit ---
 
-Copyright (C) 2009 Xavier Vergu√≠n Gonz√°lez <xavierverguin@hotmail.com>
+Copyright (C) 2009 Xavier VerguÌn Gonz·lez <xavierverguin@hotmail.com>
                                            <xavyiy@gmail.com>
 
 This program is free software; you can redistribute it and/or modify it under
@@ -26,20 +26,20 @@ http://www.gnu.org/copyleft/lesser.txt.
 
 void main_vp(
     // IN
-    float4 iPosition	        : POSITION,
-    float2 iUV                  : TEXCOORD0,
-    // OUT
-    out float4 oPosition		: POSITION,
-    out float4 oUVYLength       : TEXCOORD0,
-    // UNIFORM
-    uniform float4x4 uWorldViewProj,
-    uniform float4x4 uWorld,
-    uniform float3   uSkydomeCenter)
+	float4 iPosition	        : POSITION,
+	float2 iUV                  : TEXCOORD0,
+	// OUT
+	out float4 oPosition		: POSITION,
+	out float4 oUVYLength       : TEXCOORD0,
+	// UNIFORM
+	uniform float4x4 uWorldViewProj,
+	uniform float4x4 uWorld,
+	uniform float3   uSkydomeCenter)
 {
     // Clip space position
-    oPosition   = mul(uWorldViewProj, iPosition);
-    // World position
-    float3 ObjectSpacePosition = mul(uWorld, iPosition) - uSkydomeCenter;
+	oPosition   = mul(uWorldViewProj, iPosition);
+	// World position
+	float3 ObjectSpacePosition = mul(uWorld, iPosition) - uSkydomeCenter;
 
     // UV
     oUVYLength.xy = iUV;
@@ -52,10 +52,10 @@ void main_vp(
 void main_fp(
     // IN
     float4 iUVYLength       : TEXCOORD0,
-    // OUT
-    out float4 oColor		: COLOR,
-    // UNIFORM
-    uniform sampler2D uMoon : register(s0))
+	// OUT 
+	out float4 oColor		: COLOR,
+	// UNIFORM
+	uniform sampler2D uMoon : register(s0))
 {
     // Output color
     oColor = tex2D(uMoon, iUVYLength.xy);
