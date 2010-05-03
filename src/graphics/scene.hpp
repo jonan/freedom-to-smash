@@ -40,12 +40,11 @@ namespace SkyX   {class SkyX;        }
 namespace graphics {
 
 #define USE_CAELUM 0
-#define USE_SKYX   0
 
 /// Class to control all the graphical elements of a scene.
 class Scene {
 public:
-    explicit Scene(const bool water_plane = false); // Constructor
+    explicit Scene(const bool water_plane = false, const bool sky = false); // Constructor
     ~Scene(void); // Destructor
 
 protected:
@@ -84,10 +83,13 @@ protected:
     // Updates the water plane.
     void updateWaterPlane(const Real &time);
 
+    // Creates a dynamic sky.
+    void createSky(void);
+    // Updates the dynamic sky.
+    void updateSky(const Real &time);
+
     // Creates a dynamic sky using the Caelum plugin.
     void createCaelumSky(void);
-    // Creates a dynamic sky using the SkyX plugin.
-    void createSkyX(void);
 
 private:
     // Creates a static camera for the scene.
@@ -100,13 +102,10 @@ private:
     std::list<Ogre::Light*> light;
 
     Hydrax::Hydrax *hydrax;
+    SkyX::SkyX *skyx;
 
 #if USE_CAELUM
     Caelum::CaelumSystem * mCaelumSystem;
-#endif
-
-#if USE_SKYX
-    SkyX::SkyX * mSkyX;
 #endif
 
     DISALLOW_COPY_AND_ASSIGN(Scene);

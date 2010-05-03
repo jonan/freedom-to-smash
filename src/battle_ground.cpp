@@ -76,6 +76,7 @@ void BattleGround::start(void)
 bool BattleGround::frameStarted(const Ogre::FrameEvent &event)
 {
     updateWaterPlane(event.timeSinceLastFrame);
+    updateSky(event.timeSinceLastFrame);
     detectCollisions();
     BOOST_FOREACH(Character *character, players) {
         if (character->getPosition().y < -100)
@@ -92,10 +93,6 @@ bool BattleGround::frameStarted(const Ogre::FrameEvent &event)
 #if USE_CAELUM
     mCaelumSystem->notifyCameraChanged(this->camera);
     mCaelumSystem->updateSubcomponents(event.timeSinceLastFrame * 1000);
-#endif
-
-#if USE_SKYX
-    mSkyX->update(event.timeSinceLastFrame);
 #endif
 
     return !end;

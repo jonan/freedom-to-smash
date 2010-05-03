@@ -24,27 +24,22 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #include <hydrax/Hydrax.h>
 #include <hydrax/Noise/Perlin/Perlin.h>
 #include <hydrax/Modules/ProjectedGrid/ProjectedGrid.h>
+// SkyX
+#include <skyx/SkyX.h>
 
 #if USE_CAELUM
 #include <caelum/Caelum.h>
 #endif
 
-#if USE_SKYX
-#include <SkyX.h>
-#endif
-
 namespace graphics {
 
 // Constructor
-Scene::Scene(const bool water_plane)
+Scene::Scene(const bool water_plane, const bool sky)
         : hydrax(NULL)
+        , skyx(NULL)
 
 #if USE_CAELUM
         , mCaelumSystem(NULL)
-#endif
-
-#if USE_SKYX
-        , mSkyX(NULL)
 #endif
 
 {
@@ -52,15 +47,17 @@ Scene::Scene(const bool water_plane)
     viewport = Ogre::Root::getSingleton().getAutoCreatedWindow()->addViewport(NULL);
     if (water_plane)
         createWaterPlane();
+    if (sky)
+        createSky();
 
     createCaelumSky();
-    createSkyX();
 }
 
 // Constructor
 Scene::~Scene(void)
 {
     delete hydrax;
+    delete skyx;
 
 #if USE_CAELUM
     delete mCaelumSystem;
@@ -149,6 +146,23 @@ void Scene::updateWaterPlane(const Real &time)
     if (hydrax) hydrax->update(time);
 }
 
+// Creates a dynamic sky.
+void Scene::createSky(void)
+{
+    skyx = new SkyX::SkyX(manager, &getCurrentCamera());
+    skyx->create();
+    skyx->getVCloudsManager()->create();
+    SkyX::AtmosphereManager::Options options = skyx->getAtmosphereManager()->getOptions();
+    options.RayleighMultiplier = 0.0045f;
+    skyx->getAtmosphereManager()->setOptions(options);
+}
+
+// Updates the dynamic sky.
+void Scene::updateSky(const Real &time)
+{
+    if (skyx) skyx->update(time);
+}
+
 // Creates a dynamic sky using the Caelum plugin.
 void Scene::createCaelumSky(void)
 {
@@ -181,20 +195,6 @@ void Scene::createCaelumSky(void)
     //mCaelumSystem->getPrecipitationController()->createViewportInstance(viewport);
     //mCaelumSystem->getPrecipitationController()->setIntensity(0.05);
     //mCaelumSystem->getPrecipitationController()->setCameraSpeedScale(0.001);
-#endif
-}
-
-// Creates a dynamic sky using the SkyX plugin.
-void Scene::createSkyX(void)
-{
-#if USE_SKYX
-    /* CREATE SKYX */
-    mSkyX = new SkyX::SkyX(scene_manager, camera);
-    mSkyX->create();
-    mSkyX->getVCloudsManager()->create();
-    SkyX::AtmosphereManager::Options atOpt = mSkyX->getAtmosphereManager()->getOptions();
-    atOpt.RayleighMultiplier = 0.0045f;
-    mSkyX->getAtmosphereManager()->setOptions(atOpt);
 #endif
 }
 
