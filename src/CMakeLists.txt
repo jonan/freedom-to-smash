@@ -83,6 +83,7 @@ target_link_libraries(
   ${OGRE_LIBRARIES}
   ${OPENAL_LIBRARY}
   ${SDL_LIBRARY}
+  ${SKYX_LIBRARIES}
   )
 # Link optional libraries
 if(ENET_FOUND)

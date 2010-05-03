@@ -92,4 +92,7 @@ set(
 add_subdirectory(hydrax)
 set(HYDRAX_LIBRARIES Hydrax)
 
+add_subdirectory(skyx)
+set(SKYX_LIBRARIES SkyX)
+
 add_subdirectory(src)
