@@ -34,9 +34,9 @@ BattleGround::BattleGround(void)
     setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
     setAmbientLight(Ogre::ColourValue(2.0,2.0,2.0));
     // Create camera
+    look_node = getManager().getRootSceneNode()->createChildSceneNode();
     cam_node = getManager().getRootSceneNode()->createChildSceneNode();
-    int cam = addCamera("BattleGround Camera", Ogre::Vector3(0,0,-50), *cam_node);
-    useCamera(cam);
+    useCamera(addCamera("BattleGround Camera", *cam_node, *look_node));
     // Ground
     addObject("cube", Ogre::Vector3(0,-5,0));
     objects.back()->setScale(Ogre::Vector3(10,1,1));
@@ -82,13 +82,19 @@ bool BattleGround::frameStarted(const Ogre::FrameEvent &event)
         if (character->getPosition().y < -100)
             character->reset();
     }
-    Ogre::Vector3 average(0,0,0);
+    Ogre::Vector3 average(players.front()->getPosition());
+    Ogre::Vector3 max(players.front()->getPosition());
     BOOST_FOREACH(Character *character, players) {
         character->recoverFromPenetration(objects);
-        average += character->getPosition();
+        if (character->getPosition().x > max.x)
+            max = character->getPosition();
+        else if (character->getPosition().x < average.x)
+            average = character->getPosition();
     }
-    average /= players.size();
-    cam_node->setPosition(average);
+    average = (average + max) / 2;
+
+    look_node->setPosition(average);
+    cam_node->setPosition(average.x, average.y, -50);
 
 #if USE_CAELUM
     mCaelumSystem->notifyCameraChanged(this->camera);
