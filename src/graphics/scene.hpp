@@ -63,6 +63,16 @@ protected:
                   const unsigned int far_clip = 1000);
     // @}
 
+    // @{
+    // Add dynamic cameras.
+    int addCamera(const Ogre::String &name, Ogre::SceneNode &position,
+                  const Ogre::Vector3 &look_at = Ogre::Vector3(0,0,0),
+                  const unsigned int near_clip = 5, const unsigned int far_clip = 1000);
+    int addCamera(const Ogre::String &name, Ogre::SceneNode &position,
+                  Ogre::SceneNode &look_at, const unsigned int near_clip = 5,
+                  const unsigned int far_clip = 1000);
+    // @}
+
     // Use the given camera.
     void useCamera(const int num_camera = 0);
     // Returns the active camera.

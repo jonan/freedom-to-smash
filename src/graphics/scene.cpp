@@ -86,6 +86,37 @@ int Scene::addCamera(const Ogre::String &name, const Ogre::Vector3 &position,
     return camera.size()-1;
 }
 
+// Adds a dynamic camera.
+int Scene::addCamera(const Ogre::String &name, Ogre::SceneNode &position,
+                     const Ogre::Vector3 &look_at,
+                     const unsigned int near_clip, const unsigned int far_clip)
+{
+    addCamera(name, Ogre::Vector3(0,0,0), look_at, near_clip, far_clip);
+    position.attachObject(camera.back());
+    return camera.size()-1;
+}
+
+// Adds a dynamic camera that follows a given node.
+int Scene::addCamera(const Ogre::String &name, Ogre::SceneNode &position,
+                     Ogre::SceneNode &look_at, const unsigned int near_clip,
+                     const unsigned int far_clip)
+{
+    addCamera(name, Ogre::Vector3(0,0,0), look_at, near_clip, far_clip);
+    position.attachObject(camera.back());
+    return camera.size()-1;
+}
+
+// Add a dynamic camera that looks at and follows a given node.
+/*int Scene::addDynamicCamera(const Ogre::String &name, const Ogre::Vector3 &position,
+                            Ogre::SceneNode &look_at, Ogre::SceneNode &follow,
+                            const unsigned int near_clip, const unsigned int far_clip)
+{
+    Ogre::Camera *cam = &createCamera(name, position, near_clip, far_clip);
+    cam->setAutoTracking(true, &look_at);
+    follow.attachObject(cam);
+    return camera.size()-1;
+}*/
+
 // Use the given camera.
 void Scene::useCamera(const int num_camera)
 {
