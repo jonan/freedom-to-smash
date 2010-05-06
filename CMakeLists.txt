@@ -31,7 +31,7 @@ if(ENET_FOUND)
 endif()
 
 if(WIN32)
-    add_definitions(-DNOMINMAX)
+    add_definitions(-DNOMINMAX -DHYDRAX_LIB -DSKYX_LIB)
     link_libraries(winmm.lib)
     link_libraries(ws2_32.lib)
 endif()
