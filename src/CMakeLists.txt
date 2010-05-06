@@ -53,9 +53,12 @@ set(
   luautils.hpp
   lua_evaluator.hpp
   lua_engine.hpp
+  
+  fts.i
   )
 
 source_group(Lua FILES luautils.cpp luautils.hpp lua_evaluator.cpp lua_evaluator.hpp lua_engine.cpp lua_engine.hpp)
+source_group(Lua REGULAR_EXPRESSION .*\.i)
 source_group(Lua\\Generated FILES swigrt.h)
 source_group(Lua\\Generated REGULAR_EXPRESSION .*_wrap.cxx)
 source_group(Scheduler FILES ITask.h Scheduler.h Scheduler.cpp ScheduledItem.h ScheduledItem.cpp)
