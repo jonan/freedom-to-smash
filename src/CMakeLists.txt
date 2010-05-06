@@ -57,6 +57,8 @@ set(
 source_group(Lua FILES luautils.cpp luautils.hpp lua_evaluator.cpp lua_evaluator.hpp lua_engine.cpp lua_engine.hpp)
 source_group(Lua\\Generated FILES swigrt.h)
 source_group(Scheduler FILES ITask.h Scheduler.h Scheduler.cpp ScheduledItem.h ScheduledItem.cpp)
+source_group(Graphics REGULAR_EXPRESSION graphics/.*)
+source_group(Physics REGULAR_EXPRESSION physics/.*)
 
 # Compile the network code only if ENet was found
 if(ENET_FOUND)
