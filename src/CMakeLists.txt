@@ -55,6 +55,7 @@ set(
   lua_engine.hpp
   
   fts.i
+  ogre.i
   )
 
 source_group(Lua FILES luautils.cpp luautils.hpp lua_evaluator.cpp lua_evaluator.hpp lua_engine.cpp lua_engine.hpp)
