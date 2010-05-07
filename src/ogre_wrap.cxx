@@ -1526,18 +1526,10 @@ SWIG_Lua_dostring(lua_State *L, const char* str) {
 
 /* -------- TYPES TABLE (BEGIN) -------- */
 
-#define SWIGTYPE_p_BattleGround swig_types[0]
-#define SWIGTYPE_p_Character swig_types[1]
-#define SWIGTYPE_p_Object swig_types[2]
-#define SWIGTYPE_p_Ogre__SceneManager swig_types[3]
-#define SWIGTYPE_p_Ogre__Vector3 swig_types[4]
-#define SWIGTYPE_p_Player swig_types[5]
-#define SWIGTYPE_p_Real swig_types[6]
-#define SWIGTYPE_p_String swig_types[7]
-#define SWIGTYPE_p_std__listT_Object_p_t swig_types[8]
-#define SWIGTYPE_p_std__string swig_types[9]
-static swig_type_info *swig_types[11];
-static swig_module_info swig_module = {swig_types, 10, 0, 0, 0, 0};
+#define SWIGTYPE_p__OgreExport swig_types[0]
+#define SWIGTYPE_p_std__string swig_types[1]
+static swig_type_info *swig_types[3];
+static swig_module_info swig_module = {swig_types, 2, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -1585,9 +1577,9 @@ typedef struct{} LANGUAGE_OBJ;
 #define SWIG_FILE_WITH_INIT
 
 
-#include "object.hpp"
-#include "character.hpp"
-#include "player.hpp"
+#include <Ogre.h>
+
+
 
 
 
@@ -1829,125 +1821,20 @@ static swig_lua_class *swig_std_string_bases[] = {0};
 static const char *swig_std_string_base_names[] = {0};
 static swig_lua_class _wrap_class_std_string = { "string", &SWIGTYPE_p_std__string,_wrap_new_string, swig_delete_string, swig_std_string_methods, swig_std_string_attributes, swig_std_string_bases, swig_std_string_base_names };
 
-static int _wrap_new_Object__SWIG_0(lua_State* L) {
+static int _wrap_Vector3_set(lua_State* L) {
   int SWIG_arg = 0;
-  Ogre::SceneManager *arg1 = 0 ;
-  int arg2 ;
-  Object *result = 0 ;
+  _OgreExport arg1 ;
+  _OgreExport *argp1 ;
   
-  SWIG_check_num_args("Object",2,2)
-  if(!lua_isuserdata(L,1)) SWIG_fail_arg("Object",1,"Ogre::SceneManager &");
-  if(!lua_isnumber(L,2)) SWIG_fail_arg("Object",2,"int const");
+  SWIG_check_num_args("Ogre::Vector3",1,1)
+  if(!lua_isuserdata(L,1)) SWIG_fail_arg("Ogre::Vector3",1,"_OgreExport");
   
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_Ogre__SceneManager,0))){
-    SWIG_fail_ptr("new_Object",1,SWIGTYPE_p_Ogre__SceneManager);
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&argp1,SWIGTYPE_p__OgreExport,0))){
+    SWIG_fail_ptr("Vector3_set",1,SWIGTYPE_p__OgreExport);
   }
+  arg1 = *argp1;
   
-  arg2 = (int const)lua_tonumber(L, 2);
-  result = (Object *)new Object(*arg1,arg2);
-  SWIG_NewPointerObj(L,result,SWIGTYPE_p_Object,1); SWIG_arg++; 
-  return SWIG_arg;
-  
-  if(0) SWIG_fail;
-  
-fail:
-  lua_error(L);
-  return SWIG_arg;
-}
-
-
-static int _wrap_new_Object__SWIG_1(lua_State* L) {
-  int SWIG_arg = 0;
-  Ogre::SceneManager *arg1 = 0 ;
-  Object *result = 0 ;
-  
-  SWIG_check_num_args("Object",1,1)
-  if(!lua_isuserdata(L,1)) SWIG_fail_arg("Object",1,"Ogre::SceneManager &");
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_Ogre__SceneManager,0))){
-    SWIG_fail_ptr("new_Object",1,SWIGTYPE_p_Ogre__SceneManager);
-  }
-  
-  result = (Object *)new Object(*arg1);
-  SWIG_NewPointerObj(L,result,SWIGTYPE_p_Object,1); SWIG_arg++; 
-  return SWIG_arg;
-  
-  if(0) SWIG_fail;
-  
-fail:
-  lua_error(L);
-  return SWIG_arg;
-}
-
-
-static int _wrap_new_Object(lua_State* L) {
-  int argc;
-  int argv[3]={
-    1,2,3
-  };
-  
-  argc = lua_gettop(L);
-  if (argc == 1) {
-    int _v;
-    {
-      void *ptr;
-      if (lua_isuserdata(L,argv[0])==0 || SWIG_ConvertPtr(L,argv[0], (void **) &ptr, SWIGTYPE_p_Ogre__SceneManager, 0)) {
-        _v = 0;
-      } else {
-        _v = 1;
-      }
-    }
-    if (_v) {
-      return _wrap_new_Object__SWIG_1(L);
-    }
-  }
-  if (argc == 2) {
-    int _v;
-    {
-      void *ptr;
-      if (lua_isuserdata(L,argv[0])==0 || SWIG_ConvertPtr(L,argv[0], (void **) &ptr, SWIGTYPE_p_Ogre__SceneManager, 0)) {
-        _v = 0;
-      } else {
-        _v = 1;
-      }
-    }
-    if (_v) {
-      {
-        _v = lua_isnumber(L,argv[1]);
-      }
-      if (_v) {
-        return _wrap_new_Object__SWIG_0(L);
-      }
-    }
-  }
-  
-  lua_pushstring(L,"Wrong arguments for overloaded function 'new_Object'\n"
-    "  Possible C/C++ prototypes are:\n"
-    "    Object(Ogre::SceneManager &,int const)\n"
-    "    Object(Ogre::SceneManager &)\n");
-  lua_error(L);return 0;
-}
-
-
-static int _wrap_Object_setEntity(lua_State* L) {
-  int SWIG_arg = 0;
-  Object *arg1 = (Object *) 0 ;
-  String *arg2 = 0 ;
-  
-  SWIG_check_num_args("setEntity",2,2)
-  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("setEntity",1,"Object *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("setEntity",2,"String const &");
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_Object,0))){
-    SWIG_fail_ptr("Object_setEntity",1,SWIGTYPE_p_Object);
-  }
-  
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&arg2,SWIGTYPE_p_String,0))){
-    SWIG_fail_ptr("Object_setEntity",2,SWIGTYPE_p_String);
-  }
-  
-  (arg1)->setEntity((String const &)*arg2);
+  Ogre::Vector3 = arg1;
   
   return SWIG_arg;
   
@@ -1959,26 +1846,16 @@ fail:
 }
 
 
-static int _wrap_Object_setPosition(lua_State* L) {
+static int _wrap_Vector3_get(lua_State* L) {
   int SWIG_arg = 0;
-  Object *arg1 = (Object *) 0 ;
-  Ogre::Vector3 *arg2 = 0 ;
+  _OgreExport result;
   
-  SWIG_check_num_args("setPosition",2,2)
-  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("setPosition",1,"Object *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("setPosition",2,"Ogre::Vector3 const &");
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_Object,0))){
-    SWIG_fail_ptr("Object_setPosition",1,SWIGTYPE_p_Object);
+  SWIG_check_num_args("Ogre::Vector3",0,0)
+  result = Ogre::Vector3;
+  {
+    _OgreExport * resultptr = new _OgreExport((const _OgreExport &) result);
+    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p__OgreExport,1); SWIG_arg++;
   }
-  
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&arg2,SWIGTYPE_p_Ogre__Vector3,0))){
-    SWIG_fail_ptr("Object_setPosition",2,SWIGTYPE_p_Ogre__Vector3);
-  }
-  
-  (arg1)->setPosition((Ogre::Vector3 const &)*arg2);
-  
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -1988,452 +1865,6 @@ fail:
   return SWIG_arg;
 }
 
-
-static int _wrap_Object_setScale(lua_State* L) {
-  int SWIG_arg = 0;
-  Object *arg1 = (Object *) 0 ;
-  Ogre::Vector3 *arg2 = 0 ;
-  
-  SWIG_check_num_args("setScale",2,2)
-  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("setScale",1,"Object *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("setScale",2,"Ogre::Vector3 const &");
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_Object,0))){
-    SWIG_fail_ptr("Object_setScale",1,SWIGTYPE_p_Object);
-  }
-  
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&arg2,SWIGTYPE_p_Ogre__Vector3,0))){
-    SWIG_fail_ptr("Object_setScale",2,SWIGTYPE_p_Ogre__Vector3);
-  }
-  
-  (arg1)->setScale((Ogre::Vector3 const &)*arg2);
-  
-  return SWIG_arg;
-  
-  if(0) SWIG_fail;
-  
-fail:
-  lua_error(L);
-  return SWIG_arg;
-}
-
-
-static int _wrap_Object_translate(lua_State* L) {
-  int SWIG_arg = 0;
-  Object *arg1 = (Object *) 0 ;
-  Real *arg2 = 0 ;
-  Real *arg3 = 0 ;
-  Real *arg4 = 0 ;
-  
-  SWIG_check_num_args("translate",4,4)
-  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("translate",1,"Object *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("translate",2,"Real const &");
-  if(!lua_isuserdata(L,3)) SWIG_fail_arg("translate",3,"Real const &");
-  if(!lua_isuserdata(L,4)) SWIG_fail_arg("translate",4,"Real const &");
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_Object,0))){
-    SWIG_fail_ptr("Object_translate",1,SWIGTYPE_p_Object);
-  }
-  
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&arg2,SWIGTYPE_p_Real,0))){
-    SWIG_fail_ptr("Object_translate",2,SWIGTYPE_p_Real);
-  }
-  
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,3,(void**)&arg3,SWIGTYPE_p_Real,0))){
-    SWIG_fail_ptr("Object_translate",3,SWIGTYPE_p_Real);
-  }
-  
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,4,(void**)&arg4,SWIGTYPE_p_Real,0))){
-    SWIG_fail_ptr("Object_translate",4,SWIGTYPE_p_Real);
-  }
-  
-  (arg1)->translate((Real const &)*arg2,(Real const &)*arg3,(Real const &)*arg4);
-  
-  return SWIG_arg;
-  
-  if(0) SWIG_fail;
-  
-fail:
-  lua_error(L);
-  return SWIG_arg;
-}
-
-
-static void swig_delete_Object(void *obj) {
-Object *arg1 = (Object *) obj;
-delete arg1;
-}
-static swig_lua_method swig_Object_methods[] = {
-    {"setEntity", _wrap_Object_setEntity}, 
-    {"setPosition", _wrap_Object_setPosition}, 
-    {"setScale", _wrap_Object_setScale}, 
-    {"translate", _wrap_Object_translate}, 
-    {0,0}
-};
-static swig_lua_attribute swig_Object_attributes[] = {
-    {0,0,0}
-};
-static swig_lua_class *swig_Object_bases[] = {0};
-static const char *swig_Object_base_names[] = {0};
-static swig_lua_class _wrap_class_Object = { "Object", &SWIGTYPE_p_Object,_wrap_new_Object, swig_delete_Object, swig_Object_methods, swig_Object_attributes, swig_Object_bases, swig_Object_base_names };
-
-static int _wrap_new_Character(lua_State* L) {
-  int SWIG_arg = 0;
-  Ogre::SceneManager *arg1 = 0 ;
-  Character *result = 0 ;
-  
-  SWIG_check_num_args("Character",1,1)
-  if(!lua_isuserdata(L,1)) SWIG_fail_arg("Character",1,"Ogre::SceneManager &");
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_Ogre__SceneManager,0))){
-    SWIG_fail_ptr("new_Character",1,SWIGTYPE_p_Ogre__SceneManager);
-  }
-  
-  result = (Character *)new Character(*arg1);
-  SWIG_NewPointerObj(L,result,SWIGTYPE_p_Character,1); SWIG_arg++; 
-  return SWIG_arg;
-  
-  if(0) SWIG_fail;
-  
-fail:
-  lua_error(L);
-  return SWIG_arg;
-}
-
-
-static int _wrap_Character_getDirection(lua_State* L) {
-  int SWIG_arg = 0;
-  Character *arg1 = (Character *) 0 ;
-  MoveDirection result;
-  
-  SWIG_check_num_args("getDirection",1,1)
-  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("getDirection",1,"Character *");
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_Character,0))){
-    SWIG_fail_ptr("Character_getDirection",1,SWIGTYPE_p_Character);
-  }
-  
-  result = (MoveDirection)(arg1)->getDirection();
-  lua_pushnumber(L, (lua_Number)(int)(result)); SWIG_arg++;
-  return SWIG_arg;
-  
-  if(0) SWIG_fail;
-  
-fail:
-  lua_error(L);
-  return SWIG_arg;
-}
-
-
-static int _wrap_Character_attack(lua_State* L) {
-  int SWIG_arg = 0;
-  Character *arg1 = (Character *) 0 ;
-  
-  SWIG_check_num_args("attack",1,1)
-  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("attack",1,"Character *");
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_Character,0))){
-    SWIG_fail_ptr("Character_attack",1,SWIGTYPE_p_Character);
-  }
-  
-  (arg1)->attack();
-  
-  return SWIG_arg;
-  
-  if(0) SWIG_fail;
-  
-fail:
-  lua_error(L);
-  return SWIG_arg;
-}
-
-
-static int _wrap_Character_jump(lua_State* L) {
-  int SWIG_arg = 0;
-  Character *arg1 = (Character *) 0 ;
-  
-  SWIG_check_num_args("jump",1,1)
-  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("jump",1,"Character *");
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_Character,0))){
-    SWIG_fail_ptr("Character_jump",1,SWIGTYPE_p_Character);
-  }
-  
-  (arg1)->jump();
-  
-  return SWIG_arg;
-  
-  if(0) SWIG_fail;
-  
-fail:
-  lua_error(L);
-  return SWIG_arg;
-}
-
-
-static int _wrap_Character_defend(lua_State* L) {
-  int SWIG_arg = 0;
-  Character *arg1 = (Character *) 0 ;
-  
-  SWIG_check_num_args("defend",1,1)
-  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("defend",1,"Character *");
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_Character,0))){
-    SWIG_fail_ptr("Character_defend",1,SWIGTYPE_p_Character);
-  }
-  
-  (arg1)->defend();
-  
-  return SWIG_arg;
-  
-  if(0) SWIG_fail;
-  
-fail:
-  lua_error(L);
-  return SWIG_arg;
-}
-
-
-static int _wrap_Character_move(lua_State* L) {
-  int SWIG_arg = 0;
-  Character *arg1 = (Character *) 0 ;
-  MoveDirection arg2 ;
-  
-  SWIG_check_num_args("move",2,2)
-  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("move",1,"Character *");
-  if(!lua_isnumber(L,2)) SWIG_fail_arg("move",2,"MoveDirection const");
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_Character,0))){
-    SWIG_fail_ptr("Character_move",1,SWIGTYPE_p_Character);
-  }
-  
-  arg2 = (MoveDirection const)(int)lua_tonumber(L, 2);
-  (arg1)->move(arg2);
-  
-  return SWIG_arg;
-  
-  if(0) SWIG_fail;
-  
-fail:
-  lua_error(L);
-  return SWIG_arg;
-}
-
-
-static int _wrap_Character_stopDefending(lua_State* L) {
-  int SWIG_arg = 0;
-  Character *arg1 = (Character *) 0 ;
-  
-  SWIG_check_num_args("stopDefending",1,1)
-  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("stopDefending",1,"Character *");
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_Character,0))){
-    SWIG_fail_ptr("Character_stopDefending",1,SWIGTYPE_p_Character);
-  }
-  
-  (arg1)->stopDefending();
-  
-  return SWIG_arg;
-  
-  if(0) SWIG_fail;
-  
-fail:
-  lua_error(L);
-  return SWIG_arg;
-}
-
-
-static int _wrap_Character_stopMoving(lua_State* L) {
-  int SWIG_arg = 0;
-  Character *arg1 = (Character *) 0 ;
-  
-  SWIG_check_num_args("stopMoving",1,1)
-  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("stopMoving",1,"Character *");
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_Character,0))){
-    SWIG_fail_ptr("Character_stopMoving",1,SWIGTYPE_p_Character);
-  }
-  
-  (arg1)->stopMoving();
-  
-  return SWIG_arg;
-  
-  if(0) SWIG_fail;
-  
-fail:
-  lua_error(L);
-  return SWIG_arg;
-}
-
-
-static int _wrap_Character_recoverFromPenetration(lua_State* L) {
-  int SWIG_arg = 0;
-  Character *arg1 = (Character *) 0 ;
-  std::list< Object * > *arg2 = 0 ;
-  
-  SWIG_check_num_args("recoverFromPenetration",2,2)
-  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("recoverFromPenetration",1,"Character *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("recoverFromPenetration",2,"std::list< Object * > const &");
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_Character,0))){
-    SWIG_fail_ptr("Character_recoverFromPenetration",1,SWIGTYPE_p_Character);
-  }
-  
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&arg2,SWIGTYPE_p_std__listT_Object_p_t,0))){
-    SWIG_fail_ptr("Character_recoverFromPenetration",2,SWIGTYPE_p_std__listT_Object_p_t);
-  }
-  
-  (arg1)->recoverFromPenetration((std::list< Object * > const &)*arg2);
-  
-  return SWIG_arg;
-  
-  if(0) SWIG_fail;
-  
-fail:
-  lua_error(L);
-  return SWIG_arg;
-}
-
-
-static int _wrap_Character_reset(lua_State* L) {
-  int SWIG_arg = 0;
-  Character *arg1 = (Character *) 0 ;
-  
-  SWIG_check_num_args("reset",1,1)
-  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("reset",1,"Character *");
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_Character,0))){
-    SWIG_fail_ptr("Character_reset",1,SWIGTYPE_p_Character);
-  }
-  
-  (arg1)->reset();
-  
-  return SWIG_arg;
-  
-  if(0) SWIG_fail;
-  
-fail:
-  lua_error(L);
-  return SWIG_arg;
-}
-
-
-static void swig_delete_Character(void *obj) {
-Character *arg1 = (Character *) obj;
-delete arg1;
-}
-static swig_lua_method swig_Character_methods[] = {
-    {"getDirection", _wrap_Character_getDirection}, 
-    {"attack", _wrap_Character_attack}, 
-    {"jump", _wrap_Character_jump}, 
-    {"defend", _wrap_Character_defend}, 
-    {"move", _wrap_Character_move}, 
-    {"stopDefending", _wrap_Character_stopDefending}, 
-    {"stopMoving", _wrap_Character_stopMoving}, 
-    {"recoverFromPenetration", _wrap_Character_recoverFromPenetration}, 
-    {"reset", _wrap_Character_reset}, 
-    {0,0}
-};
-static swig_lua_attribute swig_Character_attributes[] = {
-    {0,0,0}
-};
-static swig_lua_class *swig_Character_bases[] = {0,0};
-static const char *swig_Character_base_names[] = {"Object *",0};
-static swig_lua_class _wrap_class_Character = { "Character", &SWIGTYPE_p_Character,_wrap_new_Character, swig_delete_Character, swig_Character_methods, swig_Character_attributes, swig_Character_bases, swig_Character_base_names };
-
-static int _wrap_new_Player(lua_State* L) {
-  int SWIG_arg = 0;
-  int arg1 ;
-  Player *result = 0 ;
-  
-  SWIG_check_num_args("Player",1,1)
-  if(!lua_isnumber(L,1)) SWIG_fail_arg("Player",1,"int const");
-  arg1 = (int const)lua_tonumber(L, 1);
-  result = (Player *)new Player(arg1);
-  SWIG_NewPointerObj(L,result,SWIGTYPE_p_Player,1); SWIG_arg++; 
-  return SWIG_arg;
-  
-  if(0) SWIG_fail;
-  
-fail:
-  lua_error(L);
-  return SWIG_arg;
-}
-
-
-static int _wrap_Player_setBattleground(lua_State* L) {
-  int SWIG_arg = 0;
-  Player *arg1 = (Player *) 0 ;
-  BattleGround *arg2 = 0 ;
-  
-  SWIG_check_num_args("setBattleground",2,2)
-  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("setBattleground",1,"Player *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("setBattleground",2,"BattleGround &");
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_Player,0))){
-    SWIG_fail_ptr("Player_setBattleground",1,SWIGTYPE_p_Player);
-  }
-  
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&arg2,SWIGTYPE_p_BattleGround,0))){
-    SWIG_fail_ptr("Player_setBattleground",2,SWIGTYPE_p_BattleGround);
-  }
-  
-  (arg1)->setBattleground(*arg2);
-  
-  return SWIG_arg;
-  
-  if(0) SWIG_fail;
-  
-fail:
-  lua_error(L);
-  return SWIG_arg;
-}
-
-
-static int _wrap_Player_setCharacter(lua_State* L) {
-  int SWIG_arg = 0;
-  Player *arg1 = (Player *) 0 ;
-  
-  SWIG_check_num_args("setCharacter",1,1)
-  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("setCharacter",1,"Player *");
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_Player,0))){
-    SWIG_fail_ptr("Player_setCharacter",1,SWIGTYPE_p_Player);
-  }
-  
-  (arg1)->setCharacter();
-  
-  return SWIG_arg;
-  
-  if(0) SWIG_fail;
-  
-fail:
-  lua_error(L);
-  return SWIG_arg;
-}
-
-
-static void swig_delete_Player(void *obj) {
-Player *arg1 = (Player *) obj;
-delete arg1;
-}
-static swig_lua_method swig_Player_methods[] = {
-    {"setBattleground", _wrap_Player_setBattleground}, 
-    {"setCharacter", _wrap_Player_setCharacter}, 
-    {0,0}
-};
-static swig_lua_attribute swig_Player_attributes[] = {
-    {0,0,0}
-};
-static swig_lua_class *swig_Player_bases[] = {0};
-static const char *swig_Player_base_names[] = {0};
-static swig_lua_class _wrap_class_Player = { "Player", &SWIGTYPE_p_Player,_wrap_new_Player, swig_delete_Player, swig_Player_methods, swig_Player_attributes, swig_Player_bases, swig_Player_base_names };
 
 #ifdef __cplusplus
 }
@@ -2444,65 +1875,29 @@ static const struct luaL_reg swig_commands[] = {
 };
 
 static swig_lua_var_info swig_variables[] = {
+    { "Vector3", _wrap_Vector3_get, _wrap_Vector3_set },
     {0,0,0}
 };
 
 static swig_lua_const_info swig_constants[] = {
-{ SWIG_LUA_INT,     (char *)"RIGHT", (long) RIGHT, 0, 0, 0},
-{ SWIG_LUA_INT,     (char *)"LEFT", (long) LEFT, 0, 0, 0},
     {0,0,0,0,0,0}
 };
 
 /* -------- TYPE CONVERSION AND EQUIVALENCE RULES (BEGIN) -------- */
 
-static void *_p_CharacterTo_p_Object(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((Object *)  ((Character *) x));
-}
-static swig_type_info _swigt__p_BattleGround = {"_p_BattleGround", "BattleGround *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_Character = {"_p_Character", "Character *", 0, 0, (void*)&_wrap_class_Character, 0};
-static swig_type_info _swigt__p_Object = {"_p_Object", "Object *", 0, 0, (void*)&_wrap_class_Object, 0};
-static swig_type_info _swigt__p_Ogre__SceneManager = {"_p_Ogre__SceneManager", "Ogre::SceneManager *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_Ogre__Vector3 = {"_p_Ogre__Vector3", "Ogre::Vector3 *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_Player = {"_p_Player", "Player *", 0, 0, (void*)&_wrap_class_Player, 0};
-static swig_type_info _swigt__p_Real = {"_p_Real", "Real *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_String = {"_p_String", "String *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_std__listT_Object_p_t = {"_p_std__listT_Object_p_t", "std::list< Object * > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p__OgreExport = {"_p__OgreExport", "_OgreExport *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__string = {"_p_std__string", "std::string *", 0, 0, (void*)&_wrap_class_std_string, 0};
 
 static swig_type_info *swig_type_initial[] = {
-  &_swigt__p_BattleGround,
-  &_swigt__p_Character,
-  &_swigt__p_Object,
-  &_swigt__p_Ogre__SceneManager,
-  &_swigt__p_Ogre__Vector3,
-  &_swigt__p_Player,
-  &_swigt__p_Real,
-  &_swigt__p_String,
-  &_swigt__p_std__listT_Object_p_t,
+  &_swigt__p__OgreExport,
   &_swigt__p_std__string,
 };
 
-static swig_cast_info _swigc__p_BattleGround[] = {  {&_swigt__p_BattleGround, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_Character[] = {  {&_swigt__p_Character, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_Object[] = {  {&_swigt__p_Object, 0, 0, 0},  {&_swigt__p_Character, _p_CharacterTo_p_Object, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_Ogre__SceneManager[] = {  {&_swigt__p_Ogre__SceneManager, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_Ogre__Vector3[] = {  {&_swigt__p_Ogre__Vector3, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_Player[] = {  {&_swigt__p_Player, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_Real[] = {  {&_swigt__p_Real, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_String[] = {  {&_swigt__p_String, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_std__listT_Object_p_t[] = {  {&_swigt__p_std__listT_Object_p_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p__OgreExport[] = {  {&_swigt__p__OgreExport, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__string[] = {  {&_swigt__p_std__string, 0, 0, 0},{0, 0, 0, 0}};
 
 static swig_cast_info *swig_cast_initial[] = {
-  _swigc__p_BattleGround,
-  _swigc__p_Character,
-  _swigc__p_Object,
-  _swigc__p_Ogre__SceneManager,
-  _swigc__p_Ogre__Vector3,
-  _swigc__p_Player,
-  _swigc__p_Real,
-  _swigc__p_String,
-  _swigc__p_std__listT_Object_p_t,
+  _swigc__p__OgreExport,
   _swigc__p_std__string,
 };
 

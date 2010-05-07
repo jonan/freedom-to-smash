@@ -15,16 +15,14 @@
 #define SWIG_FILE_WITH_INIT
 
 
-#include "object.hpp"
-#include "character.hpp"
-#include "player.hpp"
+#include <Ogre.h>
+
+
 
 %}
 
 
-%include "object.hpp"
-%include "character.hpp"
-%include "player.hpp"
+%include "OgreVector3.h"
 
 
 

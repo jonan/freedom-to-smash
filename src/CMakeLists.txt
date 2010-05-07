@@ -50,6 +50,7 @@ set(
 
   swigrt.h
   fts_wrap.cxx
+  ogre_wrap.cxx
   luautils.hpp
   lua_evaluator.hpp
   lua_engine.hpp
