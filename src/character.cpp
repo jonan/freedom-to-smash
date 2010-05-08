@@ -36,6 +36,8 @@ Character::Character(Ogre::SceneManager &scene_manager)
         , collision_left(false)
         , jumping_time(0)
 {
+	loadScript("../scripts/char_sinbad.lua");
+
     setEntity("sinbad");
     entity->getSkeleton()->setBlendMode(Ogre::ANIMBLEND_CUMULATIVE);
     attachEntityToBone("Sword", "Handle.L");
@@ -57,6 +59,10 @@ Character::Character(Ogre::SceneManager &scene_manager)
 Character::~Character(void)
 {
     Ogre::Root::getSingleton().removeFrameListener(this);
+}
+
+void Character::loadScript(std::string const & file)
+{
 }
 
 // Start performing an attack.

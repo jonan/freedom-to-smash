@@ -63,6 +63,11 @@ public:
     ///
     void reset(void);
 
+	//! Loads a character script.
+	//!
+	//! @param file Absolute or relative path to the lua script.
+	void loadScript(std::string const & file);
+
 private:
     // All the different states of a character.
     enum {ATTACK, DEFEND, FALL, IDLE, JUMP, LAND, MOVE, NUM_STATES};
