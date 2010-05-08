@@ -11,9 +11,6 @@ set(
   character.cpp
   input.cpp
   main.cpp
-  lua_engine.cpp
-  lua_evaluator.cpp
-  luautils.cpp
   object.cpp
   platform.cpp
   player.cpp
@@ -21,6 +18,10 @@ set(
   Scheduler.cpp
   ScheduledItem.cpp
   script.cpp
+  lua_engine.cpp
+  lua_evaluator.cpp
+  luautils.cpp
+  script_manager.cpp
   )
 
 set(
@@ -54,12 +55,13 @@ set(
   luautils.hpp
   lua_evaluator.hpp
   lua_engine.hpp
+  script_manager.hpp
   
   fts.i
   ogre.i
   )
 
-source_group(Lua FILES luautils.cpp luautils.hpp lua_evaluator.cpp lua_evaluator.hpp lua_engine.cpp lua_engine.hpp)
+source_group(Lua FILES luautils.cpp luautils.hpp lua_evaluator.cpp lua_evaluator.hpp lua_engine.cpp lua_engine.hpp script_manager.cpp script_manager.hpp)
 source_group(Lua REGULAR_EXPRESSION .*\.i)
 source_group(Lua\\Generated FILES swigrt.h)
 source_group(Lua\\Generated REGULAR_EXPRESSION .*_wrap.cxx)
