@@ -1526,20 +1526,24 @@ SWIG_Lua_dostring(lua_State *L, const char* str) {
 
 /* -------- TYPES TABLE (BEGIN) -------- */
 
-#define SWIGTYPE_p__OgreExport swig_types[0]
-#define SWIGTYPE_p_std__string swig_types[1]
-static swig_type_info *swig_types[3];
-static swig_module_info swig_module = {swig_types, 2, 0, 0, 0, 0};
+#define SWIGTYPE_p_Ogre__Vector3 swig_types[0]
+#define SWIGTYPE_p_Quaternion swig_types[1]
+#define SWIGTYPE_p_Radian swig_types[2]
+#define SWIGTYPE_p_Real swig_types[3]
+#define SWIGTYPE_p_int swig_types[4]
+#define SWIGTYPE_p_std__string swig_types[5]
+static swig_type_info *swig_types[7];
+static swig_module_info swig_module = {swig_types, 6, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
 /* -------- TYPES TABLE (END) -------- */
 
-#define SWIG_name      "fts"
-#define SWIG_init      luaopen_fts
-#define SWIG_init_user luaopen_fts_user
+#define SWIG_name      "ogre"
+#define SWIG_init      luaopen_ogre
+#define SWIG_init_user luaopen_ogre_user
 
-#define SWIG_LUACODE   luaopen_fts_luacode
+#define SWIG_LUACODE   luaopen_ogre_luacode
 
 
 namespace swig {
@@ -1578,6 +1582,8 @@ typedef struct{} LANGUAGE_OBJ;
 
 
 #include <Ogre.h>
+
+using namespace Ogre;
 
 
 
@@ -1821,20 +1827,474 @@ static swig_lua_class *swig_std_string_bases[] = {0};
 static const char *swig_std_string_base_names[] = {0};
 static swig_lua_class _wrap_class_std_string = { "string", &SWIGTYPE_p_std__string,_wrap_new_string, swig_delete_string, swig_std_string_methods, swig_std_string_attributes, swig_std_string_bases, swig_std_string_base_names };
 
-static int _wrap_Vector3_set(lua_State* L) {
+static int _wrap_Vector3_x_set(lua_State* L) {
   int SWIG_arg = 0;
-  _OgreExport arg1 ;
-  _OgreExport *argp1 ;
+  Ogre::Vector3 *arg1 = (Ogre::Vector3 *) 0 ;
+  Real arg2 ;
+  Real *argp2 ;
   
-  SWIG_check_num_args("Ogre::Vector3",1,1)
-  if(!lua_isuserdata(L,1)) SWIG_fail_arg("Ogre::Vector3",1,"_OgreExport");
+  SWIG_check_num_args("x",2,2)
+  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("x",1,"Ogre::Vector3 *");
+  if(!lua_isuserdata(L,2)) SWIG_fail_arg("x",2,"Real");
   
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&argp1,SWIGTYPE_p__OgreExport,0))){
-    SWIG_fail_ptr("Vector3_set",1,SWIGTYPE_p__OgreExport);
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_Ogre__Vector3,0))){
+    SWIG_fail_ptr("Vector3_x_set",1,SWIGTYPE_p_Ogre__Vector3);
+  }
+  
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_Real,0))){
+    SWIG_fail_ptr("Vector3_x_set",2,SWIGTYPE_p_Real);
+  }
+  arg2 = *argp2;
+  
+  if (arg1) (arg1)->x = arg2;
+  
+  return SWIG_arg;
+  
+  if(0) SWIG_fail;
+  
+fail:
+  lua_error(L);
+  return SWIG_arg;
+}
+
+
+static int _wrap_Vector3_x_get(lua_State* L) {
+  int SWIG_arg = 0;
+  Ogre::Vector3 *arg1 = (Ogre::Vector3 *) 0 ;
+  Real result;
+  
+  SWIG_check_num_args("x",1,1)
+  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("x",1,"Ogre::Vector3 *");
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_Ogre__Vector3,0))){
+    SWIG_fail_ptr("Vector3_x_get",1,SWIGTYPE_p_Ogre__Vector3);
+  }
+  
+  result =  ((arg1)->x);
+  {
+    Real * resultptr = new Real((const Real &) result);
+    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_Real,1); SWIG_arg++;
+  }
+  return SWIG_arg;
+  
+  if(0) SWIG_fail;
+  
+fail:
+  lua_error(L);
+  return SWIG_arg;
+}
+
+
+static int _wrap_Vector3_y_set(lua_State* L) {
+  int SWIG_arg = 0;
+  Ogre::Vector3 *arg1 = (Ogre::Vector3 *) 0 ;
+  Real arg2 ;
+  Real *argp2 ;
+  
+  SWIG_check_num_args("y",2,2)
+  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("y",1,"Ogre::Vector3 *");
+  if(!lua_isuserdata(L,2)) SWIG_fail_arg("y",2,"Real");
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_Ogre__Vector3,0))){
+    SWIG_fail_ptr("Vector3_y_set",1,SWIGTYPE_p_Ogre__Vector3);
+  }
+  
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_Real,0))){
+    SWIG_fail_ptr("Vector3_y_set",2,SWIGTYPE_p_Real);
+  }
+  arg2 = *argp2;
+  
+  if (arg1) (arg1)->y = arg2;
+  
+  return SWIG_arg;
+  
+  if(0) SWIG_fail;
+  
+fail:
+  lua_error(L);
+  return SWIG_arg;
+}
+
+
+static int _wrap_Vector3_y_get(lua_State* L) {
+  int SWIG_arg = 0;
+  Ogre::Vector3 *arg1 = (Ogre::Vector3 *) 0 ;
+  Real result;
+  
+  SWIG_check_num_args("y",1,1)
+  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("y",1,"Ogre::Vector3 *");
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_Ogre__Vector3,0))){
+    SWIG_fail_ptr("Vector3_y_get",1,SWIGTYPE_p_Ogre__Vector3);
+  }
+  
+  result =  ((arg1)->y);
+  {
+    Real * resultptr = new Real((const Real &) result);
+    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_Real,1); SWIG_arg++;
+  }
+  return SWIG_arg;
+  
+  if(0) SWIG_fail;
+  
+fail:
+  lua_error(L);
+  return SWIG_arg;
+}
+
+
+static int _wrap_Vector3_z_set(lua_State* L) {
+  int SWIG_arg = 0;
+  Ogre::Vector3 *arg1 = (Ogre::Vector3 *) 0 ;
+  Real arg2 ;
+  Real *argp2 ;
+  
+  SWIG_check_num_args("z",2,2)
+  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("z",1,"Ogre::Vector3 *");
+  if(!lua_isuserdata(L,2)) SWIG_fail_arg("z",2,"Real");
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_Ogre__Vector3,0))){
+    SWIG_fail_ptr("Vector3_z_set",1,SWIGTYPE_p_Ogre__Vector3);
+  }
+  
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_Real,0))){
+    SWIG_fail_ptr("Vector3_z_set",2,SWIGTYPE_p_Real);
+  }
+  arg2 = *argp2;
+  
+  if (arg1) (arg1)->z = arg2;
+  
+  return SWIG_arg;
+  
+  if(0) SWIG_fail;
+  
+fail:
+  lua_error(L);
+  return SWIG_arg;
+}
+
+
+static int _wrap_Vector3_z_get(lua_State* L) {
+  int SWIG_arg = 0;
+  Ogre::Vector3 *arg1 = (Ogre::Vector3 *) 0 ;
+  Real result;
+  
+  SWIG_check_num_args("z",1,1)
+  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("z",1,"Ogre::Vector3 *");
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_Ogre__Vector3,0))){
+    SWIG_fail_ptr("Vector3_z_get",1,SWIGTYPE_p_Ogre__Vector3);
+  }
+  
+  result =  ((arg1)->z);
+  {
+    Real * resultptr = new Real((const Real &) result);
+    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_Real,1); SWIG_arg++;
+  }
+  return SWIG_arg;
+  
+  if(0) SWIG_fail;
+  
+fail:
+  lua_error(L);
+  return SWIG_arg;
+}
+
+
+static int _wrap_new_Vector3__SWIG_0(lua_State* L) {
+  int SWIG_arg = 0;
+  Ogre::Vector3 *result = 0 ;
+  
+  SWIG_check_num_args("Ogre::Vector3",0,0)
+  result = (Ogre::Vector3 *)new Ogre::Vector3();
+  SWIG_NewPointerObj(L,result,SWIGTYPE_p_Ogre__Vector3,1); SWIG_arg++; 
+  return SWIG_arg;
+  
+  if(0) SWIG_fail;
+  
+fail:
+  lua_error(L);
+  return SWIG_arg;
+}
+
+
+static int _wrap_new_Vector3__SWIG_1(lua_State* L) {
+  int SWIG_arg = 0;
+  Real arg1 ;
+  Real arg2 ;
+  Real arg3 ;
+  Real *argp1 ;
+  Real *argp2 ;
+  Real *argp3 ;
+  Ogre::Vector3 *result = 0 ;
+  
+  SWIG_check_num_args("Ogre::Vector3",3,3)
+  if(!lua_isuserdata(L,1)) SWIG_fail_arg("Ogre::Vector3",1,"Real const");
+  if(!lua_isuserdata(L,2)) SWIG_fail_arg("Ogre::Vector3",2,"Real const");
+  if(!lua_isuserdata(L,3)) SWIG_fail_arg("Ogre::Vector3",3,"Real const");
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&argp1,SWIGTYPE_p_Real,0))){
+    SWIG_fail_ptr("new_Vector3",1,SWIGTYPE_p_Real);
   }
   arg1 = *argp1;
   
-  Ogre::Vector3 = arg1;
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_Real,0))){
+    SWIG_fail_ptr("new_Vector3",2,SWIGTYPE_p_Real);
+  }
+  arg2 = *argp2;
+  
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,3,(void**)&argp3,SWIGTYPE_p_Real,0))){
+    SWIG_fail_ptr("new_Vector3",3,SWIGTYPE_p_Real);
+  }
+  arg3 = *argp3;
+  
+  result = (Ogre::Vector3 *)new Ogre::Vector3(arg1,arg2,arg3);
+  SWIG_NewPointerObj(L,result,SWIGTYPE_p_Ogre__Vector3,1); SWIG_arg++; 
+  return SWIG_arg;
+  
+  if(0) SWIG_fail;
+  
+fail:
+  lua_error(L);
+  return SWIG_arg;
+}
+
+
+static int _wrap_new_Vector3__SWIG_2(lua_State* L) {
+  int SWIG_arg = 0;
+  Real *arg1 ;
+  Ogre::Vector3 *result = 0 ;
+  
+  SWIG_check_num_args("Ogre::Vector3",1,1)
+  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("Ogre::Vector3",1,"Real const [3]");
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_Real,0))){
+    SWIG_fail_ptr("new_Vector3",1,SWIGTYPE_p_Real);
+  }
+  
+  result = (Ogre::Vector3 *)new Ogre::Vector3((Real const (*))arg1);
+  SWIG_NewPointerObj(L,result,SWIGTYPE_p_Ogre__Vector3,1); SWIG_arg++; 
+  return SWIG_arg;
+  
+  if(0) SWIG_fail;
+  
+fail:
+  lua_error(L);
+  return SWIG_arg;
+}
+
+
+static int _wrap_new_Vector3__SWIG_3(lua_State* L) {
+  int SWIG_arg = 0;
+  int *arg1 ;
+  Ogre::Vector3 *result = 0 ;
+  
+  SWIG_check_num_args("Ogre::Vector3",1,1)
+  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("Ogre::Vector3",1,"int const [3]");
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_int,0))){
+    SWIG_fail_ptr("new_Vector3",1,SWIGTYPE_p_int);
+  }
+  
+  result = (Ogre::Vector3 *)new Ogre::Vector3((int const (*))arg1);
+  SWIG_NewPointerObj(L,result,SWIGTYPE_p_Ogre__Vector3,1); SWIG_arg++; 
+  return SWIG_arg;
+  
+  if(0) SWIG_fail;
+  
+fail:
+  lua_error(L);
+  return SWIG_arg;
+}
+
+
+static int _wrap_new_Vector3__SWIG_4(lua_State* L) {
+  int SWIG_arg = 0;
+  Real *arg1 = (Real *) (Real *)0 ;
+  Ogre::Vector3 *result = 0 ;
+  
+  SWIG_check_num_args("Ogre::Vector3",1,1)
+  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("Ogre::Vector3",1,"Real *const");
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_Real,0))){
+    SWIG_fail_ptr("new_Vector3",1,SWIGTYPE_p_Real);
+  }
+  
+  result = (Ogre::Vector3 *)new Ogre::Vector3(arg1);
+  SWIG_NewPointerObj(L,result,SWIGTYPE_p_Ogre__Vector3,1); SWIG_arg++; 
+  return SWIG_arg;
+  
+  if(0) SWIG_fail;
+  
+fail:
+  lua_error(L);
+  return SWIG_arg;
+}
+
+
+static int _wrap_new_Vector3__SWIG_5(lua_State* L) {
+  int SWIG_arg = 0;
+  Real arg1 ;
+  Real *argp1 ;
+  Ogre::Vector3 *result = 0 ;
+  
+  SWIG_check_num_args("Ogre::Vector3",1,1)
+  if(!lua_isuserdata(L,1)) SWIG_fail_arg("Ogre::Vector3",1,"Real const");
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&argp1,SWIGTYPE_p_Real,0))){
+    SWIG_fail_ptr("new_Vector3",1,SWIGTYPE_p_Real);
+  }
+  arg1 = *argp1;
+  
+  result = (Ogre::Vector3 *)new Ogre::Vector3(arg1);
+  SWIG_NewPointerObj(L,result,SWIGTYPE_p_Ogre__Vector3,1); SWIG_arg++; 
+  return SWIG_arg;
+  
+  if(0) SWIG_fail;
+  
+fail:
+  lua_error(L);
+  return SWIG_arg;
+}
+
+
+static int _wrap_new_Vector3(lua_State* L) {
+  int argc;
+  int argv[4]={
+    1,2,3,4
+  };
+  
+  argc = lua_gettop(L);
+  if (argc == 0) {
+    return _wrap_new_Vector3__SWIG_0(L);
+  }
+  if (argc == 1) {
+    int _v;
+    {
+      void *ptr;
+      if (SWIG_isptrtype(L,argv[0])==0 || SWIG_ConvertPtr(L,argv[0], (void **) &ptr, SWIGTYPE_p_Real, 0)) {
+        _v = 0;
+      } else {
+        _v = 1;
+      }
+    }
+    if (_v) {
+      return _wrap_new_Vector3__SWIG_2(L);
+    }
+  }
+  if (argc == 1) {
+    int _v;
+    {
+      void *ptr;
+      if (SWIG_isptrtype(L,argv[0])==0 || SWIG_ConvertPtr(L,argv[0], (void **) &ptr, SWIGTYPE_p_int, 0)) {
+        _v = 0;
+      } else {
+        _v = 1;
+      }
+    }
+    if (_v) {
+      return _wrap_new_Vector3__SWIG_3(L);
+    }
+  }
+  if (argc == 1) {
+    int _v;
+    {
+      void *ptr;
+      if (SWIG_isptrtype(L,argv[0])==0 || SWIG_ConvertPtr(L,argv[0], (void **) &ptr, SWIGTYPE_p_Real, 0)) {
+        _v = 0;
+      } else {
+        _v = 1;
+      }
+    }
+    if (_v) {
+      return _wrap_new_Vector3__SWIG_4(L);
+    }
+  }
+  if (argc == 1) {
+    int _v;
+    {
+      void *ptr;
+      if (lua_isuserdata(L,argv[0])==0 || SWIG_ConvertPtr(L,argv[0], (void **) &ptr, SWIGTYPE_p_Real, 0)) {
+        _v = 0;
+      } else {
+        _v = 1;
+      }
+    }
+    if (_v) {
+      return _wrap_new_Vector3__SWIG_5(L);
+    }
+  }
+  if (argc == 3) {
+    int _v;
+    {
+      void *ptr;
+      if (lua_isuserdata(L,argv[0])==0 || SWIG_ConvertPtr(L,argv[0], (void **) &ptr, SWIGTYPE_p_Real, 0)) {
+        _v = 0;
+      } else {
+        _v = 1;
+      }
+    }
+    if (_v) {
+      {
+        void *ptr;
+        if (lua_isuserdata(L,argv[1])==0 || SWIG_ConvertPtr(L,argv[1], (void **) &ptr, SWIGTYPE_p_Real, 0)) {
+          _v = 0;
+        } else {
+          _v = 1;
+        }
+      }
+      if (_v) {
+        {
+          void *ptr;
+          if (lua_isuserdata(L,argv[2])==0 || SWIG_ConvertPtr(L,argv[2], (void **) &ptr, SWIGTYPE_p_Real, 0)) {
+            _v = 0;
+          } else {
+            _v = 1;
+          }
+        }
+        if (_v) {
+          return _wrap_new_Vector3__SWIG_1(L);
+        }
+      }
+    }
+  }
+  
+  lua_pushstring(L,"Wrong arguments for overloaded function 'new_Vector3'\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    Ogre::Vector3()\n"
+    "    Ogre::Vector3(Real const,Real const,Real const)\n"
+    "    Ogre::Vector3(Real const [3])\n"
+    "    Ogre::Vector3(int const [3])\n"
+    "    Ogre::Vector3(Real *const)\n"
+    "    Ogre::Vector3(Real const)\n");
+  lua_error(L);return 0;
+}
+
+
+static int _wrap_Vector3_swap(lua_State* L) {
+  int SWIG_arg = 0;
+  Ogre::Vector3 *arg1 = (Ogre::Vector3 *) 0 ;
+  Ogre::Vector3 *arg2 = 0 ;
+  
+  SWIG_check_num_args("swap",2,2)
+  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("swap",1,"Ogre::Vector3 *");
+  if(!lua_isuserdata(L,2)) SWIG_fail_arg("swap",2,"Ogre::Vector3 &");
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_Ogre__Vector3,0))){
+    SWIG_fail_ptr("Vector3_swap",1,SWIGTYPE_p_Ogre__Vector3);
+  }
+  
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&arg2,SWIGTYPE_p_Ogre__Vector3,0))){
+    SWIG_fail_ptr("Vector3_swap",2,SWIGTYPE_p_Ogre__Vector3);
+  }
+  
+  (arg1)->swap(*arg2);
   
   return SWIG_arg;
   
@@ -1846,15 +2306,152 @@ fail:
 }
 
 
-static int _wrap_Vector3_get(lua_State* L) {
+static int _wrap_Vector3_ptr__SWIG_0(lua_State* L) {
   int SWIG_arg = 0;
-  _OgreExport result;
+  Ogre::Vector3 *arg1 = (Ogre::Vector3 *) 0 ;
+  Real *result = 0 ;
   
-  SWIG_check_num_args("Ogre::Vector3",0,0)
-  result = Ogre::Vector3;
+  SWIG_check_num_args("ptr",1,1)
+  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("ptr",1,"Ogre::Vector3 *");
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_Ogre__Vector3,0))){
+    SWIG_fail_ptr("Vector3_ptr",1,SWIGTYPE_p_Ogre__Vector3);
+  }
+  
+  result = (Real *)(arg1)->ptr();
+  SWIG_NewPointerObj(L,result,SWIGTYPE_p_Real,0); SWIG_arg++; 
+  return SWIG_arg;
+  
+  if(0) SWIG_fail;
+  
+fail:
+  lua_error(L);
+  return SWIG_arg;
+}
+
+
+static int _wrap_Vector3_ptr__SWIG_1(lua_State* L) {
+  int SWIG_arg = 0;
+  Ogre::Vector3 *arg1 = (Ogre::Vector3 *) 0 ;
+  Real *result = 0 ;
+  
+  SWIG_check_num_args("ptr",1,1)
+  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("ptr",1,"Ogre::Vector3 const *");
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_Ogre__Vector3,0))){
+    SWIG_fail_ptr("Vector3_ptr",1,SWIGTYPE_p_Ogre__Vector3);
+  }
+  
+  result = (Real *)((Ogre::Vector3 const *)arg1)->ptr();
+  SWIG_NewPointerObj(L,result,SWIGTYPE_p_Real,0); SWIG_arg++; 
+  return SWIG_arg;
+  
+  if(0) SWIG_fail;
+  
+fail:
+  lua_error(L);
+  return SWIG_arg;
+}
+
+
+static int _wrap_Vector3_ptr(lua_State* L) {
+  int argc;
+  int argv[2]={
+    1,2
+  };
+  
+  argc = lua_gettop(L);
+  if (argc == 1) {
+    int _v;
+    {
+      void *ptr;
+      if (SWIG_isptrtype(L,argv[0])==0 || SWIG_ConvertPtr(L,argv[0], (void **) &ptr, SWIGTYPE_p_Ogre__Vector3, 0)) {
+        _v = 0;
+      } else {
+        _v = 1;
+      }
+    }
+    if (_v) {
+      return _wrap_Vector3_ptr__SWIG_0(L);
+    }
+  }
+  if (argc == 1) {
+    int _v;
+    {
+      void *ptr;
+      if (SWIG_isptrtype(L,argv[0])==0 || SWIG_ConvertPtr(L,argv[0], (void **) &ptr, SWIGTYPE_p_Ogre__Vector3, 0)) {
+        _v = 0;
+      } else {
+        _v = 1;
+      }
+    }
+    if (_v) {
+      return _wrap_Vector3_ptr__SWIG_1(L);
+    }
+  }
+  
+  lua_pushstring(L,"Wrong arguments for overloaded function 'Vector3_ptr'\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    ptr(Ogre::Vector3 *)\n"
+    "    ptr(Ogre::Vector3 const *)\n");
+  lua_error(L);return 0;
+}
+
+
+static int _wrap_Vector3___eq(lua_State* L) {
+  int SWIG_arg = 0;
+  Ogre::Vector3 *arg1 = (Ogre::Vector3 *) 0 ;
+  Ogre::Vector3 *arg2 = 0 ;
+  bool result;
+  
+  SWIG_check_num_args("operator ==",2,2)
+  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("operator ==",1,"Ogre::Vector3 const *");
+  if(!lua_isuserdata(L,2)) SWIG_fail_arg("operator ==",2,"Ogre::Vector3 const &");
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_Ogre__Vector3,0))){
+    SWIG_fail_ptr("Vector3___eq",1,SWIGTYPE_p_Ogre__Vector3);
+  }
+  
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&arg2,SWIGTYPE_p_Ogre__Vector3,0))){
+    SWIG_fail_ptr("Vector3___eq",2,SWIGTYPE_p_Ogre__Vector3);
+  }
+  
+  result = (bool)((Ogre::Vector3 const *)arg1)->operator ==((Ogre::Vector3 const &)*arg2);
+  lua_pushboolean(L,(int)(result!=0)); SWIG_arg++;
+  return SWIG_arg;
+  
+  if(0) SWIG_fail;
+  
+fail:
+  lua_error(L);
+  return SWIG_arg;
+}
+
+
+static int _wrap_Vector3___add__SWIG_0(lua_State* L) {
+  int SWIG_arg = 0;
+  Ogre::Vector3 *arg1 = (Ogre::Vector3 *) 0 ;
+  Ogre::Vector3 *arg2 = 0 ;
+  Ogre::Vector3 result;
+  
+  SWIG_check_num_args("operator +",2,2)
+  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("operator +",1,"Ogre::Vector3 const *");
+  if(!lua_isuserdata(L,2)) SWIG_fail_arg("operator +",2,"Ogre::Vector3 const &");
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_Ogre__Vector3,0))){
+    SWIG_fail_ptr("Vector3___add",1,SWIGTYPE_p_Ogre__Vector3);
+  }
+  
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&arg2,SWIGTYPE_p_Ogre__Vector3,0))){
+    SWIG_fail_ptr("Vector3___add",2,SWIGTYPE_p_Ogre__Vector3);
+  }
+  
+  result = ((Ogre::Vector3 const *)arg1)->operator +((Ogre::Vector3 const &)*arg2);
   {
-    _OgreExport * resultptr = new _OgreExport((const _OgreExport &) result);
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p__OgreExport,1); SWIG_arg++;
+    Ogre::Vector3 * resultptr = new Ogre::Vector3((const Ogre::Vector3 &) result);
+    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_Ogre__Vector3,1); SWIG_arg++;
   }
   return SWIG_arg;
   
@@ -1865,6 +2462,1772 @@ fail:
   return SWIG_arg;
 }
 
+
+static int _wrap_Vector3___sub(lua_State* L) {
+  int SWIG_arg = 0;
+  Ogre::Vector3 *arg1 = (Ogre::Vector3 *) 0 ;
+  Ogre::Vector3 *arg2 = 0 ;
+  Ogre::Vector3 result;
+  
+  SWIG_check_num_args("operator -",2,2)
+  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("operator -",1,"Ogre::Vector3 const *");
+  if(!lua_isuserdata(L,2)) SWIG_fail_arg("operator -",2,"Ogre::Vector3 const &");
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_Ogre__Vector3,0))){
+    SWIG_fail_ptr("Vector3___sub",1,SWIGTYPE_p_Ogre__Vector3);
+  }
+  
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&arg2,SWIGTYPE_p_Ogre__Vector3,0))){
+    SWIG_fail_ptr("Vector3___sub",2,SWIGTYPE_p_Ogre__Vector3);
+  }
+  
+  result = ((Ogre::Vector3 const *)arg1)->operator -((Ogre::Vector3 const &)*arg2);
+  {
+    Ogre::Vector3 * resultptr = new Ogre::Vector3((const Ogre::Vector3 &) result);
+    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_Ogre__Vector3,1); SWIG_arg++;
+  }
+  return SWIG_arg;
+  
+  if(0) SWIG_fail;
+  
+fail:
+  lua_error(L);
+  return SWIG_arg;
+}
+
+
+static int _wrap_Vector3___mul__SWIG_0(lua_State* L) {
+  int SWIG_arg = 0;
+  Ogre::Vector3 *arg1 = (Ogre::Vector3 *) 0 ;
+  Real arg2 ;
+  Real *argp2 ;
+  Ogre::Vector3 result;
+  
+  SWIG_check_num_args("operator *",2,2)
+  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("operator *",1,"Ogre::Vector3 const *");
+  if(!lua_isuserdata(L,2)) SWIG_fail_arg("operator *",2,"Real const");
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_Ogre__Vector3,0))){
+    SWIG_fail_ptr("Vector3___mul",1,SWIGTYPE_p_Ogre__Vector3);
+  }
+  
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_Real,0))){
+    SWIG_fail_ptr("Vector3___mul",2,SWIGTYPE_p_Real);
+  }
+  arg2 = *argp2;
+  
+  result = ((Ogre::Vector3 const *)arg1)->operator *(arg2);
+  {
+    Ogre::Vector3 * resultptr = new Ogre::Vector3((const Ogre::Vector3 &) result);
+    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_Ogre__Vector3,1); SWIG_arg++;
+  }
+  return SWIG_arg;
+  
+  if(0) SWIG_fail;
+  
+fail:
+  lua_error(L);
+  return SWIG_arg;
+}
+
+
+static int _wrap_Vector3___mul__SWIG_1(lua_State* L) {
+  int SWIG_arg = 0;
+  Ogre::Vector3 *arg1 = (Ogre::Vector3 *) 0 ;
+  Ogre::Vector3 *arg2 = 0 ;
+  Ogre::Vector3 result;
+  
+  SWIG_check_num_args("operator *",2,2)
+  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("operator *",1,"Ogre::Vector3 const *");
+  if(!lua_isuserdata(L,2)) SWIG_fail_arg("operator *",2,"Ogre::Vector3 const &");
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_Ogre__Vector3,0))){
+    SWIG_fail_ptr("Vector3___mul",1,SWIGTYPE_p_Ogre__Vector3);
+  }
+  
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&arg2,SWIGTYPE_p_Ogre__Vector3,0))){
+    SWIG_fail_ptr("Vector3___mul",2,SWIGTYPE_p_Ogre__Vector3);
+  }
+  
+  result = ((Ogre::Vector3 const *)arg1)->operator *((Ogre::Vector3 const &)*arg2);
+  {
+    Ogre::Vector3 * resultptr = new Ogre::Vector3((const Ogre::Vector3 &) result);
+    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_Ogre__Vector3,1); SWIG_arg++;
+  }
+  return SWIG_arg;
+  
+  if(0) SWIG_fail;
+  
+fail:
+  lua_error(L);
+  return SWIG_arg;
+}
+
+
+static int _wrap_Vector3___mul(lua_State* L) {
+  int argc;
+  int argv[3]={
+    1,2,3
+  };
+  
+  argc = lua_gettop(L);
+  if (argc == 2) {
+    int _v;
+    {
+      void *ptr;
+      if (SWIG_isptrtype(L,argv[0])==0 || SWIG_ConvertPtr(L,argv[0], (void **) &ptr, SWIGTYPE_p_Ogre__Vector3, 0)) {
+        _v = 0;
+      } else {
+        _v = 1;
+      }
+    }
+    if (_v) {
+      {
+        void *ptr;
+        if (lua_isuserdata(L,argv[1])==0 || SWIG_ConvertPtr(L,argv[1], (void **) &ptr, SWIGTYPE_p_Real, 0)) {
+          _v = 0;
+        } else {
+          _v = 1;
+        }
+      }
+      if (_v) {
+        return _wrap_Vector3___mul__SWIG_0(L);
+      }
+    }
+  }
+  if (argc == 2) {
+    int _v;
+    {
+      void *ptr;
+      if (SWIG_isptrtype(L,argv[0])==0 || SWIG_ConvertPtr(L,argv[0], (void **) &ptr, SWIGTYPE_p_Ogre__Vector3, 0)) {
+        _v = 0;
+      } else {
+        _v = 1;
+      }
+    }
+    if (_v) {
+      {
+        void *ptr;
+        if (lua_isuserdata(L,argv[1])==0 || SWIG_ConvertPtr(L,argv[1], (void **) &ptr, SWIGTYPE_p_Ogre__Vector3, 0)) {
+          _v = 0;
+        } else {
+          _v = 1;
+        }
+      }
+      if (_v) {
+        return _wrap_Vector3___mul__SWIG_1(L);
+      }
+    }
+  }
+  
+  lua_pushstring(L,"Wrong arguments for overloaded function 'Vector3___mul'\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    operator *(Ogre::Vector3 const *,Real const)\n"
+    "    operator *(Ogre::Vector3 const *,Ogre::Vector3 const &)\n");
+  lua_error(L);return 0;
+}
+
+
+static int _wrap_Vector3___div__SWIG_0(lua_State* L) {
+  int SWIG_arg = 0;
+  Ogre::Vector3 *arg1 = (Ogre::Vector3 *) 0 ;
+  Real arg2 ;
+  Real *argp2 ;
+  Ogre::Vector3 result;
+  
+  SWIG_check_num_args("operator /",2,2)
+  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("operator /",1,"Ogre::Vector3 const *");
+  if(!lua_isuserdata(L,2)) SWIG_fail_arg("operator /",2,"Real const");
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_Ogre__Vector3,0))){
+    SWIG_fail_ptr("Vector3___div",1,SWIGTYPE_p_Ogre__Vector3);
+  }
+  
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_Real,0))){
+    SWIG_fail_ptr("Vector3___div",2,SWIGTYPE_p_Real);
+  }
+  arg2 = *argp2;
+  
+  result = ((Ogre::Vector3 const *)arg1)->operator /(arg2);
+  {
+    Ogre::Vector3 * resultptr = new Ogre::Vector3((const Ogre::Vector3 &) result);
+    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_Ogre__Vector3,1); SWIG_arg++;
+  }
+  return SWIG_arg;
+  
+  if(0) SWIG_fail;
+  
+fail:
+  lua_error(L);
+  return SWIG_arg;
+}
+
+
+static int _wrap_Vector3___div__SWIG_1(lua_State* L) {
+  int SWIG_arg = 0;
+  Ogre::Vector3 *arg1 = (Ogre::Vector3 *) 0 ;
+  Ogre::Vector3 *arg2 = 0 ;
+  Ogre::Vector3 result;
+  
+  SWIG_check_num_args("operator /",2,2)
+  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("operator /",1,"Ogre::Vector3 const *");
+  if(!lua_isuserdata(L,2)) SWIG_fail_arg("operator /",2,"Ogre::Vector3 const &");
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_Ogre__Vector3,0))){
+    SWIG_fail_ptr("Vector3___div",1,SWIGTYPE_p_Ogre__Vector3);
+  }
+  
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&arg2,SWIGTYPE_p_Ogre__Vector3,0))){
+    SWIG_fail_ptr("Vector3___div",2,SWIGTYPE_p_Ogre__Vector3);
+  }
+  
+  result = ((Ogre::Vector3 const *)arg1)->operator /((Ogre::Vector3 const &)*arg2);
+  {
+    Ogre::Vector3 * resultptr = new Ogre::Vector3((const Ogre::Vector3 &) result);
+    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_Ogre__Vector3,1); SWIG_arg++;
+  }
+  return SWIG_arg;
+  
+  if(0) SWIG_fail;
+  
+fail:
+  lua_error(L);
+  return SWIG_arg;
+}
+
+
+static int _wrap_Vector3___div(lua_State* L) {
+  int argc;
+  int argv[3]={
+    1,2,3
+  };
+  
+  argc = lua_gettop(L);
+  if (argc == 2) {
+    int _v;
+    {
+      void *ptr;
+      if (SWIG_isptrtype(L,argv[0])==0 || SWIG_ConvertPtr(L,argv[0], (void **) &ptr, SWIGTYPE_p_Ogre__Vector3, 0)) {
+        _v = 0;
+      } else {
+        _v = 1;
+      }
+    }
+    if (_v) {
+      {
+        void *ptr;
+        if (lua_isuserdata(L,argv[1])==0 || SWIG_ConvertPtr(L,argv[1], (void **) &ptr, SWIGTYPE_p_Real, 0)) {
+          _v = 0;
+        } else {
+          _v = 1;
+        }
+      }
+      if (_v) {
+        return _wrap_Vector3___div__SWIG_0(L);
+      }
+    }
+  }
+  if (argc == 2) {
+    int _v;
+    {
+      void *ptr;
+      if (SWIG_isptrtype(L,argv[0])==0 || SWIG_ConvertPtr(L,argv[0], (void **) &ptr, SWIGTYPE_p_Ogre__Vector3, 0)) {
+        _v = 0;
+      } else {
+        _v = 1;
+      }
+    }
+    if (_v) {
+      {
+        void *ptr;
+        if (lua_isuserdata(L,argv[1])==0 || SWIG_ConvertPtr(L,argv[1], (void **) &ptr, SWIGTYPE_p_Ogre__Vector3, 0)) {
+          _v = 0;
+        } else {
+          _v = 1;
+        }
+      }
+      if (_v) {
+        return _wrap_Vector3___div__SWIG_1(L);
+      }
+    }
+  }
+  
+  lua_pushstring(L,"Wrong arguments for overloaded function 'Vector3___div'\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    operator /(Ogre::Vector3 const *,Real const)\n"
+    "    operator /(Ogre::Vector3 const *,Ogre::Vector3 const &)\n");
+  lua_error(L);return 0;
+}
+
+
+static int _wrap_Vector3___add__SWIG_1(lua_State* L) {
+  int SWIG_arg = 0;
+  Ogre::Vector3 *arg1 = (Ogre::Vector3 *) 0 ;
+  Ogre::Vector3 *result = 0 ;
+  
+  SWIG_check_num_args("operator +",1,1)
+  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("operator +",1,"Ogre::Vector3 const *");
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_Ogre__Vector3,0))){
+    SWIG_fail_ptr("Vector3___add",1,SWIGTYPE_p_Ogre__Vector3);
+  }
+  
+  {
+    Ogre::Vector3 const &_result_ref = ((Ogre::Vector3 const *)arg1)->operator +();
+    result = (Ogre::Vector3 *) &_result_ref;
+  }
+  SWIG_NewPointerObj(L,result,SWIGTYPE_p_Ogre__Vector3,0); SWIG_arg++; 
+  return SWIG_arg;
+  
+  if(0) SWIG_fail;
+  
+fail:
+  lua_error(L);
+  return SWIG_arg;
+}
+
+
+static int _wrap_Vector3___add(lua_State* L) {
+  int argc;
+  int argv[3]={
+    1,2,3
+  };
+  
+  argc = lua_gettop(L);
+  if (argc == 1) {
+    int _v;
+    {
+      void *ptr;
+      if (SWIG_isptrtype(L,argv[0])==0 || SWIG_ConvertPtr(L,argv[0], (void **) &ptr, SWIGTYPE_p_Ogre__Vector3, 0)) {
+        _v = 0;
+      } else {
+        _v = 1;
+      }
+    }
+    if (_v) {
+      return _wrap_Vector3___add__SWIG_1(L);
+    }
+  }
+  if (argc == 2) {
+    int _v;
+    {
+      void *ptr;
+      if (SWIG_isptrtype(L,argv[0])==0 || SWIG_ConvertPtr(L,argv[0], (void **) &ptr, SWIGTYPE_p_Ogre__Vector3, 0)) {
+        _v = 0;
+      } else {
+        _v = 1;
+      }
+    }
+    if (_v) {
+      {
+        void *ptr;
+        if (lua_isuserdata(L,argv[1])==0 || SWIG_ConvertPtr(L,argv[1], (void **) &ptr, SWIGTYPE_p_Ogre__Vector3, 0)) {
+          _v = 0;
+        } else {
+          _v = 1;
+        }
+      }
+      if (_v) {
+        return _wrap_Vector3___add__SWIG_0(L);
+      }
+    }
+  }
+  
+  lua_pushstring(L,"Wrong arguments for overloaded function 'Vector3___add'\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    operator +(Ogre::Vector3 const *,Ogre::Vector3 const &)\n"
+    "    operator +(Ogre::Vector3 const *)\n");
+  lua_error(L);return 0;
+}
+
+
+static int _wrap_Vector3___unm(lua_State* L) {
+  int SWIG_arg = 0;
+  Ogre::Vector3 *arg1 = (Ogre::Vector3 *) 0 ;
+  Ogre::Vector3 result;
+  
+  SWIG_check_num_args("operator -",2,2)
+  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("operator -",1,"Ogre::Vector3 const *");
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_Ogre__Vector3,0))){
+    SWIG_fail_ptr("Vector3___unm",1,SWIGTYPE_p_Ogre__Vector3);
+  }
+  
+  result = ((Ogre::Vector3 const *)arg1)->operator -();
+  {
+    Ogre::Vector3 * resultptr = new Ogre::Vector3((const Ogre::Vector3 &) result);
+    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_Ogre__Vector3,1); SWIG_arg++;
+  }
+  return SWIG_arg;
+  
+  if(0) SWIG_fail;
+  
+fail:
+  lua_error(L);
+  return SWIG_arg;
+}
+
+
+static int _wrap_Vector3_length(lua_State* L) {
+  int SWIG_arg = 0;
+  Ogre::Vector3 *arg1 = (Ogre::Vector3 *) 0 ;
+  Real result;
+  
+  SWIG_check_num_args("length",1,1)
+  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("length",1,"Ogre::Vector3 const *");
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_Ogre__Vector3,0))){
+    SWIG_fail_ptr("Vector3_length",1,SWIGTYPE_p_Ogre__Vector3);
+  }
+  
+  result = ((Ogre::Vector3 const *)arg1)->length();
+  {
+    Real * resultptr = new Real((const Real &) result);
+    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_Real,1); SWIG_arg++;
+  }
+  return SWIG_arg;
+  
+  if(0) SWIG_fail;
+  
+fail:
+  lua_error(L);
+  return SWIG_arg;
+}
+
+
+static int _wrap_Vector3_squaredLength(lua_State* L) {
+  int SWIG_arg = 0;
+  Ogre::Vector3 *arg1 = (Ogre::Vector3 *) 0 ;
+  Real result;
+  
+  SWIG_check_num_args("squaredLength",1,1)
+  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("squaredLength",1,"Ogre::Vector3 const *");
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_Ogre__Vector3,0))){
+    SWIG_fail_ptr("Vector3_squaredLength",1,SWIGTYPE_p_Ogre__Vector3);
+  }
+  
+  result = ((Ogre::Vector3 const *)arg1)->squaredLength();
+  {
+    Real * resultptr = new Real((const Real &) result);
+    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_Real,1); SWIG_arg++;
+  }
+  return SWIG_arg;
+  
+  if(0) SWIG_fail;
+  
+fail:
+  lua_error(L);
+  return SWIG_arg;
+}
+
+
+static int _wrap_Vector3_distance(lua_State* L) {
+  int SWIG_arg = 0;
+  Ogre::Vector3 *arg1 = (Ogre::Vector3 *) 0 ;
+  Ogre::Vector3 *arg2 = 0 ;
+  Real result;
+  
+  SWIG_check_num_args("distance",2,2)
+  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("distance",1,"Ogre::Vector3 const *");
+  if(!lua_isuserdata(L,2)) SWIG_fail_arg("distance",2,"Ogre::Vector3 const &");
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_Ogre__Vector3,0))){
+    SWIG_fail_ptr("Vector3_distance",1,SWIGTYPE_p_Ogre__Vector3);
+  }
+  
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&arg2,SWIGTYPE_p_Ogre__Vector3,0))){
+    SWIG_fail_ptr("Vector3_distance",2,SWIGTYPE_p_Ogre__Vector3);
+  }
+  
+  result = ((Ogre::Vector3 const *)arg1)->distance((Ogre::Vector3 const &)*arg2);
+  {
+    Real * resultptr = new Real((const Real &) result);
+    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_Real,1); SWIG_arg++;
+  }
+  return SWIG_arg;
+  
+  if(0) SWIG_fail;
+  
+fail:
+  lua_error(L);
+  return SWIG_arg;
+}
+
+
+static int _wrap_Vector3_squaredDistance(lua_State* L) {
+  int SWIG_arg = 0;
+  Ogre::Vector3 *arg1 = (Ogre::Vector3 *) 0 ;
+  Ogre::Vector3 *arg2 = 0 ;
+  Real result;
+  
+  SWIG_check_num_args("squaredDistance",2,2)
+  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("squaredDistance",1,"Ogre::Vector3 const *");
+  if(!lua_isuserdata(L,2)) SWIG_fail_arg("squaredDistance",2,"Ogre::Vector3 const &");
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_Ogre__Vector3,0))){
+    SWIG_fail_ptr("Vector3_squaredDistance",1,SWIGTYPE_p_Ogre__Vector3);
+  }
+  
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&arg2,SWIGTYPE_p_Ogre__Vector3,0))){
+    SWIG_fail_ptr("Vector3_squaredDistance",2,SWIGTYPE_p_Ogre__Vector3);
+  }
+  
+  result = ((Ogre::Vector3 const *)arg1)->squaredDistance((Ogre::Vector3 const &)*arg2);
+  {
+    Real * resultptr = new Real((const Real &) result);
+    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_Real,1); SWIG_arg++;
+  }
+  return SWIG_arg;
+  
+  if(0) SWIG_fail;
+  
+fail:
+  lua_error(L);
+  return SWIG_arg;
+}
+
+
+static int _wrap_Vector3_dotProduct(lua_State* L) {
+  int SWIG_arg = 0;
+  Ogre::Vector3 *arg1 = (Ogre::Vector3 *) 0 ;
+  Ogre::Vector3 *arg2 = 0 ;
+  Real result;
+  
+  SWIG_check_num_args("dotProduct",2,2)
+  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("dotProduct",1,"Ogre::Vector3 const *");
+  if(!lua_isuserdata(L,2)) SWIG_fail_arg("dotProduct",2,"Ogre::Vector3 const &");
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_Ogre__Vector3,0))){
+    SWIG_fail_ptr("Vector3_dotProduct",1,SWIGTYPE_p_Ogre__Vector3);
+  }
+  
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&arg2,SWIGTYPE_p_Ogre__Vector3,0))){
+    SWIG_fail_ptr("Vector3_dotProduct",2,SWIGTYPE_p_Ogre__Vector3);
+  }
+  
+  result = ((Ogre::Vector3 const *)arg1)->dotProduct((Ogre::Vector3 const &)*arg2);
+  {
+    Real * resultptr = new Real((const Real &) result);
+    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_Real,1); SWIG_arg++;
+  }
+  return SWIG_arg;
+  
+  if(0) SWIG_fail;
+  
+fail:
+  lua_error(L);
+  return SWIG_arg;
+}
+
+
+static int _wrap_Vector3_absDotProduct(lua_State* L) {
+  int SWIG_arg = 0;
+  Ogre::Vector3 *arg1 = (Ogre::Vector3 *) 0 ;
+  Ogre::Vector3 *arg2 = 0 ;
+  Real result;
+  
+  SWIG_check_num_args("absDotProduct",2,2)
+  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("absDotProduct",1,"Ogre::Vector3 const *");
+  if(!lua_isuserdata(L,2)) SWIG_fail_arg("absDotProduct",2,"Ogre::Vector3 const &");
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_Ogre__Vector3,0))){
+    SWIG_fail_ptr("Vector3_absDotProduct",1,SWIGTYPE_p_Ogre__Vector3);
+  }
+  
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&arg2,SWIGTYPE_p_Ogre__Vector3,0))){
+    SWIG_fail_ptr("Vector3_absDotProduct",2,SWIGTYPE_p_Ogre__Vector3);
+  }
+  
+  result = ((Ogre::Vector3 const *)arg1)->absDotProduct((Ogre::Vector3 const &)*arg2);
+  {
+    Real * resultptr = new Real((const Real &) result);
+    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_Real,1); SWIG_arg++;
+  }
+  return SWIG_arg;
+  
+  if(0) SWIG_fail;
+  
+fail:
+  lua_error(L);
+  return SWIG_arg;
+}
+
+
+static int _wrap_Vector3_normalise(lua_State* L) {
+  int SWIG_arg = 0;
+  Ogre::Vector3 *arg1 = (Ogre::Vector3 *) 0 ;
+  Real result;
+  
+  SWIG_check_num_args("normalise",1,1)
+  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("normalise",1,"Ogre::Vector3 *");
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_Ogre__Vector3,0))){
+    SWIG_fail_ptr("Vector3_normalise",1,SWIGTYPE_p_Ogre__Vector3);
+  }
+  
+  result = (arg1)->normalise();
+  {
+    Real * resultptr = new Real((const Real &) result);
+    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_Real,1); SWIG_arg++;
+  }
+  return SWIG_arg;
+  
+  if(0) SWIG_fail;
+  
+fail:
+  lua_error(L);
+  return SWIG_arg;
+}
+
+
+static int _wrap_Vector3_crossProduct(lua_State* L) {
+  int SWIG_arg = 0;
+  Ogre::Vector3 *arg1 = (Ogre::Vector3 *) 0 ;
+  Ogre::Vector3 *arg2 = 0 ;
+  Ogre::Vector3 result;
+  
+  SWIG_check_num_args("crossProduct",2,2)
+  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("crossProduct",1,"Ogre::Vector3 const *");
+  if(!lua_isuserdata(L,2)) SWIG_fail_arg("crossProduct",2,"Ogre::Vector3 const &");
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_Ogre__Vector3,0))){
+    SWIG_fail_ptr("Vector3_crossProduct",1,SWIGTYPE_p_Ogre__Vector3);
+  }
+  
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&arg2,SWIGTYPE_p_Ogre__Vector3,0))){
+    SWIG_fail_ptr("Vector3_crossProduct",2,SWIGTYPE_p_Ogre__Vector3);
+  }
+  
+  result = ((Ogre::Vector3 const *)arg1)->crossProduct((Ogre::Vector3 const &)*arg2);
+  {
+    Ogre::Vector3 * resultptr = new Ogre::Vector3((const Ogre::Vector3 &) result);
+    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_Ogre__Vector3,1); SWIG_arg++;
+  }
+  return SWIG_arg;
+  
+  if(0) SWIG_fail;
+  
+fail:
+  lua_error(L);
+  return SWIG_arg;
+}
+
+
+static int _wrap_Vector3_midPoint(lua_State* L) {
+  int SWIG_arg = 0;
+  Ogre::Vector3 *arg1 = (Ogre::Vector3 *) 0 ;
+  Ogre::Vector3 *arg2 = 0 ;
+  Ogre::Vector3 result;
+  
+  SWIG_check_num_args("midPoint",2,2)
+  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("midPoint",1,"Ogre::Vector3 const *");
+  if(!lua_isuserdata(L,2)) SWIG_fail_arg("midPoint",2,"Ogre::Vector3 const &");
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_Ogre__Vector3,0))){
+    SWIG_fail_ptr("Vector3_midPoint",1,SWIGTYPE_p_Ogre__Vector3);
+  }
+  
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&arg2,SWIGTYPE_p_Ogre__Vector3,0))){
+    SWIG_fail_ptr("Vector3_midPoint",2,SWIGTYPE_p_Ogre__Vector3);
+  }
+  
+  result = ((Ogre::Vector3 const *)arg1)->midPoint((Ogre::Vector3 const &)*arg2);
+  {
+    Ogre::Vector3 * resultptr = new Ogre::Vector3((const Ogre::Vector3 &) result);
+    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_Ogre__Vector3,1); SWIG_arg++;
+  }
+  return SWIG_arg;
+  
+  if(0) SWIG_fail;
+  
+fail:
+  lua_error(L);
+  return SWIG_arg;
+}
+
+
+static int _wrap_Vector3___lt(lua_State* L) {
+  int SWIG_arg = 0;
+  Ogre::Vector3 *arg1 = (Ogre::Vector3 *) 0 ;
+  Ogre::Vector3 *arg2 = 0 ;
+  bool result;
+  
+  SWIG_check_num_args("operator <",2,2)
+  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("operator <",1,"Ogre::Vector3 const *");
+  if(!lua_isuserdata(L,2)) SWIG_fail_arg("operator <",2,"Ogre::Vector3 const &");
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_Ogre__Vector3,0))){
+    SWIG_fail_ptr("Vector3___lt",1,SWIGTYPE_p_Ogre__Vector3);
+  }
+  
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&arg2,SWIGTYPE_p_Ogre__Vector3,0))){
+    SWIG_fail_ptr("Vector3___lt",2,SWIGTYPE_p_Ogre__Vector3);
+  }
+  
+  result = (bool)((Ogre::Vector3 const *)arg1)->operator <((Ogre::Vector3 const &)*arg2);
+  lua_pushboolean(L,(int)(result!=0)); SWIG_arg++;
+  return SWIG_arg;
+  
+  if(0) SWIG_fail;
+  
+fail:
+  lua_error(L);
+  return SWIG_arg;
+}
+
+
+static int _wrap_Vector3_makeFloor(lua_State* L) {
+  int SWIG_arg = 0;
+  Ogre::Vector3 *arg1 = (Ogre::Vector3 *) 0 ;
+  Ogre::Vector3 *arg2 = 0 ;
+  
+  SWIG_check_num_args("makeFloor",2,2)
+  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("makeFloor",1,"Ogre::Vector3 *");
+  if(!lua_isuserdata(L,2)) SWIG_fail_arg("makeFloor",2,"Ogre::Vector3 const &");
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_Ogre__Vector3,0))){
+    SWIG_fail_ptr("Vector3_makeFloor",1,SWIGTYPE_p_Ogre__Vector3);
+  }
+  
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&arg2,SWIGTYPE_p_Ogre__Vector3,0))){
+    SWIG_fail_ptr("Vector3_makeFloor",2,SWIGTYPE_p_Ogre__Vector3);
+  }
+  
+  (arg1)->makeFloor((Ogre::Vector3 const &)*arg2);
+  
+  return SWIG_arg;
+  
+  if(0) SWIG_fail;
+  
+fail:
+  lua_error(L);
+  return SWIG_arg;
+}
+
+
+static int _wrap_Vector3_makeCeil(lua_State* L) {
+  int SWIG_arg = 0;
+  Ogre::Vector3 *arg1 = (Ogre::Vector3 *) 0 ;
+  Ogre::Vector3 *arg2 = 0 ;
+  
+  SWIG_check_num_args("makeCeil",2,2)
+  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("makeCeil",1,"Ogre::Vector3 *");
+  if(!lua_isuserdata(L,2)) SWIG_fail_arg("makeCeil",2,"Ogre::Vector3 const &");
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_Ogre__Vector3,0))){
+    SWIG_fail_ptr("Vector3_makeCeil",1,SWIGTYPE_p_Ogre__Vector3);
+  }
+  
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&arg2,SWIGTYPE_p_Ogre__Vector3,0))){
+    SWIG_fail_ptr("Vector3_makeCeil",2,SWIGTYPE_p_Ogre__Vector3);
+  }
+  
+  (arg1)->makeCeil((Ogre::Vector3 const &)*arg2);
+  
+  return SWIG_arg;
+  
+  if(0) SWIG_fail;
+  
+fail:
+  lua_error(L);
+  return SWIG_arg;
+}
+
+
+static int _wrap_Vector3_perpendicular(lua_State* L) {
+  int SWIG_arg = 0;
+  Ogre::Vector3 *arg1 = (Ogre::Vector3 *) 0 ;
+  Ogre::Vector3 result;
+  
+  SWIG_check_num_args("perpendicular",1,1)
+  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("perpendicular",1,"Ogre::Vector3 const *");
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_Ogre__Vector3,0))){
+    SWIG_fail_ptr("Vector3_perpendicular",1,SWIGTYPE_p_Ogre__Vector3);
+  }
+  
+  result = ((Ogre::Vector3 const *)arg1)->perpendicular();
+  {
+    Ogre::Vector3 * resultptr = new Ogre::Vector3((const Ogre::Vector3 &) result);
+    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_Ogre__Vector3,1); SWIG_arg++;
+  }
+  return SWIG_arg;
+  
+  if(0) SWIG_fail;
+  
+fail:
+  lua_error(L);
+  return SWIG_arg;
+}
+
+
+static int _wrap_Vector3_randomDeviant__SWIG_0(lua_State* L) {
+  int SWIG_arg = 0;
+  Ogre::Vector3 *arg1 = (Ogre::Vector3 *) 0 ;
+  Radian *arg2 = 0 ;
+  Ogre::Vector3 *arg3 = 0 ;
+  Ogre::Vector3 result;
+  
+  SWIG_check_num_args("randomDeviant",3,3)
+  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("randomDeviant",1,"Ogre::Vector3 const *");
+  if(!lua_isuserdata(L,2)) SWIG_fail_arg("randomDeviant",2,"Radian const &");
+  if(!lua_isuserdata(L,3)) SWIG_fail_arg("randomDeviant",3,"Ogre::Vector3 const &");
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_Ogre__Vector3,0))){
+    SWIG_fail_ptr("Vector3_randomDeviant",1,SWIGTYPE_p_Ogre__Vector3);
+  }
+  
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&arg2,SWIGTYPE_p_Radian,0))){
+    SWIG_fail_ptr("Vector3_randomDeviant",2,SWIGTYPE_p_Radian);
+  }
+  
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,3,(void**)&arg3,SWIGTYPE_p_Ogre__Vector3,0))){
+    SWIG_fail_ptr("Vector3_randomDeviant",3,SWIGTYPE_p_Ogre__Vector3);
+  }
+  
+  result = ((Ogre::Vector3 const *)arg1)->randomDeviant((Radian const &)*arg2,(Ogre::Vector3 const &)*arg3);
+  {
+    Ogre::Vector3 * resultptr = new Ogre::Vector3((const Ogre::Vector3 &) result);
+    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_Ogre__Vector3,1); SWIG_arg++;
+  }
+  return SWIG_arg;
+  
+  if(0) SWIG_fail;
+  
+fail:
+  lua_error(L);
+  return SWIG_arg;
+}
+
+
+static int _wrap_Vector3_randomDeviant__SWIG_1(lua_State* L) {
+  int SWIG_arg = 0;
+  Ogre::Vector3 *arg1 = (Ogre::Vector3 *) 0 ;
+  Radian *arg2 = 0 ;
+  Ogre::Vector3 result;
+  
+  SWIG_check_num_args("randomDeviant",2,2)
+  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("randomDeviant",1,"Ogre::Vector3 const *");
+  if(!lua_isuserdata(L,2)) SWIG_fail_arg("randomDeviant",2,"Radian const &");
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_Ogre__Vector3,0))){
+    SWIG_fail_ptr("Vector3_randomDeviant",1,SWIGTYPE_p_Ogre__Vector3);
+  }
+  
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&arg2,SWIGTYPE_p_Radian,0))){
+    SWIG_fail_ptr("Vector3_randomDeviant",2,SWIGTYPE_p_Radian);
+  }
+  
+  result = ((Ogre::Vector3 const *)arg1)->randomDeviant((Radian const &)*arg2);
+  {
+    Ogre::Vector3 * resultptr = new Ogre::Vector3((const Ogre::Vector3 &) result);
+    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_Ogre__Vector3,1); SWIG_arg++;
+  }
+  return SWIG_arg;
+  
+  if(0) SWIG_fail;
+  
+fail:
+  lua_error(L);
+  return SWIG_arg;
+}
+
+
+static int _wrap_Vector3_randomDeviant(lua_State* L) {
+  int argc;
+  int argv[4]={
+    1,2,3,4
+  };
+  
+  argc = lua_gettop(L);
+  if (argc == 2) {
+    int _v;
+    {
+      void *ptr;
+      if (SWIG_isptrtype(L,argv[0])==0 || SWIG_ConvertPtr(L,argv[0], (void **) &ptr, SWIGTYPE_p_Ogre__Vector3, 0)) {
+        _v = 0;
+      } else {
+        _v = 1;
+      }
+    }
+    if (_v) {
+      {
+        void *ptr;
+        if (lua_isuserdata(L,argv[1])==0 || SWIG_ConvertPtr(L,argv[1], (void **) &ptr, SWIGTYPE_p_Radian, 0)) {
+          _v = 0;
+        } else {
+          _v = 1;
+        }
+      }
+      if (_v) {
+        return _wrap_Vector3_randomDeviant__SWIG_1(L);
+      }
+    }
+  }
+  if (argc == 3) {
+    int _v;
+    {
+      void *ptr;
+      if (SWIG_isptrtype(L,argv[0])==0 || SWIG_ConvertPtr(L,argv[0], (void **) &ptr, SWIGTYPE_p_Ogre__Vector3, 0)) {
+        _v = 0;
+      } else {
+        _v = 1;
+      }
+    }
+    if (_v) {
+      {
+        void *ptr;
+        if (lua_isuserdata(L,argv[1])==0 || SWIG_ConvertPtr(L,argv[1], (void **) &ptr, SWIGTYPE_p_Radian, 0)) {
+          _v = 0;
+        } else {
+          _v = 1;
+        }
+      }
+      if (_v) {
+        {
+          void *ptr;
+          if (lua_isuserdata(L,argv[2])==0 || SWIG_ConvertPtr(L,argv[2], (void **) &ptr, SWIGTYPE_p_Ogre__Vector3, 0)) {
+            _v = 0;
+          } else {
+            _v = 1;
+          }
+        }
+        if (_v) {
+          return _wrap_Vector3_randomDeviant__SWIG_0(L);
+        }
+      }
+    }
+  }
+  
+  lua_pushstring(L,"Wrong arguments for overloaded function 'Vector3_randomDeviant'\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    randomDeviant(Ogre::Vector3 const *,Radian const &,Ogre::Vector3 const &)\n"
+    "    randomDeviant(Ogre::Vector3 const *,Radian const &)\n");
+  lua_error(L);return 0;
+}
+
+
+static int _wrap_Vector3_angleBetween(lua_State* L) {
+  int SWIG_arg = 0;
+  Ogre::Vector3 *arg1 = (Ogre::Vector3 *) 0 ;
+  Ogre::Vector3 *arg2 = 0 ;
+  Radian result;
+  
+  SWIG_check_num_args("angleBetween",2,2)
+  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("angleBetween",1,"Ogre::Vector3 *");
+  if(!lua_isuserdata(L,2)) SWIG_fail_arg("angleBetween",2,"Ogre::Vector3 const &");
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_Ogre__Vector3,0))){
+    SWIG_fail_ptr("Vector3_angleBetween",1,SWIGTYPE_p_Ogre__Vector3);
+  }
+  
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&arg2,SWIGTYPE_p_Ogre__Vector3,0))){
+    SWIG_fail_ptr("Vector3_angleBetween",2,SWIGTYPE_p_Ogre__Vector3);
+  }
+  
+  result = (arg1)->angleBetween((Ogre::Vector3 const &)*arg2);
+  {
+    Radian * resultptr = new Radian((const Radian &) result);
+    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_Radian,1); SWIG_arg++;
+  }
+  return SWIG_arg;
+  
+  if(0) SWIG_fail;
+  
+fail:
+  lua_error(L);
+  return SWIG_arg;
+}
+
+
+static int _wrap_Vector3_getRotationTo__SWIG_0(lua_State* L) {
+  int SWIG_arg = 0;
+  Ogre::Vector3 *arg1 = (Ogre::Vector3 *) 0 ;
+  Ogre::Vector3 *arg2 = 0 ;
+  Ogre::Vector3 *arg3 = 0 ;
+  Quaternion result;
+  
+  SWIG_check_num_args("getRotationTo",3,3)
+  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("getRotationTo",1,"Ogre::Vector3 const *");
+  if(!lua_isuserdata(L,2)) SWIG_fail_arg("getRotationTo",2,"Ogre::Vector3 const &");
+  if(!lua_isuserdata(L,3)) SWIG_fail_arg("getRotationTo",3,"Ogre::Vector3 const &");
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_Ogre__Vector3,0))){
+    SWIG_fail_ptr("Vector3_getRotationTo",1,SWIGTYPE_p_Ogre__Vector3);
+  }
+  
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&arg2,SWIGTYPE_p_Ogre__Vector3,0))){
+    SWIG_fail_ptr("Vector3_getRotationTo",2,SWIGTYPE_p_Ogre__Vector3);
+  }
+  
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,3,(void**)&arg3,SWIGTYPE_p_Ogre__Vector3,0))){
+    SWIG_fail_ptr("Vector3_getRotationTo",3,SWIGTYPE_p_Ogre__Vector3);
+  }
+  
+  result = ((Ogre::Vector3 const *)arg1)->getRotationTo((Ogre::Vector3 const &)*arg2,(Ogre::Vector3 const &)*arg3);
+  {
+    Quaternion * resultptr = new Quaternion((const Quaternion &) result);
+    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_Quaternion,1); SWIG_arg++;
+  }
+  return SWIG_arg;
+  
+  if(0) SWIG_fail;
+  
+fail:
+  lua_error(L);
+  return SWIG_arg;
+}
+
+
+static int _wrap_Vector3_getRotationTo__SWIG_1(lua_State* L) {
+  int SWIG_arg = 0;
+  Ogre::Vector3 *arg1 = (Ogre::Vector3 *) 0 ;
+  Ogre::Vector3 *arg2 = 0 ;
+  Quaternion result;
+  
+  SWIG_check_num_args("getRotationTo",2,2)
+  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("getRotationTo",1,"Ogre::Vector3 const *");
+  if(!lua_isuserdata(L,2)) SWIG_fail_arg("getRotationTo",2,"Ogre::Vector3 const &");
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_Ogre__Vector3,0))){
+    SWIG_fail_ptr("Vector3_getRotationTo",1,SWIGTYPE_p_Ogre__Vector3);
+  }
+  
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&arg2,SWIGTYPE_p_Ogre__Vector3,0))){
+    SWIG_fail_ptr("Vector3_getRotationTo",2,SWIGTYPE_p_Ogre__Vector3);
+  }
+  
+  result = ((Ogre::Vector3 const *)arg1)->getRotationTo((Ogre::Vector3 const &)*arg2);
+  {
+    Quaternion * resultptr = new Quaternion((const Quaternion &) result);
+    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_Quaternion,1); SWIG_arg++;
+  }
+  return SWIG_arg;
+  
+  if(0) SWIG_fail;
+  
+fail:
+  lua_error(L);
+  return SWIG_arg;
+}
+
+
+static int _wrap_Vector3_getRotationTo(lua_State* L) {
+  int argc;
+  int argv[4]={
+    1,2,3,4
+  };
+  
+  argc = lua_gettop(L);
+  if (argc == 2) {
+    int _v;
+    {
+      void *ptr;
+      if (SWIG_isptrtype(L,argv[0])==0 || SWIG_ConvertPtr(L,argv[0], (void **) &ptr, SWIGTYPE_p_Ogre__Vector3, 0)) {
+        _v = 0;
+      } else {
+        _v = 1;
+      }
+    }
+    if (_v) {
+      {
+        void *ptr;
+        if (lua_isuserdata(L,argv[1])==0 || SWIG_ConvertPtr(L,argv[1], (void **) &ptr, SWIGTYPE_p_Ogre__Vector3, 0)) {
+          _v = 0;
+        } else {
+          _v = 1;
+        }
+      }
+      if (_v) {
+        return _wrap_Vector3_getRotationTo__SWIG_1(L);
+      }
+    }
+  }
+  if (argc == 3) {
+    int _v;
+    {
+      void *ptr;
+      if (SWIG_isptrtype(L,argv[0])==0 || SWIG_ConvertPtr(L,argv[0], (void **) &ptr, SWIGTYPE_p_Ogre__Vector3, 0)) {
+        _v = 0;
+      } else {
+        _v = 1;
+      }
+    }
+    if (_v) {
+      {
+        void *ptr;
+        if (lua_isuserdata(L,argv[1])==0 || SWIG_ConvertPtr(L,argv[1], (void **) &ptr, SWIGTYPE_p_Ogre__Vector3, 0)) {
+          _v = 0;
+        } else {
+          _v = 1;
+        }
+      }
+      if (_v) {
+        {
+          void *ptr;
+          if (lua_isuserdata(L,argv[2])==0 || SWIG_ConvertPtr(L,argv[2], (void **) &ptr, SWIGTYPE_p_Ogre__Vector3, 0)) {
+            _v = 0;
+          } else {
+            _v = 1;
+          }
+        }
+        if (_v) {
+          return _wrap_Vector3_getRotationTo__SWIG_0(L);
+        }
+      }
+    }
+  }
+  
+  lua_pushstring(L,"Wrong arguments for overloaded function 'Vector3_getRotationTo'\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    getRotationTo(Ogre::Vector3 const *,Ogre::Vector3 const &,Ogre::Vector3 const &)\n"
+    "    getRotationTo(Ogre::Vector3 const *,Ogre::Vector3 const &)\n");
+  lua_error(L);return 0;
+}
+
+
+static int _wrap_Vector3_isZeroLength(lua_State* L) {
+  int SWIG_arg = 0;
+  Ogre::Vector3 *arg1 = (Ogre::Vector3 *) 0 ;
+  bool result;
+  
+  SWIG_check_num_args("isZeroLength",1,1)
+  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("isZeroLength",1,"Ogre::Vector3 const *");
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_Ogre__Vector3,0))){
+    SWIG_fail_ptr("Vector3_isZeroLength",1,SWIGTYPE_p_Ogre__Vector3);
+  }
+  
+  result = (bool)((Ogre::Vector3 const *)arg1)->isZeroLength();
+  lua_pushboolean(L,(int)(result!=0)); SWIG_arg++;
+  return SWIG_arg;
+  
+  if(0) SWIG_fail;
+  
+fail:
+  lua_error(L);
+  return SWIG_arg;
+}
+
+
+static int _wrap_Vector3_normalisedCopy(lua_State* L) {
+  int SWIG_arg = 0;
+  Ogre::Vector3 *arg1 = (Ogre::Vector3 *) 0 ;
+  Ogre::Vector3 result;
+  
+  SWIG_check_num_args("normalisedCopy",1,1)
+  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("normalisedCopy",1,"Ogre::Vector3 const *");
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_Ogre__Vector3,0))){
+    SWIG_fail_ptr("Vector3_normalisedCopy",1,SWIGTYPE_p_Ogre__Vector3);
+  }
+  
+  result = ((Ogre::Vector3 const *)arg1)->normalisedCopy();
+  {
+    Ogre::Vector3 * resultptr = new Ogre::Vector3((const Ogre::Vector3 &) result);
+    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_Ogre__Vector3,1); SWIG_arg++;
+  }
+  return SWIG_arg;
+  
+  if(0) SWIG_fail;
+  
+fail:
+  lua_error(L);
+  return SWIG_arg;
+}
+
+
+static int _wrap_Vector3_reflect(lua_State* L) {
+  int SWIG_arg = 0;
+  Ogre::Vector3 *arg1 = (Ogre::Vector3 *) 0 ;
+  Ogre::Vector3 *arg2 = 0 ;
+  Ogre::Vector3 result;
+  
+  SWIG_check_num_args("reflect",2,2)
+  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("reflect",1,"Ogre::Vector3 const *");
+  if(!lua_isuserdata(L,2)) SWIG_fail_arg("reflect",2,"Ogre::Vector3 const &");
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_Ogre__Vector3,0))){
+    SWIG_fail_ptr("Vector3_reflect",1,SWIGTYPE_p_Ogre__Vector3);
+  }
+  
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&arg2,SWIGTYPE_p_Ogre__Vector3,0))){
+    SWIG_fail_ptr("Vector3_reflect",2,SWIGTYPE_p_Ogre__Vector3);
+  }
+  
+  result = ((Ogre::Vector3 const *)arg1)->reflect((Ogre::Vector3 const &)*arg2);
+  {
+    Ogre::Vector3 * resultptr = new Ogre::Vector3((const Ogre::Vector3 &) result);
+    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_Ogre__Vector3,1); SWIG_arg++;
+  }
+  return SWIG_arg;
+  
+  if(0) SWIG_fail;
+  
+fail:
+  lua_error(L);
+  return SWIG_arg;
+}
+
+
+static int _wrap_Vector3_positionEquals__SWIG_0(lua_State* L) {
+  int SWIG_arg = 0;
+  Ogre::Vector3 *arg1 = (Ogre::Vector3 *) 0 ;
+  Ogre::Vector3 *arg2 = 0 ;
+  Real arg3 ;
+  Real *argp3 ;
+  bool result;
+  
+  SWIG_check_num_args("positionEquals",3,3)
+  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("positionEquals",1,"Ogre::Vector3 const *");
+  if(!lua_isuserdata(L,2)) SWIG_fail_arg("positionEquals",2,"Ogre::Vector3 const &");
+  if(!lua_isuserdata(L,3)) SWIG_fail_arg("positionEquals",3,"Real");
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_Ogre__Vector3,0))){
+    SWIG_fail_ptr("Vector3_positionEquals",1,SWIGTYPE_p_Ogre__Vector3);
+  }
+  
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&arg2,SWIGTYPE_p_Ogre__Vector3,0))){
+    SWIG_fail_ptr("Vector3_positionEquals",2,SWIGTYPE_p_Ogre__Vector3);
+  }
+  
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,3,(void**)&argp3,SWIGTYPE_p_Real,0))){
+    SWIG_fail_ptr("Vector3_positionEquals",3,SWIGTYPE_p_Real);
+  }
+  arg3 = *argp3;
+  
+  result = (bool)((Ogre::Vector3 const *)arg1)->positionEquals((Ogre::Vector3 const &)*arg2,arg3);
+  lua_pushboolean(L,(int)(result!=0)); SWIG_arg++;
+  return SWIG_arg;
+  
+  if(0) SWIG_fail;
+  
+fail:
+  lua_error(L);
+  return SWIG_arg;
+}
+
+
+static int _wrap_Vector3_positionEquals__SWIG_1(lua_State* L) {
+  int SWIG_arg = 0;
+  Ogre::Vector3 *arg1 = (Ogre::Vector3 *) 0 ;
+  Ogre::Vector3 *arg2 = 0 ;
+  bool result;
+  
+  SWIG_check_num_args("positionEquals",2,2)
+  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("positionEquals",1,"Ogre::Vector3 const *");
+  if(!lua_isuserdata(L,2)) SWIG_fail_arg("positionEquals",2,"Ogre::Vector3 const &");
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_Ogre__Vector3,0))){
+    SWIG_fail_ptr("Vector3_positionEquals",1,SWIGTYPE_p_Ogre__Vector3);
+  }
+  
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&arg2,SWIGTYPE_p_Ogre__Vector3,0))){
+    SWIG_fail_ptr("Vector3_positionEquals",2,SWIGTYPE_p_Ogre__Vector3);
+  }
+  
+  result = (bool)((Ogre::Vector3 const *)arg1)->positionEquals((Ogre::Vector3 const &)*arg2);
+  lua_pushboolean(L,(int)(result!=0)); SWIG_arg++;
+  return SWIG_arg;
+  
+  if(0) SWIG_fail;
+  
+fail:
+  lua_error(L);
+  return SWIG_arg;
+}
+
+
+static int _wrap_Vector3_positionEquals(lua_State* L) {
+  int argc;
+  int argv[4]={
+    1,2,3,4
+  };
+  
+  argc = lua_gettop(L);
+  if (argc == 2) {
+    int _v;
+    {
+      void *ptr;
+      if (SWIG_isptrtype(L,argv[0])==0 || SWIG_ConvertPtr(L,argv[0], (void **) &ptr, SWIGTYPE_p_Ogre__Vector3, 0)) {
+        _v = 0;
+      } else {
+        _v = 1;
+      }
+    }
+    if (_v) {
+      {
+        void *ptr;
+        if (lua_isuserdata(L,argv[1])==0 || SWIG_ConvertPtr(L,argv[1], (void **) &ptr, SWIGTYPE_p_Ogre__Vector3, 0)) {
+          _v = 0;
+        } else {
+          _v = 1;
+        }
+      }
+      if (_v) {
+        return _wrap_Vector3_positionEquals__SWIG_1(L);
+      }
+    }
+  }
+  if (argc == 3) {
+    int _v;
+    {
+      void *ptr;
+      if (SWIG_isptrtype(L,argv[0])==0 || SWIG_ConvertPtr(L,argv[0], (void **) &ptr, SWIGTYPE_p_Ogre__Vector3, 0)) {
+        _v = 0;
+      } else {
+        _v = 1;
+      }
+    }
+    if (_v) {
+      {
+        void *ptr;
+        if (lua_isuserdata(L,argv[1])==0 || SWIG_ConvertPtr(L,argv[1], (void **) &ptr, SWIGTYPE_p_Ogre__Vector3, 0)) {
+          _v = 0;
+        } else {
+          _v = 1;
+        }
+      }
+      if (_v) {
+        {
+          void *ptr;
+          if (lua_isuserdata(L,argv[2])==0 || SWIG_ConvertPtr(L,argv[2], (void **) &ptr, SWIGTYPE_p_Real, 0)) {
+            _v = 0;
+          } else {
+            _v = 1;
+          }
+        }
+        if (_v) {
+          return _wrap_Vector3_positionEquals__SWIG_0(L);
+        }
+      }
+    }
+  }
+  
+  lua_pushstring(L,"Wrong arguments for overloaded function 'Vector3_positionEquals'\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    positionEquals(Ogre::Vector3 const *,Ogre::Vector3 const &,Real)\n"
+    "    positionEquals(Ogre::Vector3 const *,Ogre::Vector3 const &)\n");
+  lua_error(L);return 0;
+}
+
+
+static int _wrap_Vector3_positionCloses__SWIG_0(lua_State* L) {
+  int SWIG_arg = 0;
+  Ogre::Vector3 *arg1 = (Ogre::Vector3 *) 0 ;
+  Ogre::Vector3 *arg2 = 0 ;
+  Real arg3 ;
+  Real *argp3 ;
+  bool result;
+  
+  SWIG_check_num_args("positionCloses",3,3)
+  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("positionCloses",1,"Ogre::Vector3 const *");
+  if(!lua_isuserdata(L,2)) SWIG_fail_arg("positionCloses",2,"Ogre::Vector3 const &");
+  if(!lua_isuserdata(L,3)) SWIG_fail_arg("positionCloses",3,"Real");
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_Ogre__Vector3,0))){
+    SWIG_fail_ptr("Vector3_positionCloses",1,SWIGTYPE_p_Ogre__Vector3);
+  }
+  
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&arg2,SWIGTYPE_p_Ogre__Vector3,0))){
+    SWIG_fail_ptr("Vector3_positionCloses",2,SWIGTYPE_p_Ogre__Vector3);
+  }
+  
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,3,(void**)&argp3,SWIGTYPE_p_Real,0))){
+    SWIG_fail_ptr("Vector3_positionCloses",3,SWIGTYPE_p_Real);
+  }
+  arg3 = *argp3;
+  
+  result = (bool)((Ogre::Vector3 const *)arg1)->positionCloses((Ogre::Vector3 const &)*arg2,arg3);
+  lua_pushboolean(L,(int)(result!=0)); SWIG_arg++;
+  return SWIG_arg;
+  
+  if(0) SWIG_fail;
+  
+fail:
+  lua_error(L);
+  return SWIG_arg;
+}
+
+
+static int _wrap_Vector3_positionCloses__SWIG_1(lua_State* L) {
+  int SWIG_arg = 0;
+  Ogre::Vector3 *arg1 = (Ogre::Vector3 *) 0 ;
+  Ogre::Vector3 *arg2 = 0 ;
+  bool result;
+  
+  SWIG_check_num_args("positionCloses",2,2)
+  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("positionCloses",1,"Ogre::Vector3 const *");
+  if(!lua_isuserdata(L,2)) SWIG_fail_arg("positionCloses",2,"Ogre::Vector3 const &");
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_Ogre__Vector3,0))){
+    SWIG_fail_ptr("Vector3_positionCloses",1,SWIGTYPE_p_Ogre__Vector3);
+  }
+  
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&arg2,SWIGTYPE_p_Ogre__Vector3,0))){
+    SWIG_fail_ptr("Vector3_positionCloses",2,SWIGTYPE_p_Ogre__Vector3);
+  }
+  
+  result = (bool)((Ogre::Vector3 const *)arg1)->positionCloses((Ogre::Vector3 const &)*arg2);
+  lua_pushboolean(L,(int)(result!=0)); SWIG_arg++;
+  return SWIG_arg;
+  
+  if(0) SWIG_fail;
+  
+fail:
+  lua_error(L);
+  return SWIG_arg;
+}
+
+
+static int _wrap_Vector3_positionCloses(lua_State* L) {
+  int argc;
+  int argv[4]={
+    1,2,3,4
+  };
+  
+  argc = lua_gettop(L);
+  if (argc == 2) {
+    int _v;
+    {
+      void *ptr;
+      if (SWIG_isptrtype(L,argv[0])==0 || SWIG_ConvertPtr(L,argv[0], (void **) &ptr, SWIGTYPE_p_Ogre__Vector3, 0)) {
+        _v = 0;
+      } else {
+        _v = 1;
+      }
+    }
+    if (_v) {
+      {
+        void *ptr;
+        if (lua_isuserdata(L,argv[1])==0 || SWIG_ConvertPtr(L,argv[1], (void **) &ptr, SWIGTYPE_p_Ogre__Vector3, 0)) {
+          _v = 0;
+        } else {
+          _v = 1;
+        }
+      }
+      if (_v) {
+        return _wrap_Vector3_positionCloses__SWIG_1(L);
+      }
+    }
+  }
+  if (argc == 3) {
+    int _v;
+    {
+      void *ptr;
+      if (SWIG_isptrtype(L,argv[0])==0 || SWIG_ConvertPtr(L,argv[0], (void **) &ptr, SWIGTYPE_p_Ogre__Vector3, 0)) {
+        _v = 0;
+      } else {
+        _v = 1;
+      }
+    }
+    if (_v) {
+      {
+        void *ptr;
+        if (lua_isuserdata(L,argv[1])==0 || SWIG_ConvertPtr(L,argv[1], (void **) &ptr, SWIGTYPE_p_Ogre__Vector3, 0)) {
+          _v = 0;
+        } else {
+          _v = 1;
+        }
+      }
+      if (_v) {
+        {
+          void *ptr;
+          if (lua_isuserdata(L,argv[2])==0 || SWIG_ConvertPtr(L,argv[2], (void **) &ptr, SWIGTYPE_p_Real, 0)) {
+            _v = 0;
+          } else {
+            _v = 1;
+          }
+        }
+        if (_v) {
+          return _wrap_Vector3_positionCloses__SWIG_0(L);
+        }
+      }
+    }
+  }
+  
+  lua_pushstring(L,"Wrong arguments for overloaded function 'Vector3_positionCloses'\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    positionCloses(Ogre::Vector3 const *,Ogre::Vector3 const &,Real)\n"
+    "    positionCloses(Ogre::Vector3 const *,Ogre::Vector3 const &)\n");
+  lua_error(L);return 0;
+}
+
+
+static int _wrap_Vector3_directionEquals(lua_State* L) {
+  int SWIG_arg = 0;
+  Ogre::Vector3 *arg1 = (Ogre::Vector3 *) 0 ;
+  Ogre::Vector3 *arg2 = 0 ;
+  Radian *arg3 = 0 ;
+  bool result;
+  
+  SWIG_check_num_args("directionEquals",3,3)
+  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("directionEquals",1,"Ogre::Vector3 const *");
+  if(!lua_isuserdata(L,2)) SWIG_fail_arg("directionEquals",2,"Ogre::Vector3 const &");
+  if(!lua_isuserdata(L,3)) SWIG_fail_arg("directionEquals",3,"Radian const &");
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_Ogre__Vector3,0))){
+    SWIG_fail_ptr("Vector3_directionEquals",1,SWIGTYPE_p_Ogre__Vector3);
+  }
+  
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&arg2,SWIGTYPE_p_Ogre__Vector3,0))){
+    SWIG_fail_ptr("Vector3_directionEquals",2,SWIGTYPE_p_Ogre__Vector3);
+  }
+  
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,3,(void**)&arg3,SWIGTYPE_p_Radian,0))){
+    SWIG_fail_ptr("Vector3_directionEquals",3,SWIGTYPE_p_Radian);
+  }
+  
+  result = (bool)((Ogre::Vector3 const *)arg1)->directionEquals((Ogre::Vector3 const &)*arg2,(Radian const &)*arg3);
+  lua_pushboolean(L,(int)(result!=0)); SWIG_arg++;
+  return SWIG_arg;
+  
+  if(0) SWIG_fail;
+  
+fail:
+  lua_error(L);
+  return SWIG_arg;
+}
+
+
+static int _wrap_Vector3_isNaN(lua_State* L) {
+  int SWIG_arg = 0;
+  Ogre::Vector3 *arg1 = (Ogre::Vector3 *) 0 ;
+  bool result;
+  
+  SWIG_check_num_args("isNaN",1,1)
+  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("isNaN",1,"Ogre::Vector3 const *");
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_Ogre__Vector3,0))){
+    SWIG_fail_ptr("Vector3_isNaN",1,SWIGTYPE_p_Ogre__Vector3);
+  }
+  
+  result = (bool)((Ogre::Vector3 const *)arg1)->isNaN();
+  lua_pushboolean(L,(int)(result!=0)); SWIG_arg++;
+  return SWIG_arg;
+  
+  if(0) SWIG_fail;
+  
+fail:
+  lua_error(L);
+  return SWIG_arg;
+}
+
+
+static int _wrap_Vector3_ZERO_get(lua_State* L) {
+  int SWIG_arg = 0;
+  Ogre::Vector3 *result = 0 ;
+  
+  SWIG_check_num_args("Ogre::Vector3::ZERO",0,0)
+  result = (Ogre::Vector3 *)&Ogre::Vector3::ZERO;
+  SWIG_NewPointerObj(L,result,SWIGTYPE_p_Ogre__Vector3,0); SWIG_arg++; 
+  return SWIG_arg;
+  
+  if(0) SWIG_fail;
+  
+fail:
+  lua_error(L);
+  return SWIG_arg;
+}
+
+
+static int _wrap_Vector3_UNIT_X_get(lua_State* L) {
+  int SWIG_arg = 0;
+  Ogre::Vector3 *result = 0 ;
+  
+  SWIG_check_num_args("Ogre::Vector3::UNIT_X",0,0)
+  result = (Ogre::Vector3 *)&Ogre::Vector3::UNIT_X;
+  SWIG_NewPointerObj(L,result,SWIGTYPE_p_Ogre__Vector3,0); SWIG_arg++; 
+  return SWIG_arg;
+  
+  if(0) SWIG_fail;
+  
+fail:
+  lua_error(L);
+  return SWIG_arg;
+}
+
+
+static int _wrap_Vector3_UNIT_Y_get(lua_State* L) {
+  int SWIG_arg = 0;
+  Ogre::Vector3 *result = 0 ;
+  
+  SWIG_check_num_args("Ogre::Vector3::UNIT_Y",0,0)
+  result = (Ogre::Vector3 *)&Ogre::Vector3::UNIT_Y;
+  SWIG_NewPointerObj(L,result,SWIGTYPE_p_Ogre__Vector3,0); SWIG_arg++; 
+  return SWIG_arg;
+  
+  if(0) SWIG_fail;
+  
+fail:
+  lua_error(L);
+  return SWIG_arg;
+}
+
+
+static int _wrap_Vector3_UNIT_Z_get(lua_State* L) {
+  int SWIG_arg = 0;
+  Ogre::Vector3 *result = 0 ;
+  
+  SWIG_check_num_args("Ogre::Vector3::UNIT_Z",0,0)
+  result = (Ogre::Vector3 *)&Ogre::Vector3::UNIT_Z;
+  SWIG_NewPointerObj(L,result,SWIGTYPE_p_Ogre__Vector3,0); SWIG_arg++; 
+  return SWIG_arg;
+  
+  if(0) SWIG_fail;
+  
+fail:
+  lua_error(L);
+  return SWIG_arg;
+}
+
+
+static int _wrap_Vector3_NEGATIVE_UNIT_X_get(lua_State* L) {
+  int SWIG_arg = 0;
+  Ogre::Vector3 *result = 0 ;
+  
+  SWIG_check_num_args("Ogre::Vector3::NEGATIVE_UNIT_X",0,0)
+  result = (Ogre::Vector3 *)&Ogre::Vector3::NEGATIVE_UNIT_X;
+  SWIG_NewPointerObj(L,result,SWIGTYPE_p_Ogre__Vector3,0); SWIG_arg++; 
+  return SWIG_arg;
+  
+  if(0) SWIG_fail;
+  
+fail:
+  lua_error(L);
+  return SWIG_arg;
+}
+
+
+static int _wrap_Vector3_NEGATIVE_UNIT_Y_get(lua_State* L) {
+  int SWIG_arg = 0;
+  Ogre::Vector3 *result = 0 ;
+  
+  SWIG_check_num_args("Ogre::Vector3::NEGATIVE_UNIT_Y",0,0)
+  result = (Ogre::Vector3 *)&Ogre::Vector3::NEGATIVE_UNIT_Y;
+  SWIG_NewPointerObj(L,result,SWIGTYPE_p_Ogre__Vector3,0); SWIG_arg++; 
+  return SWIG_arg;
+  
+  if(0) SWIG_fail;
+  
+fail:
+  lua_error(L);
+  return SWIG_arg;
+}
+
+
+static int _wrap_Vector3_NEGATIVE_UNIT_Z_get(lua_State* L) {
+  int SWIG_arg = 0;
+  Ogre::Vector3 *result = 0 ;
+  
+  SWIG_check_num_args("Ogre::Vector3::NEGATIVE_UNIT_Z",0,0)
+  result = (Ogre::Vector3 *)&Ogre::Vector3::NEGATIVE_UNIT_Z;
+  SWIG_NewPointerObj(L,result,SWIGTYPE_p_Ogre__Vector3,0); SWIG_arg++; 
+  return SWIG_arg;
+  
+  if(0) SWIG_fail;
+  
+fail:
+  lua_error(L);
+  return SWIG_arg;
+}
+
+
+static int _wrap_Vector3_UNIT_SCALE_get(lua_State* L) {
+  int SWIG_arg = 0;
+  Ogre::Vector3 *result = 0 ;
+  
+  SWIG_check_num_args("Ogre::Vector3::UNIT_SCALE",0,0)
+  result = (Ogre::Vector3 *)&Ogre::Vector3::UNIT_SCALE;
+  SWIG_NewPointerObj(L,result,SWIGTYPE_p_Ogre__Vector3,0); SWIG_arg++; 
+  return SWIG_arg;
+  
+  if(0) SWIG_fail;
+  
+fail:
+  lua_error(L);
+  return SWIG_arg;
+}
+
+
+static void swig_delete_Vector3(void *obj) {
+Ogre::Vector3 *arg1 = (Ogre::Vector3 *) obj;
+delete arg1;
+}
+static swig_lua_method swig_Ogre_Vector3_methods[] = {
+    {"swap", _wrap_Vector3_swap}, 
+    {"ptr", _wrap_Vector3_ptr}, 
+    {"__eq", _wrap_Vector3___eq}, 
+    {"__sub", _wrap_Vector3___sub}, 
+    {"__mul", _wrap_Vector3___mul}, 
+    {"__div", _wrap_Vector3___div}, 
+    {"__add", _wrap_Vector3___add}, 
+    {"__unm", _wrap_Vector3___unm}, 
+    {"length", _wrap_Vector3_length}, 
+    {"squaredLength", _wrap_Vector3_squaredLength}, 
+    {"distance", _wrap_Vector3_distance}, 
+    {"squaredDistance", _wrap_Vector3_squaredDistance}, 
+    {"dotProduct", _wrap_Vector3_dotProduct}, 
+    {"absDotProduct", _wrap_Vector3_absDotProduct}, 
+    {"normalise", _wrap_Vector3_normalise}, 
+    {"crossProduct", _wrap_Vector3_crossProduct}, 
+    {"midPoint", _wrap_Vector3_midPoint}, 
+    {"__lt", _wrap_Vector3___lt}, 
+    {"makeFloor", _wrap_Vector3_makeFloor}, 
+    {"makeCeil", _wrap_Vector3_makeCeil}, 
+    {"perpendicular", _wrap_Vector3_perpendicular}, 
+    {"randomDeviant", _wrap_Vector3_randomDeviant}, 
+    {"angleBetween", _wrap_Vector3_angleBetween}, 
+    {"getRotationTo", _wrap_Vector3_getRotationTo}, 
+    {"isZeroLength", _wrap_Vector3_isZeroLength}, 
+    {"normalisedCopy", _wrap_Vector3_normalisedCopy}, 
+    {"reflect", _wrap_Vector3_reflect}, 
+    {"positionEquals", _wrap_Vector3_positionEquals}, 
+    {"positionCloses", _wrap_Vector3_positionCloses}, 
+    {"directionEquals", _wrap_Vector3_directionEquals}, 
+    {"isNaN", _wrap_Vector3_isNaN}, 
+    {0,0}
+};
+static swig_lua_attribute swig_Ogre_Vector3_attributes[] = {
+    { "x", _wrap_Vector3_x_get, _wrap_Vector3_x_set},
+    { "y", _wrap_Vector3_y_get, _wrap_Vector3_y_set},
+    { "z", _wrap_Vector3_z_get, _wrap_Vector3_z_set},
+    {0,0,0}
+};
+static swig_lua_class *swig_Ogre_Vector3_bases[] = {0};
+static const char *swig_Ogre_Vector3_base_names[] = {0};
+static swig_lua_class _wrap_class_Ogre_Vector3 = { "Vector3", &SWIGTYPE_p_Ogre__Vector3,_wrap_new_Vector3, swig_delete_Vector3, swig_Ogre_Vector3_methods, swig_Ogre_Vector3_attributes, swig_Ogre_Vector3_bases, swig_Ogre_Vector3_base_names };
 
 #ifdef __cplusplus
 }
@@ -1875,7 +4238,14 @@ static const struct luaL_reg swig_commands[] = {
 };
 
 static swig_lua_var_info swig_variables[] = {
-    { "Vector3", _wrap_Vector3_get, _wrap_Vector3_set },
+    { "Vector3_ZERO", _wrap_Vector3_ZERO_get, SWIG_Lua_set_immutable },
+    { "Vector3_UNIT_X", _wrap_Vector3_UNIT_X_get, SWIG_Lua_set_immutable },
+    { "Vector3_UNIT_Y", _wrap_Vector3_UNIT_Y_get, SWIG_Lua_set_immutable },
+    { "Vector3_UNIT_Z", _wrap_Vector3_UNIT_Z_get, SWIG_Lua_set_immutable },
+    { "Vector3_NEGATIVE_UNIT_X", _wrap_Vector3_NEGATIVE_UNIT_X_get, SWIG_Lua_set_immutable },
+    { "Vector3_NEGATIVE_UNIT_Y", _wrap_Vector3_NEGATIVE_UNIT_Y_get, SWIG_Lua_set_immutable },
+    { "Vector3_NEGATIVE_UNIT_Z", _wrap_Vector3_NEGATIVE_UNIT_Z_get, SWIG_Lua_set_immutable },
+    { "Vector3_UNIT_SCALE", _wrap_Vector3_UNIT_SCALE_get, SWIG_Lua_set_immutable },
     {0,0,0}
 };
 
@@ -1885,19 +4255,35 @@ static swig_lua_const_info swig_constants[] = {
 
 /* -------- TYPE CONVERSION AND EQUIVALENCE RULES (BEGIN) -------- */
 
-static swig_type_info _swigt__p__OgreExport = {"_p__OgreExport", "_OgreExport *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_Ogre__Vector3 = {"_p_Ogre__Vector3", "Ogre::Vector3 *", 0, 0, (void*)&_wrap_class_Ogre_Vector3, 0};
+static swig_type_info _swigt__p_Quaternion = {"_p_Quaternion", "Quaternion *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_Radian = {"_p_Radian", "Radian *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_Real = {"_p_Real", "Real *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_int = {"_p_int", "int *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__string = {"_p_std__string", "std::string *", 0, 0, (void*)&_wrap_class_std_string, 0};
 
 static swig_type_info *swig_type_initial[] = {
-  &_swigt__p__OgreExport,
+  &_swigt__p_Ogre__Vector3,
+  &_swigt__p_Quaternion,
+  &_swigt__p_Radian,
+  &_swigt__p_Real,
+  &_swigt__p_int,
   &_swigt__p_std__string,
 };
 
-static swig_cast_info _swigc__p__OgreExport[] = {  {&_swigt__p__OgreExport, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_Ogre__Vector3[] = {  {&_swigt__p_Ogre__Vector3, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_Quaternion[] = {  {&_swigt__p_Quaternion, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_Radian[] = {  {&_swigt__p_Radian, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_Real[] = {  {&_swigt__p_Real, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_int[] = {  {&_swigt__p_int, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__string[] = {  {&_swigt__p_std__string, 0, 0, 0},{0, 0, 0, 0}};
 
 static swig_cast_info *swig_cast_initial[] = {
-  _swigc__p__OgreExport,
+  _swigc__p_Ogre__Vector3,
+  _swigc__p_Quaternion,
+  _swigc__p_Radian,
+  _swigc__p_Real,
+  _swigc__p_int,
   _swigc__p_std__string,
 };
 

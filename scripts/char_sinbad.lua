@@ -1,0 +1,5 @@
+
+Character =
+{
+	Name = "sinbad",
+	

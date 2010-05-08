@@ -1,7 +1,7 @@
 
 /* File: wrapping.i */
 
-%module fts
+%module ogre
 
 %include "std_string.i"
 %include "std_map.i"
@@ -17,9 +17,13 @@
 
 #include <Ogre.h>
 
+using namespace Ogre;
+
 
 
 %}
+
+#define _OgreExport 
 
 
 %include "OgreVector3.h"
