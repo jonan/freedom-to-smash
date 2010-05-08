@@ -23,4 +23,54 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #define SCRIPT_MANAGER_HPP
 
 
+
+extern "C"
+{
+    #include "lua.h"
+    #include "lualib.h"
+    #include "lauxlib.h"
+}
+
+class ScriptManager
+{
+
+	static ScriptManager * mInstance;
+
+	lua_State * mL;
+
+	ScriptManager()
+		: mL(0)
+	{
+	}
+
+public:
+
+	//! Returns the Lua state.
+	//!
+	lua_State * getL() 
+	{
+		return mL;
+	}
+
+	//! Returns a reference to the script manager instance.
+	//!
+	ScriptManager & get()
+	{
+		if(!mInstance)
+			mInstance = new ScriptManager();
+		return *mInstance;
+	}
+
+	//! Destroys the script manager, if it has been instanced.
+	//!
+	void destroy()
+	{
+		delete mInstance;
+		mInstance = 0;
+	}
+
+};
+
+
+
 #endif // SCRIPT_MANAGER_HPP
