@@ -24,9 +24,12 @@
 #include "character.hpp"
 #include "player.hpp"
 
-
-
 %}
+
+
+typedef std::string String;
+typedef float Real;
+
 
 %rename(GraphicsObject) graphics::Object;
 %include "graphics/object.hpp"

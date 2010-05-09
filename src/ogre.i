@@ -25,6 +25,9 @@ using namespace Ogre;
 
 #define _OgreExport 
 
+typedef std::string String;
+typedef float Real;
+
 
 %include "OgreVector3.h"
 

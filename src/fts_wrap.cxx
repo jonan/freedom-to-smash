@@ -1532,20 +1532,19 @@ SWIG_Lua_dostring(lua_State *L, const char* str) {
 #define SWIGTYPE_p_Ogre__SceneManager swig_types[3]
 #define SWIGTYPE_p_Ogre__Vector3 swig_types[4]
 #define SWIGTYPE_p_Player swig_types[5]
-#define SWIGTYPE_p_Real swig_types[6]
-#define SWIGTYPE_p_String swig_types[7]
-#define SWIGTYPE_p_btCollisionDispatcher swig_types[8]
-#define SWIGTYPE_p_btCollisionObject swig_types[9]
-#define SWIGTYPE_p_btCollisionShape swig_types[10]
-#define SWIGTYPE_p_btTransform swig_types[11]
-#define SWIGTYPE_p_graphics__Object swig_types[12]
-#define SWIGTYPE_p_graphics__Scene swig_types[13]
-#define SWIGTYPE_p_physics__Object swig_types[14]
-#define SWIGTYPE_p_physics__Scene swig_types[15]
-#define SWIGTYPE_p_std__listT_Object_p_t swig_types[16]
-#define SWIGTYPE_p_std__string swig_types[17]
-static swig_type_info *swig_types[19];
-static swig_module_info swig_module = {swig_types, 18, 0, 0, 0, 0};
+#define SWIGTYPE_p_btCollisionDispatcher swig_types[6]
+#define SWIGTYPE_p_btCollisionObject swig_types[7]
+#define SWIGTYPE_p_btCollisionShape swig_types[8]
+#define SWIGTYPE_p_btTransform swig_types[9]
+#define SWIGTYPE_p_float swig_types[10]
+#define SWIGTYPE_p_graphics__Object swig_types[11]
+#define SWIGTYPE_p_graphics__Scene swig_types[12]
+#define SWIGTYPE_p_physics__Object swig_types[13]
+#define SWIGTYPE_p_physics__Scene swig_types[14]
+#define SWIGTYPE_p_std__listT_Object_p_t swig_types[15]
+#define SWIGTYPE_p_std__string swig_types[16]
+static swig_type_info *swig_types[18];
+static swig_module_info swig_module = {swig_types, 17, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -1601,8 +1600,6 @@ typedef struct{} LANGUAGE_OBJ;
 #include "object.hpp"
 #include "character.hpp"
 #include "player.hpp"
-
-
 
 
 
@@ -1948,20 +1945,17 @@ static int _wrap_GraphicsObject_setEntity(lua_State* L) {
   int SWIG_arg = 0;
   graphics::Object *arg1 = (graphics::Object *) 0 ;
   String *arg2 = 0 ;
+  std::string temp2 ;
   
   SWIG_check_num_args("setEntity",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("setEntity",1,"graphics::Object *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("setEntity",2,"String const &");
+  if(!lua_isstring(L,2)) SWIG_fail_arg("setEntity",2,"String const &");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_graphics__Object,0))){
     SWIG_fail_ptr("GraphicsObject_setEntity",1,SWIGTYPE_p_graphics__Object);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&arg2,SWIGTYPE_p_String,0))){
-    SWIG_fail_ptr("GraphicsObject_setEntity",2,SWIGTYPE_p_String);
-  }
-  
+  temp2.assign(lua_tostring(L,2),lua_strlen(L,2)); arg2=&temp2;
   (arg1)->setEntity((String const &)*arg2);
   
   return SWIG_arg;
@@ -2066,26 +2060,20 @@ static int _wrap_GraphicsObject_attachEntityToBone(lua_State* L) {
   graphics::Object *arg1 = (graphics::Object *) 0 ;
   String *arg2 = 0 ;
   String *arg3 = 0 ;
+  std::string temp2 ;
+  std::string temp3 ;
   
   SWIG_check_num_args("attachEntityToBone",3,3)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("attachEntityToBone",1,"graphics::Object *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("attachEntityToBone",2,"String const &");
-  if(!lua_isuserdata(L,3)) SWIG_fail_arg("attachEntityToBone",3,"String const &");
+  if(!lua_isstring(L,2)) SWIG_fail_arg("attachEntityToBone",2,"String const &");
+  if(!lua_isstring(L,3)) SWIG_fail_arg("attachEntityToBone",3,"String const &");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_graphics__Object,0))){
     SWIG_fail_ptr("GraphicsObject_attachEntityToBone",1,SWIGTYPE_p_graphics__Object);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&arg2,SWIGTYPE_p_String,0))){
-    SWIG_fail_ptr("GraphicsObject_attachEntityToBone",2,SWIGTYPE_p_String);
-  }
-  
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,3,(void**)&arg3,SWIGTYPE_p_String,0))){
-    SWIG_fail_ptr("GraphicsObject_attachEntityToBone",3,SWIGTYPE_p_String);
-  }
-  
+  temp2.assign(lua_tostring(L,2),lua_strlen(L,2)); arg2=&temp2;
+  temp3.assign(lua_tostring(L,3),lua_strlen(L,3)); arg3=&temp3;
   (arg1)->attachEntityToBone((String const &)*arg2,(String const &)*arg3);
   
   return SWIG_arg;
@@ -2104,32 +2092,23 @@ static int _wrap_GraphicsObject_translate(lua_State* L) {
   Real *arg2 = 0 ;
   Real *arg3 = 0 ;
   Real *arg4 = 0 ;
+  Real temp2 ;
+  Real temp3 ;
+  Real temp4 ;
   
   SWIG_check_num_args("translate",4,4)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("translate",1,"graphics::Object *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("translate",2,"Real const &");
-  if(!lua_isuserdata(L,3)) SWIG_fail_arg("translate",3,"Real const &");
-  if(!lua_isuserdata(L,4)) SWIG_fail_arg("translate",4,"Real const &");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("translate",2,"Real const &");
+  if(!lua_isnumber(L,3)) SWIG_fail_arg("translate",3,"Real const &");
+  if(!lua_isnumber(L,4)) SWIG_fail_arg("translate",4,"Real const &");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_graphics__Object,0))){
     SWIG_fail_ptr("GraphicsObject_translate",1,SWIGTYPE_p_graphics__Object);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&arg2,SWIGTYPE_p_Real,0))){
-    SWIG_fail_ptr("GraphicsObject_translate",2,SWIGTYPE_p_Real);
-  }
-  
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,3,(void**)&arg3,SWIGTYPE_p_Real,0))){
-    SWIG_fail_ptr("GraphicsObject_translate",3,SWIGTYPE_p_Real);
-  }
-  
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,4,(void**)&arg4,SWIGTYPE_p_Real,0))){
-    SWIG_fail_ptr("GraphicsObject_translate",4,SWIGTYPE_p_Real);
-  }
-  
+  temp2=(Real)lua_tonumber(L,2); arg2=&temp2;
+  temp3=(Real)lua_tonumber(L,3); arg3=&temp3;
+  temp4=(Real)lua_tonumber(L,4); arg4=&temp4;
   (arg1)->translate((Real const &)*arg2,(Real const &)*arg3,(Real const &)*arg4);
   
   return SWIG_arg;
@@ -2823,20 +2802,17 @@ static int _wrap_Object_setEntity(lua_State* L) {
   int SWIG_arg = 0;
   Object *arg1 = (Object *) 0 ;
   String *arg2 = 0 ;
+  std::string temp2 ;
   
   SWIG_check_num_args("setEntity",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("setEntity",1,"Object *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("setEntity",2,"String const &");
+  if(!lua_isstring(L,2)) SWIG_fail_arg("setEntity",2,"String const &");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_Object,0))){
     SWIG_fail_ptr("Object_setEntity",1,SWIGTYPE_p_Object);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&arg2,SWIGTYPE_p_String,0))){
-    SWIG_fail_ptr("Object_setEntity",2,SWIGTYPE_p_String);
-  }
-  
+  temp2.assign(lua_tostring(L,2),lua_strlen(L,2)); arg2=&temp2;
   (arg1)->setEntity((String const &)*arg2);
   
   return SWIG_arg;
@@ -2915,32 +2891,23 @@ static int _wrap_Object_translate(lua_State* L) {
   Real *arg2 = 0 ;
   Real *arg3 = 0 ;
   Real *arg4 = 0 ;
+  Real temp2 ;
+  Real temp3 ;
+  Real temp4 ;
   
   SWIG_check_num_args("translate",4,4)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("translate",1,"Object *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("translate",2,"Real const &");
-  if(!lua_isuserdata(L,3)) SWIG_fail_arg("translate",3,"Real const &");
-  if(!lua_isuserdata(L,4)) SWIG_fail_arg("translate",4,"Real const &");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("translate",2,"Real const &");
+  if(!lua_isnumber(L,3)) SWIG_fail_arg("translate",3,"Real const &");
+  if(!lua_isnumber(L,4)) SWIG_fail_arg("translate",4,"Real const &");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_Object,0))){
     SWIG_fail_ptr("Object_translate",1,SWIGTYPE_p_Object);
   }
   
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&arg2,SWIGTYPE_p_Real,0))){
-    SWIG_fail_ptr("Object_translate",2,SWIGTYPE_p_Real);
-  }
-  
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,3,(void**)&arg3,SWIGTYPE_p_Real,0))){
-    SWIG_fail_ptr("Object_translate",3,SWIGTYPE_p_Real);
-  }
-  
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,4,(void**)&arg4,SWIGTYPE_p_Real,0))){
-    SWIG_fail_ptr("Object_translate",4,SWIGTYPE_p_Real);
-  }
-  
+  temp2=(Real)lua_tonumber(L,2); arg2=&temp2;
+  temp3=(Real)lua_tonumber(L,3); arg3=&temp3;
+  temp4=(Real)lua_tonumber(L,4); arg4=&temp4;
   (arg1)->translate((Real const &)*arg2,(Real const &)*arg3,(Real const &)*arg4);
   
   return SWIG_arg;
@@ -3401,18 +3368,17 @@ static swig_type_info _swigt__p_Object = {"_p_Object", "Object *", 0, 0, (void*)
 static swig_type_info _swigt__p_Ogre__SceneManager = {"_p_Ogre__SceneManager", "Ogre::SceneManager *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_Ogre__Vector3 = {"_p_Ogre__Vector3", "Ogre::Vector3 *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_Player = {"_p_Player", "Player *", 0, 0, (void*)&_wrap_class_Player, 0};
-static swig_type_info _swigt__p_Real = {"_p_Real", "Real *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_String = {"_p_String", "String *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_btCollisionDispatcher = {"_p_btCollisionDispatcher", "btCollisionDispatcher *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_btCollisionObject = {"_p_btCollisionObject", "btCollisionObject *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_btCollisionShape = {"_p_btCollisionShape", "btCollisionShape *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_btTransform = {"_p_btTransform", "btTransform *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_float = {"_p_float", "float *|Real *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_graphics__Object = {"_p_graphics__Object", "graphics::Object *", 0, 0, (void*)&_wrap_class_graphics_Object, 0};
 static swig_type_info _swigt__p_graphics__Scene = {"_p_graphics__Scene", "graphics::Scene *", 0, 0, (void*)&_wrap_class_graphics_Scene, 0};
 static swig_type_info _swigt__p_physics__Object = {"_p_physics__Object", "physics::Object *", 0, 0, (void*)&_wrap_class_physics_Object, 0};
 static swig_type_info _swigt__p_physics__Scene = {"_p_physics__Scene", "physics::Scene *", 0, 0, (void*)&_wrap_class_physics_Scene, 0};
 static swig_type_info _swigt__p_std__listT_Object_p_t = {"_p_std__listT_Object_p_t", "std::list< Object * > *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_std__string = {"_p_std__string", "std::string *", 0, 0, (void*)&_wrap_class_std_string, 0};
+static swig_type_info _swigt__p_std__string = {"_p_std__string", "std::string *|String *", 0, 0, (void*)&_wrap_class_std_string, 0};
 
 static swig_type_info *swig_type_initial[] = {
   &_swigt__p_BattleGround,
@@ -3421,12 +3387,11 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_Ogre__SceneManager,
   &_swigt__p_Ogre__Vector3,
   &_swigt__p_Player,
-  &_swigt__p_Real,
-  &_swigt__p_String,
   &_swigt__p_btCollisionDispatcher,
   &_swigt__p_btCollisionObject,
   &_swigt__p_btCollisionShape,
   &_swigt__p_btTransform,
+  &_swigt__p_float,
   &_swigt__p_graphics__Object,
   &_swigt__p_graphics__Scene,
   &_swigt__p_physics__Object,
@@ -3441,12 +3406,11 @@ static swig_cast_info _swigc__p_Object[] = {  {&_swigt__p_Object, 0, 0, 0},  {&_
 static swig_cast_info _swigc__p_Ogre__SceneManager[] = {  {&_swigt__p_Ogre__SceneManager, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Ogre__Vector3[] = {  {&_swigt__p_Ogre__Vector3, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Player[] = {  {&_swigt__p_Player, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_Real[] = {  {&_swigt__p_Real, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_String[] = {  {&_swigt__p_String, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_btCollisionDispatcher[] = {  {&_swigt__p_btCollisionDispatcher, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_btCollisionObject[] = {  {&_swigt__p_btCollisionObject, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_btCollisionShape[] = {  {&_swigt__p_btCollisionShape, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_btTransform[] = {  {&_swigt__p_btTransform, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_float[] = {  {&_swigt__p_float, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_graphics__Object[] = {  {&_swigt__p_graphics__Object, 0, 0, 0},  {&_swigt__p_Object, _p_ObjectTo_p_graphics__Object, 0, 0},  {&_swigt__p_Character, _p_CharacterTo_p_graphics__Object, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_graphics__Scene[] = {  {&_swigt__p_graphics__Scene, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_physics__Object[] = {  {&_swigt__p_physics__Object, 0, 0, 0},  {&_swigt__p_Object, _p_ObjectTo_p_physics__Object, 0, 0},  {&_swigt__p_Character, _p_CharacterTo_p_physics__Object, 0, 0},{0, 0, 0, 0}};
@@ -3461,12 +3425,11 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_Ogre__SceneManager,
   _swigc__p_Ogre__Vector3,
   _swigc__p_Player,
-  _swigc__p_Real,
-  _swigc__p_String,
   _swigc__p_btCollisionDispatcher,
   _swigc__p_btCollisionObject,
   _swigc__p_btCollisionShape,
   _swigc__p_btTransform,
+  _swigc__p_float,
   _swigc__p_graphics__Object,
   _swigc__p_graphics__Scene,
   _swigc__p_physics__Object,

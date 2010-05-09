@@ -12,3 +12,5 @@ Character =
 		end
 }
 	
+	
+OnCharCreate = Character.OnCreate
