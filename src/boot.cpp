@@ -28,6 +28,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #include <input.hpp>
 #include <lua_engine.hpp>
 #include <lua_evaluator.hpp>
+#include <script_manager.hpp>
 
 // Defines where resources are (according to resources.cfg).
 void defineResources(void)
@@ -78,8 +79,9 @@ void initializeAllResources(void)
 
 void HandleConfigScript()
 {
-    lua_State * L = lua_open();
-    luaopen_base(L);
+	lua_State * L = ScriptManager::get().getL();
+
+
     LuaEngine::RunFile(L, "../scripts/config.lua");
 
     bool welcomeMessageEnabled = false;

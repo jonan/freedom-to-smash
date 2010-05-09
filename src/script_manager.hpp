@@ -77,7 +77,7 @@ public:
 
 	//! Returns a reference to the script manager instance.
 	//!
-	ScriptManager & get()
+	static ScriptManager & get()
 	{
 		if(!mInstance)
 			mInstance = new ScriptManager();
