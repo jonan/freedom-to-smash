@@ -47,7 +47,7 @@ Character::Character(Ogre::SceneManager &scene_manager)
     //attachEntityToBone("Sword", "Handle.L");
     //attachEntityToBone("Sword", "Handle.R");
     setPosition(Ogre::Vector3(0,5,0));
-    node->yaw(Ogre::Degree(90));
+    //node->yaw(Ogre::Degree(90));
     prepareAnimations();
     // Start with no action active
     for (int i=0; i < NUM_STATES; i++)
@@ -76,7 +76,12 @@ void Character::loadScript(std::string const & file)
 	std::string ent;
 	res = ev.evalString("Character.Name", ent);
 
+	double yaw = 0;
+	res = ev.evalNumber("Character.Yaw", yaw);
+
 	setEntity(ent);
+	node->yaw(Ogre::Degree(yaw));
+
 
 	LuaEngine::BeginCallEx(L, "Character.OnCreate");
 	LuaEngine::PushPointer(L, this, "Character *");
