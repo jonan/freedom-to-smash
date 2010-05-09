@@ -44,7 +44,7 @@ namespace graphics {
 /// Class to control all the graphical elements of a scene.
 class Scene {
 public:
-    explicit Scene(const bool water_plane = false, const bool sky = false); // Constructor
+    Scene(void); // Constructor
     ~Scene(void); // Destructor
 
 protected:

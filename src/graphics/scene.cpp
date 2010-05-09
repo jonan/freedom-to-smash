@@ -34,7 +34,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 namespace graphics {
 
 // Constructor
-Scene::Scene(const bool water_plane, const bool sky)
+Scene::Scene(void)
         : hydrax(NULL)
         , skyx(NULL)
 
@@ -45,10 +45,6 @@ Scene::Scene(const bool water_plane, const bool sky)
 {
     manager = Ogre::Root::getSingleton().createSceneManager(Ogre::ST_GENERIC);
     viewport = Ogre::Root::getSingleton().getAutoCreatedWindow()->addViewport(NULL);
-    if (water_plane)
-        createWaterPlane();
-    if (sky)
-        createSky();
 
     createCaelumSky();
 }
@@ -105,17 +101,6 @@ int Scene::addCamera(const Ogre::String &name, Ogre::SceneNode &position,
     position.attachObject(camera.back());
     return camera.size()-1;
 }
-
-// Add a dynamic camera that looks at and follows a given node.
-/*int Scene::addDynamicCamera(const Ogre::String &name, const Ogre::Vector3 &position,
-                            Ogre::SceneNode &look_at, Ogre::SceneNode &follow,
-                            const unsigned int near_clip, const unsigned int far_clip)
-{
-    Ogre::Camera *cam = &createCamera(name, position, near_clip, far_clip);
-    cam->setAutoTracking(true, &look_at);
-    follow.attachObject(cam);
-    return camera.size()-1;
-}*/
 
 // Use the given camera.
 void Scene::useCamera(const int num_camera)
