@@ -78,7 +78,7 @@ void Character::loadScript(std::string const & file)
 
 	setEntity(ent);
 
-	LuaEngine::BeginCall(L, "OnCharCreate");
+	LuaEngine::BeginCallEx(L, "Character.OnCreate");
 	LuaEngine::PushPointer(L, this, "Character *");
 	LuaEngine::EndCall(L, 1);
 }
