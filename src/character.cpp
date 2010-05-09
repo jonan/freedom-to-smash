@@ -27,6 +27,9 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #include <physics/shapes_manager.hpp>
 #include <input.hpp>
 
+#include <lua_engine.hpp>
+#include <script_manager.hpp>
+
 // Constructor
 Character::Character(Ogre::SceneManager &scene_manager)
         : Object(scene_manager, NUM_STATES)
@@ -63,6 +66,7 @@ Character::~Character(void)
 
 void Character::loadScript(std::string const & file)
 {
+	LuaEngine::RunFile(ScriptManager::get().getL(), file);
 }
 
 // Start performing an attack.

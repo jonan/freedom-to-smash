@@ -80,8 +80,6 @@ void initializeAllResources(void)
 void HandleConfigScript()
 {
 	lua_State * L = ScriptManager::get().getL();
-
-
     LuaEngine::RunFile(L, "../scripts/config.lua");
 
     bool welcomeMessageEnabled = false;
@@ -104,8 +102,6 @@ void HandleConfigScript()
         );
     std::cout << versionMsg << std::endl;
     std::cout << "Num: " << num << std::endl;
-
-    lua_close(L);
 }
 
 // Loads all the necessary things for the game to run.
@@ -127,4 +123,6 @@ void boot(void)
 void quit(void)
 {
     delete Ogre::Root::getSingletonPtr();
+
+	ScriptManager::get().destroy();
 }
