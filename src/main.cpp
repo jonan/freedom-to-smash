@@ -19,6 +19,9 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 /// The main function.
 /// @author Jonan
 
+#include <stdexcept>
+#include <iostream>
+
 // FtS
 #include <battle_ground.hpp>
 #include <boot.hpp>
@@ -26,16 +29,23 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 
 int main(int argc, char *argv[])
 {
-    boot();
-    Player *player = new Player(1);
-    BattleGround *battle = new BattleGround;
-    player->setBattleground(*battle);
-    player->setCharacter();
-    player = new Player(2);
-    player->setBattleground(*battle);
-    player->setCharacter();
-    battle->start();
-    delete battle;
-    quit();
-    return 0;
+	try 
+	{
+
+		boot();
+		Player *player = new Player(1);
+		BattleGround *battle = new BattleGround;
+		player->setBattleground(*battle);
+		player->setCharacter();
+		player = new Player(2);
+		player->setBattleground(*battle);
+		player->setCharacter();
+		battle->start();
+		delete battle;
+		quit();
+	} 
+	catch(std::exception & e)
+	{
+		std::cerr << "Fatal exception caught on main: " << e.what() << std::endl;
+	}
 }
