@@ -31,6 +31,14 @@ extern "C"
     #include "lauxlib.h"
 }
 
+//! Wrapped modules init functions, which are defined on their respective
+//! generated files.
+extern "C"
+{
+	extern int luaopen_ogre(lua_State * L);  
+	extern int luaopen_fts(lua_State * L); 
+}
+
 class ScriptManager
 {
 
@@ -41,6 +49,21 @@ class ScriptManager
 	ScriptManager()
 		: mL(0)
 	{
+		init();
+	}
+
+	void init()
+	{
+		mL = lua_open();
+		luaopen_base(mL);
+
+		luaopen_ogre(mL);
+		luaopen_fts(mL);
+	}
+
+	~ScriptManager()
+	{
+		lua_close(mL);
 	}
 
 public:
