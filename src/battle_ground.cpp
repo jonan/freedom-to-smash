@@ -32,7 +32,7 @@ BattleGround::BattleGround(void)
 {
     // Default settings
     //setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
-	setAmbientLight(Ogre::ColourValue(1.0,1.0,1.0));
+	setAmbientLight(Ogre::ColourValue(1,1,1));
     // Create camera
     look_node = getManager().getRootSceneNode()->createChildSceneNode();
     cam_node = getManager().getRootSceneNode()->createChildSceneNode();
