@@ -68,9 +68,11 @@ public:
 	//! @param file Absolute or relative path to the lua script.
 	void handleScript(std::string const & file);
 
-private:
+
     // All the different states of a character.
     enum {ATTACK, DEFEND, FALL, IDLE, JUMP, LAND, MOVE, NUM_STATES};
+
+private:
 
     // Function that's called at the beginning of every frame.
     virtual bool frameStarted(const Ogre::FrameEvent &event);

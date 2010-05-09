@@ -3256,6 +3256,14 @@ static swig_lua_const_info swig_constants[] = {
 { SWIG_LUA_INT,     (char *)"DEBUG_PHYSIC_SHAPES", (long) 0, 0, 0, 0},
 { SWIG_LUA_INT,     (char *)"RIGHT", (long) RIGHT, 0, 0, 0},
 { SWIG_LUA_INT,     (char *)"LEFT", (long) LEFT, 0, 0, 0},
+{ SWIG_LUA_INT,     (char *)"Character_ATTACK", (long) Character::ATTACK, 0, 0, 0},
+{ SWIG_LUA_INT,     (char *)"Character_DEFEND", (long) Character::DEFEND, 0, 0, 0},
+{ SWIG_LUA_INT,     (char *)"Character_FALL", (long) Character::FALL, 0, 0, 0},
+{ SWIG_LUA_INT,     (char *)"Character_IDLE", (long) Character::IDLE, 0, 0, 0},
+{ SWIG_LUA_INT,     (char *)"Character_JUMP", (long) Character::JUMP, 0, 0, 0},
+{ SWIG_LUA_INT,     (char *)"Character_LAND", (long) Character::LAND, 0, 0, 0},
+{ SWIG_LUA_INT,     (char *)"Character_MOVE", (long) Character::MOVE, 0, 0, 0},
+{ SWIG_LUA_INT,     (char *)"Character_NUM_STATES", (long) Character::NUM_STATES, 0, 0, 0},
     {0,0,0,0,0,0}
 };
 
