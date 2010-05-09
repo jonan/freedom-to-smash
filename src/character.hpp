@@ -66,7 +66,7 @@ public:
 	//! Loads a character script.
 	//!
 	//! @param file Absolute or relative path to the lua script.
-	void loadScript(std::string const & file);
+	void handleScript(std::string const & file);
 
 private:
     // All the different states of a character.

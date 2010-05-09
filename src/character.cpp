@@ -40,23 +40,15 @@ Character::Character(Ogre::SceneManager &scene_manager)
         , collision_left(false)
         , jumping_time(0)
 {
-	loadScript("../scripts/char_sinbad.lua");
+	handleScript("../scripts/char_sinbad.lua");
 
-    //setEntity("sinbad");
     entity->getSkeleton()->setBlendMode(Ogre::ANIMBLEND_CUMULATIVE);
-    //attachEntityToBone("Sword", "Handle.L");
-    //attachEntityToBone("Sword", "Handle.R");
-    setPosition(Ogre::Vector3(0,5,0));
-    //node->yaw(Ogre::Degree(90));
+
     prepareAnimations();
     // Start with no action active
     for (int i=0; i < NUM_STATES; i++)
         action[i] = false;
     Ogre::Root::getSingleton().addFrameListener(this);
-    // Create a physic shape from the entity's bounding box
-    btVector3 size(3.0,10.0,2.0);
-    btCollisionShape *shape = &physics::ShapesManager::getInstance().getBoxShape(size);
-    setShape(*shape);
 }
 
 // Destructor
@@ -65,7 +57,7 @@ Character::~Character(void)
     Ogre::Root::getSingleton().removeFrameListener(this);
 }
 
-void Character::loadScript(std::string const & file)
+void Character::handleScript(std::string const & file)
 {
 	lua_State * L = ScriptManager::get().getL();
 	bool res = false;
@@ -80,10 +72,20 @@ void Character::loadScript(std::string const & file)
 	res = ev.evalNumber("Character.Yaw", yaw);
 
 	Ogre::Vector3 pos;
+	res = ev.evalVector3("Character.Position", pos);
+
+	Ogre::Vector3 size;
+	res = ev.evalVector3("Character.Size", size);
 
 	setEntity(ent);
+
+	setPosition(pos);
+
 	node->yaw(Ogre::Degree(yaw));
 
+	btVector3 bsize(size.x, size.y, size.z);
+	btCollisionShape * shape = &physics::ShapesManager::getInstance().getBoxShape(bsize);
+	setShape(*shape);
 
 	LuaEngine::BeginCallEx(L, "Character.OnCreate");
 	LuaEngine::PushPointer(L, this, "Character *");

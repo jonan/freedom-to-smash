@@ -3195,7 +3195,7 @@ static int _wrap_Character_loadScript(lua_State* L) {
   }
   
   temp2.assign(lua_tostring(L,2),lua_strlen(L,2)); arg2=&temp2;
-  (arg1)->loadScript((std::string const &)*arg2);
+  (arg1)->handleScript((std::string const &)*arg2);
   
   return SWIG_arg;
   
