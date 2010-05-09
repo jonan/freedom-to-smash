@@ -2,8 +2,9 @@
 Character =
 {
 	Name = "sinbad",
-	--Position = Ogre.Vector3(0,5,0),
-	--Size = Ogre.Vector3(3.0, 10.0, 2.0),
+	Position = ogre.Vector3(0,5,0),
+	Size = ogre.Vector3(3.0, 10.0, 2.0),
+	Yaw = 90,
 	
 	OnCreate = 
 		function( ch )
@@ -12,5 +13,3 @@ Character =
 		end
 }
 	
-	
-OnCharCreate = Character.OnCreate
