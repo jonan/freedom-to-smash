@@ -44,8 +44,8 @@ Character::Character(Ogre::SceneManager &scene_manager)
 
     //setEntity("sinbad");
     entity->getSkeleton()->setBlendMode(Ogre::ANIMBLEND_CUMULATIVE);
-    attachEntityToBone("Sword", "Handle.L");
-    attachEntityToBone("Sword", "Handle.R");
+    //attachEntityToBone("Sword", "Handle.L");
+    //attachEntityToBone("Sword", "Handle.R");
     setPosition(Ogre::Vector3(0,5,0));
     node->yaw(Ogre::Degree(90));
     prepareAnimations();
@@ -77,6 +77,10 @@ void Character::loadScript(std::string const & file)
 	res = ev.evalString("Character.Name", ent);
 
 	setEntity(ent);
+
+	LuaEngine::BeginCall(L, "OnCharCreate");
+	LuaEngine::PushPointer(L, this, "Character *");
+	LuaEngine::EndCall(L, 1);
 }
 
 // Start performing an attack.
