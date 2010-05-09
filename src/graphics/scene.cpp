@@ -169,8 +169,7 @@ void Scene::createSky(void)
     skyx->create();
     skyx->getVCloudsManager()->create();
     SkyX::AtmosphereManager::Options options = skyx->getAtmosphereManager()->getOptions();
-    options.RayleighMultiplier = 0.0045f;
-    skyx->getAtmosphereManager()->setOptions(options);
+	options.RayleighMultiplier = 0.0045f;
 }
 
 // Updates the dynamic sky.

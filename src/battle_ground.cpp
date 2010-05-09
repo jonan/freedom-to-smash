@@ -31,12 +31,13 @@ BattleGround::BattleGround(void)
         : end(false)
 {
     // Default settings
-    setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
-    setAmbientLight(Ogre::ColourValue(2.0,2.0,2.0));
+    //setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
+	setAmbientLight(Ogre::ColourValue(1.0,1.0,1.0));
     // Create camera
     look_node = getManager().getRootSceneNode()->createChildSceneNode();
     cam_node = getManager().getRootSceneNode()->createChildSceneNode();
     useCamera(addCamera("BattleGround Camera", *cam_node, *look_node));
+
     // Ground
     addObject("cube", Ogre::Vector3(0,-5,0));
     objects.back()->setScale(Ogre::Vector3(10,1,1));
@@ -47,6 +48,9 @@ BattleGround::BattleGround(void)
 #if DEBUG_PHYSIC_SHAPES
     createDebugDrawer(getManager());
 #endif
+
+	createWaterPlane();
+	createSky();
 }
 
 // Destructor
