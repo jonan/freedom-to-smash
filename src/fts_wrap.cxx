@@ -2141,50 +2141,7 @@ static swig_lua_class *swig_graphics_Object_bases[] = {0};
 static const char *swig_graphics_Object_base_names[] = {0};
 static swig_lua_class _wrap_class_graphics_Object = { "GraphicsObject", &SWIGTYPE_p_graphics__Object,_wrap_new_GraphicsObject, swig_delete_GraphicsObject, swig_graphics_Object_methods, swig_graphics_Object_attributes, swig_graphics_Object_bases, swig_graphics_Object_base_names };
 
-static int _wrap_new_GraphicsScene__SWIG_0(lua_State* L) {
-  int SWIG_arg = 0;
-  bool arg1 ;
-  bool arg2 ;
-  graphics::Scene *result = 0 ;
-  
-  SWIG_check_num_args("graphics::Scene",2,2)
-  if(!lua_isboolean(L,1)) SWIG_fail_arg("graphics::Scene",1,"bool const");
-  if(!lua_isboolean(L,2)) SWIG_fail_arg("graphics::Scene",2,"bool const");
-  arg1 = (lua_toboolean(L, 1)!=0);
-  arg2 = (lua_toboolean(L, 2)!=0);
-  result = (graphics::Scene *)new graphics::Scene(arg1,arg2);
-  SWIG_NewPointerObj(L,result,SWIGTYPE_p_graphics__Scene,1); SWIG_arg++; 
-  return SWIG_arg;
-  
-  if(0) SWIG_fail;
-  
-fail:
-  lua_error(L);
-  return SWIG_arg;
-}
-
-
-static int _wrap_new_GraphicsScene__SWIG_1(lua_State* L) {
-  int SWIG_arg = 0;
-  bool arg1 ;
-  graphics::Scene *result = 0 ;
-  
-  SWIG_check_num_args("graphics::Scene",1,1)
-  if(!lua_isboolean(L,1)) SWIG_fail_arg("graphics::Scene",1,"bool const");
-  arg1 = (lua_toboolean(L, 1)!=0);
-  result = (graphics::Scene *)new graphics::Scene(arg1);
-  SWIG_NewPointerObj(L,result,SWIGTYPE_p_graphics__Scene,1); SWIG_arg++; 
-  return SWIG_arg;
-  
-  if(0) SWIG_fail;
-  
-fail:
-  lua_error(L);
-  return SWIG_arg;
-}
-
-
-static int _wrap_new_GraphicsScene__SWIG_2(lua_State* L) {
+static int _wrap_new_GraphicsScene(lua_State* L) {
   int SWIG_arg = 0;
   graphics::Scene *result = 0 ;
   
@@ -2198,49 +2155,6 @@ static int _wrap_new_GraphicsScene__SWIG_2(lua_State* L) {
 fail:
   lua_error(L);
   return SWIG_arg;
-}
-
-
-static int _wrap_new_GraphicsScene(lua_State* L) {
-  int argc;
-  int argv[3]={
-    1,2,3
-  };
-  
-  argc = lua_gettop(L);
-  if (argc == 0) {
-    return _wrap_new_GraphicsScene__SWIG_2(L);
-  }
-  if (argc == 1) {
-    int _v;
-    {
-      _v = lua_isboolean(L,argv[0]);
-    }
-    if (_v) {
-      return _wrap_new_GraphicsScene__SWIG_1(L);
-    }
-  }
-  if (argc == 2) {
-    int _v;
-    {
-      _v = lua_isboolean(L,argv[0]);
-    }
-    if (_v) {
-      {
-        _v = lua_isboolean(L,argv[1]);
-      }
-      if (_v) {
-        return _wrap_new_GraphicsScene__SWIG_0(L);
-      }
-    }
-  }
-  
-  lua_pushstring(L,"Wrong arguments for overloaded function 'new_GraphicsScene'\n"
-    "  Possible C/C++ prototypes are:\n"
-    "    graphics::Scene(bool const,bool const)\n"
-    "    graphics::Scene(bool const)\n"
-    "    graphics::Scene()\n");
-  lua_error(L);return 0;
 }
 
 
@@ -3180,18 +3094,18 @@ fail:
 }
 
 
-static int _wrap_Character_loadScript(lua_State* L) {
+static int _wrap_Character_handleScript(lua_State* L) {
   int SWIG_arg = 0;
   Character *arg1 = (Character *) 0 ;
   std::string *arg2 = 0 ;
   std::string temp2 ;
   
-  SWIG_check_num_args("loadScript",2,2)
-  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("loadScript",1,"Character *");
-  if(!lua_isstring(L,2)) SWIG_fail_arg("loadScript",2,"std::string const &");
+  SWIG_check_num_args("handleScript",2,2)
+  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("handleScript",1,"Character *");
+  if(!lua_isstring(L,2)) SWIG_fail_arg("handleScript",2,"std::string const &");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_Character,0))){
-    SWIG_fail_ptr("Character_loadScript",1,SWIGTYPE_p_Character);
+    SWIG_fail_ptr("Character_handleScript",1,SWIGTYPE_p_Character);
   }
   
   temp2.assign(lua_tostring(L,2),lua_strlen(L,2)); arg2=&temp2;
@@ -3221,7 +3135,7 @@ static swig_lua_method swig_Character_methods[] = {
     {"stopMoving", _wrap_Character_stopMoving}, 
     {"recoverFromPenetration", _wrap_Character_recoverFromPenetration}, 
     {"reset", _wrap_Character_reset}, 
-    {"loadScript", _wrap_Character_loadScript}, 
+    {"handleScript", _wrap_Character_handleScript}, 
     {0,0}
 };
 static swig_lua_attribute swig_Character_attributes[] = {
