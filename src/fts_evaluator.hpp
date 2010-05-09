@@ -23,14 +23,52 @@ extern "C"
     #include "lua.h"
     #include "lualib.h"
     #include "lauxlib.h"
+
+	#include "swigrt.h"
 }
 
 #include <string>
 #include <lua_evaluator.hpp>
 
+#include <Ogre.h>
+
 
 class FtsEvaluator : public LuaEvaluator
 {
+public:
+
+	//! Evaluates an expression and stores the result in an Ogre::Vector3 .
+	//! If an error occurs, false is returned and the vector is not modified.
+	//!
+	//! @param expr Lua expression to evaluate to a string.
+	//! @param vec Vector which will keep the result.
+	//! @return True on success, false on error.
+	bool evalVector3(std::string const & expr, Ogre::Vector3 & vec)
+	{
+		// Get lua to evaluate the expression and store it into an internal
+		// global var.
+		std::string luaexpr = "_temp_eval = " + expr;
+
+		if( !luaL_dostring(L, luaexpr.c_str()) )
+		{
+			lua_getglobal( L, "_temp_eval" );
+
+			swig_type_info * pTypeInfo = SWIG_TypeQuery(L, "Ogre::Vector3 *");
+			if (pTypeInfo == 0)
+				throw std::runtime_error(std::string(
+				"Could not find vector type."));
+
+			void * vvect = 0;
+			SWIG_Lua_ConvertPtr(L, -1, &vvect, pTypeInfo, 0);
+			if(vvect)
+			{
+				Ogre::Vector3 * vectp = (Ogre::Vector3*)vvect;
+				vec = *vectp;
+			}
+		}
+
+		return false;
+	}
 
 };
 
