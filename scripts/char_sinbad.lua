@@ -10,6 +10,8 @@ Character =
 		function( ch )
 			ch:attachEntityToBone("Sword", "Handle.L")
 			ch:attachEntityToBone("Sword", "Handle.R")
-		end
+			
+			ch:createAnimation(ogre.Character.ATTACK, "SliceVertical")
+		end,
 }
 	

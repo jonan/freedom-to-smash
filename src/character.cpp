@@ -181,7 +181,7 @@ bool Character::frameStarted(const Ogre::FrameEvent &event)
 // Prepares all animations so they can be used.
 void Character::prepareAnimations(void)
 {
-    createAnimation(ATTACK, "SliceVertical");
+    //createAnimation(ATTACK, "SliceVertical");
     createAnimation(DEFEND, "DrawSwords");
     createAnimation(FALL, "JumpLoop", true);
     createAnimation(IDLE, "IdleTop", true);

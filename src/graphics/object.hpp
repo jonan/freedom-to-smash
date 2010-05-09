@@ -59,7 +59,8 @@ public:
     /// @param[in] z Units to move in the z axes.
     virtual void translate(const Real &x, const Real &y, const Real &z);
 
-protected:
+public:
+
     // Creates a new entity and returns a pointer to it.
     Ogre::Entity& createEntity(const String &name);
 
