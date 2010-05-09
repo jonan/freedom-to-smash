@@ -28,11 +28,18 @@
 
 %}
 
-
+%rename(GraphicsObject) graphics::Object;
 %include "graphics/object.hpp"
+
+%rename(GraphicsScene) graphics::Scene;
 %include "graphics/scene.hpp"
+
+%rename(PhysicsObject) physics::Object;
 %include "physics/object.hpp"
+
+%rename(PhysicsScene) physics::Scene;
 %include "physics/scene.hpp"
+
 
 %include "object.hpp"
 %include "character.hpp"
