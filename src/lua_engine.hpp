@@ -159,6 +159,39 @@ public:
         }
     }
 
+
+	//! Begins a call to a Lua function. After starting a call, the function parameters
+	//! should be pushed into the stack. This extended version of the function, unlike
+	//! the standard one, supports complex expressions as the function name.
+	//!
+	//! @param L Pointer to the Lua state.
+	//! @param name Expression which evaluates to the Lua function to call.
+	//!
+	//! @remark BeginCallEx and EndCall are not thread-safe. The user must guarantee
+	//! that BeginCallEx and EndCall pairs are executed atomically.
+	static void BeginCallEx(lua_State * L, std::string const & expr)
+	{
+		std::string luaexpr = "_temp_eval = " + expr;
+
+		if( !luaL_dostring(L, luaexpr.c_str()) )
+		{
+			// Retrieve the internal global var.
+			lua_getglobal(L, "_temp_eval");
+
+			// If the expression didn't evaluate to a function, something failed.
+			// We throw a runtime exception.
+ 			if(!lua_isfunction(L, -1))
+			{
+				lua_settop(L, mTop);
+				throw std::runtime_error(
+					std::string("LuaEng::BeginCallEx error. Expression didn't evaluate to a callable: ") +
+					expr
+					);
+			}
+		}
+	}
+
+
     //! It finishes a call. (It carries out the call itself).
     //! The arguments to pass to the function must have been pushed into the Lua
     //! stack before calling this method.
