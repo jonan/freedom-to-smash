@@ -28,7 +28,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #include <input.hpp>
 
 #include <lua_engine.hpp>
-#include <lua_evaluator.hpp>
+#include <fts_evaluator.hpp>
 #include <script_manager.hpp>
 
 // Constructor
@@ -69,7 +69,7 @@ void Character::loadScript(std::string const & file)
 {
 	lua_State * L = ScriptManager::get().getL();
 	bool res = false;
-	LuaEvaluator ev(L);
+	FtsEvaluator ev(L);
 
 	LuaEngine::RunFile(L, file);
 
@@ -78,6 +78,8 @@ void Character::loadScript(std::string const & file)
 
 	double yaw = 0;
 	res = ev.evalNumber("Character.Yaw", yaw);
+
+	Ogre::Vector3 pos;
 
 	setEntity(ent);
 	node->yaw(Ogre::Degree(yaw));

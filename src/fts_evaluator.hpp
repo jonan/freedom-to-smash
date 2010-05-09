@@ -37,6 +37,14 @@ class FtsEvaluator : public LuaEvaluator
 {
 public:
 
+	//! Constructs a FtsEvaluator.
+	//!
+	//! @param L Pointer to the lua_State to use for evaluating.
+	FtsEvaluator(lua_State * L)
+		: LuaEvaluator(L)
+	{
+	}
+
 	//! Evaluates an expression and stores the result in an Ogre::Vector3 .
 	//! If an error occurs, false is returned and the vector is not modified.
 	//!
