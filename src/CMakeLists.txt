@@ -20,6 +20,7 @@ set(
   script.cpp
   lua_engine.cpp
   lua_evaluator.cpp
+  fts_evaluator.cpp
   luautils.cpp
   script_manager.cpp
   )
@@ -54,6 +55,7 @@ set(
   ogre_wrap.cxx
   luautils.hpp
   lua_evaluator.hpp
+  fts_evaluator.hpp
   lua_engine.hpp
   script_manager.hpp
   
@@ -62,9 +64,12 @@ set(
   )
 
 source_group(Lua FILES luautils.cpp luautils.hpp lua_evaluator.cpp lua_evaluator.hpp lua_engine.cpp lua_engine.hpp script_manager.cpp script_manager.hpp)
+source_group(Lua FILES fts_evaluator.cpp fts_evaluator.hpp)
 source_group(Lua REGULAR_EXPRESSION .*\.i)
+source_group(Lua REGULAR_EXPRESSION lua.*)
 source_group(Lua\\Generated FILES swigrt.h)
 source_group(Lua\\Generated REGULAR_EXPRESSION .*_wrap.cxx)
+
 source_group(Scheduler FILES ITask.h Scheduler.h Scheduler.cpp ScheduledItem.h ScheduledItem.cpp)
 source_group(Graphics REGULAR_EXPRESSION graphics/.*)
 source_group(Physics REGULAR_EXPRESSION physics/.*)
