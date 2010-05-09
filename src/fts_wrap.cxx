@@ -2323,6 +2323,33 @@ fail:
 }
 
 
+static int _wrap_Character_loadScript(lua_State* L) {
+  int SWIG_arg = 0;
+  Character *arg1 = (Character *) 0 ;
+  std::string *arg2 = 0 ;
+  std::string temp2 ;
+  
+  SWIG_check_num_args("loadScript",2,2)
+  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("loadScript",1,"Character *");
+  if(!lua_isstring(L,2)) SWIG_fail_arg("loadScript",2,"std::string const &");
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_Character,0))){
+    SWIG_fail_ptr("Character_loadScript",1,SWIGTYPE_p_Character);
+  }
+  
+  temp2.assign(lua_tostring(L,2),lua_strlen(L,2)); arg2=&temp2;
+  (arg1)->loadScript((std::string const &)*arg2);
+  
+  return SWIG_arg;
+  
+  if(0) SWIG_fail;
+  
+fail:
+  lua_error(L);
+  return SWIG_arg;
+}
+
+
 static void swig_delete_Character(void *obj) {
 Character *arg1 = (Character *) obj;
 delete arg1;
@@ -2337,6 +2364,7 @@ static swig_lua_method swig_Character_methods[] = {
     {"stopMoving", _wrap_Character_stopMoving}, 
     {"recoverFromPenetration", _wrap_Character_recoverFromPenetration}, 
     {"reset", _wrap_Character_reset}, 
+    {"loadScript", _wrap_Character_loadScript}, 
     {0,0}
 };
 static swig_lua_attribute swig_Character_attributes[] = {

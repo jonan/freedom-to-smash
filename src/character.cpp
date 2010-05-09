@@ -28,6 +28,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #include <input.hpp>
 
 #include <lua_engine.hpp>
+#include <lua_evaluator.hpp>
 #include <script_manager.hpp>
 
 // Constructor
@@ -41,7 +42,7 @@ Character::Character(Ogre::SceneManager &scene_manager)
 {
 	loadScript("../scripts/char_sinbad.lua");
 
-    setEntity("sinbad");
+    //setEntity("sinbad");
     entity->getSkeleton()->setBlendMode(Ogre::ANIMBLEND_CUMULATIVE);
     attachEntityToBone("Sword", "Handle.L");
     attachEntityToBone("Sword", "Handle.R");
@@ -66,7 +67,16 @@ Character::~Character(void)
 
 void Character::loadScript(std::string const & file)
 {
-	LuaEngine::RunFile(ScriptManager::get().getL(), file);
+	lua_State * L = ScriptManager::get().getL();
+	bool res = false;
+	LuaEvaluator ev(L);
+
+	LuaEngine::RunFile(L, file);
+
+	std::string ent;
+	res = ev.evalString("Character.Name", ent);
+
+	setEntity(ent);
 }
 
 // Start performing an attack.
