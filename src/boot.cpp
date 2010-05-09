@@ -56,12 +56,14 @@ void setupRenderSystem(Ogre::Root &ogre_root)
 {
     // Try to use previous configuration (stored in ogre.cfg)
     if (!ogre_root.restoreConfig()) {
+        // Use Ogre's config dialog until be have our own GUI
+        ogre_root.showConfigDialog();
         // If there's no configuration file set defaults
-        Ogre::RenderSystem *render_system = ogre_root.getRenderSystemByName("OpenGL Rendering Subsystem");
+        /*Ogre::RenderSystem *render_system = ogre_root.getRenderSystemByName("OpenGL Rendering Subsystem");
         ogre_root.setRenderSystem(render_system);
         render_system->setConfigOption("Full Screen", "No");
         render_system->setConfigOption("Video Mode", "800 x 600");
-        ogre_root.saveConfig();
+        ogre_root.saveConfig();*/
     }
     ogre_root.initialise(true, "Freedom to Smash");
 }
