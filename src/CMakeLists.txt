@@ -84,6 +84,7 @@ target_link_libraries(
   ${OIS_LIBRARIES}
   ${OGRE_LIBRARIES}
   ${OPENAL_LIBRARY}
+  ${QUICK_GUI_LIBRARIES}
   ${SDL_LIBRARY}
   ${SKYX_LIBRARIES}
   )

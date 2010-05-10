@@ -14,6 +14,7 @@ find_package(SDL REQUIRED)
 include_directories(
   ${PROJECT_SOURCE_DIR}
   ${PROJECT_SOURCE_DIR}/bullet
+  ${PROJECT_SOURCE_DIR}/quick_gui/include
   ${PROJECT_SOURCE_DIR}/src
   ${Boost_INCLUDE_DIRS}
   ${LUA_INCLUDE_DIR}
@@ -91,6 +92,9 @@ set(
 
 add_subdirectory(hydrax)
 set(HYDRAX_LIBRARIES Hydrax)
+
+add_subdirectory(quick_gui)
+set(QUICK_GUI_LIBRARIES QuickGUI)
 
 add_subdirectory(skyx)
 set(SKYX_LIBRARIES SkyX)
