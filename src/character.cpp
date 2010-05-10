@@ -182,14 +182,14 @@ bool Character::frameStarted(const Ogre::FrameEvent &event)
 void Character::prepareAnimations(void)
 {
     //createAnimation(ATTACK, "SliceVertical");
-    createAnimation(DEFEND, "DrawSwords");
-    createAnimation(FALL, "JumpLoop", true);
-    createAnimation(IDLE, "IdleTop", true);
-    createAnimation(IDLE, "IdleBase", true);
-    createAnimation(JUMP, "JumpStart");
-    createAnimation(LAND, "JumpEnd");
-    createAnimation(MOVE, "RunTop", true);
-    createAnimation(MOVE, "RunBase", true);
+    //createAnimation(DEFEND, "DrawSwords");
+    //createAnimation(FALL, "JumpLoop", true);
+    //createAnimation(IDLE, "IdleTop", true);
+    //createAnimation(IDLE, "IdleBase", true);
+    //createAnimation(JUMP, "JumpStart");
+    //createAnimation(LAND, "JumpEnd");
+    //createAnimation(MOVE, "RunTop", true);
+    //createAnimation(MOVE, "RunBase", true);
 }
 
 // Funtion that needs to be called every frame for the character to be updated.

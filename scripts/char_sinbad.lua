@@ -11,7 +11,15 @@ Character =
 			ch:attachEntityToBone("Sword", "Handle.L")
 			ch:attachEntityToBone("Sword", "Handle.R")
 			
-			ch:createAnimation(ogre.Character.ATTACK, "SliceVertical")
+			ch:createAnimation(fts.Character_ATTACK, "SliceVertical")
+			ch:createAnimation(fts.Character_DEFEND, "DrawSwords");
+			ch:createAnimation(fts.Character_FALL, "JumpLoop", true);
+			ch:createAnimation(fts.Character_IDLE, "IdleTop", true);
+			ch:createAnimation(fts.Character_IDLE, "IdleBase", true);
+			ch:createAnimation(fts.Character_JUMP, "JumpStart");
+			ch:createAnimation(fts.Character_LAND, "JumpEnd");
+			ch:createAnimation(fts.Character_MOVE, "RunTop", true);
+			ch:createAnimation(fts.Character_MOVE, "RunBase", true);
 		end,
 }
 	
