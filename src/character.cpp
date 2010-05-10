@@ -106,11 +106,16 @@ void Character::handleScript(std::string const & file)
 	Ogre::Vector3 size;
 	res = ev.evalVector3("Character.Size", size);
 
+	double scale = 1;
+	res = ev.evalNumber("Character.Scale", scale);
+
 	setEntity(ent);
 
 	setPosition(pos);
 
 	node->yaw(Ogre::Degree(yaw));
+
+	node->setScale(scale, scale, scale);
 
 	btVector3 bsize(size.x, size.y, size.z);
 	btCollisionShape * shape = &physics::ShapesManager::getInstance().getBoxShape(bsize);
