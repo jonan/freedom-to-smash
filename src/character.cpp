@@ -65,7 +65,7 @@ Character::Character( Ogre::SceneManager & scene_manager, std::string const & ch
 , jumping_time(0)
 {
 	std::string script_path = boost::str(boost::format(
-		"../scripts/char_%s.lua") % script_path);
+		"../scripts/char_%s.lua") % charname);
 
 	handleScript(script_path);
 
