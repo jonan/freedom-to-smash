@@ -61,9 +61,9 @@ BattleGround::~BattleGround(void)
 }
 
 // Creates a character and adds it to the battle ground.
-Character* BattleGround::createCharacter(void)
+Character* BattleGround::createCharacter(std::string const & char_name)
 {
-    Character *character = new Character(getManager());
+    Character *character = new Character(getManager(), char_name);
     players.push_back(character);
     physics::Scene::addCollisionObject(*character);
     return character;

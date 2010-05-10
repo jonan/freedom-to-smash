@@ -22,6 +22,9 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #include <stdexcept>
 #include <iostream>
 
+#include <fts_evaluator.hpp>
+#include <script_manager.hpp>
+
 // FtS
 #include <battle_ground.hpp>
 #include <boot.hpp>
@@ -31,15 +34,20 @@ int main(int argc, char *argv[])
 {
 	try 
 	{
-
 		boot();
+
+		std::string player1, player2;
+		FtsEvaluator ev(ScriptManager::get().getL());
+		ev.evalString("Config.Player1", player1);
+		ev.evalString("Config.Player2", player2);
+
 		Player *player = new Player(1);
 		BattleGround *battle = new BattleGround;
 		player->setBattleground(*battle);
-		player->setCharacter();
+		player->setCharacter(player1);
 		player = new Player(2);
 		player->setBattleground(*battle);
-		player->setCharacter();
+		player->setCharacter(player2);
 		battle->start();
 		delete battle;
 		quit();

@@ -38,7 +38,7 @@ public:
 
     /// Creates a character and adds it to the battle ground.
     /// @return Created character.
-    Character* createCharacter(void);
+	Character* createCharacter(std::string const & char_name);
 
     /// Starts the battle.
     void start(void);

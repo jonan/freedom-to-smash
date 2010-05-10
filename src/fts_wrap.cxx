@@ -3715,15 +3715,19 @@ fail:
 static int _wrap_Player_setCharacter(lua_State* L) {
   int SWIG_arg = 0;
   Player *arg1 = (Player *) 0 ;
+  std::string *arg2 = 0 ;
+  std::string temp2 ;
   
-  SWIG_check_num_args("setCharacter",1,1)
+  SWIG_check_num_args("setCharacter",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("setCharacter",1,"Player *");
+  if(!lua_isstring(L,2)) SWIG_fail_arg("setCharacter",2,"std::string const &");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_Player,0))){
     SWIG_fail_ptr("Player_setCharacter",1,SWIGTYPE_p_Player);
   }
   
-  (arg1)->setCharacter();
+  temp2.assign(lua_tostring(L,2),lua_strlen(L,2)); arg2=&temp2;
+  (arg1)->setCharacter((std::string const &)*arg2);
   
   return SWIG_arg;
   

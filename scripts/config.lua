@@ -5,7 +5,9 @@ Config =
     WelcomeMessage = "Welcome!",
     MajorVersion = 0,
     MinorVersion = 2,
-    Num = 3.14
+    Num = 3.14,
+	Player1 = "sinbad",
+	Player2 = "sinbad"
 }
 
 
