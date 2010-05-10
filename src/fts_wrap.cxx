@@ -3292,7 +3292,7 @@ static swig_lua_class *swig_Object_bases[] = {0,0,0};
 static const char *swig_Object_base_names[] = {"graphics::Object *","physics::Object *",0};
 static swig_lua_class _wrap_class_Object = { "Object", &SWIGTYPE_p_Object,_wrap_new_Object, swig_delete_Object, swig_Object_methods, swig_Object_attributes, swig_Object_bases, swig_Object_base_names };
 
-static int _wrap_new_Character(lua_State* L) {
+static int _wrap_new_Character__SWIG_0(lua_State* L) {
   int SWIG_arg = 0;
   Ogre::SceneManager *arg1 = 0 ;
   Character *result = 0 ;
@@ -3313,6 +3313,83 @@ static int _wrap_new_Character(lua_State* L) {
 fail:
   lua_error(L);
   return SWIG_arg;
+}
+
+
+static int _wrap_new_Character__SWIG_1(lua_State* L) {
+  int SWIG_arg = 0;
+  Ogre::SceneManager *arg1 = 0 ;
+  std::string *arg2 = 0 ;
+  std::string temp2 ;
+  Character *result = 0 ;
+  
+  SWIG_check_num_args("Character",2,2)
+  if(!lua_isuserdata(L,1)) SWIG_fail_arg("Character",1,"Ogre::SceneManager &");
+  if(!lua_isstring(L,2)) SWIG_fail_arg("Character",2,"std::string const &");
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_Ogre__SceneManager,0))){
+    SWIG_fail_ptr("new_Character",1,SWIGTYPE_p_Ogre__SceneManager);
+  }
+  
+  temp2.assign(lua_tostring(L,2),lua_strlen(L,2)); arg2=&temp2;
+  result = (Character *)new Character(*arg1,(std::string const &)*arg2);
+  SWIG_NewPointerObj(L,result,SWIGTYPE_p_Character,1); SWIG_arg++; 
+  return SWIG_arg;
+  
+  if(0) SWIG_fail;
+  
+fail:
+  lua_error(L);
+  return SWIG_arg;
+}
+
+
+static int _wrap_new_Character(lua_State* L) {
+  int argc;
+  int argv[3]={
+    1,2,3
+  };
+  
+  argc = lua_gettop(L);
+  if (argc == 1) {
+    int _v;
+    {
+      void *ptr;
+      if (lua_isuserdata(L,argv[0])==0 || SWIG_ConvertPtr(L,argv[0], (void **) &ptr, SWIGTYPE_p_Ogre__SceneManager, 0)) {
+        _v = 0;
+      } else {
+        _v = 1;
+      }
+    }
+    if (_v) {
+      return _wrap_new_Character__SWIG_0(L);
+    }
+  }
+  if (argc == 2) {
+    int _v;
+    {
+      void *ptr;
+      if (lua_isuserdata(L,argv[0])==0 || SWIG_ConvertPtr(L,argv[0], (void **) &ptr, SWIGTYPE_p_Ogre__SceneManager, 0)) {
+        _v = 0;
+      } else {
+        _v = 1;
+      }
+    }
+    if (_v) {
+      {
+        _v = lua_isstring(L,argv[1]);
+      }
+      if (_v) {
+        return _wrap_new_Character__SWIG_1(L);
+      }
+    }
+  }
+  
+  lua_pushstring(L,"Wrong arguments for overloaded function 'new_Character'\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    Character(Ogre::SceneManager &)\n"
+    "    Character(Ogre::SceneManager &,std::string const &)\n");
+  lua_error(L);return 0;
 }
 
 

@@ -33,7 +33,16 @@ enum MoveDirection {RIGHT, LEFT};
 /// Class to control a character.
 class Character : public Object, public Ogre::FrameListener {
 public:
-    explicit Character(Ogre::SceneManager &scene_manager); // Constructor
+    
+	explicit Character(Ogre::SceneManager &scene_manager); // Constructor
+
+	//! Constructs a character from a Lua script. 
+	//! The script file name depends on the char name. For the character name
+	//! "sinbad", for instance, the script file name would be char_sinbad.lua.
+	//!
+	explicit Character(Ogre::SceneManager & scene_manager, 
+		std::string const & charname);
+
     ~Character(void); // Destructor
 
     // @{

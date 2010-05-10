@@ -19,7 +19,10 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 
 // Boost
 #include <boost/foreach.hpp>
+#include <boost/format.hpp>
+
 // Ogre
+
 #include <OgreEntity.h>
 #include <OgreRoot.h>
 
@@ -45,10 +48,36 @@ Character::Character(Ogre::SceneManager &scene_manager)
     entity->getSkeleton()->setBlendMode(Ogre::ANIMBLEND_CUMULATIVE);
 
     prepareAnimations();
+
     // Start with no action active
     for (int i=0; i < NUM_STATES; i++)
         action[i] = false;
+
     Ogre::Root::getSingleton().addFrameListener(this);
+}
+
+Character::Character( Ogre::SceneManager & scene_manager, std::string const & charname )
+: Object(scene_manager, NUM_STATES)
+, on_floor(true)
+, has_double_jumped(false)
+, collision_right(false)
+, collision_left(false)
+, jumping_time(0)
+{
+	std::string script_path = boost::str(boost::format(
+		"../scripts/char_%s.lua") % script_path);
+
+	handleScript(script_path);
+
+	entity->getSkeleton()->setBlendMode(Ogre::ANIMBLEND_CUMULATIVE);
+
+	prepareAnimations();
+
+	// Start with no action active
+	for (int i=0; i < NUM_STATES; i++)
+		action[i] = false;
+
+	Ogre::Root::getSingleton().addFrameListener(this);
 }
 
 // Destructor
