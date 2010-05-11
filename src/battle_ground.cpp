@@ -26,6 +26,9 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 // FtS
 #include <character.hpp>
 
+#include <fts_evaluator.hpp>
+#include <script_manager.hpp>
+
 // Constructor
 BattleGround::BattleGround(void)
         : end(false)
@@ -49,8 +52,15 @@ BattleGround::BattleGround(void)
     createDebugDrawer(getManager());
 #endif
 
-	createWaterPlane();
-	createSky();
+	bool hydrax = false, skyx = false;
+	FtsEvaluator ev(ScriptManager::get().getL());
+	ev.evalBool("Config.Hydrax", hydrax);
+	ev.evalBool("Config.SkyX", skyx);
+
+	if(hydrax)
+		createWaterPlane();
+	if(skyx)
+		createSky();
 }
 
 // Destructor

@@ -7,7 +7,9 @@ Config =
     MinorVersion = 2,
     Num = 3.14,
 	Player1 = "sinbad",
-	Player2 = "sinbad"
+	Player2 = "ninja",
+	Hydrax = true,
+	SkyX = true
 }
 
 
