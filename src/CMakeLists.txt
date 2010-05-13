@@ -23,6 +23,8 @@ set(
   fts_evaluator.cpp
   luautils.cpp
   script_manager.cpp
+  ogre_wrap.cxx
+  fts_wrap.cxx
   )
 
 set(
@@ -58,7 +60,7 @@ set(
   fts_evaluator.hpp
   lua_engine.hpp
   script_manager.hpp
-  
+
   fts.i
   ogre.i
   )
