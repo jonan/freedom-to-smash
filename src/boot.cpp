@@ -25,6 +25,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #include <OgreRoot.h>
 
 // FtS
+#include <gui/gui.hpp>
 #include <input.hpp>
 #include <lua_engine.hpp>
 #include <lua_evaluator.hpp>
@@ -116,6 +117,7 @@ void boot(void)
     Ogre::Root *ogre_root = new Ogre::Root;
     defineResources();
     setupRenderSystem(*ogre_root);
+    gui::Gui::registerScriptReader();
     initializeAllResources();
     // Start capturing all input
     Input::getInstance();
