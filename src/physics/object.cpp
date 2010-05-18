@@ -18,7 +18,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #include <physics/object.hpp>
 
 // Bullet
-#include <btBulletCollisionCommon.h>
+#include <btBulletDynamicsCommon.h>
 
 // FtS
 #include <physics/scene.hpp>
@@ -29,7 +29,7 @@ namespace physics {
 Object::Object(void)
         : shape(NULL)
         , offset(new btTransform)
-        , collision_object(new btCollisionObject)
+        , physic_object(NULL)
         , scene(NULL)
 {
 
@@ -38,27 +38,30 @@ Object::Object(void)
 // Desctructor
 Object::~Object(void)
 {
-    if (scene) scene->removeCollisionObject(*this);
+    if (scene) scene->removePhysicObject(*this);
     delete offset;
-    delete collision_object;
+    delete physic_object;
 }
 
 // Set function.
-void Object::setShape(btCollisionShape &shape, const btTransform &center_offset)
+void Object::createBody(const Real &mass, btCollisionShape &shape, const btTransform &center_offset)
 {
+    btVector3 inertia;
+    shape.calculateLocalInertia(mass, inertia);
+    btRigidBody::btRigidBodyConstructionInfo info(mass, NULL, &shape, inertia);
+    physic_object = new btRigidBody(info);
     this->shape = &shape;
     *offset = center_offset;
-    collision_object->setCollisionShape(&shape);
 }
 
 // Set function.
 void Object::setPosition(const btTransform &pos)
 {
-    collision_object->setWorldTransform(pos);
+    //collision_object->setWorldTransform(pos);
 }
 
 // Detects collisions with the given object.
-int Object::detectCollision(const Object &obj) const
+/*int Object::detectCollision(const Object &obj) const
 {
     int collision_type = NO_COLLISION;
     if (scene) {
@@ -107,6 +110,6 @@ int Object::detectCollision(const Object &obj) const
         }
     }
     return collision_type;
-}
+}*/
 
 } // namespace physics

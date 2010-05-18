@@ -35,7 +35,7 @@ BattleGround::BattleGround(void)
 {
     // Default settings
     //setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
-	setAmbientLight(Ogre::ColourValue(1,1,1));
+    setAmbientLight(Ogre::ColourValue(1,1,1));
     // Create camera
     look_node = getManager().getRootSceneNode()->createChildSceneNode();
     cam_node = getManager().getRootSceneNode()->createChildSceneNode();
@@ -52,15 +52,15 @@ BattleGround::BattleGround(void)
     createDebugDrawer(getManager());
 #endif
 
-	bool hydrax = false, skyx = false;
-	FtsEvaluator ev(ScriptManager::get().getL());
-	ev.evalBool("Config.Hydrax", hydrax);
-	ev.evalBool("Config.SkyX", skyx);
+    bool hydrax = false, skyx = false;
+    FtsEvaluator ev(ScriptManager::get().getL());
+    ev.evalBool("Config.Hydrax", hydrax);
+    ev.evalBool("Config.SkyX", skyx);
 
-	if(hydrax)
-		createWaterPlane();
-	if(skyx)
-		createSky();
+    if(hydrax)
+        createWaterPlane();
+    if(skyx)
+        createSky();
 }
 
 // Destructor
@@ -75,7 +75,7 @@ Character* BattleGround::createCharacter(std::string const & char_name)
 {
     Character *character = new Character(getManager(), char_name);
     players.push_back(character);
-    physics::Scene::addCollisionObject(*character);
+    physics::Scene::addPhysicObject(*character);
     return character;
 }
 

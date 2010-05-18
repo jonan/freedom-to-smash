@@ -29,8 +29,8 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #include <util.hpp>
 
 // Bullet
-class btCollisionObject;
 class btCollisionShape;
+class btRigidBody;
 
 namespace physics {
 
@@ -51,25 +51,25 @@ public:
 
     // @{
     /// Set functions.
-    void setShape(btCollisionShape &shape, const btTransform &center_offset = btTransform::getIdentity());
+    void createBody(const Real &mass, btCollisionShape &shape, const btTransform &center_offset = btTransform::getIdentity());
     void setScene(Scene *scene) {this->scene = scene;}
     void setPosition(const btTransform &pos);
     // @}
 
     // @{
     /// Get functions.
-    btCollisionObject& getCollisionObject(void) {return *collision_object;}
+    btRigidBody& getPhysicObject(void) {return *physic_object;}
     // @}
 
     /// Detects collisions with the given object.
     /// @param[in] obj Object.
     /// @return Type of collision.
-    int detectCollision(const Object &obj) const;
+    //int detectCollision(const Object &obj) const;
 
 private:
     btCollisionShape *shape;
     btTransform *offset;
-    btCollisionObject *collision_object;
+    btRigidBody *physic_object;
 
     Scene *scene;
 

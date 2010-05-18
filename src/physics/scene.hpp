@@ -29,10 +29,11 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #include <util.hpp>
 
 // Bullet
-class btAxisSweep3;
+class btBroadphaseInterface;
 class btCollisionDispatcher;
-class btCollisionWorld;
 class btDefaultCollisionConfiguration;
+class btDiscreteDynamicsWorld;
+class btSequentialImpulseConstraintSolver;
 
 namespace physics {
 
@@ -60,8 +61,8 @@ public:
 
     // @{
     /// Add or remove objects from the scene.
-    void addCollisionObject    (Object &obj);
-    void removeCollisionObject (Object &obj);
+    void addPhysicObject    (Object &obj);
+    void removePhysicObject (Object &obj);
     // @}
 
     // @{
@@ -72,13 +73,18 @@ public:
     /// Detects all the collisions between the objects in the scene.
     void detectCollisions(void);
 
+    /// Steps the physic simulation.
+    /// @param time Time to step.
+    void simulate(const Real &time);
+
 private:
-    btCollisionWorld *world;
-    std::list<Object*> collision_objects;
+    btDiscreteDynamicsWorld *world;
+    std::list<Object*> physic_objects;
 
     btDefaultCollisionConfiguration *configuration;
     btCollisionDispatcher *dispatcher;
-    btAxisSweep3 *broadphase;
+    btBroadphaseInterface *broadphase;
+    btSequentialImpulseConstraintSolver *solver;
 
 #if DEBUG_PHYSIC_SHAPES
     DebugDrawer *debug_drawer;

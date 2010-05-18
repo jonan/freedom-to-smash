@@ -15,13 +15,15 @@ You should have received a copy of the GNU General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>
 */
 
-#include "scene.hpp"
+#include <physics/scene.hpp>
 
-#include <btBulletCollisionCommon.h>
+// Bullet
+#include <btBulletDynamicsCommon.h>
 
-#include "object.hpp"
+// FtS
+#include <physics/object.hpp>
 #if DEBUG_PHYSIC_SHAPES
-#include "debug_drawer.hpp"
+#include <physics/debug_drawer.hpp>
 #endif
 
 namespace physics {
@@ -30,19 +32,22 @@ namespace physics {
 Scene::Scene(void)
         : configuration(new btDefaultCollisionConfiguration)
         , dispatcher(new btCollisionDispatcher(configuration))
+        , broadphase(new btDbvtBroadphase)
+        , solver(new btSequentialImpulseConstraintSolver)
 #if DEBUG_PHYSIC_SHAPES
         , debug_drawer(NULL)
 #endif
 {
-    broadphase = new btAxisSweep3(btVector3(-1000,-1000,-1000), btVector3(1000,1000,1000));
-    world = new btCollisionWorld(dispatcher, broadphase, configuration);
+    world = new btDiscreteDynamicsWorld(dispatcher, broadphase, solver, configuration);
+    world->setGravity(btVector3(0,-10,0));
 }
 
 // Destructor
 Scene::~Scene(void) {
-    while (!collision_objects.empty())
-        removeCollisionObject(*collision_objects.front());
+    while (!physic_objects.empty())
+        removePhysicObject(*physic_objects.front());
     delete world;
+    delete solver;
     delete broadphase;
     delete dispatcher;
     delete configuration;
@@ -72,25 +77,34 @@ void Scene::drawDebugLines(void)
 #endif
 
 // Add an objects to the scene.
-void Scene::addCollisionObject(Object &obj)
+void Scene::addPhysicObject(Object &obj)
 {
     obj.setScene(this);
-    world->addCollisionObject(&obj.getCollisionObject());
-    collision_objects.push_back(&obj);
+    world->addRigidBody(&obj.getPhysicObject());
+    physic_objects.push_back(&obj);
 }
 
 // Remove an objects from the scene.
-void Scene::removeCollisionObject(Object &obj)
+void Scene::removePhysicObject(Object &obj)
 {
     obj.setScene(NULL);
-    world->removeCollisionObject(&obj.getCollisionObject());
-    collision_objects.remove(&obj);
+    world->removeRigidBody(&obj.getPhysicObject());
+    physic_objects.remove(&obj);
 }
 
 // Detects all the collisions between the objects in the scene.
 void Scene::detectCollisions(void)
 {
     world->performDiscreteCollisionDetection();
+#if DEBUG_PHYSIC_SHAPES
+    drawDebugLines();
+#endif
+}
+
+// Steps the physic simulation.
+void Scene::simulate(const Real &time)
+{
+    world->stepSimulation(time, 7);
 #if DEBUG_PHYSIC_SHAPES
     drawDebugLines();
 #endif
