@@ -40,3 +40,10 @@ void Scene::addObject(const String &entity, const Ogre::Vector3 &position)
     physics::Scene::addCollisionObject(*obj);
     objects.push_back(obj);
 }
+
+// Function that's called at the beginning of every frame.
+bool Scene::frameStarted(const Ogre::FrameEvent &event)
+{
+    simulate(event.timeSinceLastFrame);
+    return true;
+}

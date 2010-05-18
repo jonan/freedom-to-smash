@@ -43,7 +43,7 @@ protected:
     void addObject(const String &entity, const Ogre::Vector3 &position);
 
     // This function is called at the beginnig of every frame.
-    virtual bool frameStarted(const Ogre::FrameEvent &event) = 0;
+    virtual bool frameStarted(const Ogre::FrameEvent &event);
 
     std::list<Object*> objects;
 
