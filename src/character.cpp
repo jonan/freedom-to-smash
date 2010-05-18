@@ -35,7 +35,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #include <script_manager.hpp>
 
 // Constructor
-Character::Character(Ogre::SceneManager &scene_manager)
+Character::Character(const String &name, Ogre::SceneManager &scene_manager)
         : Object(scene_manager, NUM_STATES)
         , on_floor(true)
         , has_double_jumped(false)
@@ -43,11 +43,10 @@ Character::Character(Ogre::SceneManager &scene_manager)
         , collision_left(false)
         , jumping_time(0)
 {
-	handleScript("../scripts/char_sinbad.lua");
+    String script_path = boost::str(boost::format("../scripts/char_%s.lua") % name);
+    handleScript(script_path);
 
     entity->getSkeleton()->setBlendMode(Ogre::ANIMBLEND_CUMULATIVE);
-
-    prepareAnimations();
 
     // Start with no action active
     for (int i=0; i < NUM_STATES; i++)
@@ -56,74 +55,54 @@ Character::Character(Ogre::SceneManager &scene_manager)
     Ogre::Root::getSingleton().addFrameListener(this);
 }
 
-Character::Character( Ogre::SceneManager & scene_manager, std::string const & charname )
-: Object(scene_manager, NUM_STATES)
-, on_floor(true)
-, has_double_jumped(false)
-, collision_right(false)
-, collision_left(false)
-, jumping_time(0)
-{
-	std::string script_path = boost::str(boost::format(
-		"../scripts/char_%s.lua") % charname);
-
-	handleScript(script_path);
-
-	entity->getSkeleton()->setBlendMode(Ogre::ANIMBLEND_CUMULATIVE);
-
-	prepareAnimations();
-
-	// Start with no action active
-	for (int i=0; i < NUM_STATES; i++)
-		action[i] = false;
-
-	Ogre::Root::getSingleton().addFrameListener(this);
-}
-
 // Destructor
 Character::~Character(void)
 {
     Ogre::Root::getSingleton().removeFrameListener(this);
 }
 
-void Character::handleScript(std::string const & file)
+// Loads a character script.
+void Character::handleScript(const String &file)
 {
-	lua_State * L = ScriptManager::get().getL();
-	bool res = false;
-	FtsEvaluator ev(L);
+    lua_State * L = ScriptManager::get().getL();
+    bool res = false;
+    FtsEvaluator ev(L);
 
-	LuaEngine::RunFile(L, file);
+    LuaEngine::RunFile(L, file);
 
-	std::string ent;
-	res = ev.evalString("Character.Name", ent);
+    std::string ent;
+    res = ev.evalString("Character.Name", ent);
 
-	double yaw = 0;
-	res = ev.evalNumber("Character.Yaw", yaw);
+    double mass = 0;
+    res = ev.evalNumber("Character.Mass", mass);
 
-	Ogre::Vector3 pos;
-	res = ev.evalVector3("Character.Position", pos);
+    double yaw = 0;
+    res = ev.evalNumber("Character.Yaw", yaw);
 
-	Ogre::Vector3 size;
-	res = ev.evalVector3("Character.Size", size);
+    Ogre::Vector3 pos;
+    res = ev.evalVector3("Character.Position", pos);
 
-	double scale = 1;
-	res = ev.evalNumber("Character.Scale", scale);
+    Ogre::Vector3 size;
+    res = ev.evalVector3("Character.Size", size);
 
-	setEntity(ent);
+    double scale = 1;
+    res = ev.evalNumber("Character.Scale", scale);
 
-	setPosition(pos);
+    setEntity(ent);
 
-	node->yaw(Ogre::Degree(yaw));
+    setPosition(pos);
 
-	node->setScale(scale, scale, scale);
+    node->yaw(Ogre::Degree(yaw));
 
-	btVector3 bsize(size.x, size.y, size.z);
-	btCollisionShape * shape = &physics::ShapesManager::getInstance().getBoxShape(bsize);
-	setShape(*shape);
+    node->setScale(scale, scale, scale);
 
-	LuaEngine::BeginCallEx(L, "Character.OnCreate");
-	LuaEngine::PushPointer(L, this, "Character *");
-	LuaEngine::EndCall(L, 1);
+    btVector3 bsize(size.x, size.y, size.z);
+    btCollisionShape * shape = &physics::ShapesManager::getInstance().getBoxShape(bsize);
+    createBody(mass, *shape);
+
+    LuaEngine::BeginCallEx(L, "Character.OnCreate");
+    LuaEngine::PushPointer(L, this, "Character *");
+    LuaEngine::EndCall(L, 1);
 }
 
 // Start performing an attack.
@@ -173,7 +152,7 @@ void Character::move(const MoveDirection direction)
 // Detects and solves collisions of the character with the battle ground.
 void Character::recoverFromPenetration(const std::list<Object*> &objects)
 {
-    on_floor = false;
+    /*on_floor = false;
 
     int collision;
     collision_right = collision_left = false;
@@ -193,7 +172,7 @@ void Character::recoverFromPenetration(const std::list<Object*> &objects)
                 has_double_jumped = false;
             }
         }
-    }
+    }*/
 }
 
 //
@@ -210,20 +189,6 @@ bool Character::frameStarted(const Ogre::FrameEvent &event)
     frameAnimation(event);
     frameMovement(event);
     return true;
-}
-
-// Prepares all animations so they can be used.
-void Character::prepareAnimations(void)
-{
-    //createAnimation(ATTACK, "SliceVertical");
-    //createAnimation(DEFEND, "DrawSwords");
-    //createAnimation(FALL, "JumpLoop", true);
-    //createAnimation(IDLE, "IdleTop", true);
-    //createAnimation(IDLE, "IdleBase", true);
-    //createAnimation(JUMP, "JumpStart");
-    //createAnimation(LAND, "JumpEnd");
-    //createAnimation(MOVE, "RunTop", true);
-    //createAnimation(MOVE, "RunBase", true);
 }
 
 // Funtion that needs to be called every frame for the character to be updated.

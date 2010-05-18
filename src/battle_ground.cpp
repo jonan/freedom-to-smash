@@ -73,7 +73,7 @@ BattleGround::~BattleGround(void)
 // Creates a character and adds it to the battle ground.
 Character* BattleGround::createCharacter(std::string const & char_name)
 {
-    Character *character = new Character(getManager(), char_name);
+    Character *character = new Character(char_name, getManager());
     players.push_back(character);
     physics::Scene::addPhysicObject(*character);
     return character;
@@ -89,6 +89,7 @@ void BattleGround::start(void)
 // Function that's called at the beginning of every frame.
 bool BattleGround::frameStarted(const Ogre::FrameEvent &event)
 {
+    Scene::frameStarted(event);
     updateWaterPlane(event.timeSinceLastFrame);
     updateSky(event.timeSinceLastFrame);
     detectCollisions();

@@ -33,17 +33,11 @@ enum MoveDirection {RIGHT, LEFT};
 /// Class to control a character.
 class Character : public Object, public Ogre::FrameListener {
 public:
-    
-	explicit Character(Ogre::SceneManager &scene_manager); // Constructor
-
-	//! Constructs a character from a Lua script. 
-	//! The script file name depends on the char name. For the character name
-	//! "sinbad", for instance, the script file name would be char_sinbad.lua.
-	//!
-	explicit Character(Ogre::SceneManager & scene_manager, 
-		std::string const & charname);
-
+    explicit Character(const String &name, Ogre::SceneManager &scene_manager); // Constructor
     ~Character(void); // Destructor
+
+    /// All the different states of a character.
+    enum {ATTACK, DEFEND, FALL, IDLE, JUMP, LAND, MOVE, NUM_STATES};
 
     // @{
     /// Get functions.
@@ -72,22 +66,13 @@ public:
     ///
     void reset(void);
 
-	//! Loads a character script.
-	//!
-	//! @param file Absolute or relative path to the lua script.
-	void handleScript(std::string const & file);
-
-
-    // All the different states of a character.
-    enum {ATTACK, DEFEND, FALL, IDLE, JUMP, LAND, MOVE, NUM_STATES};
+    /// Loads a character script.
+    /// @param[in] file Path of the script to load.
+    void handleScript(const String &file);
 
 private:
-
     // Function that's called at the beginning of every frame.
     virtual bool frameStarted(const Ogre::FrameEvent &event);
-
-    // Prepares all animations so they can be used.
-    void prepareAnimations(void);
 
     // @{
     // Funtions that need to be called every frame for the character to be updated.
