@@ -37,7 +37,7 @@ void Scene::addObject(const String &entity, const Ogre::Vector3 &position)
     Object *obj = new Object(getManager());
     obj->setEntity(entity);
     obj->setPosition(position);
-    physics::Scene::addCollisionObject(*obj);
+    physics::Scene::addPhysicObject(*obj);
     objects.push_back(obj);
 }
 

@@ -39,7 +39,7 @@ void Object::setEntity(const String &name)
     Ogre::AxisAlignedBox bounding_box = entity->getBoundingBox();
     btVector3 size = physics::vector3(bounding_box.getMaximum() - bounding_box.getMinimum());
     btCollisionShape *shape = &physics::ShapesManager::getInstance().getBoxShape(size);
-    setShape(*shape);
+    createBody(0, *shape);
 }
 
 // Set function.
@@ -58,7 +58,7 @@ void Object::setScale(const Ogre::Vector3 &scale)
     btVector3 size = physics::vector3(bounding_box.getMaximum() - bounding_box.getMinimum());
     size *= physics::vector3(scale);
     btCollisionShape *shape = &physics::ShapesManager::getInstance().getBoxShape(size);
-    setShape(*shape);
+    createBody(0, *shape);
 }
 
 // Move the object.
