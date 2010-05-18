@@ -82,10 +82,10 @@ endif()
 add_subdirectory(bullet)
 set(
   BULLET_LIBRARIES
-  BulletCollision
-  BulletDynamics
-  BulletMultiThreaded
   BulletSoftBody
+  BulletDynamics
+  BulletCollision
+  BulletMultiThreaded
   LinearMath
   )
 
