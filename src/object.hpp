@@ -47,6 +47,9 @@ public:
     virtual const Ogre::Vector3& getPosition (void) const;
     // @}
 
+    /// Creates the physic object that can then be added to a physic scene.
+    void createPhysicObject(void);
+
 private:
     DISALLOW_COPY_AND_ASSIGN(Object);
 };

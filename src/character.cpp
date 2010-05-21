@@ -46,8 +46,6 @@ Character::Character(const String &name, Ogre::SceneManager &scene_manager)
     String script_path = boost::str(boost::format("../scripts/char_%s.lua") % name);
     handleScript(script_path);
 
-    entity->getSkeleton()->setBlendMode(Ogre::ANIMBLEND_CUMULATIVE);
-
     // Start with no action active
     for (int i=0; i < NUM_STATES; i++)
         action[i] = false;
@@ -70,8 +68,6 @@ void Character::handleScript(const String &file)
 
     LuaEngine::RunFile(L, file);
 
-    std::string ent;
-    res = ev.evalString("Character.Name", ent);
     double mass = 0;
     res = ev.evalNumber("Character.Mass", mass);
     double yaw = 0;
@@ -84,9 +80,10 @@ void Character::handleScript(const String &file)
     res = ev.evalNumber("Character.Scale", scale);
 
     setPosition(pos);
-    setEntity(ent);
     node->yaw(Ogre::Degree(yaw));
     node->setScale(scale, scale, scale);
+
+    entity->getSkeleton()->setBlendMode(Ogre::ANIMBLEND_CUMULATIVE);
 
     btVector3 bsize(size.x, size.y, size.z);
     btCollisionShape *shape = &physics::ShapesManager::getInstance().getBoxShape(bsize);

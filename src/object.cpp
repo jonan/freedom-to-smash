@@ -29,11 +29,6 @@ Object::Object(const String &entity, Ogre::SceneManager &scene_manager, const in
         : graphics::Object(scene_manager, num_animations)
 {
     graphics::Object::setEntity(entity);
-    // Create a physic shape from the entity's bounding box
-    /*Ogre::AxisAlignedBox bounding_box = entity->getBoundingBox();
-    btVector3 size = physics::vector3(bounding_box.getMaximum() - bounding_box.getMinimum());
-    btCollisionShape *shape = &physics::ShapesManager::getInstance().getBoxShape(size);
-    createBody(0, *shape, this);*/
 }
 
 // Set function.
@@ -46,12 +41,16 @@ void Object::setPosition(const Ogre::Vector3 &pos)
 void Object::setScale(const Ogre::Vector3 &scale)
 {
     graphics::Object::setScale(scale);
-    // Update the physic shape
-    /*Ogre::AxisAlignedBox bounding_box = entity->getBoundingBox();
+}
+
+// Creates the physic object that can then be added to a physic scene.
+void Object::createPhysicObject(void)
+{
+    Ogre::AxisAlignedBox bounding_box = entity->getBoundingBox();
     btVector3 size = physics::vector3(bounding_box.getMaximum() - bounding_box.getMinimum());
-    size *= physics::vector3(scale);
+    size *= physics::vector3(node->getScale());
     btCollisionShape *shape = &physics::ShapesManager::getInstance().getBoxShape(size);
-    createBody(0, *shape, this);*/
+    createBody(0, *shape, this);
 }
 
 // Get function.
