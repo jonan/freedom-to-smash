@@ -4,6 +4,7 @@ set(
   graphics/scene.cpp
   physics/debug_drawer.cpp
   physics/object.cpp
+  physics/object_synchronizer.cpp
   physics/scene.cpp
   physics/shapes_manager.cpp
   battle_ground.cpp
@@ -34,6 +35,7 @@ set(
   physics/converter_functions.hpp
   physics/debug_drawer.hpp
   physics/object.hpp
+  physics/object_synchronizer.hpp
   physics/scene.hpp
   physics/shapes_manager.hpp
   battle_ground.hpp
