@@ -39,14 +39,13 @@ void Object::setEntity(const String &name)
     Ogre::AxisAlignedBox bounding_box = entity->getBoundingBox();
     btVector3 size = physics::vector3(bounding_box.getMaximum() - bounding_box.getMinimum());
     btCollisionShape *shape = &physics::ShapesManager::getInstance().getBoxShape(size);
-    createBody(0, *shape);
+    createBody(0, *shape, this);
 }
 
 // Set function.
 void Object::setPosition(const Ogre::Vector3 &pos)
 {
     graphics::Object::setPosition(pos);
-    physics::Object::setPosition(btTransform(btQuaternion(0,0,0,1), btVector3(pos.x, pos.y, pos.z)));
 }
 
 // Set function.
@@ -54,16 +53,15 @@ void Object::setScale(const Ogre::Vector3 &scale)
 {
     graphics::Object::setScale(scale);
     // Update the physic shape
-    Ogre::AxisAlignedBox bounding_box = entity->getBoundingBox();
+    /*Ogre::AxisAlignedBox bounding_box = entity->getBoundingBox();
     btVector3 size = physics::vector3(bounding_box.getMaximum() - bounding_box.getMinimum());
     size *= physics::vector3(scale);
     btCollisionShape *shape = &physics::ShapesManager::getInstance().getBoxShape(size);
-    createBody(0, *shape);
+    createBody(0, *shape, this);*/
 }
 
-// Move the object.
-void Object::translate(const Real &x, const Real &y, const Real &z)
+// Get function.
+const Ogre::Vector3& Object::getPosition(void) const
 {
-    graphics::Object::translate(x, y, z);
-    physics::Object::setPosition(btTransform(btQuaternion(0,0,0,1), physics::vector3(node->getPosition())));
+    return graphics::Object::getPosition();
 }

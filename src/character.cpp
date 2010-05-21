@@ -64,7 +64,7 @@ Character::~Character(void)
 // Loads a character script.
 void Character::handleScript(const String &file)
 {
-    lua_State * L = ScriptManager::get().getL();
+    lua_State *L = ScriptManager::get().getL();
     bool res = false;
     FtsEvaluator ev(L);
 
@@ -72,33 +72,25 @@ void Character::handleScript(const String &file)
 
     std::string ent;
     res = ev.evalString("Character.Name", ent);
-
     double mass = 0;
     res = ev.evalNumber("Character.Mass", mass);
-
     double yaw = 0;
     res = ev.evalNumber("Character.Yaw", yaw);
-
     Ogre::Vector3 pos;
     res = ev.evalVector3("Character.Position", pos);
-
     Ogre::Vector3 size;
     res = ev.evalVector3("Character.Size", size);
-
     double scale = 1;
     res = ev.evalNumber("Character.Scale", scale);
 
-    setEntity(ent);
-
     setPosition(pos);
-
+    setEntity(ent);
     node->yaw(Ogre::Degree(yaw));
-
     node->setScale(scale, scale, scale);
 
     btVector3 bsize(size.x, size.y, size.z);
-    btCollisionShape * shape = &physics::ShapesManager::getInstance().getBoxShape(bsize);
-    createBody(mass, *shape);
+    btCollisionShape *shape = &physics::ShapesManager::getInstance().getBoxShape(bsize);
+    createBody(mass, *shape, this);
 
     LuaEngine::BeginCallEx(L, "Character.OnCreate");
     LuaEngine::PushPointer(L, this, "Character *");

@@ -1543,12 +1543,13 @@ SWIG_Lua_dostring(lua_State *L, const char* str) {
 #define SWIGTYPE_p_graphics__Object swig_types[14]
 #define SWIGTYPE_p_graphics__Scene swig_types[15]
 #define SWIGTYPE_p_physics__Object swig_types[16]
-#define SWIGTYPE_p_physics__Scene swig_types[17]
-#define SWIGTYPE_p_std__listT_Object_p_t swig_types[18]
-#define SWIGTYPE_p_std__listT_Ogre__AnimationState_p_t swig_types[19]
-#define SWIGTYPE_p_std__string swig_types[20]
-static swig_type_info *swig_types[22];
-static swig_module_info swig_module = {swig_types, 21, 0, 0, 0, 0};
+#define SWIGTYPE_p_physics__ObjectSynchronizer swig_types[17]
+#define SWIGTYPE_p_physics__Scene swig_types[18]
+#define SWIGTYPE_p_std__listT_Object_p_t swig_types[19]
+#define SWIGTYPE_p_std__listT_Ogre__AnimationState_p_t swig_types[20]
+#define SWIGTYPE_p_std__string swig_types[21]
+static swig_type_info *swig_types[23];
+static swig_module_info swig_module = {swig_types, 22, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -2623,19 +2624,51 @@ fail:
 }
 
 
+static int _wrap_PhysicsObject_setScene(lua_State* L) {
+  int SWIG_arg = 0;
+  physics::Object *arg1 = (physics::Object *) 0 ;
+  physics::Scene *arg2 = (physics::Scene *) 0 ;
+  
+  SWIG_check_num_args("setScene",2,2)
+  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("setScene",1,"physics::Object *");
+  if(!SWIG_isptrtype(L,2)) SWIG_fail_arg("setScene",2,"physics::Scene *");
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_physics__Object,0))){
+    SWIG_fail_ptr("PhysicsObject_setScene",1,SWIGTYPE_p_physics__Object);
+  }
+  
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&arg2,SWIGTYPE_p_physics__Scene,0))){
+    SWIG_fail_ptr("PhysicsObject_setScene",2,SWIGTYPE_p_physics__Scene);
+  }
+  
+  (arg1)->setScene(arg2);
+  
+  return SWIG_arg;
+  
+  if(0) SWIG_fail;
+  
+fail:
+  lua_error(L);
+  return SWIG_arg;
+}
+
+
 static int _wrap_PhysicsObject_createBody__SWIG_0(lua_State* L) {
   int SWIG_arg = 0;
   physics::Object *arg1 = (physics::Object *) 0 ;
   Real *arg2 = 0 ;
   btCollisionShape *arg3 = 0 ;
-  btTransform *arg4 = 0 ;
+  physics::ObjectSynchronizer *arg4 = (physics::ObjectSynchronizer *) 0 ;
+  btTransform *arg5 = 0 ;
   Real temp2 ;
   
-  SWIG_check_num_args("createBody",4,4)
+  SWIG_check_num_args("createBody",5,5)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("createBody",1,"physics::Object *");
   if(!lua_isnumber(L,2)) SWIG_fail_arg("createBody",2,"Real const &");
   if(!lua_isuserdata(L,3)) SWIG_fail_arg("createBody",3,"btCollisionShape &");
-  if(!lua_isuserdata(L,4)) SWIG_fail_arg("createBody",4,"btTransform const &");
+  if(!SWIG_isptrtype(L,4)) SWIG_fail_arg("createBody",4,"physics::ObjectSynchronizer *");
+  if(!lua_isuserdata(L,5)) SWIG_fail_arg("createBody",5,"btTransform const &");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_physics__Object,0))){
     SWIG_fail_ptr("PhysicsObject_createBody",1,SWIGTYPE_p_physics__Object);
@@ -2648,11 +2681,16 @@ static int _wrap_PhysicsObject_createBody__SWIG_0(lua_State* L) {
   }
   
   
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,4,(void**)&arg4,SWIGTYPE_p_btTransform,0))){
-    SWIG_fail_ptr("PhysicsObject_createBody",4,SWIGTYPE_p_btTransform);
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,4,(void**)&arg4,SWIGTYPE_p_physics__ObjectSynchronizer,0))){
+    SWIG_fail_ptr("PhysicsObject_createBody",4,SWIGTYPE_p_physics__ObjectSynchronizer);
   }
   
-  (arg1)->createBody((Real const &)*arg2,*arg3,(btTransform const &)*arg4);
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,5,(void**)&arg5,SWIGTYPE_p_btTransform,0))){
+    SWIG_fail_ptr("PhysicsObject_createBody",5,SWIGTYPE_p_btTransform);
+  }
+  
+  (arg1)->createBody((Real const &)*arg2,*arg3,arg4,(btTransform const &)*arg5);
   
   return SWIG_arg;
   
@@ -2665,6 +2703,47 @@ fail:
 
 
 static int _wrap_PhysicsObject_createBody__SWIG_1(lua_State* L) {
+  int SWIG_arg = 0;
+  physics::Object *arg1 = (physics::Object *) 0 ;
+  Real *arg2 = 0 ;
+  btCollisionShape *arg3 = 0 ;
+  physics::ObjectSynchronizer *arg4 = (physics::ObjectSynchronizer *) 0 ;
+  Real temp2 ;
+  
+  SWIG_check_num_args("createBody",4,4)
+  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("createBody",1,"physics::Object *");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("createBody",2,"Real const &");
+  if(!lua_isuserdata(L,3)) SWIG_fail_arg("createBody",3,"btCollisionShape &");
+  if(!SWIG_isptrtype(L,4)) SWIG_fail_arg("createBody",4,"physics::ObjectSynchronizer *");
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_physics__Object,0))){
+    SWIG_fail_ptr("PhysicsObject_createBody",1,SWIGTYPE_p_physics__Object);
+  }
+  
+  temp2=(Real)lua_tonumber(L,2); arg2=&temp2;
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,3,(void**)&arg3,SWIGTYPE_p_btCollisionShape,0))){
+    SWIG_fail_ptr("PhysicsObject_createBody",3,SWIGTYPE_p_btCollisionShape);
+  }
+  
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,4,(void**)&arg4,SWIGTYPE_p_physics__ObjectSynchronizer,0))){
+    SWIG_fail_ptr("PhysicsObject_createBody",4,SWIGTYPE_p_physics__ObjectSynchronizer);
+  }
+  
+  (arg1)->createBody((Real const &)*arg2,*arg3,arg4);
+  
+  return SWIG_arg;
+  
+  if(0) SWIG_fail;
+  
+fail:
+  lua_error(L);
+  return SWIG_arg;
+}
+
+
+static int _wrap_PhysicsObject_createBody__SWIG_2(lua_State* L) {
   int SWIG_arg = 0;
   physics::Object *arg1 = (physics::Object *) 0 ;
   Real *arg2 = 0 ;
@@ -2700,8 +2779,8 @@ fail:
 
 static int _wrap_PhysicsObject_createBody(lua_State* L) {
   int argc;
-  int argv[5]={
-    1,2,3,4,5
+  int argv[6]={
+    1,2,3,4,5,6
   };
   
   argc = lua_gettop(L);
@@ -2729,7 +2808,7 @@ static int _wrap_PhysicsObject_createBody(lua_State* L) {
           }
         }
         if (_v) {
-          return _wrap_PhysicsObject_createBody__SWIG_1(L);
+          return _wrap_PhysicsObject_createBody__SWIG_2(L);
         }
       }
     }
@@ -2760,14 +2839,63 @@ static int _wrap_PhysicsObject_createBody(lua_State* L) {
         if (_v) {
           {
             void *ptr;
-            if (lua_isuserdata(L,argv[3])==0 || SWIG_ConvertPtr(L,argv[3], (void **) &ptr, SWIGTYPE_p_btTransform, 0)) {
+            if (SWIG_isptrtype(L,argv[3])==0 || SWIG_ConvertPtr(L,argv[3], (void **) &ptr, SWIGTYPE_p_physics__ObjectSynchronizer, 0)) {
               _v = 0;
             } else {
               _v = 1;
             }
           }
           if (_v) {
-            return _wrap_PhysicsObject_createBody__SWIG_0(L);
+            return _wrap_PhysicsObject_createBody__SWIG_1(L);
+          }
+        }
+      }
+    }
+  }
+  if (argc == 5) {
+    int _v;
+    {
+      void *ptr;
+      if (SWIG_isptrtype(L,argv[0])==0 || SWIG_ConvertPtr(L,argv[0], (void **) &ptr, SWIGTYPE_p_physics__Object, 0)) {
+        _v = 0;
+      } else {
+        _v = 1;
+      }
+    }
+    if (_v) {
+      {
+        _v = lua_isnumber(L,argv[1]);
+      }
+      if (_v) {
+        {
+          void *ptr;
+          if (lua_isuserdata(L,argv[2])==0 || SWIG_ConvertPtr(L,argv[2], (void **) &ptr, SWIGTYPE_p_btCollisionShape, 0)) {
+            _v = 0;
+          } else {
+            _v = 1;
+          }
+        }
+        if (_v) {
+          {
+            void *ptr;
+            if (SWIG_isptrtype(L,argv[3])==0 || SWIG_ConvertPtr(L,argv[3], (void **) &ptr, SWIGTYPE_p_physics__ObjectSynchronizer, 0)) {
+              _v = 0;
+            } else {
+              _v = 1;
+            }
+          }
+          if (_v) {
+            {
+              void *ptr;
+              if (lua_isuserdata(L,argv[4])==0 || SWIG_ConvertPtr(L,argv[4], (void **) &ptr, SWIGTYPE_p_btTransform, 0)) {
+                _v = 0;
+              } else {
+                _v = 1;
+              }
+            }
+            if (_v) {
+              return _wrap_PhysicsObject_createBody__SWIG_0(L);
+            }
           }
         }
       }
@@ -2776,69 +2904,10 @@ static int _wrap_PhysicsObject_createBody(lua_State* L) {
   
   lua_pushstring(L,"Wrong arguments for overloaded function 'PhysicsObject_createBody'\n"
     "  Possible C/C++ prototypes are:\n"
-    "    createBody(physics::Object *,Real const &,btCollisionShape &,btTransform const &)\n"
+    "    createBody(physics::Object *,Real const &,btCollisionShape &,physics::ObjectSynchronizer *,btTransform const &)\n"
+    "    createBody(physics::Object *,Real const &,btCollisionShape &,physics::ObjectSynchronizer *)\n"
     "    createBody(physics::Object *,Real const &,btCollisionShape &)\n");
   lua_error(L);return 0;
-}
-
-
-static int _wrap_PhysicsObject_setScene(lua_State* L) {
-  int SWIG_arg = 0;
-  physics::Object *arg1 = (physics::Object *) 0 ;
-  physics::Scene *arg2 = (physics::Scene *) 0 ;
-  
-  SWIG_check_num_args("setScene",2,2)
-  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("setScene",1,"physics::Object *");
-  if(!SWIG_isptrtype(L,2)) SWIG_fail_arg("setScene",2,"physics::Scene *");
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_physics__Object,0))){
-    SWIG_fail_ptr("PhysicsObject_setScene",1,SWIGTYPE_p_physics__Object);
-  }
-  
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&arg2,SWIGTYPE_p_physics__Scene,0))){
-    SWIG_fail_ptr("PhysicsObject_setScene",2,SWIGTYPE_p_physics__Scene);
-  }
-  
-  (arg1)->setScene(arg2);
-  
-  return SWIG_arg;
-  
-  if(0) SWIG_fail;
-  
-fail:
-  lua_error(L);
-  return SWIG_arg;
-}
-
-
-static int _wrap_PhysicsObject_setPosition(lua_State* L) {
-  int SWIG_arg = 0;
-  physics::Object *arg1 = (physics::Object *) 0 ;
-  btTransform *arg2 = 0 ;
-  
-  SWIG_check_num_args("setPosition",2,2)
-  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("setPosition",1,"physics::Object *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("setPosition",2,"btTransform const &");
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_physics__Object,0))){
-    SWIG_fail_ptr("PhysicsObject_setPosition",1,SWIGTYPE_p_physics__Object);
-  }
-  
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&arg2,SWIGTYPE_p_btTransform,0))){
-    SWIG_fail_ptr("PhysicsObject_setPosition",2,SWIGTYPE_p_btTransform);
-  }
-  
-  (arg1)->setPosition((btTransform const &)*arg2);
-  
-  return SWIG_arg;
-  
-  if(0) SWIG_fail;
-  
-fail:
-  lua_error(L);
-  return SWIG_arg;
 }
 
 
@@ -2871,9 +2940,8 @@ physics::Object *arg1 = (physics::Object *) obj;
 delete arg1;
 }
 static swig_lua_method swig_physics_Object_methods[] = {
-    {"createBody", _wrap_PhysicsObject_createBody}, 
     {"setScene", _wrap_PhysicsObject_setScene}, 
-    {"setPosition", _wrap_PhysicsObject_setPosition}, 
+    {"createBody", _wrap_PhysicsObject_createBody}, 
     {"getPhysicObject", _wrap_PhysicsObject_getPhysicObject}, 
     {0,0}
 };
@@ -3241,31 +3309,20 @@ fail:
 }
 
 
-static int _wrap_Object_translate(lua_State* L) {
+static int _wrap_Object_getPosition(lua_State* L) {
   int SWIG_arg = 0;
   Object *arg1 = (Object *) 0 ;
-  Real *arg2 = 0 ;
-  Real *arg3 = 0 ;
-  Real *arg4 = 0 ;
-  Real temp2 ;
-  Real temp3 ;
-  Real temp4 ;
+  Ogre::Vector3 *result = 0 ;
   
-  SWIG_check_num_args("translate",4,4)
-  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("translate",1,"Object *");
-  if(!lua_isnumber(L,2)) SWIG_fail_arg("translate",2,"Real const &");
-  if(!lua_isnumber(L,3)) SWIG_fail_arg("translate",3,"Real const &");
-  if(!lua_isnumber(L,4)) SWIG_fail_arg("translate",4,"Real const &");
+  SWIG_check_num_args("getPosition",1,1)
+  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("getPosition",1,"Object const *");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_Object,0))){
-    SWIG_fail_ptr("Object_translate",1,SWIGTYPE_p_Object);
+    SWIG_fail_ptr("Object_getPosition",1,SWIGTYPE_p_Object);
   }
   
-  temp2=(Real)lua_tonumber(L,2); arg2=&temp2;
-  temp3=(Real)lua_tonumber(L,3); arg3=&temp3;
-  temp4=(Real)lua_tonumber(L,4); arg4=&temp4;
-  (arg1)->translate((Real const &)*arg2,(Real const &)*arg3,(Real const &)*arg4);
-  
+  result = (Ogre::Vector3 *) &((Object const *)arg1)->getPosition();
+  SWIG_NewPointerObj(L,result,SWIGTYPE_p_Ogre__Vector3,0); SWIG_arg++; 
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -3284,7 +3341,7 @@ static swig_lua_method swig_Object_methods[] = {
     {"setEntity", _wrap_Object_setEntity}, 
     {"setPosition", _wrap_Object_setPosition}, 
     {"setScale", _wrap_Object_setScale}, 
-    {"translate", _wrap_Object_translate}, 
+    {"getPosition", _wrap_Object_getPosition}, 
     {0,0}
 };
 static swig_lua_attribute swig_Object_attributes[] = {
@@ -3698,11 +3755,6 @@ static swig_lua_var_info swig_variables[] = {
 
 static swig_lua_const_info swig_constants[] = {
 { SWIG_LUA_INT,     (char *)"USE_CAELUM", (long) 0, 0, 0, 0},
-{ SWIG_LUA_INT,     (char *)"NO_COLLISION", (long) physics::NO_COLLISION, 0, 0, 0},
-{ SWIG_LUA_INT,     (char *)"LEFT_COLLISION", (long) physics::LEFT_COLLISION, 0, 0, 0},
-{ SWIG_LUA_INT,     (char *)"RIGHT_COLLISION", (long) physics::RIGHT_COLLISION, 0, 0, 0},
-{ SWIG_LUA_INT,     (char *)"TOP_COLLISION", (long) physics::TOP_COLLISION, 0, 0, 0},
-{ SWIG_LUA_INT,     (char *)"BOTTOM_COLLISION", (long) physics::BOTTOM_COLLISION, 0, 0, 0},
 { SWIG_LUA_INT,     (char *)"DEBUG_PHYSIC_SHAPES", (long) 0, 0, 0, 0},
 { SWIG_LUA_INT,     (char *)"RIGHT", (long) RIGHT, 0, 0, 0},
 { SWIG_LUA_INT,     (char *)"LEFT", (long) LEFT, 0, 0, 0},
@@ -3734,6 +3786,9 @@ static void *_p_ObjectTo_p_graphics__Object(void *x, int *SWIGUNUSEDPARM(newmemo
 static void *_p_CharacterTo_p_graphics__Object(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((graphics::Object *) (Object *) ((Character *) x));
 }
+static void *_p_ObjectTo_p_physics__ObjectSynchronizer(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((physics::ObjectSynchronizer *)  ((Object *) x));
+}
 static swig_type_info _swigt__p_BattleGround = {"_p_BattleGround", "BattleGround *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_Character = {"_p_Character", "Character *", 0, 0, (void*)&_wrap_class_Character, 0};
 static swig_type_info _swigt__p_Object = {"_p_Object", "Object *", 0, 0, (void*)&_wrap_class_Object, 0};
@@ -3751,6 +3806,7 @@ static swig_type_info _swigt__p_float = {"_p_float", "float *|Real *", 0, 0, (vo
 static swig_type_info _swigt__p_graphics__Object = {"_p_graphics__Object", "graphics::Object *", 0, 0, (void*)&_wrap_class_graphics_Object, 0};
 static swig_type_info _swigt__p_graphics__Scene = {"_p_graphics__Scene", "graphics::Scene *", 0, 0, (void*)&_wrap_class_graphics_Scene, 0};
 static swig_type_info _swigt__p_physics__Object = {"_p_physics__Object", "physics::Object *", 0, 0, (void*)&_wrap_class_physics_Object, 0};
+static swig_type_info _swigt__p_physics__ObjectSynchronizer = {"_p_physics__ObjectSynchronizer", "physics::ObjectSynchronizer *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_physics__Scene = {"_p_physics__Scene", "physics::Scene *", 0, 0, (void*)&_wrap_class_physics_Scene, 0};
 static swig_type_info _swigt__p_std__listT_Object_p_t = {"_p_std__listT_Object_p_t", "std::list< Object * > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__listT_Ogre__AnimationState_p_t = {"_p_std__listT_Ogre__AnimationState_p_t", "std::list< Ogre::AnimationState * > *", 0, 0, (void*)0, 0};
@@ -3774,6 +3830,7 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_graphics__Object,
   &_swigt__p_graphics__Scene,
   &_swigt__p_physics__Object,
+  &_swigt__p_physics__ObjectSynchronizer,
   &_swigt__p_physics__Scene,
   &_swigt__p_std__listT_Object_p_t,
   &_swigt__p_std__listT_Ogre__AnimationState_p_t,
@@ -3797,6 +3854,7 @@ static swig_cast_info _swigc__p_float[] = {  {&_swigt__p_float, 0, 0, 0},{0, 0, 
 static swig_cast_info _swigc__p_graphics__Object[] = {  {&_swigt__p_graphics__Object, 0, 0, 0},  {&_swigt__p_Object, _p_ObjectTo_p_graphics__Object, 0, 0},  {&_swigt__p_Character, _p_CharacterTo_p_graphics__Object, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_graphics__Scene[] = {  {&_swigt__p_graphics__Scene, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_physics__Object[] = {  {&_swigt__p_physics__Object, 0, 0, 0},  {&_swigt__p_Object, _p_ObjectTo_p_physics__Object, 0, 0},  {&_swigt__p_Character, _p_CharacterTo_p_physics__Object, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_physics__ObjectSynchronizer[] = {  {&_swigt__p_physics__ObjectSynchronizer, 0, 0, 0},  {&_swigt__p_Object, _p_ObjectTo_p_physics__ObjectSynchronizer, 0, 0},  {&_swigt__p_Character, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_physics__Scene[] = {  {&_swigt__p_physics__Scene, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__listT_Object_p_t[] = {  {&_swigt__p_std__listT_Object_p_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__listT_Ogre__AnimationState_p_t[] = {  {&_swigt__p_std__listT_Ogre__AnimationState_p_t, 0, 0, 0},{0, 0, 0, 0}};
@@ -3820,6 +3878,7 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_graphics__Object,
   _swigc__p_graphics__Scene,
   _swigc__p_physics__Object,
+  _swigc__p_physics__ObjectSynchronizer,
   _swigc__p_physics__Scene,
   _swigc__p_std__listT_Object_p_t,
   _swigc__p_std__listT_Ogre__AnimationState_p_t,
