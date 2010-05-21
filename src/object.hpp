@@ -30,12 +30,14 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 /// General object with graphic and physic properties.
 class Object : public graphics::Object, public physics::Object, public physics::ObjectSynchronizer {
 public:
-    explicit Object(Ogre::SceneManager &scene_manager, const int num_animations = 0); // Constructor
+    /// @param[in] entity Name of the object's entity.
+    /// @param[in] scene_manager Manager of the scene the object will be in.
+    /// @param[in] num_animations Number of animations the object has.
+    explicit Object(const String &entity, Ogre::SceneManager &scene_manager, const int num_animations = 0); // Constructor
     virtual ~Object(void) {} // Destructor
 
     // @{
     /// Set functions.
-    virtual void setEntity   (const String &name);
     virtual void setPosition (const Ogre::Vector3 &pos);
     virtual void setScale    (const Ogre::Vector3 &scale);
     // @}

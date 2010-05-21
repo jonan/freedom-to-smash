@@ -36,7 +36,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 
 // Constructor
 Character::Character(const String &name, Ogre::SceneManager &scene_manager)
-        : Object(scene_manager, NUM_STATES)
+        : Object(name, scene_manager, NUM_STATES)
         , on_floor(true)
         , has_double_jumped(false)
         , collision_right(false)
@@ -224,7 +224,7 @@ void Character::frameMovement(const Ogre::FrameEvent &event)
         else if (direction == LEFT  && !collision_left)
             dir = 1;
         if (dir) {
-            translate(dir*25*event.timeSinceLastFrame, 0, 0);
+            //translate(dir*25*event.timeSinceLastFrame, 0, 0);
             node->setDirection(0,0,-dir,Ogre::Node::TS_PARENT);
             node->yaw(Ogre::Degree(90));
         }
@@ -240,7 +240,7 @@ void Character::frameMovement(const Ogre::FrameEvent &event)
             }
         }
         jumping_time += event.timeSinceLastFrame;
-        translate(0, calculateVerticalSpeed(initial_speed)*event.timeSinceLastFrame, 0);
+        //translate(0, calculateVerticalSpeed(initial_speed)*event.timeSinceLastFrame, 0);
     }
 }
 

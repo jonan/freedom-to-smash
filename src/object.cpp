@@ -25,21 +25,15 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #include <physics/shapes_manager.hpp>
 
 // Constructor
-Object::Object(Ogre::SceneManager &scene_manager, const int num_animations)
+Object::Object(const String &entity, Ogre::SceneManager &scene_manager, const int num_animations)
         : graphics::Object(scene_manager, num_animations)
 {
-
-}
-
-// Set function.
-void Object::setEntity(const String &name)
-{
-    graphics::Object::setEntity(name);
+    graphics::Object::setEntity(entity);
     // Create a physic shape from the entity's bounding box
-    Ogre::AxisAlignedBox bounding_box = entity->getBoundingBox();
+    /*Ogre::AxisAlignedBox bounding_box = entity->getBoundingBox();
     btVector3 size = physics::vector3(bounding_box.getMaximum() - bounding_box.getMinimum());
     btCollisionShape *shape = &physics::ShapesManager::getInstance().getBoxShape(size);
-    createBody(0, *shape, this);
+    createBody(0, *shape, this);*/
 }
 
 // Set function.

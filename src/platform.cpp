@@ -46,6 +46,6 @@ void Platform::addPoint(const Real &x, const Real &y)
 // Function that's called at the beginning of every frame.
 bool Platform::frameStarted(const Ogre::FrameEvent &event)
 {
-    translate(-0.5*event.timeSinceLastFrame, 0, 0);
+    //translate(-0.5*event.timeSinceLastFrame, 0, 0);
     return true;
 }

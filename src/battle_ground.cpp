@@ -42,12 +42,9 @@ BattleGround::BattleGround(void)
     useCamera(addCamera("BattleGround Camera", *cam_node, *look_node));
 
     // Ground
-    addObject("cube", Ogre::Vector3(0,-5,0));
-    objects.back()->setScale(Ogre::Vector3(10,1,1));
-    addObject("cube", Ogre::Vector3(-23,7,0));
-    objects.back()->setScale(Ogre::Vector3(3,0.5,1));
-    addObject("cube", Ogre::Vector3(23,7,0));
-    objects.back()->setScale(Ogre::Vector3(3,0.5,1));
+    addObject("cube", Ogre::Vector3(0,-5,0), Ogre::Vector3(10,1,1));
+    addObject("cube", Ogre::Vector3(-23,7,0), Ogre::Vector3(3,0.5,1));
+    addObject("cube", Ogre::Vector3(23,7,0), Ogre::Vector3(3,0.5,1));
 #if DEBUG_PHYSIC_SHAPES
     createDebugDrawer(getManager());
 #endif
@@ -92,21 +89,21 @@ bool BattleGround::frameStarted(const Ogre::FrameEvent &event)
     Scene::frameStarted(event);
     updateWaterPlane(event.timeSinceLastFrame);
     updateSky(event.timeSinceLastFrame);
-    detectCollisions();
+    // Check for players out of the battle ground
     BOOST_FOREACH(Character *character, players) {
         if (character->getPosition().y < -100)
             character->reset();
     }
-    Ogre::Vector3 average(players.front()->getPosition());
+    // Move camera
+    Ogre::Vector3 min(players.front()->getPosition());
     Ogre::Vector3 max(players.front()->getPosition());
     BOOST_FOREACH(Character *character, players) {
-        character->recoverFromPenetration(objects);
         if (character->getPosition().x > max.x)
             max = character->getPosition();
-        else if (character->getPosition().x < average.x)
-            average = character->getPosition();
+        else if (character->getPosition().x < min.x)
+            min = character->getPosition();
     }
-    average = (average + max) / 2;
+    Ogre::Vector3 average = (min + max) / 2;
 
     look_node->setPosition(average);
     cam_node->setPosition(average.x, average.y, -50);

@@ -40,14 +40,15 @@ public:
 
 protected:
     // Adds an object to the scene.
-    void addObject(const String &entity, const Ogre::Vector3 &position);
+    void addObject(const String &entity, const Ogre::Vector3 &position,
+                   const Ogre::Vector3 &scale = Ogre::Vector3::ZERO);
 
     // This function is called at the beginnig of every frame.
     virtual bool frameStarted(const Ogre::FrameEvent &event);
 
+private:
     std::list<Object*> objects;
 
-private:
     DISALLOW_COPY_AND_ASSIGN(Scene);
 };
 
