@@ -33,8 +33,8 @@ enum MoveDirection {RIGHT, LEFT};
 /// Class to control a character.
 class Character : public Object, public Ogre::FrameListener {
 public:
-    explicit Character(const String &name, Ogre::SceneManager &scene_manager); // Constructor
-    ~Character(void); // Destructor
+    Character(const String &name, Ogre::SceneManager &scene_manager); // Constructor
+    virtual ~Character(void); // Destructor
 
     /// All the different states of a character.
     enum {ATTACK, DEFEND, FALL, IDLE, JUMP, LAND, MOVE, NUM_STATES};

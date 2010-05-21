@@ -36,7 +36,7 @@ class Object;
 class Scene : protected physics::Scene, protected graphics::Scene, public Ogre::FrameListener {
 public:
     Scene(void) {} // Constructor
-    ~Scene(void); // Destructor
+    virtual ~Scene(void); // Destructor
 
 protected:
     // Adds an object to the scene.

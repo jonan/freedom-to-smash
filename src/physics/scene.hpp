@@ -48,7 +48,7 @@ class DebugDrawer;
 class Scene {
 public:
     Scene(void); // Constructor
-    ~Scene(void); // Destructor
+    virtual ~Scene(void); // Destructor
 
 #if DEBUG_PHYSIC_SHAPES
     /// Creates a debug drawer that draws the physic shapes.

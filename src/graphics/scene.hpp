@@ -45,7 +45,7 @@ namespace graphics {
 class Scene {
 public:
     Scene(void); // Constructor
-    ~Scene(void); // Destructor
+    virtual ~Scene(void); // Destructor
 
 protected:
     // @{
