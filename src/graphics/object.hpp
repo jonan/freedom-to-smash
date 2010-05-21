@@ -53,12 +53,6 @@ public:
     /// @param[in] bone_name Name of the main entity's bone.
     void attachEntityToBone(const String &entity_name, const String &bone_name);
 
-    /// Move the object.
-    /// @param[in] x Units to move in the x axes.
-    /// @param[in] y Units to move in the y axes.
-    /// @param[in] z Units to move in the z axes.
-    virtual void translate(const Real &x, const Real &y, const Real &z);
-
 public:
 
     // Creates a new entity and returns a pointer to it.

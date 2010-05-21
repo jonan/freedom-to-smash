@@ -75,12 +75,6 @@ void Object::attachEntityToBone(const String &entity_name, const String &bone_na
     entity->attachObjectToBone(bone_name, attached_entities.back());
 }
 
-// Move the object.
-void Object::translate(const Real &x, const Real &y, const Real &z)
-{
-    node->translate(x, y, z);
-}
-
 // Creates a new entity and returns a pointer to it.
 Ogre::Entity& Object::createEntity(const String &name)
 {
