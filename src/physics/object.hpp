@@ -34,14 +34,8 @@ class btRigidBody;
 
 namespace physics {
 
+class ObjectSynchronizer;
 class Scene;
-
-/// Collisions types.
-enum { NO_COLLISION     = 0    ,
-       LEFT_COLLISION   = 1<<0 ,
-       RIGHT_COLLISION  = 1<<1 ,
-       TOP_COLLISION    = 1<<2 ,
-       BOTTOM_COLLISION = 1<<3 };
 
 /// Class to create object that will be able to collide.
 class Object {
@@ -51,20 +45,22 @@ public:
 
     // @{
     /// Set functions.
-    void createBody(const Real &mass, btCollisionShape &shape, const btTransform &center_offset = btTransform::getIdentity());
     void setScene(Scene *scene) {this->scene = scene;}
-    void setPosition(const btTransform &pos);
     // @}
+
+    /// Creates a physic body for the object.
+    /// @param[in] mass Object's mass.
+    /// @param[in] shape Object's physical shape.
+    /// @param[in] synchronizer Synchronizer used to coordinate the physic object.
+    /// @param[in] center_offset Offset to the center of the object.
+    void createBody(const Real &mass, btCollisionShape &shape,
+                    ObjectSynchronizer *synchronizer = NULL,
+                    const btTransform &center_offset = btTransform::getIdentity());
 
     // @{
     /// Get functions.
     btRigidBody& getPhysicObject(void) {return *physic_object;}
     // @}
-
-    /// Detects collisions with the given object.
-    /// @param[in] obj Object.
-    /// @return Type of collision.
-    //int detectCollision(const Object &obj) const;
 
 private:
     btCollisionShape *shape;
