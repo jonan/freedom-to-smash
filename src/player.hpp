@@ -40,7 +40,7 @@ public:
     ///
     void setBattleground(BattleGround &ground) {battle_ground = &ground;}
     ///
-	void setCharacter(std::string const & char_name);
+    void setCharacter(const String &name);
 
 private:
     // @{

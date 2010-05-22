@@ -68,9 +68,9 @@ BattleGround::~BattleGround(void)
 }
 
 // Creates a character and adds it to the battle ground.
-Character* BattleGround::createCharacter(std::string const & char_name)
+Character* BattleGround::createCharacter(const String &name)
 {
-    Character *character = new Character(char_name, getManager());
+    Character *character = new Character(name, getManager());
     players.push_back(character);
     physics::Scene::addPhysicObject(*character);
     return character;

@@ -48,18 +48,17 @@ public:
     const Ogre::Vector3& getPosition (void) const;
     // @}
 
-    /// Attachs an new entity to a bone of the objects main entity.
+    /// Attachs an new entity to a bone of the object's main entity.
     /// @param[in] entity_name Name of the new entity.
     /// @param[in] bone_name Name of the main entity's bone.
     void attachEntityToBone(const String &entity_name, const String &bone_name);
 
-public:
+    /// Creates a new animation.
+    void createAnimation(const int type, const String &name, const bool loop = false);
 
+protected:
     // Creates a new entity and returns a pointer to it.
     Ogre::Entity& createEntity(const String &name);
-
-    // Creates a new animation.
-    void createAnimation(const int type, const String &name, const bool loop = false, const bool enabled = false);
 
     // Advances the animation and returns true if it has ended.
     bool performAnimation(const int type, const Ogre::FrameEvent &event);

@@ -53,9 +53,9 @@ Player::~Player(void)
 }
 
 //
-void Player::setCharacter(std::string const & char_name)
+void Player::setCharacter(const String &name)
 {
-    character = battle_ground->createCharacter(char_name);
+    character = battle_ground->createCharacter(name);
 }
 
 // Function to update the keyboard's state.

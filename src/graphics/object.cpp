@@ -68,11 +68,18 @@ const Ogre::Vector3& Object::getPosition(void) const
     return node->getPosition();
 }
 
-// Attachs an new entity to a bone of the objects main entity.
+// Attachs an new entity to a bone of the object's main entity.
 void Object::attachEntityToBone(const String &entity_name, const String &bone_name)
 {
     attached_entities.push_back(&createEntity(entity_name));
     entity->attachObjectToBone(bone_name, attached_entities.back());
+}
+
+// Creates a new animation.
+void Object::createAnimation(const int type, const String &name, const bool loop)
+{
+    animations[type].push_back(entity->getAnimationState(name));
+    animations[type].back()->setLoop(loop);
 }
 
 // Creates a new entity and returns a pointer to it.
@@ -96,14 +103,6 @@ Ogre::Entity& Object::createEntity(const String &name)
     }
     entity->setCastShadows(true);
     return *entity;
-}
-
-// Creates a new animation.
-void Object::createAnimation(const int type, const String &name, const bool loop, const bool enabled)
-{
-    animations[type].push_back(entity->getAnimationState(name));
-    animations[type].back()->setLoop(loop);
-    animations[type].back()->setEnabled(enabled);
 }
 
 // Advances the animation and returns true if it has ended.
