@@ -32,28 +32,28 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 
 int main(int argc, char *argv[])
 {
-	try 
-	{
-		boot();
+    try
+    {
+        boot();
 
-		std::string player1, player2;
-		FtsEvaluator ev(ScriptManager::get().getL());
-		ev.evalString("Config.Player1", player1);
-		ev.evalString("Config.Player2", player2);
+        std::string player1, player2;
+        FtsEvaluator ev(ScriptManager::get().getL());
+        ev.evalString("Config.Player1", player1);
+        ev.evalString("Config.Player2", player2);
 
-		Player *player = new Player(1);
-		BattleGround *battle = new BattleGround;
-		player->setBattleground(*battle);
-		player->setCharacter(player1);
-		player = new Player(2);
-		player->setBattleground(*battle);
-		player->setCharacter(player2);
-		battle->start();
-		delete battle;
-		quit();
-	} 
-	catch(std::exception & e)
-	{
-		std::cerr << "Fatal exception caught on main: " << e.what() << std::endl;
-	}
+        Player *player = new Player(1);
+        BattleGround *battle = new BattleGround;
+        player->setBattleground(*battle);
+        player->setCharacter(player1);
+        //player = new Player(2);
+        //player->setBattleground(*battle);
+        //player->setCharacter(player2);
+        battle->start();
+        delete battle;
+        quit();
+    }
+    catch(std::exception & e)
+    {
+        std::cerr << "Fatal exception caught on main: " << e.what() << std::endl;
+    }
 }
