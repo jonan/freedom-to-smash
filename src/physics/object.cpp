@@ -44,6 +44,12 @@ Object::~Object(void)
     delete physic_object;
 }
 
+// Stops the object from rotating.
+void Object::disableRotation(void)
+{
+    physic_object->setAngularFactor(0);
+}
+
 // Creates a physic body for the object.
 void Object::createBody(const Real &mass, btCollisionShape &shape,
                         ObjectSynchronizer *synchronizer,
@@ -55,6 +61,20 @@ void Object::createBody(const Real &mass, btCollisionShape &shape,
     physic_object = new btRigidBody(info);
     this->shape = &shape;
     *offset = center_offset;
+}
+
+// Apply's a force to the object.
+void Object::applyForce(const btVector3 &force)
+{
+    physic_object->applyCentralImpulse(force);
+}
+
+// Move the object.
+void Object::translate(const Real &x, const Real &y, const Real &z)
+{
+    btTransform movement(btQuaternion(0,0,0,1), btVector3(x, y, z));
+    physic_object->setWorldTransform(getPhysicObject().getWorldTransform()*movement);
+    physic_object->activate();
 }
 
 } // namespace physics

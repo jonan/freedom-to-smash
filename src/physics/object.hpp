@@ -48,6 +48,9 @@ public:
     void setScene(Scene *scene) {this->scene = scene;}
     // @}
 
+    /// Stops the object from rotating.
+    void disableRotation(void);
+
     /// Creates a physic body for the object.
     /// @param[in] mass Object's mass.
     /// @param[in] shape Object's physical shape.
@@ -61,6 +64,15 @@ public:
     /// Get functions.
     btRigidBody& getPhysicObject(void) {return *physic_object;}
     // @}
+
+    /// Apply's a force to the object.
+    void applyForce(const btVector3 &force);
+
+    /// Move the object.
+    /// @param[in] x Units to move in the x axes.
+    /// @param[in] y Units to move in the y axes.
+    /// @param[in] z Units to move in the z axes.
+    void translate(const Real &x, const Real &y, const Real &z);
 
 private:
     btCollisionShape *shape;

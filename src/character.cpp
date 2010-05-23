@@ -22,11 +22,11 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #include <boost/format.hpp>
 
 // Ogre
-
 #include <OgreEntity.h>
 #include <OgreRoot.h>
 
 // FtS
+#include <physics/converter_functions.hpp>
 #include <physics/shapes_manager.hpp>
 #include <input.hpp>
 
@@ -45,6 +45,7 @@ Character::Character(const String &name, Ogre::SceneManager &scene_manager)
 {
     String script_path = boost::str(boost::format("../scripts/char_%s.lua") % name);
     handleScript(script_path);
+    disableRotation();
 
     // Start with no action active
     for (int i=0; i < NUM_STATES; i++)
@@ -116,6 +117,7 @@ void Character::jump(void)
         if (!action[ATTACK] && !action[DEFEND] && !action[LAND]) {
             stopAction(IDLE);
             action[JUMP] = true;
+            applyForce(physics::vector3(Ogre::Vector3(0,400,0)));
         }
     }
 }
@@ -136,32 +138,6 @@ void Character::move(const MoveDirection direction)
         action[MOVE] = true;
         this->direction = direction;
     }
-}
-
-// Detects and solves collisions of the character with the battle ground.
-void Character::recoverFromPenetration(const std::list<Object*> &objects)
-{
-    /*on_floor = false;
-
-    int collision;
-    collision_right = collision_left = false;
-    BOOST_FOREACH(Object *obj, objects) {
-        collision = detectCollision(*obj);
-        collision_right |= collision & physics::RIGHT_COLLISION;
-        collision_left  |= collision & physics::LEFT_COLLISION;
-        if (collision & physics::TOP_COLLISION) {
-            stopAction(JUMP);
-        }
-        if (collision & physics::BOTTOM_COLLISION) {
-            on_floor = true;
-            if (action[FALL]) {
-                stopAction(FALL);
-                action[LAND] = true;
-                jumping_time = 0;
-                has_double_jumped = false;
-            }
-        }
-    }*/
 }
 
 //
@@ -221,7 +197,7 @@ void Character::frameMovement(const Ogre::FrameEvent &event)
         else if (direction == LEFT  && !collision_left)
             dir = 1;
         if (dir) {
-            //translate(dir*25*event.timeSinceLastFrame, 0, 0);
+            translate(dir*25*event.timeSinceLastFrame, 0, 0);
             node->setDirection(0,0,-dir,Ogre::Node::TS_PARENT);
             node->yaw(Ogre::Degree(90));
         }

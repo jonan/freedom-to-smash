@@ -58,11 +58,6 @@ public:
     void stopMoving    (void) {stopAction(MOVE);  }
     // @}
 
-    /// Detects and solves collisions of the character with the battle ground.
-    /// This function must be called every frame.
-    /// @param[in] objects All the objects in the battle ground.
-    void recoverFromPenetration(const std::list<Object*> &objects);
-
     ///
     void reset(void);
 
