@@ -4,6 +4,8 @@ Character =
     Name = "sinbad",
     Position = ogre.Vector3(0,5,0),
     Mass = 20,
+    JumpForce = 400,
+    WalkSpeed = 25,
     Size = ogre.Vector3(3.0, 10.0, 2.0),
     Yaw = 90,
 

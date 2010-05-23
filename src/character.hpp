@@ -87,6 +87,8 @@ private:
     bool on_floor, has_double_jumped;
     bool collision_right, collision_left;
     Real jumping_time;
+    double jump_force;
+    double walk_speed;
 
     MoveDirection direction;
 

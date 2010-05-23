@@ -42,6 +42,8 @@ Character::Character(const String &name, Ogre::SceneManager &scene_manager)
         , collision_right(false)
         , collision_left(false)
         , jumping_time(0)
+        , jump_force(0)
+        , walk_speed(0)
 {
     String script_path = boost::str(boost::format("../scripts/char_%s.lua") % name);
     handleScript(script_path);
@@ -68,6 +70,9 @@ void Character::handleScript(const String &file)
     FtsEvaluator ev(L);
 
     LuaEngine::RunFile(L, file);
+
+    res = ev.evalNumber("Character.JumpForce", jump_force);
+    res = ev.evalNumber("Character.WalkSpeed", walk_speed);
 
     double mass = 0;
     res = ev.evalNumber("Character.Mass", mass);
@@ -117,7 +122,7 @@ void Character::jump(void)
         if (!action[ATTACK] && !action[DEFEND] && !action[LAND]) {
             stopAction(IDLE);
             action[JUMP] = true;
-            applyForce(physics::vector3(Ogre::Vector3(0,400,0)));
+            applyForce(physics::vector3(Ogre::Vector3(0,jump_force,0)));
         }
     }
 }
@@ -197,7 +202,7 @@ void Character::frameMovement(const Ogre::FrameEvent &event)
         else if (direction == LEFT  && !collision_left)
             dir = 1;
         if (dir) {
-            translate(dir*25*event.timeSinceLastFrame, 0, 0);
+            translate(dir*walk_speed*event.timeSinceLastFrame, 0, 0);
             node->setDirection(0,0,-dir,Ogre::Node::TS_PARENT);
             node->yaw(Ogre::Degree(90));
         }
