@@ -54,7 +54,8 @@ void Object::setFriction(const Real &friction)
 void Object::setVelocity(const Real &x, const Real &y, const Real &z)
 {
     physic_object->setLinearVelocity(btVector3(x,y,z));
-    physic_object->activate();
+    if (x || y || z)
+        physic_object->activate();
 }
 
 // Get object's vertical speed.

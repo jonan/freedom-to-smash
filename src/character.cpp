@@ -163,9 +163,12 @@ bool Character::frameStarted(const Ogre::FrameEvent &event)
 // Funtion that needs to be called every frame for the character to be updated.
 void Character::frameCheck(void)
 {
-    on_floor = (abs(vertical_velocity) < 0.0001 && abs(getVerticalSpeed()) < 0.0001);
+    on_floor = (abs(vertical_velocity) == 0 && abs(getVerticalSpeed()) == 0) && !action[JUMP];
     vertical_velocity = getVerticalSpeed();
     if (on_floor) {
+        if (!action[MOVE]) {
+            setVelocity(0, 0, 0);
+        }
         if (action[FALL]) {
             stopAction(FALL);
             action[LAND] = true;
@@ -173,7 +176,7 @@ void Character::frameCheck(void)
         } else if (!action[ATTACK] && !action[DEFEND] && !action[LAND] && !action[MOVE]) {
             action[IDLE] = true;
         }
-    } else if (vertical_velocity < 0) {
+    } else if (vertical_velocity < -0.1) {
         stopAction(JUMP);
         action[FALL] = true;
     }
@@ -201,7 +204,7 @@ void Character::frameAnimation(const Ogre::FrameEvent &event)
 // Funtion that needs to be called every frame for the character to be updated.
 void Character::frameMovement(const Ogre::FrameEvent &event)
 {
-    if (action[MOVE]) {
+    if (action[MOVE] && on_floor) {
         int dir = 0;
         if (direction == RIGHT && !collision_right)
             dir = -1;
