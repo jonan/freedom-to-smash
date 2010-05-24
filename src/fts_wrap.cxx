@@ -2314,6 +2314,139 @@ fail:
 }
 
 
+static int _wrap_PhysicsObject_setFriction(lua_State* L) {
+  int SWIG_arg = 0;
+  physics::Object *arg1 = (physics::Object *) 0 ;
+  Real *arg2 = 0 ;
+  Real temp2 ;
+  
+  SWIG_check_num_args("setFriction",2,2)
+  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("setFriction",1,"physics::Object *");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("setFriction",2,"Real const &");
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_physics__Object,0))){
+    SWIG_fail_ptr("PhysicsObject_setFriction",1,SWIGTYPE_p_physics__Object);
+  }
+  
+  temp2=(Real)lua_tonumber(L,2); arg2=&temp2;
+  (arg1)->setFriction((Real const &)*arg2);
+  
+  return SWIG_arg;
+  
+  if(0) SWIG_fail;
+  
+fail:
+  lua_error(L);
+  return SWIG_arg;
+}
+
+
+static int _wrap_PhysicsObject_setVelocity(lua_State* L) {
+  int SWIG_arg = 0;
+  physics::Object *arg1 = (physics::Object *) 0 ;
+  Real *arg2 = 0 ;
+  Real *arg3 = 0 ;
+  Real *arg4 = 0 ;
+  Real temp2 ;
+  Real temp3 ;
+  Real temp4 ;
+  
+  SWIG_check_num_args("setVelocity",4,4)
+  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("setVelocity",1,"physics::Object *");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("setVelocity",2,"Real const &");
+  if(!lua_isnumber(L,3)) SWIG_fail_arg("setVelocity",3,"Real const &");
+  if(!lua_isnumber(L,4)) SWIG_fail_arg("setVelocity",4,"Real const &");
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_physics__Object,0))){
+    SWIG_fail_ptr("PhysicsObject_setVelocity",1,SWIGTYPE_p_physics__Object);
+  }
+  
+  temp2=(Real)lua_tonumber(L,2); arg2=&temp2;
+  temp3=(Real)lua_tonumber(L,3); arg3=&temp3;
+  temp4=(Real)lua_tonumber(L,4); arg4=&temp4;
+  (arg1)->setVelocity((Real const &)*arg2,(Real const &)*arg3,(Real const &)*arg4);
+  
+  return SWIG_arg;
+  
+  if(0) SWIG_fail;
+  
+fail:
+  lua_error(L);
+  return SWIG_arg;
+}
+
+
+static int _wrap_PhysicsObject_getPhysicObject(lua_State* L) {
+  int SWIG_arg = 0;
+  physics::Object *arg1 = (physics::Object *) 0 ;
+  btRigidBody *result = 0 ;
+  
+  SWIG_check_num_args("getPhysicObject",1,1)
+  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("getPhysicObject",1,"physics::Object *");
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_physics__Object,0))){
+    SWIG_fail_ptr("PhysicsObject_getPhysicObject",1,SWIGTYPE_p_physics__Object);
+  }
+  
+  result = (btRigidBody *) &(arg1)->getPhysicObject();
+  SWIG_NewPointerObj(L,result,SWIGTYPE_p_btRigidBody,0); SWIG_arg++; 
+  return SWIG_arg;
+  
+  if(0) SWIG_fail;
+  
+fail:
+  lua_error(L);
+  return SWIG_arg;
+}
+
+
+static int _wrap_PhysicsObject_getVerticalSpeed(lua_State* L) {
+  int SWIG_arg = 0;
+  physics::Object *arg1 = (physics::Object *) 0 ;
+  Real result;
+  
+  SWIG_check_num_args("getVerticalSpeed",1,1)
+  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("getVerticalSpeed",1,"physics::Object *");
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_physics__Object,0))){
+    SWIG_fail_ptr("PhysicsObject_getVerticalSpeed",1,SWIGTYPE_p_physics__Object);
+  }
+  
+  result = (Real)(arg1)->getVerticalSpeed();
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
+  return SWIG_arg;
+  
+  if(0) SWIG_fail;
+  
+fail:
+  lua_error(L);
+  return SWIG_arg;
+}
+
+
+static int _wrap_PhysicsObject_disableRotation(lua_State* L) {
+  int SWIG_arg = 0;
+  physics::Object *arg1 = (physics::Object *) 0 ;
+  
+  SWIG_check_num_args("disableRotation",1,1)
+  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("disableRotation",1,"physics::Object *");
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_physics__Object,0))){
+    SWIG_fail_ptr("PhysicsObject_disableRotation",1,SWIGTYPE_p_physics__Object);
+  }
+  
+  (arg1)->disableRotation();
+  
+  return SWIG_arg;
+  
+  if(0) SWIG_fail;
+  
+fail:
+  lua_error(L);
+  return SWIG_arg;
+}
+
+
 static int _wrap_PhysicsObject_createBody__SWIG_0(lua_State* L) {
   int SWIG_arg = 0;
   physics::Object *arg1 = (physics::Object *) 0 ;
@@ -2571,30 +2704,6 @@ static int _wrap_PhysicsObject_createBody(lua_State* L) {
 }
 
 
-static int _wrap_PhysicsObject_getPhysicObject(lua_State* L) {
-  int SWIG_arg = 0;
-  physics::Object *arg1 = (physics::Object *) 0 ;
-  btRigidBody *result = 0 ;
-  
-  SWIG_check_num_args("getPhysicObject",1,1)
-  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("getPhysicObject",1,"physics::Object *");
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_physics__Object,0))){
-    SWIG_fail_ptr("PhysicsObject_getPhysicObject",1,SWIGTYPE_p_physics__Object);
-  }
-  
-  result = (btRigidBody *) &(arg1)->getPhysicObject();
-  SWIG_NewPointerObj(L,result,SWIGTYPE_p_btRigidBody,0); SWIG_arg++; 
-  return SWIG_arg;
-  
-  if(0) SWIG_fail;
-  
-fail:
-  lua_error(L);
-  return SWIG_arg;
-}
-
-
 static int _wrap_PhysicsObject_applyForce(lua_State* L) {
   int SWIG_arg = 0;
   physics::Object *arg1 = (physics::Object *) 0 ;
@@ -2631,8 +2740,12 @@ delete arg1;
 }
 static swig_lua_method swig_physics_Object_methods[] = {
     {"setScene", _wrap_PhysicsObject_setScene}, 
-    {"createBody", _wrap_PhysicsObject_createBody}, 
+    {"setFriction", _wrap_PhysicsObject_setFriction}, 
+    {"setVelocity", _wrap_PhysicsObject_setVelocity}, 
     {"getPhysicObject", _wrap_PhysicsObject_getPhysicObject}, 
+    {"getVerticalSpeed", _wrap_PhysicsObject_getVerticalSpeed}, 
+    {"disableRotation", _wrap_PhysicsObject_disableRotation}, 
+    {"createBody", _wrap_PhysicsObject_createBody}, 
     {"applyForce", _wrap_PhysicsObject_applyForce}, 
     {0,0}
 };
