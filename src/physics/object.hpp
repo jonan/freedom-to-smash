@@ -48,6 +48,12 @@ public:
     void setScene(Scene *scene) {this->scene = scene;}
     // @}
 
+    // @{
+    /// Get functions.
+    btRigidBody& getPhysicObject  (void) {return *physic_object;}
+    Real         getVerticalSpeed (void);
+    // @}
+
     /// Stops the object from rotating.
     void disableRotation(void);
 
@@ -59,11 +65,6 @@ public:
     void createBody(const Real &mass, btCollisionShape &shape,
                     ObjectSynchronizer *synchronizer = NULL,
                     const btTransform &center_offset = btTransform::getIdentity());
-
-    // @{
-    /// Get functions.
-    btRigidBody& getPhysicObject(void) {return *physic_object;}
-    // @}
 
     /// Apply's a force to the object.
     void applyForce(const btVector3 &force);

@@ -44,6 +44,12 @@ Object::~Object(void)
     delete physic_object;
 }
 
+// Get object's vertical speed.
+Real Object::getVerticalSpeed(void )
+{
+    return physic_object->getVelocityInLocalPoint(offset->getOrigin()).getY();
+}
+
 // Stops the object from rotating.
 void Object::disableRotation(void)
 {
