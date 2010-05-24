@@ -48,7 +48,6 @@ Character::Character(const String &name, Ogre::SceneManager &scene_manager)
     String script_path = boost::str(boost::format("../scripts/char_%s.lua") % name);
     handleScript(script_path);
     disableRotation();
-    setFriction(20);
 
     // Start with no action active
     for (int i=0; i < NUM_STATES; i++)
@@ -209,7 +208,7 @@ void Character::frameMovement(const Ogre::FrameEvent &event)
         else if (direction == LEFT  && !collision_left)
             dir = 1;
         if (dir) {
-            translate(dir*walk_speed*event.timeSinceLastFrame, 0, 0);
+            setVelocity(dir*walk_speed, 0, 0);
             node->setDirection(0,0,-dir,Ogre::Node::TS_PARENT);
             node->yaw(Ogre::Degree(90));
         }

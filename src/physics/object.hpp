@@ -45,8 +45,9 @@ public:
 
     // @{
     /// Set functions.
-    void setScene    (Scene *scene)         {this->scene = scene;}
+    void setScene    (Scene *scene) {this->scene = scene;}
     void setFriction (const Real &friction);
+    void setVelocity (const Real &x, const Real &y, const Real &z);
     // @}
 
     // @{
@@ -69,12 +70,6 @@ public:
 
     /// Apply's a force to the object.
     void applyForce(const btVector3 &force);
-
-    /// Move the object.
-    /// @param[in] x Units to move in the x axes.
-    /// @param[in] y Units to move in the y axes.
-    /// @param[in] z Units to move in the z axes.
-    void translate(const Real &x, const Real &y, const Real &z);
 
 private:
     btCollisionShape *shape;

@@ -50,6 +50,13 @@ void Object::setFriction(const Real &friction)
     physic_object->setFriction(friction);
 }
 
+// Sets a velocity to the object.
+void Object::setVelocity(const Real &x, const Real &y, const Real &z)
+{
+    physic_object->setLinearVelocity(btVector3(x,y,z));
+    physic_object->activate();
+}
+
 // Get object's vertical speed.
 Real Object::getVerticalSpeed(void)
 {
@@ -79,14 +86,6 @@ void Object::createBody(const Real &mass, btCollisionShape &shape,
 void Object::applyForce(const btVector3 &force)
 {
     physic_object->applyCentralImpulse(force);
-    physic_object->activate();
-}
-
-// Move the object.
-void Object::translate(const Real &x, const Real &y, const Real &z)
-{
-    btTransform movement(btQuaternion(0,0,0,1), btVector3(x, y, z));
-    physic_object->setWorldTransform(getPhysicObject().getWorldTransform()*movement);
     physic_object->activate();
 }
 
