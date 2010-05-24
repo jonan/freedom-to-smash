@@ -79,14 +79,11 @@ private:
     // Player stops performing an action
     void stopAction(const int type);
 
-    // Calculates the current vertical speed.
-    const Real calculateVerticalSpeed(const Real &start_speed);
-
     bool action[NUM_STATES]; // active actions
 
     bool on_floor, has_double_jumped;
     bool collision_right, collision_left;
-    Real jumping_time;
+    Real vertical_velocity;
     double jump_force;
     double walk_speed;
 

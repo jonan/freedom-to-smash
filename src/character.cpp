@@ -41,7 +41,7 @@ Character::Character(const String &name, Ogre::SceneManager &scene_manager)
         , has_double_jumped(false)
         , collision_right(false)
         , collision_left(false)
-        , jumping_time(0)
+        , vertical_velocity(0)
         , jump_force(0)
         , walk_speed(0)
 {
@@ -115,9 +115,9 @@ void Character::jump(void)
     if ( (action[JUMP] || action[FALL]) && !has_double_jumped) {
         stopAction(JUMP);
         stopAction(FALL);
-        action[JUMP] = true;
-        jumping_time = 0;
         has_double_jumped = true;
+        action[JUMP] = true;
+        applyForce(physics::vector3(Ogre::Vector3(0,jump_force,0)));
     } else if (on_floor) {
         if (!action[ATTACK] && !action[DEFEND] && !action[LAND]) {
             stopAction(IDLE);
@@ -149,7 +149,6 @@ void Character::move(const MoveDirection direction)
 void Character::reset(void)
 {
     setPosition(Ogre::Vector3(0,5,0));
-    jumping_time = 0;
 }
 
 // Function that's called at the beginning of every frame.
@@ -164,11 +163,17 @@ bool Character::frameStarted(const Ogre::FrameEvent &event)
 // Funtion that needs to be called every frame for the character to be updated.
 void Character::frameCheck(void)
 {
+    on_floor = (abs(vertical_velocity) < 0.0001 && abs(getVerticalSpeed()) < 0.0001);
+    vertical_velocity = getVerticalSpeed();
     if (on_floor) {
-        if (!action[ATTACK] && !action[DEFEND] && !action[LAND] && !action[MOVE]) {
+        if (action[FALL]) {
+            stopAction(FALL);
+            action[LAND] = true;
+        } else if (!action[ATTACK] && !action[DEFEND] && !action[LAND] && !action[MOVE]) {
             action[IDLE] = true;
         }
-    } else if (!action[JUMP]) {
+    } else if (vertical_velocity < 0) {
+        stopAction(JUMP);
         action[FALL] = true;
     }
 }
@@ -207,19 +212,6 @@ void Character::frameMovement(const Ogre::FrameEvent &event)
             node->yaw(Ogre::Degree(90));
         }
     }
-    if (action[JUMP] || action[FALL]) {
-        Real initial_speed = 0;
-        if (action[JUMP]) {
-            initial_speed = 80;
-            if (calculateVerticalSpeed(initial_speed) <= 0) {
-                stopAction(JUMP);
-                jumping_time = 0;
-                initial_speed = 0;
-            }
-        }
-        jumping_time += event.timeSinceLastFrame;
-        //translate(0, calculateVerticalSpeed(initial_speed)*event.timeSinceLastFrame, 0);
-    }
 }
 
 // Player stops performing an action
@@ -228,11 +220,4 @@ void Character::stopAction(const int type)
     BOOST_FOREACH(Ogre::AnimationState *anim, animations[type])
         anim->setTimePosition(0);
     action[type] = false;
-}
-
-// Calculates the current vertical speed.
-const Real Character::calculateVerticalSpeed(const Real &start_speed)
-{
-    const static Real GRAVITY = 300;
-    return (start_speed - (GRAVITY * jumping_time));
 }
