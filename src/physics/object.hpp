@@ -45,7 +45,8 @@ public:
 
     // @{
     /// Set functions.
-    void setScene(Scene *scene) {this->scene = scene;}
+    void setScene    (Scene *scene)         {this->scene = scene;}
+    void setFriction (const Real &friction);
     // @}
 
     // @{

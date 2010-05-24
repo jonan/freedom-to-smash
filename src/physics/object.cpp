@@ -44,8 +44,14 @@ Object::~Object(void)
     delete physic_object;
 }
 
+// Changes the object's friction.
+void Object::setFriction(const Real &friction)
+{
+    physic_object->setFriction(friction);
+}
+
 // Get object's vertical speed.
-Real Object::getVerticalSpeed(void )
+Real Object::getVerticalSpeed(void)
 {
     return physic_object->getVelocityInLocalPoint(offset->getOrigin()).getY();
 }

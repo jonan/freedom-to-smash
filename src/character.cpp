@@ -48,6 +48,7 @@ Character::Character(const String &name, Ogre::SceneManager &scene_manager)
     String script_path = boost::str(boost::format("../scripts/char_%s.lua") % name);
     handleScript(script_path);
     disableRotation();
+    setFriction(20);
 
     // Start with no action active
     for (int i=0; i < NUM_STATES; i++)
