@@ -39,7 +39,7 @@ Scene::Scene(void)
 #endif
 {
     world = new btDiscreteDynamicsWorld(dispatcher, broadphase, solver, configuration);
-    world->setGravity(btVector3(0,-10,0));
+    world->setGravity(btVector3(0,-100,0));
 }
 
 // Destructor
