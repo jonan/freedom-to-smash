@@ -170,6 +170,7 @@ void Character::frameCheck(void)
         if (action[FALL]) {
             stopAction(FALL);
             action[LAND] = true;
+            has_double_jumped = false;
         } else if (!action[ATTACK] && !action[DEFEND] && !action[LAND] && !action[MOVE]) {
             action[IDLE] = true;
         }

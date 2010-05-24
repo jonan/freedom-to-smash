@@ -79,6 +79,7 @@ void Object::createBody(const Real &mass, btCollisionShape &shape,
 void Object::applyForce(const btVector3 &force)
 {
     physic_object->applyCentralImpulse(force);
+    physic_object->activate();
 }
 
 // Move the object.
