@@ -1,3 +1,21 @@
+/*
+ *  This file is part of Freedom to Smash.
+ *  Copyright (c) 2009-2010 David G. Miguel <noxwings@gmail.com>
+ *
+ *  Freedom to Smash is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  Freedom to Smash is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with Freedom to Smash.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 #include "soundresources.hpp"
 using namespace audio;
 
@@ -12,18 +30,17 @@ SoundResources::~SoundResources()
     unloadAllBuffers();
 }
 
-SoundBuffer* SoundResources::loadSound(const char* name, const char* extension)
+SoundBuffer* SoundResources::loadSound(const char* fileName)
 {
-    Ogre::String path = defaultLocation;
-    path += name; path += extension;
-    SoundBuffer* buffer = new SoundBuffer(name, path.c_str(), extension);
+    std::string path = defaultLocation; path += fileName;
+    SoundBuffer* buffer = new SoundBuffer(fileName, path.c_str());
     mBufferList.push_back(buffer);
     return buffer;
 }
 
-SoundBuffer* SoundResources::getSound(const char* name, const char* extension)
+SoundBuffer* SoundResources::getSound(const char* fileName)
 {
-    Ogre::String temp = name;
+    std::string temp = fileName;
 
     std::list<SoundBuffer*>::iterator it;
     // Find name ocurrences in buffer list
@@ -32,7 +49,7 @@ SoundBuffer* SoundResources::getSound(const char* name, const char* extension)
         if (temp == (*it)->getName())
             return *it;
     }
-    return loadSound(name, extension);
+    return loadSound(fileName);
 }
 
 void SoundResources::unloadAllBuffers()
@@ -49,5 +66,5 @@ void SoundResources::unloadAllBuffers()
 
 SoundResources::SoundResources()
 {
-    defaultLocation = "media/sound/";
+    defaultLocation = "./media/sound/";
 }
