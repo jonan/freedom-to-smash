@@ -72,8 +72,8 @@ private:
     // @{
     // Funtions that need to be called every frame for the character to be updated.
     void frameCheck     (void);
+    void frameMovement  (void);
     void frameAnimation (const Ogre::FrameEvent &event);
-    void frameMovement  (const Ogre::FrameEvent &event);
     // @}
 
     // Player stops performing an action

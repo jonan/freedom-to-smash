@@ -155,8 +155,8 @@ void Character::reset(void)
 bool Character::frameStarted(const Ogre::FrameEvent &event)
 {
     frameCheck();
+    frameMovement();
     frameAnimation(event);
-    frameMovement(event);
     return true;
 }
 
@@ -183,6 +183,23 @@ void Character::frameCheck(void)
 }
 
 // Funtion that needs to be called every frame for the character to be updated.
+void Character::frameMovement(void)
+{
+    if (action[MOVE] && on_floor) {
+        int dir = 0;
+        if (direction == RIGHT && !collision_right)
+            dir = -1;
+        else if (direction == LEFT  && !collision_left)
+            dir = 1;
+        if (dir) {
+            setVelocity(dir*walk_speed, 0, 0);
+            node->setDirection(0,0,-dir,Ogre::Node::TS_PARENT);
+            node->yaw(Ogre::Degree(90));
+        }
+    }
+}
+
+// Funtion that needs to be called every frame for the character to be updated.
 void Character::frameAnimation(const Ogre::FrameEvent &event)
 {
     // Disable all animations
@@ -197,23 +214,6 @@ void Character::frameAnimation(const Ogre::FrameEvent &event)
                     stopAction(i);
                 }
             }
-        }
-    }
-}
-
-// Funtion that needs to be called every frame for the character to be updated.
-void Character::frameMovement(const Ogre::FrameEvent &event)
-{
-    if (action[MOVE] && on_floor) {
-        int dir = 0;
-        if (direction == RIGHT && !collision_right)
-            dir = -1;
-        else if (direction == LEFT  && !collision_left)
-            dir = 1;
-        if (dir) {
-            setVelocity(dir*walk_speed, 0, 0);
-            node->setDirection(0,0,-dir,Ogre::Node::TS_PARENT);
-            node->yaw(Ogre::Degree(90));
         }
     }
 }
