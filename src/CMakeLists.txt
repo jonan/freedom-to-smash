@@ -2,6 +2,7 @@ set(
   SRC
   graphics/object.cpp
   graphics/scene.cpp
+  gui/gui.cpp
   physics/debug_drawer.cpp
   physics/object.cpp
   physics/object_synchronizer.cpp
@@ -32,6 +33,7 @@ set(
   HEADERS
   graphics/object.hpp
   graphics/scene.hpp
+  gui/gui.hpp
   physics/converter_functions.hpp
   physics/debug_drawer.hpp
   physics/object.hpp
@@ -103,6 +105,7 @@ target_link_libraries(
   ${OIS_LIBRARIES}
   ${OGRE_LIBRARIES}
   ${OPENAL_LIBRARY}
+  ${QUICK_GUI_LIBRARIES}
   ${SDL_LIBRARY}
   ${SKYX_LIBRARIES}
   )

@@ -14,6 +14,7 @@ find_package(SDL REQUIRED)
 include_directories(
   ${PROJECT_SOURCE_DIR}
   ${PROJECT_SOURCE_DIR}/bullet
+  ${PROJECT_SOURCE_DIR}/quick_gui/include
   ${PROJECT_SOURCE_DIR}/src
   ${Boost_INCLUDE_DIRS}
   ${LUA_INCLUDE_DIR}
@@ -79,6 +80,23 @@ else()
       )
 endif()
 
+# Copy the mene sheets to the binary directory
+set(
+  MENU_SHEETS
+  main_menu
+  )
+foreach(SHEET ${MENU_SHEETS})
+  add_custom_command(
+    OUTPUT ${PROJECT_BINARY_DIR}/menu_sheets/${SHEET}
+    COMMAND ${CMAKE_COMMAND} -E copy ${PROJECT_SOURCE_DIR}/menu_sheets/${SHEET} ${PROJECT_BINARY_DIR}/menu_sheets/${SHEET}
+    MAIN_DEPENDENCY ${PROJECT_SOURCE_DIR}/menu_sheets/${SHEET}
+    )
+    add_custom_target(
+      copy-menu-sheets ALL
+      DEPENDS ${PROJECT_BINARY_DIR}/menu_sheets/${SHEET}
+      )
+endforeach()
+
 add_subdirectory(bullet)
 set(
   BULLET_LIBRARIES
@@ -91,6 +109,9 @@ set(
 
 add_subdirectory(hydrax)
 set(HYDRAX_LIBRARIES Hydrax)
+
+add_subdirectory(quick_gui)
+set(QUICK_GUI_LIBRARIES QuickGUI)
 
 add_subdirectory(skyx)
 set(SKYX_LIBRARIES SkyX)

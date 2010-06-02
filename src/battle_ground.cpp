@@ -24,6 +24,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #include <OgreRoot.h>
 
 // FtS
+#include <gui/gui.hpp>
 #include <character.hpp>
 
 #include <fts_evaluator.hpp>
@@ -45,6 +46,10 @@ BattleGround::BattleGround(void)
     addObject("cube", Ogre::Vector3(0,-5,0), Ogre::Vector3(10,1,1));
     addObject("cube", Ogre::Vector3(-23,7,0), Ogre::Vector3(3,0.5,1));
     addObject("cube", Ogre::Vector3(23,7,0), Ogre::Vector3(3,0.5,1));
+
+    // GUI
+    gui::Gui::getInstance().loadSheet("main_menu");
+
 #if DEBUG_PHYSIC_SHAPES
     createDebugDrawer(getManager());
 #endif
