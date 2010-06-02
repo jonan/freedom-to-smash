@@ -24,6 +24,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #include <OgreRoot.h>
 
 // FtS
+#include <gui/gui.hpp>
 #include <character.hpp>
 
 // Constructor
@@ -47,6 +48,7 @@ BattleGround::BattleGround(void)
 #if DEBUG_PHYSIC_SHAPES
     createDebugDrawer(getManager());
 #endif
+    gui::Gui::getInstance().loadSheet("main_menu");
 }
 
 // Destructor

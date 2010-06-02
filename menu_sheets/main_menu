@@ -1,0 +1,28 @@
+Sheet Sheet
+{
+    MouseCursorVisible false
+
+    UserDefinedHandlers WidgetEvents
+    {
+    }
+
+    Child Widgets
+    {
+        Image Image
+        {
+            Dimensions 0 0 551 332
+            ImageName logo_sinbad.png
+
+            UserDefinedHandlers WidgetEvents
+            {
+            }
+
+        }
+
+    }
+
+    Child Windows
+    {
+    }
+
+}
