@@ -22,7 +22,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 
 namespace gui {
 
-    // Singleton pattern constructor
+// Singleton pattern constructor
 Gui& Gui::getInstance(void)
 {
     static Gui instance;
@@ -35,16 +35,26 @@ void Gui::registerScriptReader(void)
     QuickGUI::registerScriptReader();
 }
 
+// Destroys the GUI system.
+void Gui::destroy(void)
+{
+    delete QuickGUI::Root::getSingletonPtr();
+}
+
+// Creates a GUI from a sheet.
+void Gui::loadSheet(const String &name)
+{
+    QuickGUI::Sheet *sheet = QuickGUI::SheetManager::getSingleton().createSheet("menu_sheets/" + name,true);
+    gui_manager->setActiveSheet(sheet);
+}
+
 // Constructor
 Gui::Gui(void)
 {
     new QuickGUI::Root();
-}
-
-// Destructor
-Gui::~Gui(void)
-{
-    delete QuickGUI::Root::getSingletonPtr();
+    QuickGUI::SkinTypeManager::getSingleton().loadTypes();
+    QuickGUI::GUIManagerDesc manager_description;
+    gui_manager = QuickGUI::Root::getSingletonPtr()->createGUIManager(manager_description);
 }
 
 } // namespace gui

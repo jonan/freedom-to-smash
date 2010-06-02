@@ -25,6 +25,8 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 // FtS
 #include <util.hpp>
 
+namespace QuickGUI {class GUIManager;}
+
 namespace gui {
 
 ///
@@ -32,13 +34,22 @@ class Gui {
 public:
     static Gui& getInstance(void); // Singleton pattern constructor
 
-    // Registers the script reader.
-    // Must be called before initializing the resources.
+    /// Registers the script reader.
+    /// Must be called before initializing the resources.
     static void registerScriptReader(void);
+
+    /// Destroys the GUI system.
+    /// Must be called before deleting Ogre.
+    void destroy(void);
+
+    /// Creates a GUI from a sheet.
+    /// @param[in] name Name of the sheet
+    void loadSheet(const String &name);
 
 private:
     Gui(void); // Constructor
-    ~Gui(void); // Destructor
+
+    QuickGUI::GUIManager *gui_manager;
 
     DISALLOW_COPY_AND_ASSIGN(Gui);
 };

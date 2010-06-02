@@ -110,21 +110,17 @@ void HandleConfigScript()
 // Loads all the necessary things for the game to run.
 void boot(void)
 {
-    // Runs the first script
     HandleConfigScript();
-
-    // Start Ogre
-    Ogre::Root *ogre_root = new Ogre::Root;
+    setupRenderSystem( *(new Ogre::Root) );
     defineResources();
-    setupRenderSystem(*ogre_root);
     gui::Gui::registerScriptReader();
     initializeAllResources();
-    // Start capturing all input
     Input::getInstance();
 }
 
 // Shuts down all the systems and frees memory.
 void quit(void)
 {
+    gui::Gui::getInstance().destroy();
     delete Ogre::Root::getSingletonPtr();
 }
