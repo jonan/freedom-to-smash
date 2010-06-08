@@ -46,6 +46,10 @@ public:
     /// @param[in] name Name of the sheet
     void loadSheet(const String &name);
 
+    /// Temporal method to hard-code GUIs.
+    /// The GUI is then saved as sheet.gui.
+    void createSheet(void);
+
 private:
     Gui(void); // Constructor
 

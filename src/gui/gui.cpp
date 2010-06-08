@@ -48,6 +48,23 @@ void Gui::loadSheet(const String &name)
     gui_manager->setActiveSheet(sheet);
 }
 
+// Temporal method to hard-code GUIs.
+void Gui::createSheet(void)
+{
+    QuickGUI::SheetDesc *sheet_description = QuickGUI::DescManager::getSingleton().getDefaultSheetDesc();
+    QuickGUI::Sheet *sheet = QuickGUI::SheetManager::getSingleton().createSheet(sheet_description);
+    sheet->setMouseCursorVisible(false);
+    gui_manager->setActiveSheet(sheet);
+    QuickGUI::ImageDesc *img = QuickGUI::DescManager::getSingleton().getDefaultImageDesc();
+    img->image_imageName = "logo_sinbad.png";
+    img->widget_dimensions = QuickGUI::Rect(0,0,551,332);
+    sheet->createImage(img);
+    QuickGUI::LabelDesc *label = QuickGUI::DescManager::getSingleton().getDefaultLabelDesc();
+    label->widget_dimensions = QuickGUI::Rect(500,300,100,100);
+    sheet->createLabel(label);
+    sheet->saveToDisk("sheet.gui");
+}
+
 // Constructor
 Gui::Gui(void)
 {
