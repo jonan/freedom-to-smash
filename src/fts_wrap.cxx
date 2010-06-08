@@ -3541,7 +3541,6 @@ static swig_lua_var_info swig_variables[] = {
 };
 
 static swig_lua_const_info swig_constants[] = {
-{ SWIG_LUA_INT,     (char *)"USE_CAELUM", (long) 0, 0, 0, 0},
 { SWIG_LUA_INT,     (char *)"DEBUG_PHYSIC_SHAPES", (long) 0, 0, 0, 0},
 { SWIG_LUA_INT,     (char *)"RIGHT", (long) RIGHT, 0, 0, 0},
 { SWIG_LUA_INT,     (char *)"LEFT", (long) LEFT, 0, 0, 0},

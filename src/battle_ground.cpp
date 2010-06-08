@@ -113,10 +113,5 @@ bool BattleGround::frameStarted(const Ogre::FrameEvent &event)
     look_node->setPosition(average);
     cam_node->setPosition(average.x, average.y, -50);
 
-#if USE_CAELUM
-    mCaelumSystem->notifyCameraChanged(this->camera);
-    mCaelumSystem->updateSubcomponents(event.timeSinceLastFrame * 1000);
-#endif
-
     return !end;
 }

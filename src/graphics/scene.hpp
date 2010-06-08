@@ -33,13 +33,10 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 // FtS
 #include <util.hpp>
 
-namespace Caelum {class CaelumSystem;}
 namespace Hydrax {class Hydrax;      }
 namespace SkyX   {class SkyX;        }
 
 namespace graphics {
-
-#define USE_CAELUM 0
 
 /// Class to control all the graphical elements of a scene.
 class Scene {
@@ -98,9 +95,6 @@ protected:
     // Updates the dynamic sky.
     void updateSky(const Real &time);
 
-    // Creates a dynamic sky using the Caelum plugin.
-    void createCaelumSky(void);
-
 private:
     // Creates a static camera for the scene.
     Ogre::Camera& createCamera(const String &name, const Ogre::Vector3 &position,
@@ -113,10 +107,6 @@ private:
 
     Hydrax::Hydrax *hydrax;
     SkyX::SkyX *skyx;
-
-#if USE_CAELUM
-    Caelum::CaelumSystem * mCaelumSystem;
-#endif
 
     DISALLOW_COPY_AND_ASSIGN(Scene);
 };

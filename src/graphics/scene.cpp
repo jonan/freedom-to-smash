@@ -15,7 +15,7 @@ You should have received a copy of the GNU General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>
 */
 
-#include "scene.hpp"
+#include <graphics/scene.hpp>
 
 // Ogre
 #include <OgreRenderWindow.h>
@@ -27,26 +27,15 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 // SkyX
 #include <skyx/SkyX.h>
 
-#if USE_CAELUM
-#include <caelum/Caelum.h>
-#endif
-
 namespace graphics {
 
 // Constructor
 Scene::Scene(void)
         : hydrax(NULL)
         , skyx(NULL)
-
-#if USE_CAELUM
-        , mCaelumSystem(NULL)
-#endif
-
 {
     manager = Ogre::Root::getSingleton().createSceneManager(Ogre::ST_GENERIC);
     viewport = Ogre::Root::getSingleton().getAutoCreatedWindow()->addViewport(NULL);
-
-    createCaelumSky();
 }
 
 // Constructor
@@ -54,10 +43,6 @@ Scene::~Scene(void)
 {
     delete hydrax;
     delete skyx;
-
-#if USE_CAELUM
-    delete mCaelumSystem;
-#endif
 }
 
 // Adds a static camera.
@@ -169,51 +154,16 @@ void Scene::createSky(void)
     skyx->create();
     skyx->getVCloudsManager()->create();
     SkyX::AtmosphereManager::Options options = skyx->getAtmosphereManager()->getOptions();
-	options.RayleighMultiplier = 0.0045f;
-	skyx->getVCloudsManager()->setWindSpeed(80);
+    options.RayleighMultiplier = 0.0045f;
+    skyx->getVCloudsManager()->setWindSpeed(80);
 
-	skyx->getAtmosphereManager()->setOptions(options);
+    skyx->getAtmosphereManager()->setOptions(options);
 }
 
 // Updates the dynamic sky.
 void Scene::updateSky(const Real &time)
 {
     if (skyx) skyx->update(time);
-}
-
-// Creates a dynamic sky using the Caelum plugin.
-void Scene::createCaelumSky(void)
-{
-#if USE_CAELUM
-    // Create the sky
-    mCaelumSystem = new Caelum::CaelumSystem(Ogre::Root::getSingletonPtr(), scene_manager,
-        (Caelum::CaelumSystem::CaelumComponent)(
-        Caelum::CaelumSystem::CaelumComponent::CAELUM_COMPONENT_SKY_DOME
-        | Caelum::CaelumSystem::CaelumComponent::CAELUM_COMPONENT_SUN
-        | Caelum::CaelumSystem::CaelumComponent::CAELUM_COMPONENT_CLOUDS
-        /*| Caelum::CaelumSystem::CaelumComponent::CAELUM_COMPONENT_MOON*/
-        | Caelum::CaelumSystem::CaelumComponent::CAELUM_COMPONENT_IMAGE_STARFIELD
-        /*| Caelum::CaelumSystem::CaelumComponent::CAELUM_COMPONENT_PRECIPITATION*/
-        ));
-
-    mCaelumSystem->setGlobalFogDensityMultiplier(0);
-
-    // Some of the following settings seem to be supported by DX but NOT by OGL.
-    // They are hence commented out for now.
-
-    //mCaelumSystem->setSceneFogDensityMultiplier(0);
-    //mCaelumSystem->setManageSceneFog(false);
-    //mCamera->setFarClipDistance(100000000);
-    //mCaelumSystem->setTimeScale(4000);
-
-    //Caelum::FlatCloudLayer * clouds = mCaelumSystem->getCloudSystem()->getLayer(0);
-    //clouds->setCloudCover(0.6);
-    //clouds->setCloudBlendTime(1);
-
-    //mCaelumSystem->getPrecipitationController()->createViewportInstance(viewport);
-    //mCaelumSystem->getPrecipitationController()->setIntensity(0.05);
-    //mCaelumSystem->getPrecipitationController()->setCameraSpeedScale(0.001);
-#endif
 }
 
 // Creates a static camera for the scene.
