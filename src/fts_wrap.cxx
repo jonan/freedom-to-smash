@@ -2376,6 +2376,41 @@ fail:
 }
 
 
+static int _wrap_PhysicsObject_setPosition(lua_State* L) {
+  int SWIG_arg = 0;
+  physics::Object *arg1 = (physics::Object *) 0 ;
+  Real *arg2 = 0 ;
+  Real *arg3 = 0 ;
+  Real *arg4 = 0 ;
+  Real temp2 ;
+  Real temp3 ;
+  Real temp4 ;
+  
+  SWIG_check_num_args("setPosition",4,4)
+  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("setPosition",1,"physics::Object *");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("setPosition",2,"Real const &");
+  if(!lua_isnumber(L,3)) SWIG_fail_arg("setPosition",3,"Real const &");
+  if(!lua_isnumber(L,4)) SWIG_fail_arg("setPosition",4,"Real const &");
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_physics__Object,0))){
+    SWIG_fail_ptr("PhysicsObject_setPosition",1,SWIGTYPE_p_physics__Object);
+  }
+  
+  temp2=(Real)lua_tonumber(L,2); arg2=&temp2;
+  temp3=(Real)lua_tonumber(L,3); arg3=&temp3;
+  temp4=(Real)lua_tonumber(L,4); arg4=&temp4;
+  (arg1)->setPosition((Real const &)*arg2,(Real const &)*arg3,(Real const &)*arg4);
+  
+  return SWIG_arg;
+  
+  if(0) SWIG_fail;
+  
+fail:
+  lua_error(L);
+  return SWIG_arg;
+}
+
+
 static int _wrap_PhysicsObject_getPhysicObject(lua_State* L) {
   int SWIG_arg = 0;
   physics::Object *arg1 = (physics::Object *) 0 ;
@@ -2742,6 +2777,7 @@ static swig_lua_method swig_physics_Object_methods[] = {
     {"setScene", _wrap_PhysicsObject_setScene}, 
     {"setFriction", _wrap_PhysicsObject_setFriction}, 
     {"setVelocity", _wrap_PhysicsObject_setVelocity}, 
+    {"setPosition", _wrap_PhysicsObject_setPosition}, 
     {"getPhysicObject", _wrap_PhysicsObject_getPhysicObject}, 
     {"getVerticalSpeed", _wrap_PhysicsObject_getVerticalSpeed}, 
     {"disableRotation", _wrap_PhysicsObject_disableRotation}, 
@@ -3074,25 +3110,25 @@ fail:
 }
 
 
-static int _wrap_Object_setScale(lua_State* L) {
+static int _wrap_Object_setGraphicalPosition(lua_State* L) {
   int SWIG_arg = 0;
   Object *arg1 = (Object *) 0 ;
   Ogre::Vector3 *arg2 = 0 ;
   
-  SWIG_check_num_args("setScale",2,2)
-  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("setScale",1,"Object *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("setScale",2,"Ogre::Vector3 const &");
+  SWIG_check_num_args("setGraphicalPosition",2,2)
+  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("setGraphicalPosition",1,"Object *");
+  if(!lua_isuserdata(L,2)) SWIG_fail_arg("setGraphicalPosition",2,"Ogre::Vector3 const &");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_Object,0))){
-    SWIG_fail_ptr("Object_setScale",1,SWIGTYPE_p_Object);
+    SWIG_fail_ptr("Object_setGraphicalPosition",1,SWIGTYPE_p_Object);
   }
   
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&arg2,SWIGTYPE_p_Ogre__Vector3,0))){
-    SWIG_fail_ptr("Object_setScale",2,SWIGTYPE_p_Ogre__Vector3);
+    SWIG_fail_ptr("Object_setGraphicalPosition",2,SWIGTYPE_p_Ogre__Vector3);
   }
   
-  (arg1)->setScale((Ogre::Vector3 const &)*arg2);
+  (arg1)->setGraphicalPosition((Ogre::Vector3 const &)*arg2);
   
   return SWIG_arg;
   
@@ -3104,19 +3140,19 @@ fail:
 }
 
 
-static int _wrap_Object_getPosition(lua_State* L) {
+static int _wrap_Object_getGraphicalPosition(lua_State* L) {
   int SWIG_arg = 0;
   Object *arg1 = (Object *) 0 ;
   Ogre::Vector3 *result = 0 ;
   
-  SWIG_check_num_args("getPosition",1,1)
-  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("getPosition",1,"Object const *");
+  SWIG_check_num_args("getGraphicalPosition",1,1)
+  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("getGraphicalPosition",1,"Object const *");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_Object,0))){
-    SWIG_fail_ptr("Object_getPosition",1,SWIGTYPE_p_Object);
+    SWIG_fail_ptr("Object_getGraphicalPosition",1,SWIGTYPE_p_Object);
   }
   
-  result = (Ogre::Vector3 *) &((Object const *)arg1)->getPosition();
+  result = (Ogre::Vector3 *) &((Object const *)arg1)->getGraphicalPosition();
   SWIG_NewPointerObj(L,result,SWIGTYPE_p_Ogre__Vector3,0); SWIG_arg++; 
   return SWIG_arg;
   
@@ -3157,8 +3193,8 @@ delete arg1;
 }
 static swig_lua_method swig_Object_methods[] = {
     {"setPosition", _wrap_Object_setPosition}, 
-    {"setScale", _wrap_Object_setScale}, 
-    {"getPosition", _wrap_Object_getPosition}, 
+    {"setGraphicalPosition", _wrap_Object_setGraphicalPosition}, 
+    {"getGraphicalPosition", _wrap_Object_getGraphicalPosition}, 
     {"createPhysicObject", _wrap_Object_createPhysicObject}, 
     {0,0}
 };
@@ -3187,6 +3223,36 @@ static int _wrap_new_Character(lua_State* L) {
   
   result = (Character *)new Character((String const &)*arg1,*arg2);
   SWIG_NewPointerObj(L,result,SWIGTYPE_p_Character,1); SWIG_arg++; 
+  return SWIG_arg;
+  
+  if(0) SWIG_fail;
+  
+fail:
+  lua_error(L);
+  return SWIG_arg;
+}
+
+
+static int _wrap_Character_setInitialPos(lua_State* L) {
+  int SWIG_arg = 0;
+  Character *arg1 = (Character *) 0 ;
+  Ogre::Vector3 *arg2 = (Ogre::Vector3 *) 0 ;
+  
+  SWIG_check_num_args("setInitialPos",2,2)
+  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("setInitialPos",1,"Character *");
+  if(!SWIG_isptrtype(L,2)) SWIG_fail_arg("setInitialPos",2,"Ogre::Vector3 *");
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_Character,0))){
+    SWIG_fail_ptr("Character_setInitialPos",1,SWIGTYPE_p_Character);
+  }
+  
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&arg2,SWIGTYPE_p_Ogre__Vector3,0))){
+    SWIG_fail_ptr("Character_setInitialPos",2,SWIGTYPE_p_Ogre__Vector3);
+  }
+  
+  (arg1)->setInitialPos(arg2);
+  
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -3417,6 +3483,7 @@ Character *arg1 = (Character *) obj;
 delete arg1;
 }
 static swig_lua_method swig_Character_methods[] = {
+    {"setInitialPos", _wrap_Character_setInitialPos}, 
     {"getDirection", _wrap_Character_getDirection}, 
     {"attack", _wrap_Character_attack}, 
     {"jump", _wrap_Character_jump}, 
