@@ -92,8 +92,6 @@ void BattleGround::start(void)
 bool BattleGround::frameStarted(const Ogre::FrameEvent &event)
 {
     Scene::frameStarted(event);
-    updateWaterPlane(event.timeSinceLastFrame);
-    updateSky(event.timeSinceLastFrame);
     // Check for players out of the battle ground
     BOOST_FOREACH(Character *character, players) {
         if (character->getPosition().y < -100)

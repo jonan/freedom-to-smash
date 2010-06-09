@@ -46,5 +46,7 @@ void Scene::addObject(const String &entity, const Ogre::Vector3 &position, const
 bool Scene::frameStarted(const Ogre::FrameEvent &event)
 {
     simulate(event.timeSinceLastFrame);
+    updateWaterPlane(event.timeSinceLastFrame);
+    updateSky(event.timeSinceLastFrame);
     return true;
 }
