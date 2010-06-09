@@ -34,13 +34,19 @@ Object::Object(const String &entity, Ogre::SceneManager &scene_manager, const in
 // Set function.
 void Object::setPosition(const Ogre::Vector3 &pos)
 {
-    graphics::Object::setPosition(pos);
+    physics::Object::setPosition(pos.x, pos.y, pos.z);
 }
 
 // Set function.
-void Object::setScale(const Ogre::Vector3 &scale)
+void Object::setGraphicalPosition(const Ogre::Vector3 &pos)
 {
-    graphics::Object::setScale(scale);
+    graphics::Object::setPosition(pos);
+}
+
+// Get function.
+const Ogre::Vector3& Object::getGraphicalPosition(void) const
+{
+    return graphics::Object::getPosition();
 }
 
 // Creates the physic object that can then be added to a physic scene.
@@ -51,10 +57,4 @@ void Object::createPhysicObject(void)
     size *= physics::vector3(node->getScale());
     btCollisionShape *shape = &physics::ShapesManager::getInstance().getBoxShape(size);
     createBody(0, *shape, this);
-}
-
-// Get function.
-const Ogre::Vector3& Object::getPosition(void) const
-{
-    return graphics::Object::getPosition();
 }

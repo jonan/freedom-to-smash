@@ -38,8 +38,8 @@ public:
 
     // @{
     /// The physics system will call this methods when convenient.
-    virtual const Ogre::Vector3& getPosition(void) const = 0;
-    virtual void setPosition(const Ogre::Vector3 &pos) = 0;
+    virtual const Ogre::Vector3& getGraphicalPosition(void) const = 0;
+    virtual void setGraphicalPosition(const Ogre::Vector3 &pos) = 0;
     // @}
 
 private:

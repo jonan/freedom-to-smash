@@ -2,7 +2,6 @@
 Character =
 {
     Name = "ninja",
-    Position = ogre.Vector3(0,5,0),
     Mass = 20,
     JumpForce = 300,
     WalkSpeed = 25,

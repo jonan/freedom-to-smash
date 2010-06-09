@@ -47,6 +47,9 @@ BattleGround::BattleGround(void)
     addObject("cube", Ogre::Vector3(-23,7,0), Ogre::Vector3(3,0.5,1));
     addObject("cube", Ogre::Vector3(23,7,0), Ogre::Vector3(3,0.5,1));
 
+    setStartingPosition(-10,10);
+    setStartingPosition(10,10);
+
     // GUI
     gui::Gui::getInstance().loadSheet("main_menu");
 
@@ -70,6 +73,8 @@ BattleGround::~BattleGround(void)
 {
     BOOST_FOREACH(Character *character, players)
         delete character;
+    BOOST_FOREACH(Ogre::Vector3 *pos, positions)
+        delete pos;
 }
 
 // Creates a character and adds it to the battle ground.
@@ -78,12 +83,21 @@ Character* BattleGround::createCharacter(const String &name)
     Character *character = new Character(name, getManager());
     players.push_back(character);
     physics::Scene::addPhysicObject(*character);
+    character->setInitialPos(positions[players.size()-1]);
     return character;
+}
+
+//
+void BattleGround::setStartingPosition(const Real &x, const Real &y)
+{
+    positions.push_back(new Ogre::Vector3(x,y,0));
 }
 
 // Starts the battle.
 void BattleGround::start(void)
 {
+    BOOST_FOREACH(Character *character, players)
+        character->reset();
     Ogre::Root::getSingleton().addFrameListener(this);
     Ogre::Root::getSingleton().startRendering();
 }

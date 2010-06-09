@@ -58,6 +58,14 @@ void Object::setVelocity(const Real &x, const Real &y, const Real &z)
         physic_object->activate();
 }
 
+// Sets the position of the object.
+void Object::setPosition(const Real &x, const Real &y, const Real &z)
+{
+    physic_object->setWorldTransform(btTransform(btQuaternion(0,0,0,1), btVector3(x,y,z)));
+    physic_object->clearForces();
+    setVelocity(0,0,0);
+}
+
 // Get object's vertical speed.
 Real Object::getVerticalSpeed(void)
 {

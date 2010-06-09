@@ -2,7 +2,6 @@
 Character =
 {
     Name = "sinbad",
-    Position = ogre.Vector3(0,5,0),
     Mass = 20,
     JumpForce = 1200,
     WalkSpeed = 25,

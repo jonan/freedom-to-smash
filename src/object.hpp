@@ -38,13 +38,13 @@ public:
 
     // @{
     /// Set functions.
-    virtual void setPosition (const Ogre::Vector3 &pos);
-    virtual void setScale    (const Ogre::Vector3 &scale);
+    virtual void setPosition          (const Ogre::Vector3 &pos);
+    virtual void setGraphicalPosition (const Ogre::Vector3 &pos);
     // @}
 
     // @{
     /// Get functions.
-    virtual const Ogre::Vector3& getPosition (void) const;
+    virtual const Ogre::Vector3& getGraphicalPosition (void) const;
     // @}
 
     /// Creates the physic object that can then be added to a physic scene.

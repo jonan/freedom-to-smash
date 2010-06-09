@@ -45,9 +45,9 @@ int main(int argc, char *argv[])
         BattleGround *battle = new BattleGround;
         player->setBattleground(*battle);
         player->setCharacter(player1);
-        //player = new Player(2);
-        //player->setBattleground(*battle);
-        //player->setCharacter(player2);
+        player = new Player(2);
+        player->setBattleground(*battle);
+        player->setCharacter(player2);
         battle->start();
         delete battle;
         quit();

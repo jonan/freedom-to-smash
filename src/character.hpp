@@ -40,6 +40,11 @@ public:
     enum {ATTACK, DEFEND, FALL, IDLE, JUMP, LAND, MOVE, NUM_STATES};
 
     // @{
+    /// Set functions.
+    void setInitialPos(Ogre::Vector3 *pos);
+    // @}
+
+    // @{
     /// Get functions.
     MoveDirection getDirection(void) {return direction;}
     // @}
@@ -86,6 +91,8 @@ private:
     Real vertical_velocity;
     double jump_force;
     double walk_speed;
+
+    Ogre::Vector3 *initial_pos;
 
     MoveDirection direction;
 

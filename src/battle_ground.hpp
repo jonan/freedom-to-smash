@@ -40,6 +40,9 @@ public:
     /// @return Created character.
     Character* createCharacter(const String &name);
 
+    ///
+    void setStartingPosition(const Real &x, const Real &y);
+
     /// Starts the battle.
     void start(void);
     /// Quits the battle.
@@ -50,6 +53,8 @@ private:
     virtual bool frameStarted(const Ogre::FrameEvent &event);
 
     std::list<Character*> players;
+    std::vector<Ogre::Vector3*> positions;
+
     Ogre::SceneNode *cam_node;
     Ogre::SceneNode *look_node;
 

@@ -44,6 +44,7 @@ Character::Character(const String &name, Ogre::SceneManager &scene_manager)
         , vertical_velocity(0)
         , jump_force(0)
         , walk_speed(0)
+        , initial_pos(NULL)
 {
     String script_path = boost::str(boost::format("../scripts/char_%s.lua") % name);
     handleScript(script_path);
@@ -59,7 +60,14 @@ Character::Character(const String &name, Ogre::SceneManager &scene_manager)
 // Destructor
 Character::~Character(void)
 {
+    delete initial_pos;
     Ogre::Root::getSingleton().removeFrameListener(this);
+}
+
+//
+void Character::setInitialPos(Ogre::Vector3 *pos)
+{
+    initial_pos = new Ogre::Vector3(*pos);
 }
 
 // Loads a character script.
@@ -78,14 +86,11 @@ void Character::handleScript(const String &file)
     res = ev.evalNumber("Character.Mass", mass);
     double yaw = 0;
     res = ev.evalNumber("Character.Yaw", yaw);
-    Ogre::Vector3 pos;
-    res = ev.evalVector3("Character.Position", pos);
     Ogre::Vector3 size;
     res = ev.evalVector3("Character.Size", size);
     double scale = 1;
     res = ev.evalNumber("Character.Scale", scale);
 
-    setPosition(pos);
     node->yaw(Ogre::Degree(yaw));
     node->setScale(scale, scale, scale);
 
@@ -148,7 +153,7 @@ void Character::move(const MoveDirection direction)
 //
 void Character::reset(void)
 {
-    setPosition(Ogre::Vector3(0,5,0));
+    setPosition(*initial_pos);
 }
 
 // Function that's called at the beginning of every frame.

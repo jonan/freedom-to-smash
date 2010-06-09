@@ -48,6 +48,7 @@ public:
     void setScene    (Scene *scene) {this->scene = scene;}
     void setFriction (const Real &friction);
     void setVelocity (const Real &x, const Real &y, const Real &z);
+    void setPosition (const Real &x, const Real &y, const Real &z);
     // @}
 
     // @{
