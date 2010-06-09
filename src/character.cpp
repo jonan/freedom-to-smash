@@ -168,7 +168,7 @@ bool Character::frameStarted(const Ogre::FrameEvent &event)
 // Funtion that needs to be called every frame for the character to be updated.
 void Character::frameCheck(void)
 {
-    on_floor = (abs(vertical_velocity) == 0 && abs(getVerticalSpeed()) == 0) && !action[JUMP];
+    on_floor = (abs(vertical_velocity) < 0.1 && abs(getVerticalSpeed()) < 0.1) && !action[JUMP];
     vertical_velocity = getVerticalSpeed();
     if (on_floor) {
         if (!action[MOVE]) {
