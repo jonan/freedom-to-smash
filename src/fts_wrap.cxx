@@ -2341,7 +2341,7 @@ fail:
 }
 
 
-static int _wrap_PhysicsObject_setVelocity(lua_State* L) {
+static int _wrap_PhysicsObject_setVelocity__SWIG_0(lua_State* L) {
   int SWIG_arg = 0;
   physics::Object *arg1 = (physics::Object *) 0 ;
   Real *arg2 = 0 ;
@@ -2376,7 +2376,107 @@ fail:
 }
 
 
-static int _wrap_PhysicsObject_setPosition(lua_State* L) {
+static int _wrap_PhysicsObject_setVelocity__SWIG_1(lua_State* L) {
+  int SWIG_arg = 0;
+  physics::Object *arg1 = (physics::Object *) 0 ;
+  Real *arg2 = 0 ;
+  Real *arg3 = 0 ;
+  Real temp2 ;
+  Real temp3 ;
+  
+  SWIG_check_num_args("setVelocity",3,3)
+  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("setVelocity",1,"physics::Object *");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("setVelocity",2,"Real const &");
+  if(!lua_isnumber(L,3)) SWIG_fail_arg("setVelocity",3,"Real const &");
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_physics__Object,0))){
+    SWIG_fail_ptr("PhysicsObject_setVelocity",1,SWIGTYPE_p_physics__Object);
+  }
+  
+  temp2=(Real)lua_tonumber(L,2); arg2=&temp2;
+  temp3=(Real)lua_tonumber(L,3); arg3=&temp3;
+  (arg1)->setVelocity((Real const &)*arg2,(Real const &)*arg3);
+  
+  return SWIG_arg;
+  
+  if(0) SWIG_fail;
+  
+fail:
+  lua_error(L);
+  return SWIG_arg;
+}
+
+
+static int _wrap_PhysicsObject_setVelocity(lua_State* L) {
+  int argc;
+  int argv[5]={
+    1,2,3,4,5
+  };
+  
+  argc = lua_gettop(L);
+  if (argc == 3) {
+    int _v;
+    {
+      void *ptr;
+      if (SWIG_isptrtype(L,argv[0])==0 || SWIG_ConvertPtr(L,argv[0], (void **) &ptr, SWIGTYPE_p_physics__Object, 0)) {
+        _v = 0;
+      } else {
+        _v = 1;
+      }
+    }
+    if (_v) {
+      {
+        _v = lua_isnumber(L,argv[1]);
+      }
+      if (_v) {
+        {
+          _v = lua_isnumber(L,argv[2]);
+        }
+        if (_v) {
+          return _wrap_PhysicsObject_setVelocity__SWIG_1(L);
+        }
+      }
+    }
+  }
+  if (argc == 4) {
+    int _v;
+    {
+      void *ptr;
+      if (SWIG_isptrtype(L,argv[0])==0 || SWIG_ConvertPtr(L,argv[0], (void **) &ptr, SWIGTYPE_p_physics__Object, 0)) {
+        _v = 0;
+      } else {
+        _v = 1;
+      }
+    }
+    if (_v) {
+      {
+        _v = lua_isnumber(L,argv[1]);
+      }
+      if (_v) {
+        {
+          _v = lua_isnumber(L,argv[2]);
+        }
+        if (_v) {
+          {
+            _v = lua_isnumber(L,argv[3]);
+          }
+          if (_v) {
+            return _wrap_PhysicsObject_setVelocity__SWIG_0(L);
+          }
+        }
+      }
+    }
+  }
+  
+  lua_pushstring(L,"Wrong arguments for overloaded function 'PhysicsObject_setVelocity'\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    setVelocity(physics::Object *,Real const &,Real const &,Real const &)\n"
+    "    setVelocity(physics::Object *,Real const &,Real const &)\n");
+  lua_error(L);return 0;
+}
+
+
+static int _wrap_PhysicsObject_setPosition__SWIG_0(lua_State* L) {
   int SWIG_arg = 0;
   physics::Object *arg1 = (physics::Object *) 0 ;
   Real *arg2 = 0 ;
@@ -2411,6 +2511,106 @@ fail:
 }
 
 
+static int _wrap_PhysicsObject_setPosition__SWIG_1(lua_State* L) {
+  int SWIG_arg = 0;
+  physics::Object *arg1 = (physics::Object *) 0 ;
+  Real *arg2 = 0 ;
+  Real *arg3 = 0 ;
+  Real temp2 ;
+  Real temp3 ;
+  
+  SWIG_check_num_args("setPosition",3,3)
+  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("setPosition",1,"physics::Object *");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("setPosition",2,"Real const &");
+  if(!lua_isnumber(L,3)) SWIG_fail_arg("setPosition",3,"Real const &");
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_physics__Object,0))){
+    SWIG_fail_ptr("PhysicsObject_setPosition",1,SWIGTYPE_p_physics__Object);
+  }
+  
+  temp2=(Real)lua_tonumber(L,2); arg2=&temp2;
+  temp3=(Real)lua_tonumber(L,3); arg3=&temp3;
+  (arg1)->setPosition((Real const &)*arg2,(Real const &)*arg3);
+  
+  return SWIG_arg;
+  
+  if(0) SWIG_fail;
+  
+fail:
+  lua_error(L);
+  return SWIG_arg;
+}
+
+
+static int _wrap_PhysicsObject_setPosition(lua_State* L) {
+  int argc;
+  int argv[5]={
+    1,2,3,4,5
+  };
+  
+  argc = lua_gettop(L);
+  if (argc == 3) {
+    int _v;
+    {
+      void *ptr;
+      if (SWIG_isptrtype(L,argv[0])==0 || SWIG_ConvertPtr(L,argv[0], (void **) &ptr, SWIGTYPE_p_physics__Object, 0)) {
+        _v = 0;
+      } else {
+        _v = 1;
+      }
+    }
+    if (_v) {
+      {
+        _v = lua_isnumber(L,argv[1]);
+      }
+      if (_v) {
+        {
+          _v = lua_isnumber(L,argv[2]);
+        }
+        if (_v) {
+          return _wrap_PhysicsObject_setPosition__SWIG_1(L);
+        }
+      }
+    }
+  }
+  if (argc == 4) {
+    int _v;
+    {
+      void *ptr;
+      if (SWIG_isptrtype(L,argv[0])==0 || SWIG_ConvertPtr(L,argv[0], (void **) &ptr, SWIGTYPE_p_physics__Object, 0)) {
+        _v = 0;
+      } else {
+        _v = 1;
+      }
+    }
+    if (_v) {
+      {
+        _v = lua_isnumber(L,argv[1]);
+      }
+      if (_v) {
+        {
+          _v = lua_isnumber(L,argv[2]);
+        }
+        if (_v) {
+          {
+            _v = lua_isnumber(L,argv[3]);
+          }
+          if (_v) {
+            return _wrap_PhysicsObject_setPosition__SWIG_0(L);
+          }
+        }
+      }
+    }
+  }
+  
+  lua_pushstring(L,"Wrong arguments for overloaded function 'PhysicsObject_setPosition'\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    setPosition(physics::Object *,Real const &,Real const &,Real const &)\n"
+    "    setPosition(physics::Object *,Real const &,Real const &)\n");
+  lua_error(L);return 0;
+}
+
+
 static int _wrap_PhysicsObject_getPhysicObject(lua_State* L) {
   int SWIG_arg = 0;
   physics::Object *arg1 = (physics::Object *) 0 ;
@@ -2435,20 +2635,20 @@ fail:
 }
 
 
-static int _wrap_PhysicsObject_getVerticalSpeed(lua_State* L) {
+static int _wrap_PhysicsObject_getVelocity(lua_State* L) {
   int SWIG_arg = 0;
   physics::Object *arg1 = (physics::Object *) 0 ;
-  Real result;
+  btVector3 *result = 0 ;
   
-  SWIG_check_num_args("getVerticalSpeed",1,1)
-  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("getVerticalSpeed",1,"physics::Object *");
+  SWIG_check_num_args("getVelocity",1,1)
+  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("getVelocity",1,"physics::Object const *");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_physics__Object,0))){
-    SWIG_fail_ptr("PhysicsObject_getVerticalSpeed",1,SWIGTYPE_p_physics__Object);
+    SWIG_fail_ptr("PhysicsObject_getVelocity",1,SWIGTYPE_p_physics__Object);
   }
   
-  result = (Real)(arg1)->getVerticalSpeed();
-  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
+  result = (btVector3 *) &((physics::Object const *)arg1)->getVelocity();
+  SWIG_NewPointerObj(L,result,SWIGTYPE_p_btVector3,0); SWIG_arg++; 
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -2779,7 +2979,7 @@ static swig_lua_method swig_physics_Object_methods[] = {
     {"setVelocity", _wrap_PhysicsObject_setVelocity}, 
     {"setPosition", _wrap_PhysicsObject_setPosition}, 
     {"getPhysicObject", _wrap_PhysicsObject_getPhysicObject}, 
-    {"getVerticalSpeed", _wrap_PhysicsObject_getVerticalSpeed}, 
+    {"getVelocity", _wrap_PhysicsObject_getVelocity}, 
     {"disableRotation", _wrap_PhysicsObject_disableRotation}, 
     {"createBody", _wrap_PhysicsObject_createBody}, 
     {"applyForce", _wrap_PhysicsObject_applyForce}, 

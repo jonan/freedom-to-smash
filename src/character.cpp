@@ -41,7 +41,6 @@ Character::Character(const String &name, Ogre::SceneManager &scene_manager)
         , has_double_jumped(false)
         , collision_right(false)
         , collision_left(false)
-        , vertical_velocity(0)
         , jump_force(0)
         , walk_speed(0)
         , initial_pos(NULL)
@@ -168,12 +167,10 @@ bool Character::frameStarted(const Ogre::FrameEvent &event)
 // Funtion that needs to be called every frame for the character to be updated.
 void Character::frameCheck(void)
 {
-    on_floor = (abs(vertical_velocity) < 0.1 && abs(getVerticalSpeed()) < 0.1) && !action[JUMP];
-    vertical_velocity = getVerticalSpeed();
+    Real vertical_velocity = physics::vector3(getVelocity()).y;
+    on_floor = (abs(vertical_velocity) < 0.1) && !action[JUMP];
     if (on_floor) {
-        if (!action[MOVE]) {
-            setVelocity(0, 0, 0);
-        }
+        setVelocity(0, 0);
         if (action[FALL]) {
             stopAction(FALL);
             action[LAND] = true;
@@ -197,7 +194,7 @@ void Character::frameMovement(void)
         else if (direction == LEFT  && !collision_left)
             dir = 1;
         if (dir) {
-            setVelocity(dir*walk_speed, 0, 0);
+            setVelocity(dir*walk_speed, 0);
             node->setDirection(0,0,-dir,Ogre::Node::TS_PARENT);
             node->yaw(Ogre::Degree(90));
         }

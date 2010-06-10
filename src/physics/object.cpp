@@ -63,13 +63,13 @@ void Object::setPosition(const Real &x, const Real &y, const Real &z)
 {
     physic_object->setWorldTransform(btTransform(btQuaternion(0,0,0,1), btVector3(x,y,z)));
     physic_object->clearForces();
-    setVelocity(0,0,0);
+    setVelocity(0,0);
 }
 
 // Get object's vertical speed.
-Real Object::getVerticalSpeed(void)
+const btVector3& Object::getVelocity(void) const
 {
-    return physic_object->getVelocityInLocalPoint(offset->getOrigin()).getY();
+    return physic_object->getLinearVelocity();
 }
 
 // Stops the object from rotating.

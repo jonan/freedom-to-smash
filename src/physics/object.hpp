@@ -47,14 +47,14 @@ public:
     /// Set functions.
     void setScene    (Scene *scene) {this->scene = scene;}
     void setFriction (const Real &friction);
-    void setVelocity (const Real &x, const Real &y, const Real &z);
-    void setPosition (const Real &x, const Real &y, const Real &z);
+    void setVelocity (const Real &x, const Real &y, const Real &z = 0);
+    void setPosition (const Real &x, const Real &y, const Real &z = 0);
     // @}
 
     // @{
     /// Get functions.
-    btRigidBody& getPhysicObject  (void) {return *physic_object;}
-    Real         getVerticalSpeed (void);
+    btRigidBody&       getPhysicObject  (void) {return *physic_object;}
+    const btVector3&   getVelocity      (void) const;
     // @}
 
     /// Stops the object from rotating.
