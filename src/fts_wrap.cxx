@@ -1529,23 +1529,24 @@ SWIG_Lua_dostring(lua_State *L, const char* str) {
 #define SWIGTYPE_p_BattleGround swig_types[0]
 #define SWIGTYPE_p_Character swig_types[1]
 #define SWIGTYPE_p_Object swig_types[2]
-#define SWIGTYPE_p_Ogre__SceneManager swig_types[3]
-#define SWIGTYPE_p_Ogre__Vector3 swig_types[4]
-#define SWIGTYPE_p_Player swig_types[5]
-#define SWIGTYPE_p_btCollisionDispatcher swig_types[6]
-#define SWIGTYPE_p_btCollisionShape swig_types[7]
-#define SWIGTYPE_p_btRigidBody swig_types[8]
-#define SWIGTYPE_p_btTransform swig_types[9]
-#define SWIGTYPE_p_btVector3 swig_types[10]
-#define SWIGTYPE_p_float swig_types[11]
-#define SWIGTYPE_p_graphics__Object swig_types[12]
-#define SWIGTYPE_p_graphics__Scene swig_types[13]
-#define SWIGTYPE_p_physics__Object swig_types[14]
-#define SWIGTYPE_p_physics__ObjectSynchronizer swig_types[15]
-#define SWIGTYPE_p_physics__Scene swig_types[16]
-#define SWIGTYPE_p_std__string swig_types[17]
-static swig_type_info *swig_types[19];
-static swig_module_info swig_module = {swig_types, 18, 0, 0, 0, 0};
+#define SWIGTYPE_p_Ogre__Quaternion swig_types[3]
+#define SWIGTYPE_p_Ogre__SceneManager swig_types[4]
+#define SWIGTYPE_p_Ogre__Vector3 swig_types[5]
+#define SWIGTYPE_p_Player swig_types[6]
+#define SWIGTYPE_p_btCollisionDispatcher swig_types[7]
+#define SWIGTYPE_p_btCollisionShape swig_types[8]
+#define SWIGTYPE_p_btRigidBody swig_types[9]
+#define SWIGTYPE_p_btTransform swig_types[10]
+#define SWIGTYPE_p_btVector3 swig_types[11]
+#define SWIGTYPE_p_float swig_types[12]
+#define SWIGTYPE_p_graphics__Object swig_types[13]
+#define SWIGTYPE_p_graphics__Scene swig_types[14]
+#define SWIGTYPE_p_physics__Object swig_types[15]
+#define SWIGTYPE_p_physics__ObjectSynchronizer swig_types[16]
+#define SWIGTYPE_p_physics__Scene swig_types[17]
+#define SWIGTYPE_p_std__string swig_types[18]
+static swig_type_info *swig_types[20];
+static swig_module_info swig_module = {swig_types, 19, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -1999,6 +2000,36 @@ fail:
 }
 
 
+static int _wrap_GraphicsObject_setRotation(lua_State* L) {
+  int SWIG_arg = 0;
+  graphics::Object *arg1 = (graphics::Object *) 0 ;
+  Ogre::Quaternion *arg2 = 0 ;
+  
+  SWIG_check_num_args("setRotation",2,2)
+  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("setRotation",1,"graphics::Object *");
+  if(!lua_isuserdata(L,2)) SWIG_fail_arg("setRotation",2,"Ogre::Quaternion const &");
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_graphics__Object,0))){
+    SWIG_fail_ptr("GraphicsObject_setRotation",1,SWIGTYPE_p_graphics__Object);
+  }
+  
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&arg2,SWIGTYPE_p_Ogre__Quaternion,0))){
+    SWIG_fail_ptr("GraphicsObject_setRotation",2,SWIGTYPE_p_Ogre__Quaternion);
+  }
+  
+  (arg1)->setRotation((Ogre::Quaternion const &)*arg2);
+  
+  return SWIG_arg;
+  
+  if(0) SWIG_fail;
+  
+fail:
+  lua_error(L);
+  return SWIG_arg;
+}
+
+
 static int _wrap_GraphicsObject_setScale(lua_State* L) {
   int SWIG_arg = 0;
   graphics::Object *arg1 = (graphics::Object *) 0 ;
@@ -2043,6 +2074,30 @@ static int _wrap_GraphicsObject_getPosition(lua_State* L) {
   
   result = (Ogre::Vector3 *) &((graphics::Object const *)arg1)->getPosition();
   SWIG_NewPointerObj(L,result,SWIGTYPE_p_Ogre__Vector3,0); SWIG_arg++; 
+  return SWIG_arg;
+  
+  if(0) SWIG_fail;
+  
+fail:
+  lua_error(L);
+  return SWIG_arg;
+}
+
+
+static int _wrap_GraphicsObject_getRotation(lua_State* L) {
+  int SWIG_arg = 0;
+  graphics::Object *arg1 = (graphics::Object *) 0 ;
+  Ogre::Quaternion *result = 0 ;
+  
+  SWIG_check_num_args("getRotation",1,1)
+  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("getRotation",1,"graphics::Object const *");
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_graphics__Object,0))){
+    SWIG_fail_ptr("GraphicsObject_getRotation",1,SWIGTYPE_p_graphics__Object);
+  }
+  
+  result = (Ogre::Quaternion *) &((graphics::Object const *)arg1)->getRotation();
+  SWIG_NewPointerObj(L,result,SWIGTYPE_p_Ogre__Quaternion,0); SWIG_arg++; 
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -2223,8 +2278,10 @@ delete arg1;
 static swig_lua_method swig_graphics_Object_methods[] = {
     {"setEntity", _wrap_GraphicsObject_setEntity}, 
     {"setPosition", _wrap_GraphicsObject_setPosition}, 
+    {"setRotation", _wrap_GraphicsObject_setRotation}, 
     {"setScale", _wrap_GraphicsObject_setScale}, 
     {"getPosition", _wrap_GraphicsObject_getPosition}, 
+    {"getRotation", _wrap_GraphicsObject_getRotation}, 
     {"attachEntityToBone", _wrap_GraphicsObject_attachEntityToBone}, 
     {"createAnimation", _wrap_GraphicsObject_createAnimation}, 
     {0,0}
@@ -3340,20 +3397,86 @@ fail:
 }
 
 
+static int _wrap_Object_setGraphicalRotation(lua_State* L) {
+  int SWIG_arg = 0;
+  Object *arg1 = (Object *) 0 ;
+  Ogre::Quaternion *arg2 = 0 ;
+  
+  SWIG_check_num_args("setGraphicalRotation",2,2)
+  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("setGraphicalRotation",1,"Object *");
+  if(!lua_isuserdata(L,2)) SWIG_fail_arg("setGraphicalRotation",2,"Ogre::Quaternion const &");
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_Object,0))){
+    SWIG_fail_ptr("Object_setGraphicalRotation",1,SWIGTYPE_p_Object);
+  }
+  
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&arg2,SWIGTYPE_p_Ogre__Quaternion,0))){
+    SWIG_fail_ptr("Object_setGraphicalRotation",2,SWIGTYPE_p_Ogre__Quaternion);
+  }
+  
+  (arg1)->setGraphicalRotation((Ogre::Quaternion const &)*arg2);
+  
+  return SWIG_arg;
+  
+  if(0) SWIG_fail;
+  
+fail:
+  lua_error(L);
+  return SWIG_arg;
+}
+
+
 static int _wrap_Object_getGraphicalPosition(lua_State* L) {
   int SWIG_arg = 0;
   Object *arg1 = (Object *) 0 ;
-  Ogre::Vector3 *result = 0 ;
+  Ogre::Vector3 *arg2 = 0 ;
   
-  SWIG_check_num_args("getGraphicalPosition",1,1)
+  SWIG_check_num_args("getGraphicalPosition",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("getGraphicalPosition",1,"Object const *");
+  if(!lua_isuserdata(L,2)) SWIG_fail_arg("getGraphicalPosition",2,"Ogre::Vector3 &");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_Object,0))){
     SWIG_fail_ptr("Object_getGraphicalPosition",1,SWIGTYPE_p_Object);
   }
   
-  result = (Ogre::Vector3 *) &((Object const *)arg1)->getGraphicalPosition();
-  SWIG_NewPointerObj(L,result,SWIGTYPE_p_Ogre__Vector3,0); SWIG_arg++; 
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&arg2,SWIGTYPE_p_Ogre__Vector3,0))){
+    SWIG_fail_ptr("Object_getGraphicalPosition",2,SWIGTYPE_p_Ogre__Vector3);
+  }
+  
+  ((Object const *)arg1)->getGraphicalPosition(*arg2);
+  
+  return SWIG_arg;
+  
+  if(0) SWIG_fail;
+  
+fail:
+  lua_error(L);
+  return SWIG_arg;
+}
+
+
+static int _wrap_Object_getGraphicalRotation(lua_State* L) {
+  int SWIG_arg = 0;
+  Object *arg1 = (Object *) 0 ;
+  Ogre::Quaternion *arg2 = 0 ;
+  
+  SWIG_check_num_args("getGraphicalRotation",2,2)
+  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("getGraphicalRotation",1,"Object const *");
+  if(!lua_isuserdata(L,2)) SWIG_fail_arg("getGraphicalRotation",2,"Ogre::Quaternion &");
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_Object,0))){
+    SWIG_fail_ptr("Object_getGraphicalRotation",1,SWIGTYPE_p_Object);
+  }
+  
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&arg2,SWIGTYPE_p_Ogre__Quaternion,0))){
+    SWIG_fail_ptr("Object_getGraphicalRotation",2,SWIGTYPE_p_Ogre__Quaternion);
+  }
+  
+  ((Object const *)arg1)->getGraphicalRotation(*arg2);
+  
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -3367,15 +3490,19 @@ fail:
 static int _wrap_Object_createPhysicObject(lua_State* L) {
   int SWIG_arg = 0;
   Object *arg1 = (Object *) 0 ;
+  Real *arg2 = 0 ;
+  Real temp2 ;
   
-  SWIG_check_num_args("createPhysicObject",1,1)
+  SWIG_check_num_args("createPhysicObject",2,2)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("createPhysicObject",1,"Object *");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("createPhysicObject",2,"Real const &");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_Object,0))){
     SWIG_fail_ptr("Object_createPhysicObject",1,SWIGTYPE_p_Object);
   }
   
-  (arg1)->createPhysicObject();
+  temp2=(Real)lua_tonumber(L,2); arg2=&temp2;
+  (arg1)->createPhysicObject((Real const &)*arg2);
   
   return SWIG_arg;
   
@@ -3394,7 +3521,9 @@ delete arg1;
 static swig_lua_method swig_Object_methods[] = {
     {"setPosition", _wrap_Object_setPosition}, 
     {"setGraphicalPosition", _wrap_Object_setGraphicalPosition}, 
+    {"setGraphicalRotation", _wrap_Object_setGraphicalRotation}, 
     {"getGraphicalPosition", _wrap_Object_getGraphicalPosition}, 
+    {"getGraphicalRotation", _wrap_Object_getGraphicalRotation}, 
     {"createPhysicObject", _wrap_Object_createPhysicObject}, 
     {0,0}
 };
@@ -3845,6 +3974,7 @@ static void *_p_ObjectTo_p_physics__ObjectSynchronizer(void *x, int *SWIGUNUSEDP
 static swig_type_info _swigt__p_BattleGround = {"_p_BattleGround", "BattleGround *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_Character = {"_p_Character", "Character *", 0, 0, (void*)&_wrap_class_Character, 0};
 static swig_type_info _swigt__p_Object = {"_p_Object", "Object *", 0, 0, (void*)&_wrap_class_Object, 0};
+static swig_type_info _swigt__p_Ogre__Quaternion = {"_p_Ogre__Quaternion", "Ogre::Quaternion *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_Ogre__SceneManager = {"_p_Ogre__SceneManager", "Ogre::SceneManager *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_Ogre__Vector3 = {"_p_Ogre__Vector3", "Ogre::Vector3 *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_Player = {"_p_Player", "Player *", 0, 0, (void*)&_wrap_class_Player, 0};
@@ -3865,6 +3995,7 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_BattleGround,
   &_swigt__p_Character,
   &_swigt__p_Object,
+  &_swigt__p_Ogre__Quaternion,
   &_swigt__p_Ogre__SceneManager,
   &_swigt__p_Ogre__Vector3,
   &_swigt__p_Player,
@@ -3885,6 +4016,7 @@ static swig_type_info *swig_type_initial[] = {
 static swig_cast_info _swigc__p_BattleGround[] = {  {&_swigt__p_BattleGround, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Character[] = {  {&_swigt__p_Character, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Object[] = {  {&_swigt__p_Object, 0, 0, 0},  {&_swigt__p_Character, _p_CharacterTo_p_Object, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_Ogre__Quaternion[] = {  {&_swigt__p_Ogre__Quaternion, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Ogre__SceneManager[] = {  {&_swigt__p_Ogre__SceneManager, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Ogre__Vector3[] = {  {&_swigt__p_Ogre__Vector3, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Player[] = {  {&_swigt__p_Player, 0, 0, 0},{0, 0, 0, 0}};
@@ -3905,6 +4037,7 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_BattleGround,
   _swigc__p_Character,
   _swigc__p_Object,
+  _swigc__p_Ogre__Quaternion,
   _swigc__p_Ogre__SceneManager,
   _swigc__p_Ogre__Vector3,
   _swigc__p_Player,

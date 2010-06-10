@@ -38,15 +38,18 @@ public:
 
     // @{
     /// The physics system will call this methods when convenient.
-    virtual const Ogre::Vector3& getGraphicalPosition(void) const = 0;
-    virtual void setGraphicalPosition(const Ogre::Vector3 &pos) = 0;
+    virtual void getGraphicalPosition (Ogre::Vector3 &pos)    const = 0;
+    virtual void getGraphicalRotation (Ogre::Quaternion &rot) const = 0;
+
+    virtual void setGraphicalPosition (const Ogre::Vector3 &pos)    = 0;
+    virtual void setGraphicalRotation (const Ogre::Quaternion &rot) = 0;
     // @}
 
 private:
     // @{
     // Bullet's methods to manage the object's position.
-    virtual void getWorldTransform(btTransform &transform) const;
-    virtual void setWorldTransform(const btTransform &transform);
+    virtual void getWorldTransform (btTransform &transform) const;
+    virtual void setWorldTransform (const btTransform &transform);
     // @}
 
     DISALLOW_COPY_AND_ASSIGN(ObjectSynchronizer);

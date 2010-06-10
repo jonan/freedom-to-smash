@@ -57,6 +57,12 @@ void Object::setPosition(const Ogre::Vector3 &pos)
 }
 
 // Set function.
+void Object::setRotation(const Ogre::Quaternion &rot)
+{
+    node->setOrientation(rot);
+}
+
+// Set function.
 void Object::setScale(const Ogre::Vector3 &scale)
 {
     node->setScale(scale);
@@ -66,6 +72,12 @@ void Object::setScale(const Ogre::Vector3 &scale)
 const Ogre::Vector3& Object::getPosition(void) const
 {
     return node->getPosition();
+}
+
+// Get function.
+const Ogre::Quaternion& Object::getRotation(void) const
+{
+    return node->getOrientation();
 }
 
 // Attachs an new entity to a bone of the object's main entity.

@@ -40,12 +40,14 @@ public:
     /// Set functions.
     virtual void setEntity   (const String &name);
     virtual void setPosition (const Ogre::Vector3 &pos);
+    virtual void setRotation (const Ogre::Quaternion &rot);
     virtual void setScale    (const Ogre::Vector3 &scale);
     // @}
 
     // @{
     /// Get functions.
-    const Ogre::Vector3& getPosition (void) const;
+    const Ogre::Vector3& getPosition    (void) const;
+    const Ogre::Quaternion& getRotation (void) const;
     // @}
 
     /// Attachs an new entity to a bone of the object's main entity.

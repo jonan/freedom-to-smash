@@ -43,18 +43,30 @@ void Object::setGraphicalPosition(const Ogre::Vector3 &pos)
     graphics::Object::setPosition(pos);
 }
 
-// Get function.
-const Ogre::Vector3& Object::getGraphicalPosition(void) const
+// Set function.
+void Object::setGraphicalRotation(const Ogre::Quaternion &rot)
 {
-    return graphics::Object::getPosition();
+    graphics::Object::setRotation(rot);
+}
+
+// Get function.
+void Object::getGraphicalPosition(Ogre::Vector3 &pos) const
+{
+    pos = graphics::Object::getPosition();
+}
+
+// Get function.
+void Object::getGraphicalRotation(Ogre::Quaternion &rot) const
+{
+    rot = graphics::Object::getRotation();
 }
 
 // Creates the physic object that can then be added to a physic scene.
-void Object::createPhysicObject(void)
+void Object::createPhysicObject(const Real &mass)
 {
     Ogre::AxisAlignedBox bounding_box = entity->getBoundingBox();
     btVector3 size = physics::vector3(bounding_box.getMaximum() - bounding_box.getMinimum());
     size *= physics::vector3(node->getScale());
     btCollisionShape *shape = &physics::ShapesManager::getInstance().getBoxShape(size);
-    createBody(0, *shape, this);
+    createBody(mass, *shape, this);
 }

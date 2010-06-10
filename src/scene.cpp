@@ -32,12 +32,13 @@ Scene::~Scene(void)
 }
 
 // Adds an object to the scene.
-void Scene::addObject(const String &entity, const Ogre::Vector3 &position, const Ogre::Vector3 &scale)
+void Scene::addObject(const String &entity, const Ogre::Vector3 &position,
+                      const Real &mass, const Ogre::Vector3 &scale)
 {
     Object *obj = new Object(entity, getManager());
     obj->setGraphicalPosition(position);
     obj->setScale(scale);
-    obj->createPhysicObject();
+    obj->createPhysicObject(mass);
     physics::Scene::addPhysicObject(*obj);
     objects.push_back(obj);
 }

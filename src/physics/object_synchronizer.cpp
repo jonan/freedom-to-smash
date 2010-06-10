@@ -25,13 +25,20 @@ namespace physics {
 // Get the object's position.
 void ObjectSynchronizer::getWorldTransform(btTransform &transform) const
 {
-    transform.setOrigin(vector3(getGraphicalPosition()));
+    Ogre::Vector3 pos;
+    Ogre::Quaternion rot;
+    getGraphicalPosition(pos);
+    getGraphicalRotation(rot);
+
+    transform.setOrigin(vector3(pos));
+    transform.setRotation(quaternion(rot));
 }
 
 // Set the object's position.
 void ObjectSynchronizer::setWorldTransform(const btTransform &transform)
 {
-    setGraphicalPosition(vector3(transform.getOrigin()));
+    setGraphicalPosition( vector3(transform.getOrigin()) );
+    setGraphicalRotation( quaternion(transform.getRotation()) );
 }
 
 } // namespace physics

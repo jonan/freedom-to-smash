@@ -40,15 +40,17 @@ public:
     /// Set functions.
     virtual void setPosition          (const Ogre::Vector3 &pos);
     virtual void setGraphicalPosition (const Ogre::Vector3 &pos);
+    virtual void setGraphicalRotation (const Ogre::Quaternion &rot);
     // @}
 
     // @{
     /// Get functions.
-    virtual const Ogre::Vector3& getGraphicalPosition (void) const;
+    virtual void getGraphicalPosition (Ogre::Vector3 &pos)    const;
+    virtual void getGraphicalRotation (Ogre::Quaternion &rot) const;
     // @}
 
     /// Creates the physic object that can then be added to a physic scene.
-    void createPhysicObject(void);
+    void createPhysicObject(const Real &mass);
 
 private:
     DISALLOW_COPY_AND_ASSIGN(Object);
