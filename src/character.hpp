@@ -71,6 +71,10 @@ public:
     void handleScript(const String &file);
 
 private:
+    // This method needs to be defined this way to ignore
+    // the rotation of the character's physical representation.
+    virtual void setGraphicalRotation (const Ogre::Quaternion &/*rot*/) {}
+
     // Function that's called at the beginning of every frame.
     virtual bool frameStarted(const Ogre::FrameEvent &event);
 
