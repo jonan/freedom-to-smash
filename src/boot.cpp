@@ -25,6 +25,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #include <OgreRoot.h>
 
 // FtS
+#include <audio/soundmanager.hpp>
 #include <gui/gui.hpp>
 #include <input.hpp>
 #include <lua_engine.hpp>
@@ -80,7 +81,7 @@ void initializeAllResources(void)
 
 void HandleConfigScript()
 {
-	lua_State * L = ScriptManager::get().getL();
+    lua_State * L = ScriptManager::get().getL();
     LuaEngine::RunFile(L, "../scripts/config.lua");
 
     bool welcomeMessageEnabled = false;
@@ -114,6 +115,7 @@ void boot(void)
     gui::Gui::registerScriptReader();
     initializeAllResources();
     Input::getInstance();
+    audio::SoundManager::getInstance();
 }
 
 // Shuts down all the systems and frees memory.
@@ -122,5 +124,5 @@ void quit(void)
     gui::Gui::getInstance().destroy();
     delete Ogre::Root::getSingletonPtr();
 
-	ScriptManager::get().destroy();
+    ScriptManager::get().destroy();
 }
