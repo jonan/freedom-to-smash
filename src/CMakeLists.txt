@@ -106,8 +106,8 @@ target_link_libraries(
   ${OGRE_LIBRARIES}
   ${OPENAL_LIBRARY}
   ${QUICK_GUI_LIBRARIES}
-  ${SDL_LIBRARY}
   ${SKYX_LIBRARIES}
+  ${VORBIS_LIBRARIES}
   )
 # Link optional libraries
 if(ENET_FOUND)
