@@ -9,7 +9,8 @@ find_package(Lua51 REQUIRED)
 find_package(OGRE REQUIRED)
 find_package(OIS REQUIRED)
 find_package(OpenAL REQUIRED)
-find_package(SDL REQUIRED)
+
+pkg_check_modules(VORBIS REQUIRED vorbisfile)
 
 include_directories(
   ${PROJECT_SOURCE_DIR}
@@ -21,7 +22,7 @@ include_directories(
   ${OGRE_INCLUDE_DIRS}
   ${OIS_INCLUDE_DIRS}
   ${OPENAL_INCLUDE_DIR}
-  ${SDL_INCLUDE_DIR}
+  ${VORBIS_INCLUDE_DIRS}
   )
 
 # Optional libraries

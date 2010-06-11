@@ -3,7 +3,7 @@
 *** DEBIAN ***
 
 (as root)
-# aptitude install g++ cmake make libogre-dev libois-dev libboost-all-dev liblua5.1-0-dev libopenal-dev libsdl1.2-dev
+# aptitude install cmake make g++ libogre-dev libois-dev libopenal-dev libvorbis-dev libboost-all-dev liblua5.1-0-dev
 
 (in the source directory)
 $ mkdir build

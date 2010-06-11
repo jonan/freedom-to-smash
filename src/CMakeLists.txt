@@ -1,5 +1,10 @@
 set(
   SRC
+  audio/soundbuffer.cpp
+  audio/soundloader.cpp
+  audio/soundmanager.cpp
+  audio/soundresources.cpp
+  audio/soundsource.cpp
   graphics/object.cpp
   graphics/scene.cpp
   gui/gui.cpp
@@ -31,6 +36,11 @@ set(
 
 set(
   HEADERS
+  audio/soundbuffer.hpp
+  audio/soundloader.hpp
+  audio/soundmanager.hpp
+  audio/soundresources.hpp
+  audio/soundsource.hpp
   graphics/object.hpp
   graphics/scene.hpp
   gui/gui.hpp
@@ -106,8 +116,8 @@ target_link_libraries(
   ${OGRE_LIBRARIES}
   ${OPENAL_LIBRARY}
   ${QUICK_GUI_LIBRARIES}
-  ${SDL_LIBRARY}
   ${SKYX_LIBRARIES}
+  ${VORBIS_LIBRARIES}
   )
 # Link optional libraries
 if(ENET_FOUND)
