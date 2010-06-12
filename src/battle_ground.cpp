@@ -43,11 +43,11 @@ BattleGround::BattleGround(void)
     useCamera(addCamera("BattleGround Camera", *cam_node, *look_node));
 
     // Ground
-    addObject("cube", Ogre::Vector3(0,-5,0), 0, Ogre::Vector3(10,1,1));
-    addObject("cube", Ogre::Vector3(-23,7,0), 0, Ogre::Vector3(3,0.5,1));
-    addObject("cube", Ogre::Vector3(23,7,0), 0, Ogre::Vector3(3,0.5,1));
+    addObject("cube", Ogre::Vector3(0,-5,0), Ogre::Vector3(10,1,1));
+    addObject("cube", Ogre::Vector3(-23,7,0), Ogre::Vector3(3,0.5,1));
+    addObject("cube", Ogre::Vector3(23,7,0), Ogre::Vector3(3,0.5,1));
     for (int i=0; i<5; i++)
-        addObject("cube", Ogre::Vector3(0,5*i,0), 100, Ogre::Vector3(0.6,0.6,0.6));
+        addObject("cube", Ogre::Vector3(0,5*i,0), Ogre::Vector3(0.6,0.6,0.6), 100);
 
     setStartingPosition(-10,10);
     setStartingPosition(10,10);
