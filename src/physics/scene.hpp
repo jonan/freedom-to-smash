@@ -37,7 +37,7 @@ class btSequentialImpulseConstraintSolver;
 
 namespace physics {
 
-#define DEBUG_PHYSIC_SHAPES 0
+#define DEBUG_PHYSIC_SHAPES 1
 
 class Object;
 #if DEBUG_PHYSIC_SHAPES
