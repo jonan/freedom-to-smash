@@ -3066,59 +3066,6 @@ fail:
 }
 
 
-static int _wrap_PhysicsScene_createDebugDrawer(lua_State* L) {
-  int SWIG_arg = 0;
-  physics::Scene *arg1 = (physics::Scene *) 0 ;
-  Ogre::SceneManager *arg2 = 0 ;
-  
-  SWIG_check_num_args("createDebugDrawer",2,2)
-  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("createDebugDrawer",1,"physics::Scene *");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("createDebugDrawer",2,"Ogre::SceneManager &");
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_physics__Scene,0))){
-    SWIG_fail_ptr("PhysicsScene_createDebugDrawer",1,SWIGTYPE_p_physics__Scene);
-  }
-  
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&arg2,SWIGTYPE_p_Ogre__SceneManager,0))){
-    SWIG_fail_ptr("PhysicsScene_createDebugDrawer",2,SWIGTYPE_p_Ogre__SceneManager);
-  }
-  
-  (arg1)->createDebugDrawer(*arg2);
-  
-  return SWIG_arg;
-  
-  if(0) SWIG_fail;
-  
-fail:
-  lua_error(L);
-  return SWIG_arg;
-}
-
-
-static int _wrap_PhysicsScene_drawDebugLines(lua_State* L) {
-  int SWIG_arg = 0;
-  physics::Scene *arg1 = (physics::Scene *) 0 ;
-  
-  SWIG_check_num_args("drawDebugLines",1,1)
-  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("drawDebugLines",1,"physics::Scene *");
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_physics__Scene,0))){
-    SWIG_fail_ptr("PhysicsScene_drawDebugLines",1,SWIGTYPE_p_physics__Scene);
-  }
-  
-  (arg1)->drawDebugLines();
-  
-  return SWIG_arg;
-  
-  if(0) SWIG_fail;
-  
-fail:
-  lua_error(L);
-  return SWIG_arg;
-}
-
-
 static int _wrap_PhysicsScene_addPhysicObject(lua_State* L) {
   int SWIG_arg = 0;
   physics::Scene *arg1 = (physics::Scene *) 0 ;
@@ -3258,8 +3205,6 @@ physics::Scene *arg1 = (physics::Scene *) obj;
 delete arg1;
 }
 static swig_lua_method swig_physics_Scene_methods[] = {
-    {"createDebugDrawer", _wrap_PhysicsScene_createDebugDrawer}, 
-    {"drawDebugLines", _wrap_PhysicsScene_drawDebugLines}, 
     {"addPhysicObject", _wrap_PhysicsScene_addPhysicObject}, 
     {"removePhysicObject", _wrap_PhysicsScene_removePhysicObject}, 
     {"getDispatcher", _wrap_PhysicsScene_getDispatcher}, 
@@ -4169,7 +4114,7 @@ static swig_lua_var_info swig_variables[] = {
 };
 
 static swig_lua_const_info swig_constants[] = {
-{ SWIG_LUA_INT,     (char *)"DEBUG_PHYSIC_SHAPES", (long) 1, 0, 0, 0},
+{ SWIG_LUA_INT,     (char *)"DEBUG_PHYSIC_SHAPES", (long) 0, 0, 0, 0},
 { SWIG_LUA_INT,     (char *)"RIGHT", (long) RIGHT, 0, 0, 0},
 { SWIG_LUA_INT,     (char *)"LEFT", (long) LEFT, 0, 0, 0},
 { SWIG_LUA_INT,     (char *)"Character_ATTACK", (long) Character::ATTACK, 0, 0, 0},
