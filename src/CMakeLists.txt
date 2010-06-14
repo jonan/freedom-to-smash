@@ -91,12 +91,6 @@ source_group(Scheduler FILES ITask.h Scheduler.h Scheduler.cpp ScheduledItem.h S
 source_group(Graphics REGULAR_EXPRESSION graphics/.*)
 source_group(Physics REGULAR_EXPRESSION physics/.*)
 
-# Compile the network code only if ENet was found
-if(ENET_FOUND)
-    list(APPEND SRC server.cpp)
-    list(APPEND HEADERS server.hpp)
-endif()
-
 if(WIN32)
     if(NOT CYGWIN)
         list(APPEND SRC ${HEADERS})
@@ -109,7 +103,6 @@ set_target_properties(freedom-to-smash PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${PRO
 target_link_libraries(
   freedom-to-smash
   ${BULLET_LIBRARIES}
-  ${ENET_LIBRARIES}
   ${HYDRAX_LIBRARIES}
   ${LUA_LIBRARIES}
   ${OIS_LIBRARIES}
@@ -119,7 +112,3 @@ target_link_libraries(
   ${SKYX_LIBRARIES}
   ${VORBIS_LIBRARIES}
   )
-# Link optional libraries
-if(ENET_FOUND)
-    target_link_libraries(freedom-to-smash ${ENET_LIBRARIES})
-endif()

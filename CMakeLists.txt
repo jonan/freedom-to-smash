@@ -25,13 +25,6 @@ include_directories(
   ${VORBIS_INCLUDE_DIRS}
   )
 
-# Optional libraries
-find_package(ENet)
-
-if(ENET_FOUND)
-    include_directories(${ENET_INCLUDE_DIR})
-endif()
-
 if(WIN32)
     add_definitions(-DNOMINMAX -DHYDRAX_LIB -DSKYX_LIB -DQUICKGUI_EXPORTS)
     link_libraries(winmm.lib)
