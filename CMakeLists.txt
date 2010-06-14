@@ -10,7 +10,12 @@ find_package(OGRE REQUIRED)
 find_package(OIS REQUIRED)
 find_package(OpenAL REQUIRED)
 
-pkg_check_modules(VORBIS REQUIRED vorbisfile)
+if(NOT WIN32)
+    pkg_check_modules(VORBIS REQUIRED vorbisfile)
+else()
+    set(VORBIS_INCLUDE_DIRS .)
+    set(VORBIS_LIBRARIES .)
+endif()
 
 include_directories(
   ${PROJECT_SOURCE_DIR}
