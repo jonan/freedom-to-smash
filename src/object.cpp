@@ -25,10 +25,11 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #include <physics/shapes_manager.hpp>
 
 // Constructor
-Object::Object(const String &entity, Ogre::SceneManager &scene_manager, const int num_animations)
+Object::Object(const char *entity, Ogre::SceneManager &scene_manager, const int num_animations)
         : graphics::Object(scene_manager, num_animations)
 {
-    graphics::Object::setEntity(entity);
+    if (entity)
+        graphics::Object::setEntity(String(entity));
 }
 
 // Set function.
@@ -62,11 +63,16 @@ void Object::getGraphicalRotation(Ogre::Quaternion &rot) const
 }
 
 // Creates the physic object that can then be added to a physic scene.
-void Object::createPhysicObject(const Real &mass)
+void Object::createPhysicObject(const Real &mass, const Ogre::Vector3 &offset, const Ogre::Vector3 &size)
 {
-    Ogre::AxisAlignedBox bounding_box = entity->getBoundingBox();
-    btVector3 size = physics::vector3(bounding_box.getMaximum() - bounding_box.getMinimum());
-    size *= physics::vector3(node->getScale());
-    btCollisionShape *shape = &physics::ShapesManager::getInstance().getBoxShape(size);
+    btVector3 physic_size;
+    if (entity) {
+        Ogre::AxisAlignedBox bounding_box = entity->getBoundingBox();
+        physic_size = physics::vector3(bounding_box.getMaximum() - bounding_box.getMinimum());
+        physic_size *= physics::vector3(node->getScale());
+    } else {
+        physic_size = physics::vector3(size);
+    }
+    btCollisionShape *shape = &physics::ShapesManager::getInstance().getBoxShape(physic_size);
     createBody(mass, *shape, this);
 }

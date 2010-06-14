@@ -35,14 +35,24 @@ Scene::~Scene(void)
 void Scene::addObject(const String &entity, const Ogre::Vector3 &position,
                       const Ogre::Vector3 &scale, const Real &mass)
 {
-    addGraphicObject(entity, position, scale);
+    addGraphicObject(entity.c_str(), position, scale);
     Object *obj = objects.back();
     obj->createPhysicObject(mass);
     physics::Scene::addPhysicObject(*obj);
 }
 
 // Adds an object to the scene.
-void Scene::addGraphicObject(const String &entity, const Ogre::Vector3 &position, const Ogre::Vector3 &scale)
+void Scene::addPhysicObject(const Ogre::Vector3 &position, const Ogre::Vector3 &size,
+                            const Real mass, const Ogre::Vector3 &offset)
+{
+    addGraphicObject(NULL, position);
+    Object *obj = objects.back();
+    obj->createPhysicObject(mass, offset, size);
+    physics::Scene::addPhysicObject(*obj);
+}
+
+// Adds an object to the scene.
+void Scene::addGraphicObject(const char *entity, const Ogre::Vector3 &position, const Ogre::Vector3 &scale)
 {
     Object *obj = new Object(entity, getManager());
     obj->setGraphicalPosition(position);

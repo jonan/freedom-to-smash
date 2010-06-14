@@ -36,7 +36,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 
 // Constructor
 Character::Character(const String &name, Ogre::SceneManager &scene_manager)
-        : Object(name, scene_manager, NUM_STATES)
+        : Object(name.c_str(), scene_manager, NUM_STATES)
         , on_floor(true)
         , has_double_jumped(false)
         , collision_right(false)

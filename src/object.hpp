@@ -22,6 +22,9 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #ifndef OBJECT_HPP
 #define OBJECT_HPP
 
+// Ogre
+#include <OgreVector3.h>
+
 // FtS
 #include <graphics/object.hpp>
 #include <physics/object.hpp>
@@ -33,7 +36,7 @@ public:
     /// @param[in] entity Name of the object's entity.
     /// @param[in] scene_manager Manager of the scene the object will be in.
     /// @param[in] num_animations Number of animations the object has.
-    explicit Object(const String &entity, Ogre::SceneManager &scene_manager, const int num_animations = 0); // Constructor
+    explicit Object(const char *entity, Ogre::SceneManager &scene_manager, const int num_animations = 0); // Constructor
     virtual ~Object(void) {} // Destructor
 
     // @{
@@ -50,7 +53,12 @@ public:
     // @}
 
     /// Creates the physic object that can then be added to a physic scene.
-    void createPhysicObject(const Real &mass);
+    /// @param[in] mass The object's mass.
+    /// @param[in] offset Offset between the center of the physic object and the graphical position.
+    /// @param[in] size Size of the physic object (only needed when the object has no entity).
+    void createPhysicObject(const Real &mass,
+                            const Ogre::Vector3 &offset = Ogre::Vector3::ZERO,
+                            const Ogre::Vector3 &size = Ogre::Vector3::ZERO);
 
 private:
     DISALLOW_COPY_AND_ASSIGN(Object);

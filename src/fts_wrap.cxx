@@ -3066,6 +3066,59 @@ fail:
 }
 
 
+static int _wrap_PhysicsScene_createDebugDrawer(lua_State* L) {
+  int SWIG_arg = 0;
+  physics::Scene *arg1 = (physics::Scene *) 0 ;
+  Ogre::SceneManager *arg2 = 0 ;
+  
+  SWIG_check_num_args("createDebugDrawer",2,2)
+  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("createDebugDrawer",1,"physics::Scene *");
+  if(!lua_isuserdata(L,2)) SWIG_fail_arg("createDebugDrawer",2,"Ogre::SceneManager &");
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_physics__Scene,0))){
+    SWIG_fail_ptr("PhysicsScene_createDebugDrawer",1,SWIGTYPE_p_physics__Scene);
+  }
+  
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&arg2,SWIGTYPE_p_Ogre__SceneManager,0))){
+    SWIG_fail_ptr("PhysicsScene_createDebugDrawer",2,SWIGTYPE_p_Ogre__SceneManager);
+  }
+  
+  (arg1)->createDebugDrawer(*arg2);
+  
+  return SWIG_arg;
+  
+  if(0) SWIG_fail;
+  
+fail:
+  lua_error(L);
+  return SWIG_arg;
+}
+
+
+static int _wrap_PhysicsScene_drawDebugLines(lua_State* L) {
+  int SWIG_arg = 0;
+  physics::Scene *arg1 = (physics::Scene *) 0 ;
+  
+  SWIG_check_num_args("drawDebugLines",1,1)
+  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("drawDebugLines",1,"physics::Scene *");
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_physics__Scene,0))){
+    SWIG_fail_ptr("PhysicsScene_drawDebugLines",1,SWIGTYPE_p_physics__Scene);
+  }
+  
+  (arg1)->drawDebugLines();
+  
+  return SWIG_arg;
+  
+  if(0) SWIG_fail;
+  
+fail:
+  lua_error(L);
+  return SWIG_arg;
+}
+
+
 static int _wrap_PhysicsScene_addPhysicObject(lua_State* L) {
   int SWIG_arg = 0;
   physics::Scene *arg1 = (physics::Scene *) 0 ;
@@ -3205,6 +3258,8 @@ physics::Scene *arg1 = (physics::Scene *) obj;
 delete arg1;
 }
 static swig_lua_method swig_physics_Scene_methods[] = {
+    {"createDebugDrawer", _wrap_PhysicsScene_createDebugDrawer}, 
+    {"drawDebugLines", _wrap_PhysicsScene_drawDebugLines}, 
     {"addPhysicObject", _wrap_PhysicsScene_addPhysicObject}, 
     {"removePhysicObject", _wrap_PhysicsScene_removePhysicObject}, 
     {"getDispatcher", _wrap_PhysicsScene_getDispatcher}, 
@@ -3221,24 +3276,23 @@ static swig_lua_class _wrap_class_physics_Scene = { "PhysicsScene", &SWIGTYPE_p_
 
 static int _wrap_new_Object__SWIG_0(lua_State* L) {
   int SWIG_arg = 0;
-  String *arg1 = 0 ;
+  char *arg1 = (char *) 0 ;
   Ogre::SceneManager *arg2 = 0 ;
   int arg3 ;
-  std::string temp1 ;
   Object *result = 0 ;
   
   SWIG_check_num_args("Object",3,3)
-  if(!lua_isstring(L,1)) SWIG_fail_arg("Object",1,"String const &");
+  if(!lua_isstring(L,1)) SWIG_fail_arg("Object",1,"char const *");
   if(!lua_isuserdata(L,2)) SWIG_fail_arg("Object",2,"Ogre::SceneManager &");
   if(!lua_isnumber(L,3)) SWIG_fail_arg("Object",3,"int const");
-  temp1.assign(lua_tostring(L,1),lua_strlen(L,1)); arg1=&temp1;
+  arg1 = (char *)lua_tostring(L, 1);
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&arg2,SWIGTYPE_p_Ogre__SceneManager,0))){
     SWIG_fail_ptr("new_Object",2,SWIGTYPE_p_Ogre__SceneManager);
   }
   
   arg3 = (int const)lua_tonumber(L, 3);
-  result = (Object *)new Object((String const &)*arg1,*arg2,arg3);
+  result = (Object *)new Object((char const *)arg1,*arg2,arg3);
   SWIG_NewPointerObj(L,result,SWIGTYPE_p_Object,1); SWIG_arg++; 
   return SWIG_arg;
   
@@ -3252,21 +3306,20 @@ fail:
 
 static int _wrap_new_Object__SWIG_1(lua_State* L) {
   int SWIG_arg = 0;
-  String *arg1 = 0 ;
+  char *arg1 = (char *) 0 ;
   Ogre::SceneManager *arg2 = 0 ;
-  std::string temp1 ;
   Object *result = 0 ;
   
   SWIG_check_num_args("Object",2,2)
-  if(!lua_isstring(L,1)) SWIG_fail_arg("Object",1,"String const &");
+  if(!lua_isstring(L,1)) SWIG_fail_arg("Object",1,"char const *");
   if(!lua_isuserdata(L,2)) SWIG_fail_arg("Object",2,"Ogre::SceneManager &");
-  temp1.assign(lua_tostring(L,1),lua_strlen(L,1)); arg1=&temp1;
+  arg1 = (char *)lua_tostring(L, 1);
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&arg2,SWIGTYPE_p_Ogre__SceneManager,0))){
     SWIG_fail_ptr("new_Object",2,SWIGTYPE_p_Ogre__SceneManager);
   }
   
-  result = (Object *)new Object((String const &)*arg1,*arg2);
+  result = (Object *)new Object((char const *)arg1,*arg2);
   SWIG_NewPointerObj(L,result,SWIGTYPE_p_Object,1); SWIG_arg++; 
   return SWIG_arg;
   
@@ -3331,8 +3384,8 @@ static int _wrap_new_Object(lua_State* L) {
   
   lua_pushstring(L,"Wrong arguments for overloaded function 'new_Object'\n"
     "  Possible C/C++ prototypes are:\n"
-    "    Object(String const &,Ogre::SceneManager &,int const)\n"
-    "    Object(String const &,Ogre::SceneManager &)\n");
+    "    Object(char const *,Ogre::SceneManager &,int const)\n"
+    "    Object(char const *,Ogre::SceneManager &)\n");
   lua_error(L);return 0;
 }
 
@@ -3487,7 +3540,82 @@ fail:
 }
 
 
-static int _wrap_Object_createPhysicObject(lua_State* L) {
+static int _wrap_Object_createPhysicObject__SWIG_0(lua_State* L) {
+  int SWIG_arg = 0;
+  Object *arg1 = (Object *) 0 ;
+  Real *arg2 = 0 ;
+  Ogre::Vector3 *arg3 = 0 ;
+  Ogre::Vector3 *arg4 = 0 ;
+  Real temp2 ;
+  
+  SWIG_check_num_args("createPhysicObject",4,4)
+  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("createPhysicObject",1,"Object *");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("createPhysicObject",2,"Real const &");
+  if(!lua_isuserdata(L,3)) SWIG_fail_arg("createPhysicObject",3,"Ogre::Vector3 const &");
+  if(!lua_isuserdata(L,4)) SWIG_fail_arg("createPhysicObject",4,"Ogre::Vector3 const &");
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_Object,0))){
+    SWIG_fail_ptr("Object_createPhysicObject",1,SWIGTYPE_p_Object);
+  }
+  
+  temp2=(Real)lua_tonumber(L,2); arg2=&temp2;
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,3,(void**)&arg3,SWIGTYPE_p_Ogre__Vector3,0))){
+    SWIG_fail_ptr("Object_createPhysicObject",3,SWIGTYPE_p_Ogre__Vector3);
+  }
+  
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,4,(void**)&arg4,SWIGTYPE_p_Ogre__Vector3,0))){
+    SWIG_fail_ptr("Object_createPhysicObject",4,SWIGTYPE_p_Ogre__Vector3);
+  }
+  
+  (arg1)->createPhysicObject((Real const &)*arg2,(Ogre::Vector3 const &)*arg3,(Ogre::Vector3 const &)*arg4);
+  
+  return SWIG_arg;
+  
+  if(0) SWIG_fail;
+  
+fail:
+  lua_error(L);
+  return SWIG_arg;
+}
+
+
+static int _wrap_Object_createPhysicObject__SWIG_1(lua_State* L) {
+  int SWIG_arg = 0;
+  Object *arg1 = (Object *) 0 ;
+  Real *arg2 = 0 ;
+  Ogre::Vector3 *arg3 = 0 ;
+  Real temp2 ;
+  
+  SWIG_check_num_args("createPhysicObject",3,3)
+  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("createPhysicObject",1,"Object *");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("createPhysicObject",2,"Real const &");
+  if(!lua_isuserdata(L,3)) SWIG_fail_arg("createPhysicObject",3,"Ogre::Vector3 const &");
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_Object,0))){
+    SWIG_fail_ptr("Object_createPhysicObject",1,SWIGTYPE_p_Object);
+  }
+  
+  temp2=(Real)lua_tonumber(L,2); arg2=&temp2;
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,3,(void**)&arg3,SWIGTYPE_p_Ogre__Vector3,0))){
+    SWIG_fail_ptr("Object_createPhysicObject",3,SWIGTYPE_p_Ogre__Vector3);
+  }
+  
+  (arg1)->createPhysicObject((Real const &)*arg2,(Ogre::Vector3 const &)*arg3);
+  
+  return SWIG_arg;
+  
+  if(0) SWIG_fail;
+  
+fail:
+  lua_error(L);
+  return SWIG_arg;
+}
+
+
+static int _wrap_Object_createPhysicObject__SWIG_2(lua_State* L) {
   int SWIG_arg = 0;
   Object *arg1 = (Object *) 0 ;
   Real *arg2 = 0 ;
@@ -3511,6 +3639,110 @@ static int _wrap_Object_createPhysicObject(lua_State* L) {
 fail:
   lua_error(L);
   return SWIG_arg;
+}
+
+
+static int _wrap_Object_createPhysicObject(lua_State* L) {
+  int argc;
+  int argv[5]={
+    1,2,3,4,5
+  };
+  
+  argc = lua_gettop(L);
+  if (argc == 2) {
+    int _v;
+    {
+      void *ptr;
+      if (SWIG_isptrtype(L,argv[0])==0 || SWIG_ConvertPtr(L,argv[0], (void **) &ptr, SWIGTYPE_p_Object, 0)) {
+        _v = 0;
+      } else {
+        _v = 1;
+      }
+    }
+    if (_v) {
+      {
+        _v = lua_isnumber(L,argv[1]);
+      }
+      if (_v) {
+        return _wrap_Object_createPhysicObject__SWIG_2(L);
+      }
+    }
+  }
+  if (argc == 3) {
+    int _v;
+    {
+      void *ptr;
+      if (SWIG_isptrtype(L,argv[0])==0 || SWIG_ConvertPtr(L,argv[0], (void **) &ptr, SWIGTYPE_p_Object, 0)) {
+        _v = 0;
+      } else {
+        _v = 1;
+      }
+    }
+    if (_v) {
+      {
+        _v = lua_isnumber(L,argv[1]);
+      }
+      if (_v) {
+        {
+          void *ptr;
+          if (lua_isuserdata(L,argv[2])==0 || SWIG_ConvertPtr(L,argv[2], (void **) &ptr, SWIGTYPE_p_Ogre__Vector3, 0)) {
+            _v = 0;
+          } else {
+            _v = 1;
+          }
+        }
+        if (_v) {
+          return _wrap_Object_createPhysicObject__SWIG_1(L);
+        }
+      }
+    }
+  }
+  if (argc == 4) {
+    int _v;
+    {
+      void *ptr;
+      if (SWIG_isptrtype(L,argv[0])==0 || SWIG_ConvertPtr(L,argv[0], (void **) &ptr, SWIGTYPE_p_Object, 0)) {
+        _v = 0;
+      } else {
+        _v = 1;
+      }
+    }
+    if (_v) {
+      {
+        _v = lua_isnumber(L,argv[1]);
+      }
+      if (_v) {
+        {
+          void *ptr;
+          if (lua_isuserdata(L,argv[2])==0 || SWIG_ConvertPtr(L,argv[2], (void **) &ptr, SWIGTYPE_p_Ogre__Vector3, 0)) {
+            _v = 0;
+          } else {
+            _v = 1;
+          }
+        }
+        if (_v) {
+          {
+            void *ptr;
+            if (lua_isuserdata(L,argv[3])==0 || SWIG_ConvertPtr(L,argv[3], (void **) &ptr, SWIGTYPE_p_Ogre__Vector3, 0)) {
+              _v = 0;
+            } else {
+              _v = 1;
+            }
+          }
+          if (_v) {
+            return _wrap_Object_createPhysicObject__SWIG_0(L);
+          }
+        }
+      }
+    }
+  }
+  
+  lua_pushstring(L,"Wrong arguments for overloaded function 'Object_createPhysicObject'\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    createPhysicObject(Object *,Real const &,Ogre::Vector3 const &,Ogre::Vector3 const &)\n"
+    "    createPhysicObject(Object *,Real const &,Ogre::Vector3 const &)\n"
+    "    createPhysicObject(Object *,Real const &)\n");
+  lua_error(L);return 0;
 }
 
 
@@ -3937,7 +4169,7 @@ static swig_lua_var_info swig_variables[] = {
 };
 
 static swig_lua_const_info swig_constants[] = {
-{ SWIG_LUA_INT,     (char *)"DEBUG_PHYSIC_SHAPES", (long) 0, 0, 0, 0},
+{ SWIG_LUA_INT,     (char *)"DEBUG_PHYSIC_SHAPES", (long) 1, 0, 0, 0},
 { SWIG_LUA_INT,     (char *)"RIGHT", (long) RIGHT, 0, 0, 0},
 { SWIG_LUA_INT,     (char *)"LEFT", (long) LEFT, 0, 0, 0},
 { SWIG_LUA_INT,     (char *)"Character_ATTACK", (long) Character::ATTACK, 0, 0, 0},
