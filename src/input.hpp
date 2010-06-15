@@ -32,7 +32,8 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 
 /// Class to control all input and who is listening to it.
 /// @todo Add joystick support.
-class Input : public Ogre::FrameListener, public OIS::KeyListener, public OIS::JoyStickListener {
+class Input : public Ogre::FrameListener, public OIS::KeyListener
+            , public OIS::MouseListener,  public OIS::JoyStickListener {
 public:
     static Input* getInstance(void); // Singleton pattern constructor
     ~Input(void); // Destructor
@@ -40,12 +41,14 @@ public:
     // @{
     /// Functions to add listeners.
     void addKeyListener      (OIS::KeyListener &listener)      {key_listeners.push_back(&listener);     }
+    void addMouseListener    (OIS::MouseListener &listener)    {mouse_listeners.push_back(&listener);   }
     void addJoyStickListener (OIS::JoyStickListener &listener) {joystick_listeners.push_back(&listener);}
     // @}
 
     // @{
     /// Functions to remove listeners.
     void removeKeyListener      (OIS::KeyListener &listener)      {key_listeners.remove(&listener);     }
+    void removeMouseListener    (OIS::MouseListener &listener)    {mouse_listeners.remove(&listener);   }
     void removeJoyStickListener (OIS::JoyStickListener &listener) {joystick_listeners.remove(&listener);}
     // @}
 
@@ -60,8 +63,15 @@ private:
 
     // @{
     // Functions to update the keyboard's state.
-    virtual bool keyPressed  (const OIS::KeyEvent &key);
-    virtual bool keyReleased (const OIS::KeyEvent &key);
+    virtual bool keyPressed  (const OIS::KeyEvent &event);
+    virtual bool keyReleased (const OIS::KeyEvent &event);
+    // @}
+
+    // @{
+    // Functions to update the mouse's state.
+    virtual bool mouseMoved    (const OIS::MouseEvent &arg);
+    virtual bool mousePressed  (const OIS::MouseEvent &arg, OIS::MouseButtonID key);
+    virtual bool mouseReleased (const OIS::MouseEvent &arg, OIS::MouseButtonID key);
     // @}
 
     // @{
@@ -73,9 +83,11 @@ private:
 
     OIS::InputManager *manager;
     OIS::Keyboard     *keyboard;
+    OIS::Mouse        *mouse;
     OIS::JoyStick     *joystick;
 
     std::list<OIS::KeyListener*>      key_listeners;
+    std::list<OIS::MouseListener*>    mouse_listeners;
     std::list<OIS::JoyStickListener*> joystick_listeners;
 
     DISALLOW_COPY_AND_ASSIGN(Input);

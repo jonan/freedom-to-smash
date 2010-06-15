@@ -34,6 +34,7 @@ Input* Input::getInstance(void)
 Input::~Input(void)
 {
     if (keyboard) manager->destroyInputObject(keyboard);
+    if (mouse) manager->destroyInputObject(mouse);
     if (joystick) manager->destroyInputObject(joystick);
     OIS::InputManager::destroyInputSystem(manager);
 }
@@ -43,6 +44,7 @@ Input::Input(void)
 {
     setupOIS();
     if (keyboard) keyboard->setEventCallback(this);
+    if (mouse) mouse->setEventCallback(this);
     if (joystick) joystick->setEventCallback(this);
     Ogre::Root::getSingleton().addFrameListener(this);
 }
@@ -71,6 +73,15 @@ void Input::setupOIS(void)
     }
     cout << endl;
     try {
+      cout << "Creating mouse... ";
+      mouse = static_cast<OIS::Mouse*>(manager->createInputObject(OIS::OISMouse, true));
+    } catch (const OIS::Exception &exception) {
+      // No mouse
+      cout << "FAILED";
+      mouse = NULL;
+    }
+    cout << endl;
+    try {
         cout << "Creating joystick... ";
         joystick = static_cast<OIS::JoyStick*>(manager->createInputObject(OIS::OISJoyStick, true));
     } catch (const OIS::Exception &exception) {
@@ -79,28 +90,62 @@ void Input::setupOIS(void)
         joystick = NULL;
     }
     cout << endl;
+    // Tell OIS the dimensions of the window (only needed when using mouse)
+    if (mouse) {
+        unsigned int width, height, depth;
+        int left, top;
+        const OIS::MouseState &mouse_state = mouse->getMouseState();
+        window->getMetrics(width, height, depth, left, top);
+        mouse_state.width = width;
+        mouse_state.height = height;
+    }
 }
 
 // Checks input after every frame.
 bool Input::frameEnded(const Ogre::FrameEvent &/*event*/)
 {
     if (keyboard) keyboard->capture();
+    if (mouse) mouse->capture();
     if (joystick) joystick->capture();
     return true;
 }
 
 // Function to update the keyboard's state.
-bool Input::keyPressed(const OIS::KeyEvent &key)
+bool Input::keyPressed(const OIS::KeyEvent &event)
 {
     BOOST_FOREACH(OIS::KeyListener *listener, key_listeners)
-        listener->keyPressed(key);
+        listener->keyPressed(event);
     return true;
 }
 
 // Function to update the keyboard's state.
-bool Input::keyReleased(const OIS::KeyEvent &key)
+bool Input::keyReleased(const OIS::KeyEvent &event)
 {
     BOOST_FOREACH(OIS::KeyListener *listener, key_listeners)
-        listener->keyReleased(key);
+        listener->keyReleased(event);
+    return true;
+}
+
+// Functions to update the mouse's state.
+bool Input::mouseMoved(const OIS::MouseEvent &event)
+{
+    BOOST_FOREACH(OIS::MouseListener *listener, mouse_listeners)
+        listener->mouseMoved(event);
+    return true;
+}
+
+// Functions to update the mouse's state.
+bool Input::mousePressed(const OIS::MouseEvent &event, OIS::MouseButtonID key)
+{
+    BOOST_FOREACH(OIS::MouseListener *listener, mouse_listeners)
+        listener->mousePressed(event, key);
+    return true;
+}
+
+// Functions to update the mouse's state.
+bool Input::mouseReleased(const OIS::MouseEvent &event, OIS::MouseButtonID key)
+{
+    BOOST_FOREACH(OIS::MouseListener *listener, mouse_listeners)
+        listener->mouseReleased(event, key);
     return true;
 }
