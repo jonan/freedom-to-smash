@@ -2738,19 +2738,19 @@ fail:
 }
 
 
-static int _wrap_PhysicsObject_createBody(lua_State* L) {
+static int _wrap_PhysicsObject_createBody__SWIG_0(lua_State* L) {
   int SWIG_arg = 0;
   physics::Object *arg1 = (physics::Object *) 0 ;
   Real *arg2 = 0 ;
   btCollisionShape *arg3 = 0 ;
-  physics::ObjectSynchronizer *arg4 = 0 ;
+  physics::ObjectSynchronizer *arg4 = (physics::ObjectSynchronizer *) 0 ;
   Real temp2 ;
   
   SWIG_check_num_args("createBody",4,4)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("createBody",1,"physics::Object *");
   if(!lua_isnumber(L,2)) SWIG_fail_arg("createBody",2,"Real const &");
   if(!lua_isuserdata(L,3)) SWIG_fail_arg("createBody",3,"btCollisionShape &");
-  if(!lua_isuserdata(L,4)) SWIG_fail_arg("createBody",4,"physics::ObjectSynchronizer &");
+  if(!SWIG_isptrtype(L,4)) SWIG_fail_arg("createBody",4,"physics::ObjectSynchronizer *");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_physics__Object,0))){
     SWIG_fail_ptr("PhysicsObject_createBody",1,SWIGTYPE_p_physics__Object);
@@ -2767,7 +2767,7 @@ static int _wrap_PhysicsObject_createBody(lua_State* L) {
     SWIG_fail_ptr("PhysicsObject_createBody",4,SWIGTYPE_p_physics__ObjectSynchronizer);
   }
   
-  (arg1)->createBody((Real const &)*arg2,*arg3,*arg4);
+  (arg1)->createBody((Real const &)*arg2,*arg3,arg4);
   
   return SWIG_arg;
   
@@ -2776,6 +2776,124 @@ static int _wrap_PhysicsObject_createBody(lua_State* L) {
 fail:
   lua_error(L);
   return SWIG_arg;
+}
+
+
+static int _wrap_PhysicsObject_createBody__SWIG_1(lua_State* L) {
+  int SWIG_arg = 0;
+  physics::Object *arg1 = (physics::Object *) 0 ;
+  Real *arg2 = 0 ;
+  btCollisionShape *arg3 = 0 ;
+  Real temp2 ;
+  
+  SWIG_check_num_args("createBody",3,3)
+  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("createBody",1,"physics::Object *");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("createBody",2,"Real const &");
+  if(!lua_isuserdata(L,3)) SWIG_fail_arg("createBody",3,"btCollisionShape &");
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_physics__Object,0))){
+    SWIG_fail_ptr("PhysicsObject_createBody",1,SWIGTYPE_p_physics__Object);
+  }
+  
+  temp2=(Real)lua_tonumber(L,2); arg2=&temp2;
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,3,(void**)&arg3,SWIGTYPE_p_btCollisionShape,0))){
+    SWIG_fail_ptr("PhysicsObject_createBody",3,SWIGTYPE_p_btCollisionShape);
+  }
+  
+  (arg1)->createBody((Real const &)*arg2,*arg3);
+  
+  return SWIG_arg;
+  
+  if(0) SWIG_fail;
+  
+fail:
+  lua_error(L);
+  return SWIG_arg;
+}
+
+
+static int _wrap_PhysicsObject_createBody(lua_State* L) {
+  int argc;
+  int argv[5]={
+    1,2,3,4,5
+  };
+  
+  argc = lua_gettop(L);
+  if (argc == 3) {
+    int _v;
+    {
+      void *ptr;
+      if (SWIG_isptrtype(L,argv[0])==0 || SWIG_ConvertPtr(L,argv[0], (void **) &ptr, SWIGTYPE_p_physics__Object, 0)) {
+        _v = 0;
+      } else {
+        _v = 1;
+      }
+    }
+    if (_v) {
+      {
+        _v = lua_isnumber(L,argv[1]);
+      }
+      if (_v) {
+        {
+          void *ptr;
+          if (lua_isuserdata(L,argv[2])==0 || SWIG_ConvertPtr(L,argv[2], (void **) &ptr, SWIGTYPE_p_btCollisionShape, 0)) {
+            _v = 0;
+          } else {
+            _v = 1;
+          }
+        }
+        if (_v) {
+          return _wrap_PhysicsObject_createBody__SWIG_1(L);
+        }
+      }
+    }
+  }
+  if (argc == 4) {
+    int _v;
+    {
+      void *ptr;
+      if (SWIG_isptrtype(L,argv[0])==0 || SWIG_ConvertPtr(L,argv[0], (void **) &ptr, SWIGTYPE_p_physics__Object, 0)) {
+        _v = 0;
+      } else {
+        _v = 1;
+      }
+    }
+    if (_v) {
+      {
+        _v = lua_isnumber(L,argv[1]);
+      }
+      if (_v) {
+        {
+          void *ptr;
+          if (lua_isuserdata(L,argv[2])==0 || SWIG_ConvertPtr(L,argv[2], (void **) &ptr, SWIGTYPE_p_btCollisionShape, 0)) {
+            _v = 0;
+          } else {
+            _v = 1;
+          }
+        }
+        if (_v) {
+          {
+            void *ptr;
+            if (SWIG_isptrtype(L,argv[3])==0 || SWIG_ConvertPtr(L,argv[3], (void **) &ptr, SWIGTYPE_p_physics__ObjectSynchronizer, 0)) {
+              _v = 0;
+            } else {
+              _v = 1;
+            }
+          }
+          if (_v) {
+            return _wrap_PhysicsObject_createBody__SWIG_0(L);
+          }
+        }
+      }
+    }
+  }
+  
+  lua_pushstring(L,"Wrong arguments for overloaded function 'PhysicsObject_createBody'\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    createBody(physics::Object *,Real const &,btCollisionShape &,physics::ObjectSynchronizer *)\n"
+    "    createBody(physics::Object *,Real const &,btCollisionShape &)\n");
+  lua_error(L);return 0;
 }
 
 

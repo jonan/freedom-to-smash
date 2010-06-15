@@ -78,11 +78,11 @@ void Object::disableRotation(void)
 
 // Creates a physic body for the object.
 void Object::createBody(const Real &mass, btCollisionShape &shape,
-                        ObjectSynchronizer &synchronizer)
+                        ObjectSynchronizer *synchronizer)
 {
     btVector3 inertia;
     shape.calculateLocalInertia(mass, inertia);
-    btRigidBody::btRigidBodyConstructionInfo info(mass, &synchronizer, &shape, inertia);
+    btRigidBody::btRigidBodyConstructionInfo info(mass, synchronizer, &shape, inertia);
     physic_object = new btRigidBody(info);
     this->shape = &shape;
 }

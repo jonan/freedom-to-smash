@@ -75,5 +75,5 @@ void Object::createPhysicObject(const Real &mass, const Ogre::Vector3 &center_of
     }
     btCollisionShape *shape = &physics::ShapesManager::getInstance().getBoxShape(physic_size);
     setCenterOffset(physics::vector3(center_offset));
-    createBody(mass, *shape, *this);
+    createBody(mass, *shape, this);
 }

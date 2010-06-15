@@ -80,6 +80,7 @@ private:
 
     // @{
     // Funtions that need to be called every frame for the character to be updated.
+    void frameAttack    (void);
     void frameCheck     (void);
     void frameMovement  (void);
     void frameAnimation (const Ogre::FrameEvent &event);
@@ -95,6 +96,9 @@ private:
     bool collision_right, collision_left;
     double jump_force;
     double walk_speed;
+
+    physics::Object *attack_obj;
+    btCollisionShape *attack_shape;
 
     Ogre::Vector3 *initial_pos;
 

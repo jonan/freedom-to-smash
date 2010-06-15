@@ -63,10 +63,14 @@ public:
     /// @param[in] shape Object's physical shape.
     /// @param[in] synchronizer Synchronizer used to coordinate the physic object.
     void createBody(const Real &mass, btCollisionShape &shape,
-                    ObjectSynchronizer &synchronizer);
+                    ObjectSynchronizer *synchronizer = NULL);
 
     /// Apply's a force to the object.
     void applyForce(const btVector3 &force);
+
+protected:
+    //
+    Scene* getScene(void) {return scene;}
 
 private:
     btCollisionShape *shape;

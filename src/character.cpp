@@ -28,6 +28,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 // FtS
 #include <physics/converter_functions.hpp>
 #include <physics/shapes_manager.hpp>
+#include <physics/scene.hpp>
 #include <input.hpp>
 
 #include <lua_engine.hpp>
@@ -44,6 +45,8 @@ Character::Character(const String &name, Ogre::SceneManager &scene_manager)
         , collision_left(false)
         , jump_force(0)
         , walk_speed(0)
+        , attack_obj(NULL)
+        , attack_shape( &physics::ShapesManager::getInstance().getBoxShape( btVector3(0.1,4,10) ) )
         , initial_pos(NULL)
 {
     String script_path = boost::str(boost::format("../scripts/char_%s.lua") % name);
@@ -102,8 +105,8 @@ void Character::handleScript(const String &file)
 
     btVector3 bsize(size.x, size.y, size.z);
     btCollisionShape *shape = &physics::ShapesManager::getInstance().getBoxShape(bsize);
-    setCenterOffset(physics::vector3(Ogre::Vector3(0,1,0)));
-    createBody(mass, *shape, *this);
+    setCenterOffset(physics::vector3(Ogre::Vector3(0,0,0)));
+    createBody(mass, *shape, this);
 
     LuaEngine::BeginCallEx(L, "Character.OnCreate");
     LuaEngine::PushPointer(L, this, "Character *");
@@ -113,9 +116,21 @@ void Character::handleScript(const String &file)
 // Start performing an attack.
 void Character::attack(void)
 {
-    if (action[IDLE] || action[MOVE]) {
+    if (action[IDLE]) {
         stopAction(IDLE);
         action[ATTACK] = true;
+        // Create physic attack object
+        attack_obj = new physics::Object();
+        attack_obj->createBody(20, *attack_shape);
+        Ogre::Vector3 pos = getPosition();
+        int dir = 0;
+        if (direction == RIGHT && !collision_right)
+            dir = -1;
+        else if (direction == LEFT  && !collision_left)
+            dir = 1;
+        pos.x += dir*1.5;
+        attack_obj->setPosition(pos.x, pos.y, pos.z);
+        getScene()->addPhysicObject(*attack_obj);
     }
 }
 
@@ -164,10 +179,28 @@ void Character::reset(void)
 // Function that's called at the beginning of every frame.
 bool Character::frameStarted(const Ogre::FrameEvent &event)
 {
+    frameAttack();
     frameCheck();
     frameMovement();
     frameAnimation(event);
     return true;
+}
+
+// Funtion that needs to be called every frame for the character to be updated.
+void Character::frameAttack(void)
+{
+    if (attack_obj) {
+        int dir = 0;
+        if (direction == RIGHT && !collision_right)
+            dir = -1;
+        else if (direction == LEFT  && !collision_left)
+            dir = 1;
+        attack_obj->setVelocity(dir*70,0,0);
+        if (!action[ATTACK]) {
+            delete attack_obj;
+            attack_obj = NULL;
+        }
+    }
 }
 
 // Funtion that needs to be called every frame for the character to be updated.
