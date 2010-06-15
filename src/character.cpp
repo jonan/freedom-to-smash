@@ -48,6 +48,7 @@ Character::Character(const String &name, Ogre::SceneManager &scene_manager)
         , attack_obj(NULL)
         , attack_shape( &physics::ShapesManager::getInstance().getBoxShape( btVector3(0.1,4,10) ) )
         , initial_pos(NULL)
+        , direction(LEFT)
 {
     String script_path = boost::str(boost::format("../scripts/char_%s.lua") % name);
     handleScript(script_path);
@@ -124,10 +125,10 @@ void Character::attack(void)
         attack_obj->createBody(20, *attack_shape);
         attack_obj->disableRotation();
         Ogre::Vector3 pos = getPosition();
-        int dir = 0;
-        if (direction == RIGHT && !collision_right)
+        int dir;
+        if (direction == RIGHT)
             dir = -1;
-        else if (direction == LEFT  && !collision_left)
+        else if (direction)
             dir = 1;
         pos.x += dir*1.5;
         attack_obj->setPosition(pos.x, pos.y, pos.z);
@@ -191,10 +192,10 @@ bool Character::frameStarted(const Ogre::FrameEvent &event)
 void Character::frameAttack(void)
 {
     if (attack_obj) {
-        int dir = 0;
-        if (direction == RIGHT && !collision_right)
+        int dir;
+        if (direction == RIGHT)
             dir = -1;
-        else if (direction == LEFT  && !collision_left)
+        else
             dir = 1;
         attack_obj->setVelocity(dir*70,0,0);
         if (!action[ATTACK]) {
