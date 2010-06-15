@@ -64,7 +64,6 @@ set(
   Scheduler.h
   ScheduledItem.h
   ITask.h
-  server.hpp
 
   swigrt.h
   fts_wrap.cxx
