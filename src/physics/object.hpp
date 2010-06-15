@@ -22,15 +22,13 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #ifndef PHYSICS_OBJECT_HPP
 #define PHYSICS_OBJECT_HPP
 
-// Bullet
-#include <LinearMath/btTransform.h>
-
 // FtS
 #include <util.hpp>
 
 // Bullet
 class btCollisionShape;
 class btRigidBody;
+class btVector3;
 
 namespace physics {
 
@@ -64,17 +62,14 @@ public:
     /// @param[in] mass Object's mass.
     /// @param[in] shape Object's physical shape.
     /// @param[in] synchronizer Synchronizer used to coordinate the physic object.
-    /// @param[in] center_offset Offset to the center of the object.
     void createBody(const Real &mass, btCollisionShape &shape,
-                    ObjectSynchronizer *synchronizer = NULL,
-                    const btTransform &center_offset = btTransform::getIdentity());
+                    ObjectSynchronizer &synchronizer);
 
     /// Apply's a force to the object.
     void applyForce(const btVector3 &force);
 
 private:
     btCollisionShape *shape;
-    btTransform *offset;
     btRigidBody *physic_object;
 
     Scene *scene;

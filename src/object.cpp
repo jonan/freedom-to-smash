@@ -63,7 +63,7 @@ void Object::getGraphicalRotation(Ogre::Quaternion &rot) const
 }
 
 // Creates the physic object that can then be added to a physic scene.
-void Object::createPhysicObject(const Real &mass, const Ogre::Vector3 &offset, const Ogre::Vector3 &size)
+void Object::createPhysicObject(const Real &mass, const Ogre::Vector3 &center_offset, const Ogre::Vector3 &size)
 {
     btVector3 physic_size;
     if (entity) {
@@ -74,5 +74,6 @@ void Object::createPhysicObject(const Real &mass, const Ogre::Vector3 &offset, c
         physic_size = physics::vector3(size);
     }
     btCollisionShape *shape = &physics::ShapesManager::getInstance().getBoxShape(physic_size);
-    createBody(mass, *shape, this);
+    setCenterOffset(physics::vector3(center_offset));
+    createBody(mass, *shape, *this);
 }

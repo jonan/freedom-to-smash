@@ -1536,17 +1536,16 @@ SWIG_Lua_dostring(lua_State *L, const char* str) {
 #define SWIGTYPE_p_btCollisionDispatcher swig_types[7]
 #define SWIGTYPE_p_btCollisionShape swig_types[8]
 #define SWIGTYPE_p_btRigidBody swig_types[9]
-#define SWIGTYPE_p_btTransform swig_types[10]
-#define SWIGTYPE_p_btVector3 swig_types[11]
-#define SWIGTYPE_p_float swig_types[12]
-#define SWIGTYPE_p_graphics__Object swig_types[13]
-#define SWIGTYPE_p_graphics__Scene swig_types[14]
-#define SWIGTYPE_p_physics__Object swig_types[15]
-#define SWIGTYPE_p_physics__ObjectSynchronizer swig_types[16]
-#define SWIGTYPE_p_physics__Scene swig_types[17]
-#define SWIGTYPE_p_std__string swig_types[18]
-static swig_type_info *swig_types[20];
-static swig_module_info swig_module = {swig_types, 19, 0, 0, 0, 0};
+#define SWIGTYPE_p_btVector3 swig_types[10]
+#define SWIGTYPE_p_float swig_types[11]
+#define SWIGTYPE_p_graphics__Object swig_types[12]
+#define SWIGTYPE_p_graphics__Scene swig_types[13]
+#define SWIGTYPE_p_physics__Object swig_types[14]
+#define SWIGTYPE_p_physics__ObjectSynchronizer swig_types[15]
+#define SWIGTYPE_p_physics__Scene swig_types[16]
+#define SWIGTYPE_p_std__string swig_types[17]
+static swig_type_info *swig_types[19];
+static swig_module_info swig_module = {swig_types, 18, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -2739,67 +2738,19 @@ fail:
 }
 
 
-static int _wrap_PhysicsObject_createBody__SWIG_0(lua_State* L) {
+static int _wrap_PhysicsObject_createBody(lua_State* L) {
   int SWIG_arg = 0;
   physics::Object *arg1 = (physics::Object *) 0 ;
   Real *arg2 = 0 ;
   btCollisionShape *arg3 = 0 ;
-  physics::ObjectSynchronizer *arg4 = (physics::ObjectSynchronizer *) 0 ;
-  btTransform *arg5 = 0 ;
-  Real temp2 ;
-  
-  SWIG_check_num_args("createBody",5,5)
-  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("createBody",1,"physics::Object *");
-  if(!lua_isnumber(L,2)) SWIG_fail_arg("createBody",2,"Real const &");
-  if(!lua_isuserdata(L,3)) SWIG_fail_arg("createBody",3,"btCollisionShape &");
-  if(!SWIG_isptrtype(L,4)) SWIG_fail_arg("createBody",4,"physics::ObjectSynchronizer *");
-  if(!lua_isuserdata(L,5)) SWIG_fail_arg("createBody",5,"btTransform const &");
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_physics__Object,0))){
-    SWIG_fail_ptr("PhysicsObject_createBody",1,SWIGTYPE_p_physics__Object);
-  }
-  
-  temp2=(Real)lua_tonumber(L,2); arg2=&temp2;
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,3,(void**)&arg3,SWIGTYPE_p_btCollisionShape,0))){
-    SWIG_fail_ptr("PhysicsObject_createBody",3,SWIGTYPE_p_btCollisionShape);
-  }
-  
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,4,(void**)&arg4,SWIGTYPE_p_physics__ObjectSynchronizer,0))){
-    SWIG_fail_ptr("PhysicsObject_createBody",4,SWIGTYPE_p_physics__ObjectSynchronizer);
-  }
-  
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,5,(void**)&arg5,SWIGTYPE_p_btTransform,0))){
-    SWIG_fail_ptr("PhysicsObject_createBody",5,SWIGTYPE_p_btTransform);
-  }
-  
-  (arg1)->createBody((Real const &)*arg2,*arg3,arg4,(btTransform const &)*arg5);
-  
-  return SWIG_arg;
-  
-  if(0) SWIG_fail;
-  
-fail:
-  lua_error(L);
-  return SWIG_arg;
-}
-
-
-static int _wrap_PhysicsObject_createBody__SWIG_1(lua_State* L) {
-  int SWIG_arg = 0;
-  physics::Object *arg1 = (physics::Object *) 0 ;
-  Real *arg2 = 0 ;
-  btCollisionShape *arg3 = 0 ;
-  physics::ObjectSynchronizer *arg4 = (physics::ObjectSynchronizer *) 0 ;
+  physics::ObjectSynchronizer *arg4 = 0 ;
   Real temp2 ;
   
   SWIG_check_num_args("createBody",4,4)
   if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("createBody",1,"physics::Object *");
   if(!lua_isnumber(L,2)) SWIG_fail_arg("createBody",2,"Real const &");
   if(!lua_isuserdata(L,3)) SWIG_fail_arg("createBody",3,"btCollisionShape &");
-  if(!SWIG_isptrtype(L,4)) SWIG_fail_arg("createBody",4,"physics::ObjectSynchronizer *");
+  if(!lua_isuserdata(L,4)) SWIG_fail_arg("createBody",4,"physics::ObjectSynchronizer &");
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_physics__Object,0))){
     SWIG_fail_ptr("PhysicsObject_createBody",1,SWIGTYPE_p_physics__Object);
@@ -2816,7 +2767,7 @@ static int _wrap_PhysicsObject_createBody__SWIG_1(lua_State* L) {
     SWIG_fail_ptr("PhysicsObject_createBody",4,SWIGTYPE_p_physics__ObjectSynchronizer);
   }
   
-  (arg1)->createBody((Real const &)*arg2,*arg3,arg4);
+  (arg1)->createBody((Real const &)*arg2,*arg3,*arg4);
   
   return SWIG_arg;
   
@@ -2825,174 +2776,6 @@ static int _wrap_PhysicsObject_createBody__SWIG_1(lua_State* L) {
 fail:
   lua_error(L);
   return SWIG_arg;
-}
-
-
-static int _wrap_PhysicsObject_createBody__SWIG_2(lua_State* L) {
-  int SWIG_arg = 0;
-  physics::Object *arg1 = (physics::Object *) 0 ;
-  Real *arg2 = 0 ;
-  btCollisionShape *arg3 = 0 ;
-  Real temp2 ;
-  
-  SWIG_check_num_args("createBody",3,3)
-  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("createBody",1,"physics::Object *");
-  if(!lua_isnumber(L,2)) SWIG_fail_arg("createBody",2,"Real const &");
-  if(!lua_isuserdata(L,3)) SWIG_fail_arg("createBody",3,"btCollisionShape &");
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_physics__Object,0))){
-    SWIG_fail_ptr("PhysicsObject_createBody",1,SWIGTYPE_p_physics__Object);
-  }
-  
-  temp2=(Real)lua_tonumber(L,2); arg2=&temp2;
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,3,(void**)&arg3,SWIGTYPE_p_btCollisionShape,0))){
-    SWIG_fail_ptr("PhysicsObject_createBody",3,SWIGTYPE_p_btCollisionShape);
-  }
-  
-  (arg1)->createBody((Real const &)*arg2,*arg3);
-  
-  return SWIG_arg;
-  
-  if(0) SWIG_fail;
-  
-fail:
-  lua_error(L);
-  return SWIG_arg;
-}
-
-
-static int _wrap_PhysicsObject_createBody(lua_State* L) {
-  int argc;
-  int argv[6]={
-    1,2,3,4,5,6
-  };
-  
-  argc = lua_gettop(L);
-  if (argc == 3) {
-    int _v;
-    {
-      void *ptr;
-      if (SWIG_isptrtype(L,argv[0])==0 || SWIG_ConvertPtr(L,argv[0], (void **) &ptr, SWIGTYPE_p_physics__Object, 0)) {
-        _v = 0;
-      } else {
-        _v = 1;
-      }
-    }
-    if (_v) {
-      {
-        _v = lua_isnumber(L,argv[1]);
-      }
-      if (_v) {
-        {
-          void *ptr;
-          if (lua_isuserdata(L,argv[2])==0 || SWIG_ConvertPtr(L,argv[2], (void **) &ptr, SWIGTYPE_p_btCollisionShape, 0)) {
-            _v = 0;
-          } else {
-            _v = 1;
-          }
-        }
-        if (_v) {
-          return _wrap_PhysicsObject_createBody__SWIG_2(L);
-        }
-      }
-    }
-  }
-  if (argc == 4) {
-    int _v;
-    {
-      void *ptr;
-      if (SWIG_isptrtype(L,argv[0])==0 || SWIG_ConvertPtr(L,argv[0], (void **) &ptr, SWIGTYPE_p_physics__Object, 0)) {
-        _v = 0;
-      } else {
-        _v = 1;
-      }
-    }
-    if (_v) {
-      {
-        _v = lua_isnumber(L,argv[1]);
-      }
-      if (_v) {
-        {
-          void *ptr;
-          if (lua_isuserdata(L,argv[2])==0 || SWIG_ConvertPtr(L,argv[2], (void **) &ptr, SWIGTYPE_p_btCollisionShape, 0)) {
-            _v = 0;
-          } else {
-            _v = 1;
-          }
-        }
-        if (_v) {
-          {
-            void *ptr;
-            if (SWIG_isptrtype(L,argv[3])==0 || SWIG_ConvertPtr(L,argv[3], (void **) &ptr, SWIGTYPE_p_physics__ObjectSynchronizer, 0)) {
-              _v = 0;
-            } else {
-              _v = 1;
-            }
-          }
-          if (_v) {
-            return _wrap_PhysicsObject_createBody__SWIG_1(L);
-          }
-        }
-      }
-    }
-  }
-  if (argc == 5) {
-    int _v;
-    {
-      void *ptr;
-      if (SWIG_isptrtype(L,argv[0])==0 || SWIG_ConvertPtr(L,argv[0], (void **) &ptr, SWIGTYPE_p_physics__Object, 0)) {
-        _v = 0;
-      } else {
-        _v = 1;
-      }
-    }
-    if (_v) {
-      {
-        _v = lua_isnumber(L,argv[1]);
-      }
-      if (_v) {
-        {
-          void *ptr;
-          if (lua_isuserdata(L,argv[2])==0 || SWIG_ConvertPtr(L,argv[2], (void **) &ptr, SWIGTYPE_p_btCollisionShape, 0)) {
-            _v = 0;
-          } else {
-            _v = 1;
-          }
-        }
-        if (_v) {
-          {
-            void *ptr;
-            if (SWIG_isptrtype(L,argv[3])==0 || SWIG_ConvertPtr(L,argv[3], (void **) &ptr, SWIGTYPE_p_physics__ObjectSynchronizer, 0)) {
-              _v = 0;
-            } else {
-              _v = 1;
-            }
-          }
-          if (_v) {
-            {
-              void *ptr;
-              if (lua_isuserdata(L,argv[4])==0 || SWIG_ConvertPtr(L,argv[4], (void **) &ptr, SWIGTYPE_p_btTransform, 0)) {
-                _v = 0;
-              } else {
-                _v = 1;
-              }
-            }
-            if (_v) {
-              return _wrap_PhysicsObject_createBody__SWIG_0(L);
-            }
-          }
-        }
-      }
-    }
-  }
-  
-  lua_pushstring(L,"Wrong arguments for overloaded function 'PhysicsObject_createBody'\n"
-    "  Possible C/C++ prototypes are:\n"
-    "    createBody(physics::Object *,Real const &,btCollisionShape &,physics::ObjectSynchronizer *,btTransform const &)\n"
-    "    createBody(physics::Object *,Real const &,btCollisionShape &,physics::ObjectSynchronizer *)\n"
-    "    createBody(physics::Object *,Real const &,btCollisionShape &)\n");
-  lua_error(L);return 0;
 }
 
 
@@ -3056,6 +2839,59 @@ static int _wrap_new_PhysicsScene(lua_State* L) {
   SWIG_check_num_args("physics::Scene",0,0)
   result = (physics::Scene *)new physics::Scene();
   SWIG_NewPointerObj(L,result,SWIGTYPE_p_physics__Scene,1); SWIG_arg++; 
+  return SWIG_arg;
+  
+  if(0) SWIG_fail;
+  
+fail:
+  lua_error(L);
+  return SWIG_arg;
+}
+
+
+static int _wrap_PhysicsScene_createDebugDrawer(lua_State* L) {
+  int SWIG_arg = 0;
+  physics::Scene *arg1 = (physics::Scene *) 0 ;
+  Ogre::SceneManager *arg2 = 0 ;
+  
+  SWIG_check_num_args("createDebugDrawer",2,2)
+  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("createDebugDrawer",1,"physics::Scene *");
+  if(!lua_isuserdata(L,2)) SWIG_fail_arg("createDebugDrawer",2,"Ogre::SceneManager &");
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_physics__Scene,0))){
+    SWIG_fail_ptr("PhysicsScene_createDebugDrawer",1,SWIGTYPE_p_physics__Scene);
+  }
+  
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&arg2,SWIGTYPE_p_Ogre__SceneManager,0))){
+    SWIG_fail_ptr("PhysicsScene_createDebugDrawer",2,SWIGTYPE_p_Ogre__SceneManager);
+  }
+  
+  (arg1)->createDebugDrawer(*arg2);
+  
+  return SWIG_arg;
+  
+  if(0) SWIG_fail;
+  
+fail:
+  lua_error(L);
+  return SWIG_arg;
+}
+
+
+static int _wrap_PhysicsScene_drawDebugLines(lua_State* L) {
+  int SWIG_arg = 0;
+  physics::Scene *arg1 = (physics::Scene *) 0 ;
+  
+  SWIG_check_num_args("drawDebugLines",1,1)
+  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("drawDebugLines",1,"physics::Scene *");
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_physics__Scene,0))){
+    SWIG_fail_ptr("PhysicsScene_drawDebugLines",1,SWIGTYPE_p_physics__Scene);
+  }
+  
+  (arg1)->drawDebugLines();
+  
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -3205,6 +3041,8 @@ physics::Scene *arg1 = (physics::Scene *) obj;
 delete arg1;
 }
 static swig_lua_method swig_physics_Scene_methods[] = {
+    {"createDebugDrawer", _wrap_PhysicsScene_createDebugDrawer}, 
+    {"drawDebugLines", _wrap_PhysicsScene_drawDebugLines}, 
     {"addPhysicObject", _wrap_PhysicsScene_addPhysicObject}, 
     {"removePhysicObject", _wrap_PhysicsScene_removePhysicObject}, 
     {"getDispatcher", _wrap_PhysicsScene_getDispatcher}, 
@@ -4114,7 +3952,7 @@ static swig_lua_var_info swig_variables[] = {
 };
 
 static swig_lua_const_info swig_constants[] = {
-{ SWIG_LUA_INT,     (char *)"DEBUG_PHYSIC_SHAPES", (long) 0, 0, 0, 0},
+{ SWIG_LUA_INT,     (char *)"DEBUG_PHYSIC_SHAPES", (long) 1, 0, 0, 0},
 { SWIG_LUA_INT,     (char *)"RIGHT", (long) RIGHT, 0, 0, 0},
 { SWIG_LUA_INT,     (char *)"LEFT", (long) LEFT, 0, 0, 0},
 { SWIG_LUA_INT,     (char *)"Character_ATTACK", (long) Character::ATTACK, 0, 0, 0},
@@ -4158,7 +3996,6 @@ static swig_type_info _swigt__p_Player = {"_p_Player", "Player *", 0, 0, (void*)
 static swig_type_info _swigt__p_btCollisionDispatcher = {"_p_btCollisionDispatcher", "btCollisionDispatcher *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_btCollisionShape = {"_p_btCollisionShape", "btCollisionShape *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_btRigidBody = {"_p_btRigidBody", "btRigidBody *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_btTransform = {"_p_btTransform", "btTransform *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_btVector3 = {"_p_btVector3", "btVector3 *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_float = {"_p_float", "float *|Real *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_graphics__Object = {"_p_graphics__Object", "graphics::Object *", 0, 0, (void*)&_wrap_class_graphics_Object, 0};
@@ -4179,7 +4016,6 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_btCollisionDispatcher,
   &_swigt__p_btCollisionShape,
   &_swigt__p_btRigidBody,
-  &_swigt__p_btTransform,
   &_swigt__p_btVector3,
   &_swigt__p_float,
   &_swigt__p_graphics__Object,
@@ -4200,7 +4036,6 @@ static swig_cast_info _swigc__p_Player[] = {  {&_swigt__p_Player, 0, 0, 0},{0, 0
 static swig_cast_info _swigc__p_btCollisionDispatcher[] = {  {&_swigt__p_btCollisionDispatcher, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_btCollisionShape[] = {  {&_swigt__p_btCollisionShape, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_btRigidBody[] = {  {&_swigt__p_btRigidBody, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_btTransform[] = {  {&_swigt__p_btTransform, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_btVector3[] = {  {&_swigt__p_btVector3, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_float[] = {  {&_swigt__p_float, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_graphics__Object[] = {  {&_swigt__p_graphics__Object, 0, 0, 0},  {&_swigt__p_Object, _p_ObjectTo_p_graphics__Object, 0, 0},  {&_swigt__p_Character, _p_CharacterTo_p_graphics__Object, 0, 0},{0, 0, 0, 0}};
@@ -4221,7 +4056,6 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_btCollisionDispatcher,
   _swigc__p_btCollisionShape,
   _swigc__p_btRigidBody,
-  _swigc__p_btTransform,
   _swigc__p_btVector3,
   _swigc__p_float,
   _swigc__p_graphics__Object,

@@ -42,9 +42,9 @@ protected:
     // @{
     // Adds an object to the scene.
     void addObject(const String &entity, const Ogre::Vector3 &position,
-                   const Ogre::Vector3 &scale = Ogre::Vector3::ZERO, const Real &mass = 0);
-    void addPhysicObject(const Ogre::Vector3 &position, const Ogre::Vector3 &size,
-                         const Real mass, const Ogre::Vector3 &offset = Ogre::Vector3::ZERO);
+                   const Ogre::Vector3 &scale = Ogre::Vector3::ZERO, const Real &mass = 0,
+                   const Ogre::Vector3 &center_offset = Ogre::Vector3::ZERO);
+    void addPhysicObject(const Ogre::Vector3 &position, const Ogre::Vector3 &size, const Real &mass);
     void addGraphicObject(const char *entity, const Ogre::Vector3 &position,
                           const Ogre::Vector3 &scale = Ogre::Vector3::ZERO);
     // @}

@@ -17,10 +17,32 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 
 #include <physics/object_synchronizer.hpp>
 
+// Bullet
+#include <LinearMath/btTransform.h>
+
 // FtS
 #include <physics/converter_functions.hpp>
 
 namespace physics {
+
+// Constructor
+ObjectSynchronizer::ObjectSynchronizer(void)
+    : offset(new btVector3(0,0,0))
+{
+
+}
+
+// Constructor
+ObjectSynchronizer::~ObjectSynchronizer(void)
+{
+    delete offset;
+}
+
+// Set functions.
+void ObjectSynchronizer::setCenterOffset(const btVector3 &center_offset)
+{
+    *offset = center_offset;
+}
 
 // Get the object's position.
 void ObjectSynchronizer::getWorldTransform(btTransform &transform) const
@@ -30,14 +52,14 @@ void ObjectSynchronizer::getWorldTransform(btTransform &transform) const
     getGraphicalPosition(pos);
     getGraphicalRotation(rot);
 
-    transform.setOrigin(vector3(pos));
+    transform.setOrigin( vector3(pos) - *offset );
     transform.setRotation(quaternion(rot));
 }
 
 // Set the object's position.
 void ObjectSynchronizer::setWorldTransform(const btTransform &transform)
 {
-    setGraphicalPosition( vector3(transform.getOrigin()) );
+    setGraphicalPosition( vector3( transform.getOrigin() + *offset ) );
     setGraphicalRotation( quaternion(transform.getRotation()) );
 }
 

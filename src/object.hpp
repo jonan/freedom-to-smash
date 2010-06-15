@@ -54,10 +54,10 @@ public:
 
     /// Creates the physic object that can then be added to a physic scene.
     /// @param[in] mass The object's mass.
-    /// @param[in] offset Offset between the center of the physic object and the graphical position.
+    /// @param[in] center_offset Offset between the center of the physic object and the graphical position.
     /// @param[in] size Size of the physic object (only needed when the object has no entity).
     void createPhysicObject(const Real &mass,
-                            const Ogre::Vector3 &offset = Ogre::Vector3::ZERO,
+                            const Ogre::Vector3 &center_offset = Ogre::Vector3::ZERO,
                             const Ogre::Vector3 &size = Ogre::Vector3::ZERO);
 
 private:

@@ -102,7 +102,8 @@ void Character::handleScript(const String &file)
 
     btVector3 bsize(size.x, size.y, size.z);
     btCollisionShape *shape = &physics::ShapesManager::getInstance().getBoxShape(bsize);
-    createBody(mass, *shape, this);
+    setCenterOffset(physics::vector3(Ogre::Vector3(0,1,0)));
+    createBody(mass, *shape, *this);
 
     LuaEngine::BeginCallEx(L, "Character.OnCreate");
     LuaEngine::PushPointer(L, this, "Character *");

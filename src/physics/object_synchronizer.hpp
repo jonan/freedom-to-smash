@@ -33,8 +33,13 @@ namespace physics {
 /// Class to synchronize a physic object.
 class ObjectSynchronizer : public btMotionState {
 public:
-    ObjectSynchronizer(void) {} // Constructor
-    virtual ~ObjectSynchronizer(void) {} // Destructor
+    ObjectSynchronizer(void); // Constructor
+    virtual ~ObjectSynchronizer(void); // Destructor
+
+    // @{
+    /// Set functions.
+    void setCenterOffset(const btVector3 &center_offset);
+    // @}
 
     // @{
     /// The physics system will call this methods when convenient.
@@ -51,6 +56,8 @@ private:
     virtual void getWorldTransform (btTransform &transform) const;
     virtual void setWorldTransform (const btTransform &transform);
     // @}
+
+    btVector3 *offset;
 
     DISALLOW_COPY_AND_ASSIGN(ObjectSynchronizer);
 };

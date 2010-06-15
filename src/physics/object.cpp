@@ -29,7 +29,6 @@ namespace physics {
 // Constructor
 Object::Object(void)
         : shape(NULL)
-        , offset(new btTransform)
         , physic_object(NULL)
         , scene(NULL)
 {
@@ -40,7 +39,6 @@ Object::Object(void)
 Object::~Object(void)
 {
     if (scene) scene->removePhysicObject(*this);
-    delete offset;
     delete physic_object;
 }
 
@@ -80,15 +78,13 @@ void Object::disableRotation(void)
 
 // Creates a physic body for the object.
 void Object::createBody(const Real &mass, btCollisionShape &shape,
-                        ObjectSynchronizer *synchronizer,
-                        const btTransform &center_offset)
+                        ObjectSynchronizer &synchronizer)
 {
     btVector3 inertia;
     shape.calculateLocalInertia(mass, inertia);
-    btRigidBody::btRigidBodyConstructionInfo info(mass, synchronizer, &shape, inertia);
+    btRigidBody::btRigidBodyConstructionInfo info(mass, &synchronizer, &shape, inertia);
     physic_object = new btRigidBody(info);
     this->shape = &shape;
-    *offset = center_offset;
 }
 
 // Apply's a force to the object.

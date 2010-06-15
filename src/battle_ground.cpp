@@ -53,7 +53,7 @@ BattleGround::BattleGround(void)
     setStartingPosition(10,10);
 
     // GUI
-    gui::Gui::getInstance().loadSheet("main_menu");
+    //gui::Gui::getInstance().loadSheet("main_menu");
 
 #if DEBUG_PHYSIC_SHAPES
     createDebugDrawer(getManager());
