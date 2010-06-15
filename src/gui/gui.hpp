@@ -22,6 +22,9 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #ifndef GUI_GUI_HPP
 #define GUI_GUI_HPP
 
+// OIS
+#include <OIS/OIS.h>
+
 // FtS
 #include <util.hpp>
 
@@ -30,7 +33,7 @@ namespace QuickGUI {class GUIManager;}
 namespace gui {
 
 ///
-class Gui {
+class Gui : public OIS::KeyListener, public OIS::MouseListener {
 public:
     static Gui& getInstance(void); // Singleton pattern constructor
 
@@ -52,6 +55,19 @@ public:
 
 private:
     Gui(void); // Constructor
+
+    // @{
+    // Functions to update the keyboard's state.
+    virtual bool keyPressed  (const OIS::KeyEvent &key);
+    virtual bool keyReleased (const OIS::KeyEvent &key);
+    // @}
+
+    // @{
+    // Functions to update the mouse's state.
+    virtual bool mouseMoved    (const OIS::MouseEvent &arg);
+    virtual bool mousePressed  (const OIS::MouseEvent &arg, OIS::MouseButtonID key);
+    virtual bool mouseReleased (const OIS::MouseEvent &arg, OIS::MouseButtonID key);
+    // @}
 
     QuickGUI::GUIManager *gui_manager;
 
