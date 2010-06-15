@@ -122,6 +122,7 @@ void Character::attack(void)
         // Create physic attack object
         attack_obj = new physics::Object();
         attack_obj->createBody(20, *attack_shape);
+        attack_obj->disableRotation();
         Ogre::Vector3 pos = getPosition();
         int dir = 0;
         if (direction == RIGHT && !collision_right)
