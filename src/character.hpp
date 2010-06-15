@@ -91,6 +91,7 @@ private:
     bool action[NUM_STATES]; // active actions
 
     bool on_floor, has_double_jumped;
+    Real yaw;
     bool collision_right, collision_left;
     double jump_force;
     double walk_speed;

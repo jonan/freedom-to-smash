@@ -39,6 +39,7 @@ Character::Character(const String &name, Ogre::SceneManager &scene_manager)
         : Object(name.c_str(), scene_manager, NUM_STATES)
         , on_floor(true)
         , has_double_jumped(false)
+        , yaw(0)
         , collision_right(false)
         , collision_left(false)
         , jump_force(0)
@@ -83,10 +84,14 @@ void Character::handleScript(const String &file)
 
     double mass = 0;
     res = ev.evalNumber("Character.Mass", mass);
+
     double yaw = 0;
     res = ev.evalNumber("Character.Yaw", yaw);
+    this->yaw = yaw;
+
     Ogre::Vector3 size;
     res = ev.evalVector3("Character.Size", size);
+
     double scale = 1;
     res = ev.evalNumber("Character.Scale", scale);
 
@@ -196,7 +201,7 @@ void Character::frameMovement(void)
         if (dir) {
             setVelocity(dir*walk_speed, 0);
             node->setDirection(0,0,-dir,Ogre::Node::TS_PARENT);
-            node->yaw(Ogre::Degree(90));
+            node->yaw(Ogre::Degree(yaw));
         }
     }
 }
