@@ -20,8 +20,13 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 // Ogre
 #include <OgreRoot.h>
 
+#include <fts_evaluator.hpp>
+#include <script_manager.hpp>
+
 // FtS
 #include <gui/gui.hpp>
+#include <battle_ground.hpp>
+#include <player.hpp>
 
 // Constructor
 Menu::Menu(void)
@@ -43,6 +48,31 @@ void Menu::start(void)
     Ogre::Root::getSingleton().addFrameListener(this);
     Ogre::Root::getSingleton().startRendering();
     Ogre::Root::getSingleton().removeFrameListener(this);
+}
+
+//
+void Menu::player1(const QuickGUI::EventArgs& /*args*/)
+{
+    std::string player1, player2;
+    FtsEvaluator ev(ScriptManager::get().getL());
+    ev.evalString("Config.Player1", player1);
+    ev.evalString("Config.Player2", player2);
+
+    Player *player = new Player(1);
+    BattleGround *battle = new BattleGround;
+    player->setBattleground(*battle);
+    player->setCharacter(player1);
+    player = new Player(2);
+    player->setBattleground(*battle);
+    player->setCharacter(player2);
+    battle->start();
+    delete battle;
+}
+
+//
+void Menu::player2(const QuickGUI::EventArgs& /*args*/)
+{
+
 }
 
 // Function that's called at the beginning of every frame.

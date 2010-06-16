@@ -71,8 +71,10 @@ void Gui::createSheet(Menu *menu)
     sheet->createImage(img);
     QuickGUI::Button* myButton = sheet->createButton(QuickGUI::Rect(280,450,200,50));
     myButton->setSkinType("fts.1player");
+    myButton->addWidgetEventHandler(QuickGUI::WIDGET_EVENT_MOUSE_BUTTON_UP,&Menu::player1,menu);
     myButton = sheet->createButton(QuickGUI::Rect(580,450,200,50));
     myButton->setSkinType("fts.2player");
+    myButton->addWidgetEventHandler(QuickGUI::WIDGET_EVENT_MOUSE_BUTTON_UP,&Menu::player2,menu);
     myButton = sheet->createButton(QuickGUI::Rect(430,550,200,50));
     myButton->setSkinType("fts.exit");
     myButton->addWidgetEventHandler(QuickGUI::WIDGET_EVENT_MOUSE_BUTTON_UP,&Menu::exit,menu);

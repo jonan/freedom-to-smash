@@ -38,8 +38,13 @@ public:
 
     ///
     void start(void);
-    ///
+
+    // @{
+    /// Menu functions.
+    void player1(const QuickGUI::EventArgs& /*args*/);
+    void player2(const QuickGUI::EventArgs& /*args*/);
     void exit(const QuickGUI::EventArgs& /*args*/) {end = true;}
+    // @}
 
 private:
     // This function is called at the beginnig of every frame.
