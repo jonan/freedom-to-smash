@@ -1,6 +1,6 @@
 Sheet Sheet
 {
-    MouseCursorVisible false
+    Dimensions 0 0 1366 768
 
     UserDefinedHandlers WidgetEvents
     {
@@ -10,11 +10,65 @@ Sheet Sheet
     {
         Image Image
         {
-            Dimensions 0 0 551 332
+            Dimensions 280 50 551 332
             ImageName logo_sinbad.png
 
             UserDefinedHandlers WidgetEvents
             {
+            }
+
+        }
+
+        Button Button
+        {
+            Dimensions 280 450 200 50
+            SkinType fts.1player
+            Text.AllottedSize 196 46
+            Text.HorizontalAlignment TEXT_ALIGNMENT_HORIZONTAL_CENTER
+
+            UserDefinedHandlers WidgetEvents
+            {
+            }
+
+            Text segments
+            {
+                Segment0 micross.10 0 0 0 0 
+            }
+
+        }
+
+        Button Button1
+        {
+            Dimensions 580 450 200 50
+            SkinType fts.2player
+            Text.AllottedSize 196 46
+            Text.HorizontalAlignment TEXT_ALIGNMENT_HORIZONTAL_CENTER
+
+            UserDefinedHandlers WidgetEvents
+            {
+            }
+
+            Text segments
+            {
+                Segment0 micross.10 0 0 0 0 
+            }
+
+        }
+
+        Button Button2
+        {
+            Dimensions 430 550 200 50
+            SkinType fts.exit
+            Text.AllottedSize 196 46
+            Text.HorizontalAlignment TEXT_ALIGNMENT_HORIZONTAL_CENTER
+
+            UserDefinedHandlers WidgetEvents
+            {
+            }
+
+            Text segments
+            {
+                Segment0 micross.10 0 0 0 0 
             }
 
         }
