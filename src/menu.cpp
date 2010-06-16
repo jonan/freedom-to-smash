@@ -67,6 +67,7 @@ void Menu::player1(const QuickGUI::EventArgs& /*args*/)
     player->setCharacter(player2);
     battle->start();
     delete battle;
+    useCamera(0);
 }
 
 //
