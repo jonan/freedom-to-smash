@@ -52,9 +52,6 @@ BattleGround::BattleGround(void)
     setStartingPosition(-10,10);
     setStartingPosition(10,10);
 
-    // GUI
-    //gui::Gui::getInstance().loadSheet("main_menu");
-
 #if DEBUG_PHYSIC_SHAPES
     createDebugDrawer(getManager());
 #endif
@@ -102,6 +99,7 @@ void BattleGround::start(void)
         character->reset();
     Ogre::Root::getSingleton().addFrameListener(this);
     Ogre::Root::getSingleton().startRendering();
+    Ogre::Root::getSingleton().removeFrameListener(this);
 }
 
 // Function that's called at the beginning of every frame.
