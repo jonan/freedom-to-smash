@@ -35,7 +35,11 @@ Scene::Scene(void)
         , skyx(NULL)
 {
     manager = Ogre::Root::getSingleton().createSceneManager(Ogre::ST_GENERIC);
-    viewport = Ogre::Root::getSingleton().getAutoCreatedWindow()->addViewport(NULL);
+    try {
+        viewport = Ogre::Root::getSingleton().getAutoCreatedWindow()->addViewport(NULL);
+    } catch (Ogre::Exception exception) {
+        viewport = Ogre::Root::getSingleton().getAutoCreatedWindow()->getViewport(0);
+    }
 }
 
 // Constructor
