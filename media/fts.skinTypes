@@ -1,0 +1,35 @@
+Button fts.default
+{
+    SkinElement default
+    {
+        Border_Bottom 0
+        Border_Left 0
+        Border_Right 0
+        Border_Top 0
+        Texture 1p.png
+        TileBackground false
+        TileBorders true
+    }
+
+    SkinElement down
+    {
+        Border_Bottom 0
+        Border_Left 0
+        Border_Right 0
+        Border_Top 0
+        Texture 1p.png
+        TileBackground false
+        TileBorders true
+    }
+
+    SkinElement over
+    {
+        Border_Bottom 0
+        Border_Left 0
+        Border_Right 0
+        Border_Top 0
+        Texture 1p.png
+        TileBackground false
+        TileBorders true
+    }
+}
