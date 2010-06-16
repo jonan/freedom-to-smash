@@ -29,6 +29,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 #include <battle_ground.hpp>
 #include <boot.hpp>
 #include <player.hpp>
+#include <menu.hpp>
 
 int main(int argc, char *argv[])
 {
@@ -36,7 +37,10 @@ int main(int argc, char *argv[])
     {
         boot();
 
-        std::string player1, player2;
+        Menu *menu = new Menu;
+        menu->start();
+        delete menu;
+        /*std::string player1, player2;
         FtsEvaluator ev(ScriptManager::get().getL());
         ev.evalString("Config.Player1", player1);
         ev.evalString("Config.Player2", player2);
@@ -49,7 +53,7 @@ int main(int argc, char *argv[])
         player->setBattleground(*battle);
         player->setCharacter(player2);
         battle->start();
-        delete battle;
+        delete battle;*/
         quit();
     }
     catch(std::exception & e)
