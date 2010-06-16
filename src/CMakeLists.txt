@@ -18,6 +18,7 @@ set(
   character.cpp
   input.cpp
   main.cpp
+  menu.cpp
   object.cpp
   platform.cpp
   player.cpp
@@ -54,6 +55,7 @@ set(
   boot.hpp
   character.hpp
   input.hpp
+  menu.hpp
   object.hpp
   platform.hpp
   player.hpp
