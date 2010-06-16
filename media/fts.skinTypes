@@ -1,4 +1,4 @@
-Button fts.default
+Button fts.1player
 {
     SkinElement default
     {
@@ -17,7 +17,7 @@ Button fts.default
         Border_Left 0
         Border_Right 0
         Border_Top 0
-        Texture 1p.png
+        Texture 1p_h.png
         TileBackground false
         TileBorders true
     }
@@ -29,6 +29,78 @@ Button fts.default
         Border_Right 0
         Border_Top 0
         Texture 1p.png
+        TileBackground false
+        TileBorders true
+    }
+}
+
+Button fts.2player
+{
+    SkinElement default
+    {
+        Border_Bottom 0
+        Border_Left 0
+        Border_Right 0
+        Border_Top 0
+        Texture 2p.png
+        TileBackground false
+        TileBorders true
+    }
+
+    SkinElement down
+    {
+        Border_Bottom 0
+        Border_Left 0
+        Border_Right 0
+        Border_Top 0
+        Texture 2p_h.png
+        TileBackground false
+        TileBorders true
+    }
+
+    SkinElement over
+    {
+        Border_Bottom 0
+        Border_Left 0
+        Border_Right 0
+        Border_Top 0
+        Texture 2p.png
+        TileBackground false
+        TileBorders true
+    }
+}
+
+Button fts.exit
+{
+    SkinElement default
+    {
+        Border_Bottom 0
+        Border_Left 0
+        Border_Right 0
+        Border_Top 0
+        Texture exit.png
+        TileBackground false
+        TileBorders true
+    }
+
+    SkinElement down
+    {
+        Border_Bottom 0
+        Border_Left 0
+        Border_Right 0
+        Border_Top 0
+        Texture exit_h.png
+        TileBackground false
+        TileBorders true
+    }
+
+    SkinElement over
+    {
+        Border_Bottom 0
+        Border_Left 0
+        Border_Right 0
+        Border_Top 0
+        Texture exit.png
         TileBackground false
         TileBorders true
     }
