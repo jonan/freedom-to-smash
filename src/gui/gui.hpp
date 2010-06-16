@@ -30,6 +30,8 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 
 namespace QuickGUI {class GUIManager;}
 
+class Menu;
+
 namespace gui {
 
 ///
@@ -47,11 +49,11 @@ public:
 
     /// Creates a GUI from a sheet.
     /// @param[in] name Name of the sheet
-    void loadSheet(const String &name);
+    void loadSheet(const String &name, Menu *menu);
 
     /// Temporal method to hard-code GUIs.
     /// The GUI is then saved as sheet.gui.
-    void createSheet(void);
+    void createSheet(Menu *menu);
 
 private:
     Gui(void); // Constructor

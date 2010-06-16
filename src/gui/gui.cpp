@@ -22,6 +22,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>
 
 // FtS
 #include <input.hpp>
+#include <menu.hpp>
 
 namespace gui {
 
@@ -47,7 +48,7 @@ void Gui::destroy(void)
 }
 
 // Creates a GUI from a sheet.
-void Gui::loadSheet(const String &name)
+void Gui::loadSheet(const String &name, Menu *menu)
 {
     Input::getInstance()->addKeyListener(*this);
     Input::getInstance()->addMouseListener(*this);
@@ -56,21 +57,26 @@ void Gui::loadSheet(const String &name)
 }
 
 // Temporal method to hard-code GUIs.
-void Gui::createSheet(void)
+void Gui::createSheet(Menu *menu)
 {
     Input::getInstance()->addKeyListener(*this);
     Input::getInstance()->addMouseListener(*this);
     QuickGUI::SheetDesc *sheet_description = QuickGUI::DescManager::getSingleton().getDefaultSheetDesc();
     QuickGUI::Sheet *sheet = QuickGUI::SheetManager::getSingleton().createSheet(sheet_description);
-    //sheet->setMouseCursorVisible(false);
+    sheet->setSize(QuickGUI::Size(1024, 768));
     gui_manager->setActiveSheet(sheet);
-    QuickGUI::ButtonDesc* bd = QuickGUI::DescManager::getSingleton().getDefaultButtonDesc();
-    bd->textDesc.segments.push_back(QuickGUI::TextSegment("micross.12",QuickGUI::ColourValue::Red,"Click Me!"));
-    bd->widget_name = "MyButton";
-    bd->widget_dimensions.size = QuickGUI::Size(100,25);
-    bd->widget_dimensions.position = QuickGUI::Point(50,50);
-    QuickGUI::Button* myButton = sheet->createButton(bd);
-    sheet->saveToDisk("sheet.gui");
+    QuickGUI::ImageDesc* img = QuickGUI::DescManager::getSingleton().getDefaultImageDesc();
+    img->image_imageName = "logo_sinbad.png";
+    img->widget_dimensions = QuickGUI::Rect(280,50,551,332);
+    sheet->createImage(img);
+    QuickGUI::Button* myButton = sheet->createButton(QuickGUI::Rect(280,450,200,50));
+    myButton->setSkinType("fts.1player");
+    myButton = sheet->createButton(QuickGUI::Rect(580,450,200,50));
+    myButton->setSkinType("fts.2player");
+    myButton = sheet->createButton(QuickGUI::Rect(430,550,200,50));
+    myButton->setSkinType("fts.exit");
+    myButton->addWidgetEventHandler(QuickGUI::WIDGET_EVENT_MOUSE_BUTTON_UP,&Menu::exit,menu);
+    sheet->saveToDisk("sheets/sheet.gui");
 }
 
 // Constructor
